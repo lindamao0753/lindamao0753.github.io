@@ -1,5 +1,7 @@
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,10 +18,15 @@
 
 
 
-  </head>
-  <body>
-    <div class="main">
-      <div class="main-content">
+</head>
+
+<body>
+    <style>
+        .searched-keyword {
+            background-color: yellow;
+        }
+    </style>
+    <div class="main animated">
         <div class="site-header">
   <a href="https://lindamao0753.github.io">
   <img class="avatar" src="https://lindamao0753.github.io/images/avatar.png?v=1615868309972" alt="">
@@ -75,35 +82,12 @@
   </form>
 </div>
 
-    
-        
-
-<div class="archives-container">
-  
-    <h2 class="year">2021</h2>
-    
-      
-        <article class="post">
-          <a href="https://lindamao0753.github.io/post/jvm-xu-ni-ji/">
-            <h2 class="post-title">
-              JVM虚拟机
-              <small>2021-03-13</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-  
-</div>
-
-    
-        <div class="pagination-container">
-  
-  
-</div>
-
-    
-        <div class="site-footer">
+        <div id="gridea-search-result" data-update="1615868309972">
+            <div class="searching">搜索中......</div>
+            <div class="no-result" style="display:none">未搜索到相关文章</div>
+        </div>
+    </div>
+    <div class="site-footer">
   <p class="copyright text-muted">Copyright ©<span>lindamao</span><br><a href="https://github.com/getgridea/gridea" class="Themeinfo" one-link-mark="yes">Powered by Gridea</a></p>
 </div>
 
@@ -111,7 +95,10 @@
   hljs.initHighlightingOnLoad()
 </script>
 
-      </div>
-    </div>
-  </body>
+    <script src="https://lindamao0753.github.io/media/gridea-search/result-template.ejs" type="text/ejs"></script>
+    <script src="https://lindamao0753.github.io/media/gridea-search/fuse.basic.min.js"></script>
+    <script src="https://lindamao0753.github.io/media/gridea-search/ejs.min.js"></script>
+    <script src="https://lindamao0753.github.io/media/gridea-search/gridea-search.js"></script>
+</body>
+
 </html>
