@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://lindamao0753.github.io/favicon.ico?v=1616040318505">
+<link rel="shortcut icon" href="https://lindamao0753.github.io/favicon.ico?v=1616060850543">
 <link rel="stylesheet" href="https://lindamao0753.github.io/styles/main.css">
 
 
@@ -32,7 +32,7 @@ public class TestThread1 extends T..." />
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://lindamao0753.github.io">
-        <img src="https://lindamao0753.github.io/images/avatar.png?v=1616040318505" class="site-logo">
+        <img src="https://lindamao0753.github.io/images/avatar.png?v=1616060850543" class="site-logo">
         <h1 class="site-title">Lindamao</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -128,7 +128,7 @@ public class TestThread1 extends Thread {
 
 </code></pre>
 <p>测试：</p>
-<figure data-type="image" tabindex="1"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311185407365.png" alt="image-20210311185407365" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="//tvax3.sinaimg.cn/mw690/007bjbYxly1goo6u2wjv9j30mh0bl74i.jpg" alt="image-20210311185407365" loading="lazy"></figure>
 <p>经过测试可以发现这些 这些线程的执行是<strong>交互</strong>进行的 并且每次运行的结果都会不一样</p>
 <h2 id="2-实现runnable接口">2、实现Runnable接口</h2>
 <pre><code class="language-java">package com.draco.demo01;
@@ -164,7 +164,7 @@ public class TestThread2 implements Runnable{
 </code></pre>
 <p>推荐使用第二种，<strong>实现Runnable接口</strong>。</p>
 <p>点击源码可以发现Thread类就是集成Runnable接口的</p>
-<figure data-type="image" tabindex="2"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210313130004060.png" alt="image-20210313130004060" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="//tva2.sinaimg.cn/mw690/007bjbYxly1goo6w7cyqij30ia0fkq4c.jpg" alt="image-20210313130004060" loading="lazy"></figure>
 <p>**所以说Thread是继承了Runnable接口的 **</p>
 <p><strong>因为在第二种方式里还是得创建一个Thread线程的对象</strong></p>
 <p>还有第三种<strong>Callable接口</strong></p>
@@ -545,12 +545,12 @@ interface ILove{
 <li>多个参数也可以去掉参数，要去掉就都去掉，而且必须加上括号。</li>
 </ul>
 <h1 id="4-线程状态">4、线程状态</h1>
-<figure data-type="image" tabindex="3"><img src="%E7%AC%AC%E4%B8%80%E7%89%88.assets/image-20210204111058577.png" alt="image-20210204111058577" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="//tvax3.sinaimg.cn/mw690/007bjbYxly1goo6xfbroyj30vj0ao795.jpg" alt="image-20210204111058577" loading="lazy"></figure>
 <p>详细</p>
-<figure data-type="image" tabindex="4"><img src="%E7%AC%AC%E4%B8%80%E7%89%88.assets/image-20210204112126116.png" alt="image-20210204112126116" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="//tvax3.sinaimg.cn/mw690/007bjbYxly1goo6xobqppj312x0jtk0c.jpg" alt="image-20210204112126116" loading="lazy"></figure>
 <p><strong>创建，就绪，运行，等待，死亡</strong></p>
 <p><strong>线程方法</strong></p>
-<figure data-type="image" tabindex="5"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210313214445748.png" alt="image-20210313214445748" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="//tvax2.sinaimg.cn/mw690/007bjbYxly1goo6xx4xilj313f0ibtkv.jpg" alt="image-20210313214445748" loading="lazy"></figure>
 <h3 id="线程案例">线程案例</h3>
 <p><strong>买票</strong></p>
 <pre><code class="language-java">package com.lin;
@@ -720,8 +720,8 @@ public class TestStop implements Runnable{
 }
 </code></pre>
 <h2 id="2-睡眠sleep">2、睡眠sleep</h2>
-<figure data-type="image" tabindex="6"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210313220958238.png" alt="image-20210313220958238" loading="lazy"></figure>
-<p>模拟网络延时</p>
+<p><img src="//tvax4.sinaimg.cn/mw690/007bjbYxly1goo6y8x9e3j31ac0mn7in.jpg" alt="image-20210313220958238" loading="lazy"><br>
+模拟网络延时</p>
 <p><strong>注意！</strong></p>
 <p>如果没有加上延时的话 会出现票数为负的情况 结果就可能为负数！！！</p>
 <p>模拟网络延时：放大问题的发生性</p>
@@ -862,9 +862,9 @@ class MyYield implements Runnable{
 <p>礼让线程，让当前正在执行的线程暂停，但不阻塞，将线程从运行状态转为就绪状态</p>
 <p>所以也就会出现</p>
 <p>礼让<strong>不成功</strong>的状态</p>
-<figure data-type="image" tabindex="7"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210314142023127.png" alt="image-20210314142023127" loading="lazy"></figure>
+<p><img src="//tva4.sinaimg.cn/mw690/007bjbYxly1goo6yxojkoj30es0553yj.jpg" alt="image-20210314142023127" loading="lazy">7.png)</p>
 <p>礼让<strong>成功</strong>的状态</p>
-<figure data-type="image" tabindex="8"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210314142049174.png" alt="image-20210314142049174" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="//tvax4.sinaimg.cn/mw690/007bjbYxly1goo6z3ipjkj30gv06t3yl.jpg" alt="image-20210314142049174" loading="lazy"></figure>
 <h2 id="4-合并join">4、合并Join</h2>
 <p>Join合并线程，待次线程执行完成之后，再执行其他的线程，其他线程阻塞</p>
 <p>可以想象成插队 是个很霸道的东西。</p>
@@ -896,12 +896,12 @@ public class TestJoin implements Runnable{
 
 </code></pre>
 <p>也就是插队，待此线程执行完成后，再执行其他的线程，其他线程阻塞</p>
-<figure data-type="image" tabindex="9"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210317111406644.png" alt="image-20210317111406644" loading="lazy"></figure>
-<p><strong>注意：</strong></p>
+<p><img src="//tvax1.sinaimg.cn/mw690/007bjbYxly1goo6zixn87j31a90hvq3w.jpg" alt="image-20210317111406644" loading="lazy"><br>
+<strong>注意：</strong></p>
 <p>这里要将副线程放到if语句当中实现 不然副线程在主线程的运行刚开始的时候就会执行官 就可能不会等到if条件满足的时候就开始执行了</p>
 <p>这里可以看到 当线程实现了Join方法后 前面正在执行的线程必须等待插队进来的线程执行完之后才能继续进行下去。</p>
 <h2 id="5-线程的状态">5、线程的状态</h2>
-<figure data-type="image" tabindex="10"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210314143557265.png" alt="image-20210314143557265" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="//tvax1.sinaimg.cn/mw690/007bjbYxly1goo7316i2uj31aa0n547u.jpg" alt="image-20210314143557265" loading="lazy"></figure>
 <pre><code class="language-java">package com.state;
 /*
 思路
@@ -949,11 +949,11 @@ public class TestState {
 </code></pre>
 <p>当线程TERMINATED后（死亡后），就不能启动了，<strong>所以线程只能启动一次</strong></p>
 <p>在线程结束之后再启动程序会报错</p>
-<figure data-type="image" tabindex="11"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210314151322323.png" alt="image-20210314151322323" loading="lazy"></figure>
+<figure data-type="image" tabindex="8"><img src="//tvax3.sinaimg.cn/mw690/007bjbYxly1goo737ze0cj30nl022aab.jpg" alt="image-20210314151322323" loading="lazy"></figure>
 <p><strong>想要再执行线程就必须再new一个新的线程</strong></p>
 <h2 id="6-线程的优先级">6、线程的优先级</h2>
-<figure data-type="image" tabindex="12"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210314151423661.png" alt="image-20210314151423661" loading="lazy"></figure>
-<p><strong>两种方式</strong></p>
+<p><img src="//tva4.sinaimg.cn/mw690/007bjbYxly1goo756jzn1j31930oygsf.jpg" alt="image-20210314151423661" loading="lazy"><br>
+<strong>两种方式</strong></p>
 <p>getPrriority() <strong>获得</strong>现线程的优先级</p>
 <p>setPriority（int XXX）<strong>设置</strong>线程的优先级</p>
 <p><strong>注意</strong></p>
@@ -1008,7 +1008,7 @@ public class TestPriority {
 </code></pre>
 <p><strong>先设置优先级，再启动</strong></p>
 <p><strong>优先级低的只是意味着获得CPU调度的概率低，并不是优先级低就不会被调用</strong>了</p>
-<figure data-type="image" tabindex="13"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210314153526471.png" alt="image-20210314153526471" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="//tvax2.sinaimg.cn/mw690/007bjbYxly1goo75eamxcj30ep05bmx8.jpg" alt="image-20210314153526471" loading="lazy"></figure>
 <p><strong>注意</strong></p>
 <p><strong>主函数的优先级默认为5 且能改变主函数优先级</strong></p>
 <p><strong>最大优先级为10</strong></p>
@@ -1077,7 +1077,7 @@ class You implements Runnable{
 <p>加入锁机制<strong>synchronized</strong></p>
 <p>当然加入锁也会出现一些问题</p>
 <p>鱼和熊掌不可兼得嘛</p>
-<figure data-type="image" tabindex="14"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210314163518662.png" alt="image-20210314163518662" loading="lazy"></figure>
+<figure data-type="image" tabindex="10"><img src="//tvax2.sinaimg.cn/mw690/007bjbYxly1goo75wlgdtj318h0knk1z.jpg" alt="image-20210314163518662" loading="lazy"></figure>
 <h2 id="1-三大线程不安全案例">1、三大线程不安全案例</h2>
 <p><strong>不安全的情况出现的本质是</strong></p>
 <p><strong>每个线程在自己的工作内存交互，内存控制不当会造成数据不一致。</strong></p>
@@ -1128,7 +1128,7 @@ class BuyTicket implements Runnable{
 </code></pre>
 <p><strong>出现的问题：</strong></p>
 <p>因为当用户同一时间都取到最后一张票的时候票的数量就会同一时间的减少 就会取到负数的票</p>
-<figure data-type="image" tabindex="15"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315133410036.png" alt="image-20210315133410036" loading="lazy"></figure>
+<figure data-type="image" tabindex="11"><img src="//tva1.sinaimg.cn/mw690/007bjbYxly1goo76fhwruj309n04v745.jpg" alt="image-20210315133410036" loading="lazy"></figure>
 <p><strong>不安全的取钱</strong></p>
 <pre><code class="language-java">package com.UnSafe;
 
@@ -1188,7 +1188,7 @@ class TakeMoney extends Thread {
 <p><strong>出现的问题：</strong></p>
 <p>钱不足的时候还能再进行取钱这个操作</p>
 <p>假设这种情况发生在实际生活当中 那就会出现很危险的情况！！！</p>
-<figure data-type="image" tabindex="16"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315132557572.png" alt="image-20210315132557572" loading="lazy"></figure>
+<figure data-type="image" tabindex="12"><img src="//tvax4.sinaimg.cn/mw690/007bjbYxly1goo76phnrbj30cc03uwee.jpg" alt="image-20210315132557572" loading="lazy"></figure>
 <p><strong>不安全的集合</strong></p>
 <pre><code class="language-java">package com.UnSafe;
 
@@ -1216,13 +1216,13 @@ public class UnSafeList {
 
 </code></pre>
 <p>出现的问题：</p>
-<p>程在执行的过程 有的进程一起进行的时候同时将内存覆盖掉了  所以就会出现集合的大小填不满的情况 <img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315133807600.png" alt="image-20210315133807600" loading="lazy"></p>
-<p>为了解决这种机制 和避免在计算机中发生这种情况 我们使用了下面的同步机制</p>
+<p>程在执行的过程 有的进程一起进行的时候同时将内存覆盖掉了  所以就会出现集合的大小填不满的情况 !<img src="//tva4.sinaimg.cn/mw690/007bjbYxly1goo773g8rnj30ee02m0sl.jpg" alt="image-20210315133807600" loading="lazy"><br>
+为了解决这种机制 和避免在计算机中发生这种情况 我们使用了下面的同步机制</p>
 <p>第一个是synchronize</p>
 <p>第二个是Lock锁</p>
 <h2 id="2-synchronize同步">2、synchronize同步</h2>
-<figure data-type="image" tabindex="17"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315134716665.png" alt="image-20210315134716665" loading="lazy"></figure>
-<figure data-type="image" tabindex="18"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315140002986.png" alt="image-20210315140002986" loading="lazy"></figure>
+<figure data-type="image" tabindex="13"><img src="//tvax4.sinaimg.cn/mw690/007bjbYxly1goo77dfolkj319m0omnat.jpg" alt="image-20210315134716665" loading="lazy"></figure>
+<figure data-type="image" tabindex="14"><img src="//tvax2.sinaimg.cn/mw690/007bjbYxly1goo77lfoqzj310v0jcgys.jpg" alt="image-20210315140002986" loading="lazy"></figure>
 <p><strong>对于上述三种线程不安全的案例解决方案</strong></p>
 <pre><code class="language-java">package com.draco.syn;
 
@@ -1379,9 +1379,9 @@ public class UnSafeList {
 <p><strong>记住：对于synchronized的对象就是我们需要<mark>修改的对象</mark>即可</strong></p>
 <p><strong>对比之前的加锁案例我们可以发现 Lock 锁我们可以很清楚的看到加锁和解锁的位置</strong></p>
 <h1 id="6-锁">6、锁</h1>
-<figure data-type="image" tabindex="19"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315195114285.png" alt="image-20210315195114285" loading="lazy"></figure>
+<figure data-type="image" tabindex="15"><img src="//tvax2.sinaimg.cn/mw690/007bjbYxly1goo780lhp4j318b0nj11z.jpg" alt="image-20210315195114285" loading="lazy"></figure>
 <h2 id="synchronized与lock对比"><strong>synchronized与Lock对比</strong></h2>
-<figure data-type="image" tabindex="20"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315194059435.png" alt="image-20210315194059435" loading="lazy"></figure>
+<figure data-type="image" tabindex="16"><img src="//tva2.sinaimg.cn/mw690/007bjbYxly1goo787z7gkj31co0n1gty.jpg" alt="image-20210315194059435" loading="lazy"></figure>
 <h2 id="1-死锁">1、死锁</h2>
 <pre><code class="language-java">package com.draco.lock;
 
@@ -1443,12 +1443,12 @@ class Makeup extends Thread{
     }
 }
 </code></pre>
-<figure data-type="image" tabindex="21"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315201107334.png" alt="image-20210315201107334" loading="lazy"></figure>
+<figure data-type="image" tabindex="17"><img src="//tvax4.sinaimg.cn/mw690/007bjbYxly1goo78gb92xj305c02d0rf.jpg" alt="image-20210315201107334" loading="lazy"></figure>
 <p><strong>解决方法：</strong></p>
 <p><strong>不一次性将锁全部获取到 用完就放开</strong></p>
-<figure data-type="image" tabindex="22"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315201213576.png" alt="image-20210315201213576" loading="lazy"></figure>
+<figure data-type="image" tabindex="18"><img src="//tva1.sinaimg.cn/mw690/007bjbYxly1goo78mbx1ij30d503e0si.jpg" alt="image-20210315201213576" loading="lazy"></figure>
 <h2 id="2-死锁产生的必要条件">2、死锁产生的必要条件</h2>
-<figure data-type="image" tabindex="23"><img src="%E7%AC%AC%E4%B8%80%E7%89%88.assets/image-20210204214449140.png" alt="image-20210204214449140" loading="lazy"></figure>
+<figure data-type="image" tabindex="19"><img src="//tvax4.sinaimg.cn/mw690/007bjbYxly1goo7a45b4gj30z30fjjyw.jpg" alt="image-20210204214449140" loading="lazy"></figure>
 <h2 id="3-reentrantlock可重入锁">3、ReentrantLock可重入锁</h2>
 <p>对比之前的取票案例</p>
 <pre><code class="language-java">package com.draco.lock;
@@ -1497,7 +1497,7 @@ class Lock2 implements Runnable{
 }
 </code></pre>
 <p><strong>对比之前的加锁案例我们可以发现 Lock 锁我们可以很清楚的看到加锁和解锁的位置</strong></p>
-<figure data-type="image" tabindex="24"><img src="%E7%AC%AC%E4%B8%80%E7%89%88.assets/image-20210204220748282.png" alt="image-20210204220748282" loading="lazy"></figure>
+<figure data-type="image" tabindex="20"><img src="//tva3.sinaimg.cn/mw690/007bjbYxly1goo7abjwfoj30pe09ydjd.jpg" alt="image-20210204220748282" loading="lazy"></figure>
 <h1 id="7-线程通信">7、线程通信</h1>
 <h2 id="1-管程法">1、管程法</h2>
 <pre><code class="language-java">package com.draco.gaoji;
@@ -1604,11 +1604,11 @@ class KeepSpace{
 <p>生产者生产的仓库放满了之后就该停止生产并让用户消费 用户消费时即应当提醒生产者进行生产</p>
 <h2 id="2-信号灯法">2、信号灯法</h2>
 <h2 id="3-消费者生产者模式"><strong>3、消费者生产者模式</strong></h2>
-<figure data-type="image" tabindex="25"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315201440570.png" alt="image-20210315201440570" loading="lazy"></figure>
+<figure data-type="image" tabindex="21"><img src="//tvax4.sinaimg.cn/mw690/007bjbYxly1goo7avf9m9j31ar0n8wo3.jpg" alt="image-20210315201440570" loading="lazy"></figure>
 <p><strong>分析问题</strong></p>
-<figure data-type="image" tabindex="26"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315201451306.png" alt="image-20210315201451306" loading="lazy"></figure>
+<figure data-type="image" tabindex="22"><img src="//tvax3.sinaimg.cn/mw690/007bjbYxly1goo7b13sqqj317r0pwk0m.jpg" alt="image-20210315201451306" loading="lazy"></figure>
 <p><strong>常用方法</strong></p>
-<figure data-type="image" tabindex="27"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315201509636.png" alt="image-20210315201509636" loading="lazy"></figure>
+<figure data-type="image" tabindex="23"><img src="//tva3.sinaimg.cn/mw690/007bjbYxly1goo7b64smhj317l0pv7j3.jpg" alt="image-20210315201509636" loading="lazy"></figure>
 <pre><code class="language-java">package com.commun;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
@@ -1717,7 +1717,7 @@ class synContioner{
 <p>应该用while，否则当有多个消费者的时候，会出现脏判断的</p>
 <p>if语句中醒来的线程 不会再一次进行判断了 而while会重新再判断</p>
 <h2 id="线程池">线程池</h2>
-<figure data-type="image" tabindex="28"><img src="C:%5CUsers%5Clin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315210736862.png" alt="image-20210315210736862" loading="lazy"></figure>
+<figure data-type="image" tabindex="24"><img src="//tva2.sinaimg.cn/mw690/007bjbYxly1goo7bexypjj318a0qiwpj.jpg" alt="image-20210315210736862" loading="lazy"></figure>
 
             </div>
             
