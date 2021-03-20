@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lindamao0753.github.io</id>
     <title>Lindamao</title>
-    <updated>2021-03-20T15:06:42.048Z</updated>
+    <updated>2021-03-20T15:17:29.171Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lindamao0753.github.io"/>
     <link rel="self" href="https://lindamao0753.github.io/atom.xml"/>
@@ -16,7 +16,8 @@
         <link href="https://lindamao0753.github.io/post/duo-xian-cheng/">
         </link>
         <updated>2021-03-16T04:38:31.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="1-创建线程的两种方法">1、创建线程的两种方法</h1>
+        <content type="html"><![CDATA[<!-- more -->
+<h1 id="1-创建线程的两种方法">1、创建线程的两种方法</h1>
 <h2 id="1-继承thread类">1、继承Thread类</h2>
 <pre><code class="language-java">package com.lin;
 //创建线程方式一： 继承Thread类 ，重写run()方法 ，调用start开启线程
