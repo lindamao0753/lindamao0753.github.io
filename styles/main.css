@@ -2000,13 +2000,13 @@ body {
       border-bottom-color: #fc6423;
     }
       .site-meta {
-        background: #000 !important;
+        background: #212529 !important;
       }
       .head-top-line {
-        background: #000 !important;
+        background: #212529 !important;
       }
     .brand {
-      background: #000;
+      background: #212529;
     }
     .main-title {
       color: #FFF;
