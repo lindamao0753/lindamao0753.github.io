@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lindamao0753.github.io</id>
     <title>Lindamao</title>
-    <updated>2021-03-30T05:24:25.981Z</updated>
+    <updated>2021-04-01T09:51:27.421Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lindamao0753.github.io"/>
     <link rel="self" href="https://lindamao0753.github.io/atom.xml"/>
@@ -10,6 +10,271 @@
     <logo>https://lindamao0753.github.io/images/avatar.png</logo>
     <icon>https://lindamao0753.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Lindamao</rights>
+    <entry>
+        <title type="html"><![CDATA[1]]></title>
+        <id>https://lindamao0753.github.io/post/1/</id>
+        <link href="https://lindamao0753.github.io/post/1/">
+        </link>
+        <updated>2021-03-30T05:32:33.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="算法">算法</h1>
+<h2 id="冒泡排序">冒泡排序</h2>
+<p>概述：</p>
+<p>冒泡排序是最简单的排序之一了，其大体思想就是通过与相邻元素的比较和交换来把小的数交换到最前面。这个过程类似于水泡向上升一样，因此而得名。举个栗子，对5,3,8,6,4这个无序序列进行冒泡排序。首先从后向前冒泡，4和6比较，把4交换到前面，序列变成5,3,8,4,6。同理4和8交换，变成5,3,4,8,6,3和4无需交换。5和3交换，变成3,5,4,8,6,3.这样一次冒泡就完了，把最小的数3排到最前面了。对剩下的序列依次冒泡就会得到一个有序序列。冒泡排序的时间复杂度为O(n^2)。</p>
+<p>实现思路 ：</p>
+<p>从索引大的向前面开始比较 如果大的索引小于前面的就要进行交换 直到不能交换为止</p>
+<p>实现代码(逆序)：</p>
+<pre><code class="language-java">package com.lin;
+
+public class BubbleSort {
+    //排序方法
+    public static void bubbleSort(int[] arr) {
+        if(arr == null || arr.length == 0)
+            return ;
+        for(int i=0; i&lt;arr.length;i++) {
+            //如果内循环的索引大于外层的就无法进行排序了
+            for(int j=arr.length-1; j&gt;i; j--) {
+                if(arr[j]&lt;arr[j-1]) {
+                    swap(arr, j-1, j);
+                }
+            }
+        }
+    }
+    //交换方法
+    public static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    public static void main(String[] args) {
+        int[] arr;
+        arr = new int[]{....};
+        bubbleSort(arr);
+        for (int i : arr) {
+            System.out.print(&quot; &quot;+i);
+        }
+    }
+
+}
+</code></pre>
+<p>正序实现代码</p>
+<pre><code class="language-java">package com.lin;
+/*
+ *@Description:冒泡排序算法实现（正序）
+ */
+public class BubbleSort2 {
+    public static void bubbleSort(int[] arr) {
+        if(arr == null || arr.length == 0)
+            return ;
+        for(int i=1;i&lt;arr.length;i++) {
+           //当内循环小于数组的长度再减去i的时候就退出
+            for(int j=0; j&lt;arr.length-i; j++) {
+                if(arr[j]&gt;arr[j+1]) {
+                    swap(arr, j+1, j);
+                }
+            }
+        }
+    }
+
+    public static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    public static void main(String[] args) {
+        int[] arr;
+        arr = new int[]{....};
+        bubbleSort(arr);
+        for (int i : arr) {
+            System.out.print(&quot; &quot;+i);
+        }
+
+    }
+
+}
+</code></pre>
+<h2 id="选择排序">选择排序</h2>
+<p>选择排序的思想其实和冒泡排序有点类似，都是在一次排序后把最小的元素放到最前面。但是过程不同，冒泡排序是通过<strong>相邻</strong>的比较和交换。而选择排序是通过对<strong>整体</strong>的选择。举个栗子，对5,3,8,6,4这个无序序列进行简单选择排序，首先要选择5以外的最小数来和5交换，也就是选择3和5交换，一次排序后就变成了3,5,8,6,4.对剩下的序列一次进行选择和交换，最终就会得到一个有序序列。其实选择排序可以看成冒泡排序的优化，因为其目的相同，只是选择排序只有在确定了最小数的前提下才进行交换，大大减少了交换的次数。选择排序的时间复杂度为O(n^2)。</p>
+<p>实现思路：</p>
+<p>首先先在数组中找出元素最小的数 然后放到最左边 其次再重复执行第一个步骤 并将最小的数字按从左到右排放好</p>
+<p>实现代码（正序) ：</p>
+<pre><code class="language-java">package com.lin;
+/*
+@Description 正序的选择排序算法
+ */
+public class SelectSort {
+    public static void selectSort(int[] arr) {
+        if(arr == null || arr.length == 0)
+            return ;
+        //先定义最小的数字
+
+        for(int i=0; i&lt;arr.length;i++){//只需要比较n-1次
+            //先定义最小值的索引 从0开始
+            int minIndex = i;
+            for(int j=i+1; j&lt;arr.length;j++)
+            {
+            //从i+1开始比较，因为minIndex默认为i了就是0，i就没必要比了。
+                //判断前面的值是否小于后面
+                if(arr[j]&lt;arr[minIndex])
+                {
+                    //如果前面的数字 小于后面的值就将后面的索引和之前的交换
+                    minIndex = j;
+                }
+            }
+            //当内循环找到最小值的时候才进行一次交换
+            if(minIndex != i) { //如果minIndex不为i，说明找到了更小的值，执行交换的方法
+                swap(arr, i, minIndex);
+            }
+    }
+}
+public static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+        }
+
+    public static void main(String[] args) {
+        int[] arr;
+        arr = new int[]{5,4,8,6,3,2,2};
+        selectSort(arr);
+        for (int i : arr) {
+            System.out.print(&quot; &quot;+i);
+        }
+    }
+        }
+</code></pre>
+<h2 id="插入排序">插入排序</h2>
+<p>插入排序不是通过交换位置而是通过比较找到合适的位置插入元素来达到排序的目的的。相信大家都有过打扑克牌的经历，特别是牌数较大的。在分牌时可能要整理自己的牌，牌多的时候怎么整理呢？就是拿到一张牌，找到一个合适的位置插入。</p>
+<p>这个原理其实和插入排序是一样的。举个栗子，对5,3,8,6,4这个无序序列进行简单插入排序，首先假设第一个数的位置时正确的，想一下在拿到第一张牌的时候，没必要整理。然后3要插到5前面，把5后移一位，变成3,5,8,6,4.想一下整理牌的时候应该也是这样吧。然后8不用动，6插在8前面，8后移一位，4插在5前面，从5开始都向后移一位。</p>
+<p><strong>注意在插入一个数的时候要保证这个数前面的数已经有序</strong>。简单插入排序的时间复杂度也是O(n^2)。</p>
+<p>实现思路(正序):假设从第二个元素开始插入 并将此元素与这前的所有元素进行比较  如果比前面的元素小的话 就插入到该元素前面并将后面的元素向后移动。</p>
+<p>实现代码：</p>
+<pre><code class="language-java">package com.lin;
+/**
+ *@Description:简单插入排序算法实现(正序)
+ */
+public class InsertSort {
+    public static void insertSort(int[] a) {
+        int i, j, insertNote;// 要插入的数据
+        for (i = 1; i &lt; a.length; i++) {// 从数组的第二个元素开始循环将数组中的元素插入
+            insertNote = a[i];// 设置数组中的第2个元素为第一次循环要插入的数据 依次往后
+            j = i - 1;
+            //不断的判断插入的元素是否小于前面的所有元素 是的话就循环将元素往右边放
+            while (j &gt;= 0 &amp;&amp; insertNote &lt; a[j]) {
+                a[j + 1] = a[j];// 如果要插入的元素小于第j个元素,就将第j个元素向后移动
+                j--;
+            }
+            a[j + 1] = insertNote;// 直到要插入的元素不小于第j个元素,将insertNote插入到数组中
+        }
+    }
+
+
+    public static void main(String[] args) {
+        int[] arr;
+        arr = new int[]{3,5,4,8,6,3};
+        insertSort(arr);
+        for (int i : arr) {
+            System.out.print(&quot; &quot;+i);
+        }
+    }
+
+}
+</code></pre>
+<h2 id="快速排序">快速排序</h2>
+<h2 id="高快省的排序算法">高快省的排序算法</h2>
+<p>有没有既不浪费空间又可以快一点的排序算法呢？那就是“快速排序”啦！光听这个名字是不是就觉得很高端呢。</p>
+<p>假设我们现在对“6 1 2 7 9 3 4 5 10 8”这个10个数进行排序。首先在这个序列中随便找一个数作为<strong>基准数</strong>（不要被这个名词吓到了，就是一个用来参照的数，待会你就知道它用来做啥的了）。为了方便，就让第一个数6作为基准数吧。接下来，需要将这个序列中所有比基准数大的数放在6的右边，比基准数小的数放在6的左边，类似下面这种排列：</p>
+<p>3 1 2 5 4 6 9 7 10 8</p>
+<p>在初始状态下，数字6在序列的第1位。我们的目标是将6挪到序列中间的某个位置，假设这个位置是k。现在就需要寻找这个k，并且以第k位为分界点，左边的数都小于等于6，右边的数都大于等于6。想一想，你有办法可以做到这点吗？</p>
+<h2 id="排序算法显神威">排序算法显神威</h2>
+<p>方法其实很简单：分别从初始序列“6 1 2 7 9 3 4 5 10 8”两端开始“探测”。先从<strong>右</strong>往<strong>左</strong>找一个小于6的数，再从<strong>左</strong>往<strong>右</strong>找一个大于6的数，然后交换他们。这里可以用两个变量i和j，分别指向序列最左边和最右边。我们为这两个变量起个好听的名字“哨兵i”和“哨兵j”。刚开始的时候让哨兵i指向序列的最左边（即i=1），指向数字6。让哨兵j指向序列的最右边（即=10），指向数字。</p>
+<p><img src="https://img-blog.csdn.net/20150810105856630" alt="这里写图片描述" loading="lazy"><br>
+首先哨兵j开始出动。因为此处设置的基准数是最左边的数，所以需要让哨兵j先出动，这一点非常重要（请自己想一想为什么）。哨兵j一步一步地向左挪动（即j–），直到找到一个小于6的数停下来。接下来哨兵i再一步一步向右挪动（即i++），直到找到一个数大于6的数停下来。最后哨兵j停在了数字5面前，哨兵i停在了数字7面前。<br>
+<img src="https://img-blog.csdn.net/20150810105908580" alt="这里写图片描述" loading="lazy"><br>
+<img src="https://img-blog.csdn.net/20150810105918502" alt="这里写图片描述" loading="lazy"><br>
+现在交换哨兵i和哨兵j所指向的元素的值。交换之后的序列如下：</p>
+<p>6 1 2 <strong>5</strong> 9 3 4 <strong>7</strong> 10 8<br>
+<img src="https://img-blog.csdn.net/20150810105928634" alt="这里写图片描述" loading="lazy"><br>
+<img src="https://img-blog.csdn.net/20150810105938122" alt="这里写图片描述" loading="lazy"><br>
+到此，第一次交换结束。接下来开始哨兵j继续向左挪动（再友情提醒，每次必须是哨兵j先出发）。他发现了4（比基准数6要小，满足要求）之后停了下来。哨兵i也继续向右挪动的，他发现了9（比基准数6要大，满足要求）之后停了下来。此时再次进行交换，交换之后的序列如下：</p>
+<p>6 1 2 5 <strong>4</strong> 3 <strong>9</strong> 7 10 8</p>
+<p>第二次交换结束，“探测”继续。哨兵j继续向左挪动，他发现了3（比基准数6要小，满足要求）之后又停了下来。哨兵i继续向右移动，糟啦！此时哨兵i和哨兵j相遇了，哨兵i和哨兵j都走到3面前。说明此时“探测”结束。我们将基准数6和3进行交换。交换之后的序列如下：</p>
+<p><strong>3</strong> 1 2 5 4 <strong>6</strong> 9 7 10 8</p>
+<p><img src="https://img-blog.csdn.net/20150810105949306" alt="这里写图片描述" loading="lazy"><br>
+<img src="https://img-blog.csdn.net/20150810110000025" alt="这里写图片描述" loading="lazy"><br>
+<img src="https://img-blog.csdn.net/20150810110009599" alt="这里写图片描述" loading="lazy"></p>
+<p>到此第一轮“探测”真正结束。此时以基准数6为分界点，6左边的数都小于等于6，6右边的数都大于等于6。回顾一下刚才的过程，其实哨兵j的使命就是要找小于基准数的数，而哨兵i的使命就是要找大于基准数的数，直到i和j碰头为止。</p>
+<p>OK，解释完毕。现在基准数6已经归位，它正好处在序列的第6位。此时我们已经将原来的序列，以6为分界点拆分成了两个序列，左边的序列是“3 1 2 5 4”，右边的序列是“9 7 10 8”。接下来还需要分别处理这两个序列。因为6左边和右边的序列目前都还是很混乱的。不过不要紧，我们已经掌握了方法，接下来只要模拟刚才的方法分别处理6左边和右边的序列即可。现在先来处理6左边的序列现吧。</p>
+<p>左边的序列是“3 1 2 5 4”。请将这个序列以3为基准数进行调整，使得3左边的数都小于等于3，3右边的数都大于等于3。好了开始动笔吧</p>
+<p>如果你模拟的没有错，调整完毕之后的序列的顺序应该是：</p>
+<p>2 1 <strong>3</strong> 5 4</p>
+<p>OK，现在3已经归位。接下来需要处理3左边的序列“2 1”和右边的序列“5 4”。对序列“2 1”以2为基准数进行调整，处理完毕之后的序列为“1 2”，到此2已经归位。序列“1”只有一个数，也不需要进行任何处理。至此我们对序列“2 1”已全部处理完毕，得到序列是“1 2”。序列“5 4”的处理也仿照此方法，最后得到的序列如下：</p>
+<p>1 2 3 4 5 6 9 7 10 8</p>
+<p>对于序列“9 7 10 8”也模拟刚才的过程，直到不可拆分出新的子序列为止。最终将会得到这样的序列，如下</p>
+<p>1 2 3 4 5 6 7 8 9 10</p>
+<p>到此，排序完全结束。细心的同学可能已经发现，快速排序的每一轮处理其实就是将这一轮的基准数归位，直到所有的数都归位为止，排序就结束了。下面上个霸气的图来描述下整个算法的处理过程。<br>
+<img src="https://img-blog.csdn.net/20150810110155861" alt="这里写图片描述" loading="lazy"></p>
+<p>这是为什么呢？</p>
+<p>快速排序之所比较快，因为相比冒泡排序，每次交换是跳跃式的。每次排序的时候设置一个基准点，将小于等于基准点的数全部放到基准点的左边，将大于等于基准点的数全部放到基准点的右边。这样在每次交换的时候就不会像冒泡排序一样每次只能在相邻的数之间进行交换，交换的距离就大的多了。因此总的比较和交换次数就少了，速度自然就提高了。当然在最坏的情况下，仍可能是相邻的两个数进行了交换。因此快速排序的最差时间复杂度和冒泡排序是一样的都是O(N2)，它的平均时间复杂度为O(NlogN)。其实快速排序是基于一种叫做“二分”的思想。我们后面还会遇到“二分”思想，到时候再聊。先上代码，如下</p>
+<p>实现思路：</p>
+<p>通过基准数来交换元素</p>
+<p>实现代码：</p>
+<pre><code class="language-java">package com.lin;
+/*
+ *@Descriptions实现快速排序算法 完成一些列的步骤是基准数归位
+ */
+public class QuickSort {
+    public static void quickSort(int[] arr,int low,int high){
+        int i,j,temp,t;
+        if(low&gt;high){
+            return;
+        }
+        //哨兵i 放在数组最左边
+        i=low;
+        //哨兵j 放在数组最右边
+        j=high;
+        //temp就是基准位 先定位从最左边开始
+        temp = arr[low];
+
+        while (i&lt;j) {
+            //先看右边，依次往左递减 循环停止的条件是当找到比基准数小的数
+            while (temp&lt;=arr[j]&amp;&amp;i&lt;j) {
+                j--;
+            }
+            //再看左边，依次往右递增
+            while (temp&gt;=arr[i]&amp;&amp;i&lt;j) {
+                i++;
+            }
+            //如果满足条件即就是上面的循环停止 也就是找到了各自满足的数字则交换 i在j的右侧
+            if (i&lt;j) {
+                t = arr[j];
+                arr[j] = arr[i];
+                arr[i] = t;
+            }
+
+        }
+        //当两个哨兵碰到一起的时候 一般是数组一半的位置 
+        //最后将基准为与i和j相等位置的数字交换
+        arr[low] = arr[i];
+        arr[i] = temp;
+        //当第一个基准数完成的时候开始递归调用数组左右半边的函数
+        //递归调用左半数组 
+        quickSort(arr, low, j-1);
+        //递归调用右半数组
+        quickSort(arr, j+1, high);
+    }
+    public static void main(String[] args){
+        int[] arr = {6,1,2,7,9,3,4,5,10,8};
+        quickSort(arr, 0, arr.length-1);
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.print(&quot; &quot;+arr[i]);
+        }
+    }
+
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[JUC]]></title>
         <id>https://lindamao0753.github.io/post/juc/</id>
