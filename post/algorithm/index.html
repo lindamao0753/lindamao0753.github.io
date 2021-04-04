@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="keywords" content="Gridea静态个人博客">
+<meta name="description" content="好好学习">
+<meta name="theme-color" content="#212529">
+<title>基本算法 | Lindamao</title>
+<link rel="shortcut icon" href="/favicon.ico?v=1617540036055">
+<link rel="stylesheet" href="/styles/main.css">
+<link rel="stylesheet" href="/media/css/pisces.css">
+
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+<link href="/media/hljs/styles/idea.css" rel="stylesheet">  
+
+<script src="/media/hljs/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+    <meta name="description" content="基本算法" />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div class="head-top-line"></div>
+    <div class="header-box">
+      
+<div class=" pisces">
+  <header class="header bg-color ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>Lindamao</span>
+            </a>  
+          
+        </div>
+        
+          <p class="subtitle">好好学习</p>
+        
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/" target="_self">
+                  <i class="fa fa-home"></i> 首页
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/archives" target="_self">
+                  <i class="fa fa-archive"></i> 归档
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/tags" target="_self">
+                  <i class="fa fa-tags"></i> 标签
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/post/about" target="_self">
+                  <i class="fa fa-user"></i> 关于
+                </a>
+              
+            </li>
+          
+          <li class="nav-item">
+            <a>
+              <i class="fa fa-search"></i> 搜索
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+    </div>
+    <div class="main-continer">
+      
+      <div class="section-layout pisces ">
+        <div class="section-layout-wrapper">
+          
+
+<div class="sidebar">
+  
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+      <div class="sidebar-body pisces" id="sidebar_body">
+        
+          
+            <div style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto" id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li><a href="#%E6%AF%94%E8%BE%83%E7%AE%97%E6%B3%95">比较算法</a>
+<ul>
+<li><a href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F">冒泡排序</a></li>
+<li><a href="#%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F">选择排序</a></li>
+<li><a href="#%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F">插入排序</a></li>
+<li><a href="#%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F">希尔排序</a></li>
+<li><a href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快速排序</a></li>
+<li></li>
+<li><a href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F">归并排序</a>
+<ul>
+<li><a href="#%E5%BD%92%E5%B9%B6%E4%B8%8E%E5%BF%AB%E6%8E%92%E7%9A%84%E6%AF%94%E8%BE%83">归并与快排的比较</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A0%86%E6%8E%92%E5%BA%8F">堆排序</a></li>
+</ul>
+</li>
+<li><a href="#%E9%9D%9E%E6%AF%94%E8%BE%83%E7%AE%97%E6%B3%95">非比较算法</a>
+<ul>
+<li><a href="#%E6%AF%94%E8%BE%83%E5%92%8C%E9%9D%9E%E6%AF%94%E8%BE%83%E7%9A%84%E5%8C%BA%E5%88%AB">比较和非比较的区别</a>
+<ul>
+<li><a href="#%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E9%80%82%E7%94%A8%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4">计数排序适用数据范围</a></li>
+</ul>
+</li>
+<li><a href="#%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F">计数排序</a><br>
+*
+<ul>
+<li><a href="#%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E9%80%82%E7%94%A8%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4-2">计数排序适用数据范围</a></li>
+<li><a href="#%E8%BF%87%E7%A8%8B%E5%88%86%E6%9E%90">过程分析</a><br>
+*
+<ul>
+<li><a href="#%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B1"><strong>算法流程（1）</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%A1%B6%E6%8E%92%E5%BA%8F">桶排序</a></li>
+<li><a href="#%E6%A1%B6%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90">桶排序算法分析</a>
+<ul>
+<li><a href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90">时间复杂度分析</a></li>
+<li><a href="#%E6%A1%B6%E6%8E%92%E5%BA%8F%E9%80%82%E7%94%A8%E6%83%85%E5%86%B5">桶排序适用情况</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F">基数排序</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9">算法复杂度和相关知识点</a></li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1; 
+let active = 'active-show', activeClass = 'active-current';
+let tocWrapper = document.querySelector('#toc_wrapper');
+let tocContent = tocWrapper.children[0];
+let autoNumber = tocWrapper&&tocWrapper.classList.contains('auto-number');
+
+function addTocNumber(elem, deep) {
+  if (!elem) {
+    return;
+  }
+  let prop = elem.__proto__;
+
+  if (prop === HTMLUListElement.prototype) {
+    for (let i = 0; i < elem.children.length; i++) {
+      addTocNumber(elem.children[i], deep + (i + 1) + '.');
+    }
+  } else if (prop === HTMLLIElement.prototype) {
+    // 保存li元素
+    if (elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+      lList.push(elem);
+    }
+    for (let i = 0; i < elem.children.length; i++) {
+      let cur = elem.children[i];
+      if (cur.__proto__ === HTMLAnchorElement.prototype) {
+        if (autoNumber) {
+          cur.text =  deep + ' ' + cur.text;
+        }
+      } else if (cur.__proto__ === HTMLUListElement.prototype) {
+        addTocNumber(cur, deep);
+      }
+    }
+  }
+}
+
+function removeParentActiveClass() {
+  let parents = tocContent.querySelectorAll('.'+active)
+  parents.forEach(function(elem) {
+    elem.classList.remove(active);
+  });
+}
+
+function addActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.add(activeClass);
+  }
+}
+
+function removeActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.remove(activeClass);
+  }
+}
+
+function addActiveLiElemment(elem, parent) {
+  if (!elem || elem === parent) {
+    return;
+  } else {
+    if (elem.__proto__ === HTMLLIElement.prototype) {
+      elem.classList.add(active);
+    }
+    addActiveLiElemment(elem.parentElement, parent);
+  }
+}
+
+function showToc() {
+  if (tocWrapper) {
+    postBody = document.querySelector('#post_body');
+    for (let i = 0; i < postBody.children.length; i++) {
+      if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+        hList.push(postBody.children[i]);
+      }
+    }
+    if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+    } else if (tocWrapper.classList.contains('no_compress')){
+      tocContent.classList.add('expanded');
+    } else {
+      if (hList.length > 10) {
+        active = 'active-hidden'
+        tocContent.classList.add('closed');
+      } else {
+        tocContent.classList.add('expanded');
+      }
+    }
+  }
+}
+
+(function() {
+  // 处理不是从#一级标题开始目录
+  if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+    let con = tocContent.children[0].children[0];
+    tocContent.innerHTML = con.innerHTML;
+  }
+  addTocNumber(tocContent, '');
+})();
+
+document.addEventListener('scroll', function(e) {
+  if (lList.length <= 0) {
+    return;
+  }
+  let scrollTop = document.scrollingElement.scrollTop + 10;
+  let dir;
+
+  if (lastTop - scrollTop > 0) {
+    dir = 'up';
+  } else {
+    dir = 'down';
+  }
+
+  lastTop = scrollTop;
+  if (scrollTop <= 0) {
+    if (lastIndex >= 0 && lastIndex < hList.length) {
+      lList[lastIndex].classList.remove(activeClass);
+    }
+    return;
+  }
+
+  let current = 0, hasFind = false;
+  for (let i = 0; i < hList.length; i++) {
+    if (hList[i].offsetTop > scrollTop) {
+      current = i;
+      hasFind = true;
+      break;
+    }
+  }
+  if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+    current = hList.length - 1;
+  } else {
+    current--;
+  }
+  if (dir === 'down') {
+    if (current > lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex) 
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  } else {
+    if (current < lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex);
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  }
+});
+
+window.addEventListener('load', function() {
+  showToc();
+  document.querySelector('#sidebar').style='display: block;';
+  tocWrapper.classList.add('toc-active');
+  setTimeout(function() {
+    if ("createEvent" in document) {
+      let evt = document.createEvent("HTMLEvents");
+      evt.initEvent("scroll", false, true);
+      document.dispatchEvent(evt);
+    }
+    else {
+      document.fireEvent("scroll");
+    }
+  }, 500)
+})
+
+</script>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc && postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  if (sidebarBody) {
+    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+      let hasFix = false;
+      let scrollEl = document.querySelector('.main-continer');
+      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+      window.addEventListener('scroll', function(e) {
+        if (document.scrollingElement.scrollTop >= limitTop) {
+          if (!hasFix) {
+            sidebar.classList.add('sidebar-fixed');
+            hasFix = true;
+          }
+        } else {
+          if (hasFix) {
+            sidebar.classList.remove('sidebar-fixed');
+            hasFix = false;
+          }
+        }
+      });
+    }
+  }
+  
+</script>
+          <div class="section-box box-shadow-wrapper">
+            <div class="section bg-color post post-page">
+              <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://lindamao0753.github.io/post/algorithm/">
+      基本算法
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span>发布于</span>
+      <span>2021-04-04</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>42分钟</span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>10826<span class="pc-show">字数</span></span>
+    </span>
+    
+      
+      
+        
+      
+      <span id="/post/algorithm/" data-flag-title="基本算法" class="meta-item pc-show leancloud_visitors">
+        <span class="post-meta-divider">|</span>
+        <i class="fa fa-eye"></i>
+        <span>浏览量：<span class="leancloud-visitors-count" ></span></span>
+      </span>
+    
+  </div>
+</header>
+              <div class="post-body next-md-body" id="post_body">
+                <h1 id="比较算法">比较算法</h1>
+<h2 id="冒泡排序">冒泡排序</h2>
+<p>概述：</p>
+<p>冒泡排序是最简单的排序之一了，其大体思想就是通过与<strong>相邻元素</strong>的比较和交换来把小的数交换到最前面。这个过程类似于水泡向上升一样，因此而得名。举个栗子，对5,3,8,6,4这个无序序列进行冒泡排序。首先从后向前冒泡，4和6比较，把4交换到前面，序列变成5,3,8,4,6。同理4和8交换，变成5,3,4,8,6,3和4无需交换。5和3交换，变成3,5,4,8,6,3.这样一次冒泡就完了，把最小的数3排到最前面了。对剩下的序列依次冒泡就会得到一个有序序列。冒泡排序的时间复杂度为O(n^2)。</p>
+<p>实现思路 ：</p>
+<p>从索引大的向前面开始比较 如果大的索引小于前面的就要进行交换 直到不能交换为止</p>
+<p>实现代码(逆序)：</p>
+<pre><code class="language-java">package com.lin;
+
+public class BubbleSort {
+    //排序方法
+    public static void bubbleSort(int[] arr) {
+        if(arr == null || arr.length == 0)
+            return ;
+        for(int i=0; i&lt;arr.length;i++) {
+            //如果内循环的索引大于外层的就无法进行排序了
+            for(int j=arr.length-1; j&gt;i; j--) {
+                if(arr[j]&lt;arr[j-1]) {
+                    swap(arr, j-1, j);
+                }
+            }
+        }
+    }
+    //交换方法
+    public static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    public static void main(String[] args) {
+        int[] arr;
+        arr = new int[]{....};
+        bubbleSort(arr);
+        for (int i : arr) {
+            System.out.print(&quot; &quot;+i);
+        }
+    }
+
+}
+</code></pre>
+<p>正序实现代码</p>
+<pre><code class="language-java">package com.lin;
+/*
+ *@Description:冒泡排序算法实现（正序）
+ */
+public class BubbleSort2 {
+    public static void bubbleSort(int[] arr) {
+        if(arr == null || arr.length == 0)
+            return ;
+        for(int i=1;i&lt;arr.length;i++) {
+           //当内循环小于数组的长度再减去i的时候就退出
+            for(int j=0; j&lt;arr.length-i; j++) {
+                if(arr[j]&gt;arr[j+1]) {
+                    swap(arr, j+1, j);
+                }
+            }
+        }
+    }
+
+    public static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    public static void main(String[] args) {
+        int[] arr;
+        arr = new int[]{....};
+        bubbleSort(arr);
+        for (int i : arr) {
+            System.out.print(&quot; &quot;+i);
+        }
+
+    }
+
+}
+</code></pre>
+<h2 id="选择排序">选择排序</h2>
+<p>选择排序的思想其实和冒泡排序有点类似，都是在一次排序后把最小的元素放到最前面。但是过程不同，冒泡排序是通过<strong>相邻</strong>的比较和交换。而选择排序是通过对<strong>整体</strong>的选择。举个栗子，对5,3,8,6,4这个无序序列进行简单选择排序，首先要选择5以外的最小数来和5交换，也就是选择3和5交换，一次排序后就变成了3,5,8,6,4.对剩下的序列一次进行选择和交换，最终就会得到一个有序序列。其实选择排序可以看成冒泡排序的优化，因为其目的相同，</p>
+<p>只是选择排序只有在<strong>确定了最小数的前提下才进行交换</strong>，大大减少了交换的次数。选择排序的时间复杂度为O(n^2)。</p>
+<p>实现思路：</p>
+<p>首先先在数组中找出元素最小的数 然后放到最左边 其次再重复执行第一个步骤 并将最小的数字按从左到右排放好</p>
+<p>实现代码（正序) ：</p>
+<pre><code class="language-java">package com.lin;
+/*
+@Description 正序的选择排序算法
+ */
+public class SelectSort {
+    public static void selectSort(int[] arr) {
+        if(arr == null || arr.length == 0)
+            return ;
+        //先定义最小的数字
+
+        for(int i=0; i&lt;arr.length;i++){//只需要比较n-1次
+            //先定义最小值的索引 从0开始
+            int minIndex = i;
+            for(int j=i+1; j&lt;arr.length;j++)
+            {
+            //从i+1开始比较，因为minIndex默认为i了就是0，i就没必要比了。
+                //判断前面的值是否小于后面
+                if(arr[j]&lt;arr[minIndex])
+                {
+                    //如果前面的数字 小于后面的值就将后面的索引和之前的交换
+                    minIndex = j;
+                }
+            }
+            //当内循环找到最小值的时候才进行一次交换
+            if(minIndex != i) { //如果minIndex不为i，说明找到了更小的值，执行交换的方法
+                swap(arr, i, minIndex);
+            }
+    }
+}
+public static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+        }
+
+    public static void main(String[] args) {
+        int[] arr;
+        arr = new int[]{5,4,8,6,3,2,2};
+        selectSort(arr);
+        for (int i : arr) {
+            System.out.print(&quot; &quot;+i);
+        }
+    }
+        }
+</code></pre>
+<h2 id="插入排序">插入排序</h2>
+<p>插入排序不是通过交换位置而是通过比较找到合适的位置插入元素来达到排序的目的的。相信大家都有过打扑克牌的经历，特别是牌数较大的。在分牌时可能要整理自己的牌，牌多的时候怎么整理呢？就是拿到一张牌，找到一个合适的位置插入。</p>
+<p>这个原理其实和插入排序是一样的。举个栗子，对5,3,8,6,4这个无序序列进行简单插入排序，首先假设第一个数的位置时正确的，想一下在拿到第一张牌的时候，没必要整理。然后3要插到5前面，把5后移一位，变成3,5,8,6,4.想一下整理牌的时候应该也是这样吧。然后8不用动，6插在8前面，8后移一位，4插在5前面，从5开始都向后移一位。</p>
+<p><strong>注意在插入一个数的时候要保证这个数前面的数已经有序</strong>。简单插入排序的时间复杂度也是O(n^2)。</p>
+<p>实现思路(正序):假设从第二个元素开始插入 并将此元素与这前的所有元素进行比较  如果比前面的元素小的话 就插入到该元素前面并将后面的元素向后移动。</p>
+<p>实现代码：</p>
+<pre><code class="language-java">package com.lin;
+/**
+ *@Description:简单插入排序算法实现(正序)
+ */
+public class InsertSort {
+    public static void insertSort(int[] a) {
+        int i, j, insertNote;// 要插入的数据
+        for (i = 1; i &lt; a.length; i++) {// 从数组的第二个元素开始循环将数组中的元素插入
+            insertNote = a[i];// 设置数组中的第2个元素为第一次循环要插入的数据 依次往后
+            j = i - 1;
+            //不断的判断插入的元素是否小于前面的所有元素 是的话就循环将元素往右边放
+            while (j &gt;= 0 &amp;&amp; insertNote &lt; a[j]) {
+                a[j + 1] = a[j];// 如果要插入的元素小于第j个元素,就将第j个元素向后移动
+                j--;
+            }
+            a[j + 1] = insertNote;// 直到要插入的元素不小于第j个元素,将insertNote插入到数组中
+        }
+    }
+
+
+    public static void main(String[] args) {
+        int[] arr;
+        arr = new int[]{3,5,4,8,6,3};
+        insertSort(arr);
+        for (int i : arr) {
+            System.out.print(&quot; &quot;+i);
+        }
+    }
+
+}
+</code></pre>
+<h2 id="希尔排序">希尔排序</h2>
+<p>概述<br>
+希尔排序(Shell’s Sort)是插入排序的一种又称“缩小增量排序”（Diminishing Increment Sort），是直接插入排序算法的一种更高效的改进版本。希尔排序是非稳定排序算法。该方法因D.L.Shell于1959年提出而得名。</p>
+<p>希尔排序是把记录按下标的一定增量分组，对每组使用直接插入排序算法排序；随着增量逐渐减少，每组包含的关键词越来越多，当增量减至1时，整个文件恰被分成一组，算法便终止。</p>
+<p>插入排序的速度虽然比冒泡和选择快，但是还是比较慢且有缺陷的。因为如果一个最小的数字在数组最后面，则对它进行排序的时候，要循环很多次，将其插入到数组的最前端，而希尔排序则解决了这个问题。它与插入排序类似，只是把一组插入排序，改为了多组。一开始是每隔length/2个数字为一组进行插入，则第一轮插入的时候，比较小的数字都插入到了数组的前段，相对于插入排序，少了许多次循环的过程。</p>
+<p>它把一组数组，改为了多组，分别进行插入排序。分隔这些不同组插入排序的东西，我管它叫做“步长”。步长一开始是 length/2 ,随后不断 / 2。</p>
+<p>原理</p>
+<p>图源：尚硅谷java数据结构视频</p>
+<figure data-type="image" tabindex="1"><img src="//tvax3.sinaimg.cn/large/007bjbYxgy1gp7z7iyfl3j30dt0batde.jpg" alt="20200724120341429" loading="lazy"></figure>
+<p>以上图举例：</p>
+<p>数组长度为10，则初始步长为5，即将此数组分为5组，每隔5个下标 (一个步长) 的数字为一组，分别进行插入排序。</p>
+<p>第一次排序完成后，步长继续 /2，为2，即将数组分为2组，每隔两个下标的数字为一组。分别对这两组进行插入排序。</p>
+<p>第一次排序完成后，步长继续 /2，为1，即数组不分组，直接进行插入排序。</p>
+<p>实现思路 ：<strong>设置步长 根据步长之间的索引比较进行插入排序</strong></p>
+<p>实现代码：</p>
+<pre><code class="language-java">package com.lin;
+
+public class ShellSort {
+
+
+    public static int[] shellSort(int[] array){
+        //控制步长，每循环一次就除二
+        for (int n = array.length/2; n &gt; 0; n /= 2 ){
+            //从下标为步长的元素开始，依次向后循环
+            
+            //不用担心前面的元素，因为下面j层的循环，会依次和前面的数字进行比较。
+
+            for (int i = n; i &lt; array.length; i++) {
+                // 从下标为[步长]的数字开始，向前 隔一个步长 进行比较
+                // 如果后一个比前一个小，则交换，如果不是，则返回上一层循环，
+                // i+1后再进行【如果后一个比前一个小，则交换】的比较
+                // 之后j-n，再和一开始位置的两个步长距离的数字进行比较
+                // 如此反复
+                for (int j = i; j &gt; 0 &amp;&amp; j-n &gt;= 0 &amp;&amp; array[j] &lt; array[j-n]; j-=n) {
+                    int temp = array[j];
+                    array[j] = array[j-n];
+                    array[j-n] = temp;
+                }
+            }
+        }
+        return array;
+    }
+    public static void main(String[] args) {
+        int[] array = {3,5,4,8,6,3};
+        int[] ints = shellSort(array);
+        for (int anInt : ints) {
+            System.out.print(&quot; &quot;+anInt);
+        }
+//        int[] array = new int[80000];
+//        for (int i = 0; i &lt; array.length; i++) {
+//            array[i] = (int)(Math.random()*800000);
+//        }
+        long startTime=System.currentTimeMillis();
+        shellSort(array);
+        long endTime=System.currentTimeMillis();
+        System.out.println(&quot;  程序运行时间： &quot;+(endTime - startTime)+&quot;ms&quot;);
+        //希尔排序排序80k长度的数组，在我这台电脑上只用了不到0.1秒，而插入排序则需要2秒多
+    }
+}
+</code></pre>
+<h2 id="快速排序">快速排序</h2>
+<p>有没有既不浪费空间又可以快一点的排序算法呢？那就是“快速排序”啦！光听这个名字是不是就觉得很高端呢。</p>
+<p>假设我们现在对“6 1 2 7 9 3 4 5 10 8”这个10个数进行排序。首先在这个序列中随便找一个数作为<strong>基准数</strong>（不要被这个名词吓到了，就是一个用来参照的数，待会你就知道它用来做啥的了）。为了方便，就让第一个数6作为基准数吧。接下来，需要将这个序列中所有比基准数大的数放在6的右边，比基准数小的数放在6的左边，类似下面这种排列：</p>
+<p>3 1 2 5 4 6 9 7 10 8</p>
+<p>在初始状态下，数字6在序列的第1位。我们的目标是将6挪到序列中间的某个位置，假设这个位置是k。现在就需要寻找这个k，并且以第k位为分界点，左边的数都小于等于6，右边的数都大于等于6。想一想，你有办法可以做到这点吗？</p>
+<h2 id=""></h2>
+<p>方法其实很简单：分别从初始序列“6 1 2 7 9 3 4 5 10 8”两端开始“探测”。先从<strong>右</strong>往<strong>左</strong>找一个小于6的数，再从<strong>左</strong>往<strong>右</strong>找一个大于6的数，然后交换他们。这里可以用两个变量i和j，分别指向序列最左边和最右边。我们为这两个变量起个好听的名字“哨兵i”和“哨兵j”。刚开始的时候让哨兵i指向序列的最左边（即i=1），指向数字6。让哨兵j指向序列的最右边（即=10），指向数字。</p>
+<p><img src="//tvax1.sinaimg.cn/large/007bjbYxgy1gp7zcptuu9j30b403kt8n.jpg" alt="20150810105856630" loading="lazy"><br>
+首先哨兵j开始出动。因为此处设置的基准数是最左边的数，所以需要让哨兵j先出动，这一点非常重要（请自己想一想为什么）。哨兵j一步一步地向左挪动（即j–），直到找到一个小于6的数停下来。接下来哨兵i再一步一步向右挪动（即i++），直到找到一个数大于6的数停下来。最后哨兵j停在了数字5面前，哨兵i停在了数字7面前。<br>
+<img src="//tvax2.sinaimg.cn/large/007bjbYxgy1gp7ze7d2q1j309q040t8n.jpg" alt="20150810105908580" loading="lazy"><br>
+<img src="//tva2.sinaimg.cn/large/007bjbYxgy1gp7zegyfqxj309q034jra.jpg" alt="20150810105918502" loading="lazy"><br>
+现在交换哨兵i和哨兵j所指向的元素的值。交换之后的序列如下：</p>
+<p>6 1 2 <strong>5</strong> 9 3 4 <strong>7</strong> 10 8<br>
+<img src="//tva2.sinaimg.cn/large/007bjbYxgy1gp7zeogr65j309q03zq2v.jpg" alt="20150810105928634" loading="lazy"><br>
+<img src="//tvax3.sinaimg.cn/large/007bjbYxgy1gp7zeyhv3kj309q034t8m.jpg" alt="20150810105938122" loading="lazy"><br>
+到此，第一次交换结束。接下来开始哨兵j继续向左挪动（再友情提醒，每次必须是哨兵j先出发）。他发现了4（比基准数6要小，满足要求）之后停了下来。哨兵i也继续向右挪动的，他发现了9（比基准数6要大，满足要求）之后停了下来。此时再次进行交换，交换之后的序列如下：</p>
+<p>6 1 2 5 <strong>4</strong> 3 <strong>9</strong> 7 10 8</p>
+<p>第二次交换结束，“探测”继续。哨兵j继续向左挪动，他发现了3（比基准数6要小，满足要求）之后又停了下来。哨兵i继续向右移动，糟啦！此时哨兵i和哨兵j相遇了，哨兵i和哨兵j都走到3面前。说明此时“探测”结束。我们将基准数6和3进行交换。交换之后的序列如下：</p>
+<p><strong>3</strong> 1 2 5 4 <strong>6</strong> 9 7 10 8</p>
+<p><img src="//tva2.sinaimg.cn/large/007bjbYxgy1gp7zhcwxurj309q03fmx2.jpg" alt="20150810105949306" loading="lazy"><br>
+<img src="//tvax3.sinaimg.cn/large/007bjbYxgy1gp7zhl5linj309q04h748.jpg" alt="20150810110000025" loading="lazy"><br>
+<img src="//tvax4.sinaimg.cn/large/007bjbYxgy1gp7zixypqdj309q03l3yf.jpg" alt="20150810110009599" loading="lazy"></p>
+<p>到此第一轮“探测”真正结束。此时以基准数6为分界点，6左边的数都小于等于6，6右边的数都大于等于6。回顾一下刚才的过程，其实哨兵j的使命就是要找小于基准数的数，而哨兵i的使命就是要找大于基准数的数，直到i和j碰头为止。</p>
+<p>OK，解释完毕。现在基准数6已经归位，它正好处在序列的第6位。此时我们已经将原来的序列，以6为分界点拆分成了两个序列，左边的序列是“3 1 2 5 4”，右边的序列是“9 7 10 8”。接下来还需要分别处理这两个序列。因为6左边和右边的序列目前都还是很混乱的。不过不要紧，我们已经掌握了方法，接下来只要模拟刚才的方法分别处理6左边和右边的序列即可。现在先来处理6左边的序列现吧。</p>
+<p>左边的序列是“3 1 2 5 4”。请将这个序列以3为基准数进行调整，使得3左边的数都小于等于3，3右边的数都大于等于3。好了开始动笔吧</p>
+<p>如果你模拟的没有错，调整完毕之后的序列的顺序应该是：</p>
+<p>2 1 <strong>3</strong> 5 4</p>
+<p>OK，现在3已经归位。接下来需要处理3左边的序列“2 1”和右边的序列“5 4”。对序列“2 1”以2为基准数进行调整，处理完毕之后的序列为“1 2”，到此2已经归位。序列“1”只有一个数，也不需要进行任何处理。至此我们对序列“2 1”已全部处理完毕，得到序列是“1 2”。序列“5 4”的处理也仿照此方法，最后得到的序列如下：</p>
+<p>1 2 3 4 5 6 9 7 10 8</p>
+<p>对于序列“9 7 10 8”也模拟刚才的过程，直到不可拆分出新的子序列为止。最终将会得到这样的序列，如下</p>
+<p>1 2 3 4 5 6 7 8 9 10</p>
+<p>到此，排序完全结束。细心的同学可能已经发现，快速排序的每一轮处理其实就是将这一轮的基准数归位，直到所有的数都归位为止，排序就结束了。下面上个霸气的图来描述下整个算法的处理过程。<br>
+<img src="//tva4.sinaimg.cn/large/007bjbYxgy1gp7zjzu6psj30f70gomy7.jpg" alt="20150810110155861" loading="lazy"></p>
+<p>这是为什么呢？</p>
+<p>快速排序之所比较快，因为相比冒泡排序，每次交换是跳跃式的。每次排序的时候设置一个基准点，将小于等于基准点的数全部放到基准点的左边，将大于等于基准点的数全部放到基准点的右边。这样在每次交换的时候就不会像冒泡排序一样每次只能在相邻的数之间进行交换，交换的距离就大的多了。因此总的比较和交换次数就少了，速度自然就提高了。当然在最坏的情况下，仍可能是相邻的两个数进行了交换。因此快速排序的最差时间复杂度和冒泡排序是一样的都是O(N2)，它的平均时间复杂度为O(NlogN)。其实快速排序是基于一种叫做“二分”的思想。我们后面还会遇到“二分”思想，到时候再聊。先上代码，如下</p>
+<p>实现思路：</p>
+<p>通过基准数来交换元素</p>
+<p>实现代码：</p>
+<pre><code class="language-java">package com.lin;
+/*
+ *@Descriptions实现快速排序算法 完成一些列的步骤是基准数归位
+ */
+public class QuickSort {
+    public static void quickSort(int[] arr,int low,int high){
+        int i,j,temp,t;
+        if(low&gt;high){
+            return;
+        }
+        //哨兵i 放在数组最左边
+        i=low;
+        //哨兵j 放在数组最右边
+        j=high;
+        //temp就是基准位 先定位从最左边开始
+        temp = arr[low];
+
+        while (i&lt;j) {
+            //先看右边，依次往左递减 循环停止的条件是当找到比基准数小的数
+            while (temp&lt;=arr[j]&amp;&amp;i&lt;j) {
+                j--;
+            }
+            //再看左边，依次往右递增
+            while (temp&gt;=arr[i]&amp;&amp;i&lt;j) {
+                i++;
+            }
+            //如果满足条件即就是上面的循环停止 也就是找到了各自满足的数字则交换 i在j的右侧
+            if (i&lt;j) {
+                t = arr[j];
+                arr[j] = arr[i];
+                arr[i] = t;
+            }
+
+        }
+        //当两个哨兵碰到一起的时候 一般是数组一半的位置 
+        //最后将基准为与i和j相等位置的数字交换
+        arr[low] = arr[i];
+        arr[i] = temp;
+        //当第一个基准数完成的时候开始递归调用数组左右半边的函数
+        //递归调用左半数组 
+        quickSort(arr, low, j-1);
+        //递归调用右半数组
+        quickSort(arr, j+1, high);
+    }
+    public static void main(String[] args){
+        int[] arr = {6,1,2,7,9,3,4,5,10,8};
+        quickSort(arr, 0, arr.length-1);
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.print(&quot; &quot;+arr[i]);
+        }
+    }
+
+}
+</code></pre>
+<h2 id="归并排序">归并排序</h2>
+<p>概念：</p>
+<p>归并排序<br>
+1、原理<br>
+归并排序是一种概念上最简单的排序算法，与快速排序一样，归并排序也是基于分治法的。归并排序将待排序的元素序列分成两个长度相等的子序列，为每一个子序列排序，然后再将他们合并成一个子序列。合并两个子序列的过程也就是两路归并。</p>
+<p>2、复杂度<br>
+归并排序是一种稳定的排序算法，归并排序的主要问题在于它需要一个与待排序数组一样大的辅助数组空间。由于归并排序每次划分时两个子序列的长度基本一样，所以归并排序最好、最差和平均时间复杂度都是nlog2n。<br>
+我们可以通过下图非常容易看懂归并排序的过程：</p>
+<p>要将两个排好序的子序列合并为一个子序列的方法：</p>
+<p><strong>每次都是从未比较的两个子序列的最小值中选出一个更小值</strong>。</p>
+<p>复杂度：</p>
+<p>代码实现：</p>
+<pre><code class="language-java">package com.lin;
+
+public class MergeSort {
+    //两路归并算法，两个排好序的子序列合并为一个子序列
+    //mid为取子序列前面和后面之和的对半索引
+    public static void merge(int[] a, int left, int mid, int right){
+        int []tmp=new int[a.length];//辅助数组 将改变的子序列复制到a数组当中
+        int p1=left,p2=mid+1,k=left;//p1、p2是检测指针，k是存放指针 通过k的索引赋值到temp的数组上面
+        //当子序列的索引都小于检测指针进行循环
+        while(p1&lt;=mid &amp;&amp; p2&lt;=right){
+            if(a[p1]&lt;=a[p2])
+                //如果前面值小于后面的 就把前面的值先放到辅助数组当中
+                tmp[k++]=a[p1++];
+            else
+                //否则就将后面的值放到辅助数组当中
+                tmp[k++]=a[p2++];
+        }
+        
+        while(p1&lt;=mid) tmp[k++]=a[p1++];//如果第一个序列未检测完，直接将后面所有元素加到合并的序列中
+        
+        while(p2&lt;=right) tmp[k++]=a[p2++];//同上
+
+        //复制回原素组
+        for (int i = left; i &lt;=right; i++)
+            a[i]=tmp[i];
+    }
+
+    public static void mergeSort(int[] a, int start, int end){
+        //递归调用函数 先把子序列分完再开始排序
+        if(start&lt;end){//当子序列中只有一个元素时结束递归
+            int mid=(start+end)/2;//划分子序列
+            mergeSort(a, start, mid);//对左侧子序列进行递归排序
+            mergeSort(a, mid+1, end);//对右侧子序列进行递归排序
+            merge(a, start, mid, end);//合并 完成一次排序合并就会satrt 和mid 还有end 的值都会增加 两两元素之间发生交交换
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] a = { 49, 38, 65, 97, 76, 13, 27, 50 };
+        mergeSort(a, 0, a.length-1);
+        System.out.println(&quot;排好序的数组：&quot;);
+        for (int e : a)
+            System.out.print(e+&quot; &quot;);
+    }
+}
+</code></pre>
+<h3 id="归并与快排的比较">归并与快排的比较</h3>
+<p>在同一台计算机上得到两个算法在不同数组长度下的执行时间：</p>
+<p>快排和归并的理论上的时间复杂性如下表：</p>
+<p>（1）在数组长度小于一千万的时候，如下图，快速排序的速度要略微快于归并排序，可能是因为归并需要额外的数组开销（比如声明临时local数组用来储存排序结果），这些操作让归并算法在小规模数据的并不占优势。</p>
+<p>（2）但是，当数据量达到亿级时，归并的速度开始超过快速排序了，如下图，因为归并排序比快排要稳定，所以在数据量大的时候，快排容易达到O(n^2)的时间复杂度，当然这里是指未改进的快排算法。</p>
+<h2 id="堆排序">堆排序</h2>
+<p><strong>概念</strong></p>
+<p>堆排序：堆排序（Heapsort）是指利用堆这种数据结构所设计的一种排序算法。</p>
+<p><strong>堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点</strong>。</p>
+<p>堆是具有以下性质的完全二叉树：每个结点的值都大于或等于其左右孩子结点的值，称为大顶堆；或者每个结点的值都小于或等于其左右孩子结点的值，称为小顶堆。如下图：</p>
+<figure data-type="image" tabindex="2"><img src="//tvax2.sinaimg.cn/large/007bjbYxgy1gp7zki7cwqj31ds0lkq66.jpg" alt="20180908011909728" loading="lazy"></figure>
+<p>同时，我们对堆中的结点按层进行编号，将这种逻辑结构映射到数组中就是下面这个样子</p>
+<figure data-type="image" tabindex="3"><img src="//tvax2.sinaimg.cn/large/007bjbYxgy1gp7zlieswaj311q06uq3a.jpg" alt="20180908012011635" loading="lazy"></figure>
+<p><strong>该数组从逻辑上讲就是一个堆结构，我们用简单的公式来描述一下堆的定义</strong>就是：</p>
+<p>2i+1和2i+2 为他们的子节点</p>
+<p><strong>大顶堆</strong>：arr[i] &gt;= arr[2i+1] &amp;&amp; arr[i] &gt;= arr[2i+2]</p>
+<p><strong>小顶堆</strong>：arr[i] &lt;= arr[2i+1] &amp;&amp; arr[i] &lt;= arr[2i+2]</p>
+<p>ok，了解了这些定义。接下来，我们来看看堆排序的基本思想及基本步骤：</p>
+<p>堆排序的基本思想是：将待排序序列构造成一个大顶堆，此时，整个序列的最大值就是堆顶的根节点。将其与末尾元素进行交换</p>
+<p>此时末尾就为最大值。然后将剩余n-1个元素重新构造成一个堆，这样会得到n个元素的次小值。如此反复执行，便能得到一个有序序列了</p>
+<p><strong>步骤一 构造初始堆。将给定无序序列构造成一个大顶堆（一般升序采用大顶堆，降序采用小顶堆)。</strong></p>
+<p>a.假设给定无序序列结构如下</p>
+<figure data-type="image" tabindex="4"><img src="//tvax1.sinaimg.cn/large/007bjbYxgy1gp7zlndllbj30ji0i6myd.jpg" alt="1024555-20161217192038651-934327647" loading="lazy"></figure>
+<p>2.此时我们从<strong>最后一个</strong>非叶子结点开始（叶结点自然不用调整，第一个非叶子结点 arr.length/2-1=5/2-1=1，也就是下面的6结点），从左至右，从下至上进行调整。然后进行比较它的子树</p>
+<figure data-type="image" tabindex="5"><img src="//tva3.sinaimg.cn/large/007bjbYxgy1gp7zlrbxjoj31bg0iyacd.jpg" alt="1024555-20161217192209433-270379236" loading="lazy"></figure>
+<p>4.找到<strong>第二个</strong>非叶节点 也就是最后一个节点的索引再减一也就是4，由于[4,9,6]中9元素最大，4和9交换。</p>
+<figure data-type="image" tabindex="6"><img src="//tvax4.sinaimg.cn/large/007bjbYxgy1gp7zlxx0vij31ao0jeacb.jpg" alt="1024555-20161217192854636-1823585260" loading="lazy"></figure>
+<p>这时，交换导致了子根[4,5,6]结构混乱，继续调整，[4,5,6]中6最大，交换4和6。</p>
+<figure data-type="image" tabindex="7"><img src="//tvax4.sinaimg.cn/large/007bjbYxgy1gp7zm2g9jij31bs0ia41a.jpg" alt="1024555-20161217193347886-1142194411" loading="lazy"></figure>
+<p>此时，我们就将一个无需序列构造成了一个大顶堆。</p>
+<p><strong>步骤二 将堆顶元素与末尾元素进行交换，使末尾元素最大。</strong></p>
+<p><strong>将待排序序列构造成一个大顶堆，此时，整个序列的最大值就是堆顶的根节点。将其与末尾元素进行交换，此时末尾就为最大值。</strong></p>
+<p><strong>然后将剩余n-1个元素再重新构造成一个大顶堆，这样会得到n个元素的次小值，如此反复执行，便能得到一个有序序列了。</strong></p>
+<p><strong>然后继续调整堆，再将堆顶元素与末尾元素交换，得到第二大元素。如此反复进行交换、重建、交换。</strong></p>
+<p>a.将堆顶元素9和末尾元素4进行交换</p>
+<figure data-type="image" tabindex="8"><img src="//tva2.sinaimg.cn/large/007bjbYxgy1gp7zm7id91j31e00i6act.jpg" alt="1024555-20161217194207620-1455153342" loading="lazy"></figure>
+<p>b.重新调整结构，使其继续满足堆定义(即父节点比子节点都大)  调整结构的目的是为了满足堆定义</p>
+<figure data-type="image" tabindex="9"><img src="//tva1.sinaimg.cn/large/007bjbYxgy1gp7zmew33zj31as0hgq5m.jpg" alt="1024555-20161218153110495-1280388728" loading="lazy"></figure>
+<p>c.再将堆顶元素8与末尾元素5进行交换，得到第二大元素8. （调换过后的末尾元素的索引应该往前 ）</p>
+<figure data-type="image" tabindex="10"><img src="//tva2.sinaimg.cn/large/007bjbYxgy1gp7zmlhczyj31ay0huwge.jpg" alt="1024555-20161218152929339-1114983222" loading="lazy"></figure>
+<p>后续过程，继续进行调整，交换，如此反复进行，最终使得整个序列有序</p>
+<figure data-type="image" tabindex="11"><img src="//tva2.sinaimg.cn/large/007bjbYxgy1gp7zmqty3wj30lq0j8wfl.jpg" alt="1024555-20161218152348229-935654830" loading="lazy"></figure>
+<p>再简单总结下堆排序的基本思路：</p>
+<p><strong>a.将无需序列构建成一个堆，根据升序降序需求选择大顶堆或小顶堆;</strong></p>
+<p><strong>b.将堆顶元素与末尾元素交换，将最大元素&quot;沉&quot;到数组末端;</strong></p>
+<p><strong>c.重新调整结构，使其满足堆定义，然后继续交换堆顶元素与当前末尾元素，反复执行调整+交换步骤，直到整个序列有序。</strong></p>
+<p>更详细的图解</p>
+<figure data-type="image" tabindex="12"><img src="//tva3.sinaimg.cn/large/007bjbYxgy1gp7zn95ugzj30xx169tm6.jpg" alt="20200831103112610" loading="lazy"></figure>
+<p><img src="//tvax3.sinaimg.cn/large/007bjbYxgy1gp7zneygjcj30sn1c3k0a.jpg" alt="20200831103235481" loading="lazy"><br>
+代码实现：</p>
+<pre><code class="language-java">package com.lin;
+
+import java.util.Arrays;
+
+public class HeapSort {
+        //大函数
+    public static void sort(int []arr){
+        //1.构建大顶堆
+        for(int i=arr.length/2-1;i&gt;=0;i--){
+            //从最后一个非叶子结点开始（arr.length/2-1） 从下至上，从右至左调整结构 一直到找到最后的非叶子结点 最后也就到了0索引为0的那里
+            //循环执行调用调大顶堆的函数
+            adjustHeap(arr,i,arr.length);
+        }
+        //2.调整堆结构+交换堆顶元素与末尾元素
+        for(int j=arr.length-1;j&gt;0;j--){
+            //j-1 的原因是交换完就最后一个元素后 除去最后一个元素并对剩下的元素进行重新堆积大顶堆
+            swap(arr,0,j);//将堆顶元素与末尾元素进行交换
+
+            adjustHeap(arr,0,j);//对重新对堆进行调整
+        }
+
+    }
+
+    /**
+     * 调整大顶堆（仅是调整过程，建立在大顶堆已构建的基础上）
+     * @param arr
+     * @param i
+     * @param length
+     */
+            //调整大顶堆函数
+    public static void adjustHeap(int []arr,int i,int length){
+        int temp = arr[i];//先取出当前元素i 也就是父节点 2k+1的原因调整因为交换元素的大顶堆 使其满足大顶堆定义
+        for(int k=i*2+1;k&lt;length;k=k*2+1){//从i结点的左子结点开始，也就是2i+1处开始
+            //k为i结点的子节点的第一个结点 也就是左子节点
+            //判断找出最大的子节点
+            if(k+1&lt;length &amp;&amp; arr[k]&lt;arr[k+1]){
+                //如果没有右结点的时候直接进行下面的比较
+                //如果左子结点小于右子结点，k指向右子结 然后将索引+1
+                k++;
+            }
+            //最后将那个最大的子节点
+            if(arr[k] &gt;temp){//如果子节点大于父节点，将子节点值赋给父节点（不用进行交换） 并将当前的子节点变为子节点然后回到上面的循环再与其子节点进行比较
+                arr[i] = arr[k];
+                i = k;
+            }else{
+                break;
+            }
+        }
+        arr[i] = temp;//将temp值放到最终的位置
+    }
+
+    /**
+     * 交换元素
+     * @param arr
+     * @param a
+     * @param b
+     */
+
+        //交换函数
+    public static void swap(int []arr,int a ,int b){
+        int temp=arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
+    }
+    public static void main(String []args){
+        int []arr = {3,7,16,10,21,23};
+        System.out.println(&quot;排序前：&quot;+ Arrays.toString(arr));
+        sort(arr);
+        System.out.println(&quot;排序后：&quot;+Arrays.toString(arr));
+    }
+
+}
+
+</code></pre>
+<h1 id="非比较算法">非比较算法</h1>
+<h2 id="比较和非比较的区别">比较和非比较的区别</h2>
+<p>常见的快速排序、归并排序、堆排序、冒泡排序等属于比较排序。在排序的最终结果里，元素之间的次序依赖于它们之间的比较。每个数都必须和其他数进行比较，才能确定自己的位置。<br>
+在<strong>冒泡排序</strong>之类的排序中，问题规模为n，又因为需要比较n次，所以平均时间复杂度为O(n²)。在<strong>归并排序、快速排序</strong>之类的排序中，问题规模通过分治法消减为logN次，所以时间复杂度平均<strong>O(nlogn)</strong>。<br>
+比较排序的优势是，适用于各种规模的数据，也不在乎数据的分布，都能进行排序。可以说，比较排序适用于一切需要排序的情况。</p>
+<p>计数排序、基数排序、桶排序则属于非比较排序。非比较排序是通过确定每个元素之前，应该有多少个元素来排序。针对数组arr，计算arr[i]之前有多少个元素，则唯一确定了arr[i]在排序后数组中的位置。<br>
+非比较排序只要确定每个元素之前的已有的元素个数即可，所有一次遍历即可解决。算法时间复杂度<strong>O(n)</strong>。<br>
+非比较排序时间复杂度底，但由于非比较排序需要占用空间来确定唯一位置。所以对数据规模和数据分布有一定的要求。</p>
+<h3 id="计数排序适用数据范围">计数排序适用数据范围</h3>
+<p>计数排序需要占用大量空间，它仅适用于数据比较集中的情况。比如 [0100]，[1000019999] 这样的数据。</p>
+<h2 id="计数排序">计数排序</h2>
+<p>尝试写一个O(n)时间复杂度的排序算法</p>
+<p>看似是不可能的 以为基于比较的排序的下限是O(nlogn)。</p>
+<p>前提条件，就是待排序的数要满足一定的范围的整数，而且计数排序需要比较多的辅助空间。其基本思想是，用待排序的数作为计数数组的下标，统计每个数字的个数。</p>
+<p>然后依次输出即可得到有序序列。</p>
+<h4 id="计数排序适用数据范围-2">计数排序适用数据范围</h4>
+<p>计数排序需要占用大量空间，它仅适用于数据比较集中的情况。比如 [0100]，[1000019999] 这样的数据。</p>
+<h4 id="过程分析">过程分析</h4>
+<p>计数排序的基本思想是：<code>对每一个输入的元素arr[i]，确定小于 arr[i] 的元素个数</code>。<br>
+所以可以直接把 arr[i] 放到它输出数组中的位置上。假设有5个数小于 arr[i]，所以 arr[i] 应该放在数组的第6个位置上。</p>
+<p>下面给出两种实现：</p>
+<h6 id="算法流程1"><strong>算法流程（1）</strong></h6>
+<p>需要三个数组:<br>
+待排序数组 int[] arr = new int[]{4,3,6,3,5,1};<br>
+辅助计数数组 int[] help = new int[max - min + 1]; //该数组大小为待排序数组中的最大值减最小值+1<br>
+输出数组 int[] res = new int[arr.length];</p>
+<p>1.求出待排序数组的最大值max=6， 最小值min=1<br>
+2.实例化辅助计数数组help，help数组中每个下标对应arr中的一个元素，<strong>help用来记录每个元素出现的次数</strong><br>
+3.计算 arr 中每个元素在help中的位置 position = arr[i] - min，此时 help = [1,0,2,1,1,1]; （3出现了两次，2未出现）<br>
+4.根据 help 数组求得排序后的数组，此时 res = [1,3,3,4,5,6]</p>
+<pre><code class="language-java">package com.lin;
+
+public class CountSort {
+    public static int[] countSort1(int[] arr){
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        //定义待排数组中的最大值 先将其最小为为最大的值 这样肯定有比它大的数 然后返回更大的值
+        int max = Integer.MIN_VALUE;
+        //定义待排数组中的最小值 先将其最小为为最小的值 这样肯定有比它小的数 然后返回更小的值
+        int min = Integer.MAX_VALUE;
+        //根据Math函数找出数组中的最大最小值
+        for(int i = 0; i &lt; arr.length; i++){
+
+            max = Math.max(max, arr[i]);
+
+            min = Math.min(min, arr[i]);
+        }
+        //辅助计数数组 help该数组大小为待排序数组中的最大值减最小值+1 保证了如果是以步长为1增的数字都能够排在数组当中
+        int help[] = new int[max-min+1];
+        //找出每个数字出现的次数 从索引为0的开始
+        for(int i = 0; i &lt; arr.length; i++){
+            //position 为索引的位置
+            int position= arr[i] - min;
+
+            //有这个数的话在索引上的值+1
+            help[position]++;
+        }
+        int index = 0;
+        for(int i = 0; i &lt; help.length; i++){
+            //如果数组上有此值 按照个数依次将他排完
+            while(help[i]-- &gt; 0){
+                //从最小值开始加起来 因为最小值排在最前面  然后根据出现的位置进行排序 就可以将正确的顺序排放下去了
+                //arr[index++]的值为当前的索引值加上最小值 
+                arr[index++] = i+min;
+            }
+        }
+        return arr;
+    }
+
+    public static void main(String[] args) {
+        int[] arr;
+        arr = new int[]{3,5,4,8,6,3};
+        countSort1(arr);
+        for (int i : arr) {
+            System.out.print(&quot; &quot;+i);
+        }
+    }
+    }
+
+</code></pre>
+<h2 id="桶排序">桶排序</h2>
+<p>其实桶排序重要的是它的思想，而不是具体实现，桶排序从字面的意思上看：</p>
+<ul>
+<li>桶：若干个桶，说明此类排序将数据放入若干个桶中。</li>
+<li>桶：每个桶有容量，桶是有一定容积的容器，所以每个桶中可能有多个元素。</li>
+<li>桶：从整体来看，整个排序更希望桶能够更匀称，即既不溢出(太多)又不太少。<br>
+<img src="//tva3.sinaimg.cn/large/007bjbYxgy1gp7znof6b0j30lp06it9m.jpg" alt="20200727192913255" loading="lazy"></li>
+</ul>
+<p>但是这些桶跟排序又有什么关系呢？<br>
+首先先说下桶排序的思想，百度百科是这么说的</p>
+<blockquote>
+<p>工作的原理是将数组分到有限数量的桶子里。每个桶子再个别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排序）。桶排序是鸽巢排序的一种归纳结果。当要被排序的数组内的数值是均匀分配的时候，桶排序使用线性时间（Θ（n））。但桶排序并不是 比较排序，他不受到 O(n log n) 下限的影响。</p>
+</blockquote>
+<p>用通俗易懂的话来理解：</p>
+<ul>
+<li><strong>将待排序的序列分到若干个桶中，每个桶内的元素再进行个别排序。</strong></li>
+<li>时间复杂度最好可能是线性O(n)，桶排序不是基于比较的排序</li>
+</ul>
+<p>当然，<strong>桶排序是一种用空间换取时间的排序。</strong></p>
+<p>既然是排序，那么最终的结果肯定是从小到大的，桶排序借助桶的位置完成一次初步的排序——将待排序元素分别放至各个桶内。</p>
+<p>而我们通常根据待排序元素整除的方法将其较为均匀的放至桶中，如<code>8 5 22 15 28 9 45 42 39 19 27 47 12</code>这个待排序序列，<strong>假设放入桶编号的规则</strong>为：<code>n/10</code>。这样首先各个元素就可以直接通过整除的方法放至对应桶中。而右侧所有桶内数据都比左侧的要大！</p>
+<figure data-type="image" tabindex="13"><img src="//tva2.sinaimg.cn/large/007bjbYxgy1gp7znv7ka6j30qb0edwhn.jpg" alt="20200728011506731" loading="lazy"></figure>
+<p>在刚刚放入桶中的时候，各个桶的大小相对可以确定，右侧都比左侧大，但桶内还是无序的，对各个桶内分别进行排序，再依次按照桶的顺序、桶内序列顺序得到一个最终排序的序列。<br>
+<img src="//tva3.sinaimg.cn/large/007bjbYxgy1gp7zo02p1yj30ng0bedhr.jpg" alt="20200728144935190" loading="lazy"></p>
+<p>以上就是桶排序在算法上的思想了。如果使用java具体实现的话思路也很简单：用List[]类型的集合数组表示桶，每个List代表一个桶，将数据根据整除得到的值直接放到对应编号的集合里面去，再依次进行排序就可以了。</p>
+<h2 id="桶排序算法分析">桶排序算法分析</h2>
+<p>上面讲了桶排序的具体思想，但是你是不是总觉得心理没那么踏实呢，这就完了？总觉得怪怪的是吧？</p>
+<p><img src="//tva3.sinaimg.cn/large/007bjbYxgy1gp7zor413kg306o06oq2v.gif" alt="20200728155016220" loading="lazy"><br>
+桶排序确实有很多不一样的地方，无论是算法时间复杂度还是整个算法的流程，都不如啥快排啦、归并啦这些传统排序来的实在。</p>
+<h3 id="时间复杂度分析">时间复杂度分析</h3>
+<p>桶排序的时间复杂度到底是多少？</p>
+<p>我们假设有<code>n</code>个待排序数字。分到<code>m</code>个桶中，如果分配均匀这样平均每个桶有<code>n/m</code>个元素。首先在这里我郑重说明一下桶排序的算法时间复杂度有两部分组成：</p>
+<ul>
+<li>1.遍历处理每个元素，<strong>O(n)级别的普通遍历</strong></li>
+<li>2**.每个桶内再次排序的时间复杂度总和**</li>
+</ul>
+<p>对于第一个部分，我想大家都应该理解最后排好序的取值遍历一趟的O(n);而第二部分咱们可以进行这样的分析：</p>
+<ul>
+<li>如果桶内元素分配较为均匀<strong>假设每个桶内部使用的排序算法为快速排序</strong>，那么每个桶内的时间复杂度为<code>(n/m) log(n/m)</code>。有m个桶，那么时间复杂度为<code>m * (n/m)log(n/m)</code>=<code>n (log n-log m)</code>.<br>
+![img]<img src="//tva1.sinaimg.cn/large/007bjbYxgy1gp7zp1j6zaj30qb0fy0uh.jpg" alt="20200728203705134" loading="lazy"><br>
+所以最终桶排序的时间复杂度为：<code>O(n)+O(n*(log n- log m))</code>=<code>O(n+n*(log n -log m))</code> 3其中m为桶的个数。我们有时也会写成O(n+c),其中c=n*(log n -log m);</li>
+</ul>
+<p>在这里如果到达极限情况<code>n=m</code>时。就能确保避免桶内排序，将数值放到桶中不需要再排序达到O(n)的排序效果,当然这种情况属于</p>
+<p><strong>计数排序</strong> 也就是上面实现的<br>
+<img src="//tvax3.sinaimg.cn/large/007bjbYxgy1gp7zpaiar2j30ga06ot9d.jpg" alt="20200728220257521" loading="lazy"></p>
+<h3 id="桶排序适用情况">桶排序适用情况</h3>
+<p>桶排序并且像常规排序那样没有限制，桶排序有相当的限制。因为<strong>桶的个数和大小都是我们人为设置的</strong>。而每个桶又要避免空桶的情况。所以我们在使用桶排序的时候即需要对<strong>待排序数列要求偏均匀</strong>，又要要求<strong>桶的设计兼顾效率和空间。</strong></p>
+<p><strong>待排序序列要求均匀？我要不均匀又会怎么样呢？</strong><br>
+会这样：<br>
+<img src="//tvax4.sinaimg.cn/large/007bjbYxgy1gp7zph4acoj30ol0apdhg.jpg" alt="20200728213223108" loading="lazy"><br>
+这样其实相当于只用了有效的很少个数桶，而再看桶排序的时间复杂度：<code>O(n+n*(log n -log m))</code>m取向1，log m去向0.整个复杂度变成<code>O(n+nlogn)</code>从级别来看就是<code>O(nlogn)</code>，你瞅瞅你瞅瞅，这种情况就跟没用桶一样，就是快排(或其他排序)的时间复杂度。</p>
+<p><strong>那，那不能我搞100000个桶嘛？</strong><br>
+不可以，真的不可以，如果100000个桶，你看看会造成什么情况：<br>
+<img src="//tvax2.sinaimg.cn/large/007bjbYxgy1gp7zqu91trj30p30cgwgm.jpg" alt="20200728214708187" loading="lazy"><br>
+这才短短不到100个数，你为了一一映射用100000个空间，空间内容浪费不说，你遍历虽然O(n)也是100000次也比100个的<code>O(nlogn)</code>大上很多啊，真是折了夫人又折兵。</p>
+<p>所以现在明白前面说的话了吧：数要相对均匀分布，桶的个数也要合理设计。总之桶排序是一种用空间换取时间的排序。在设计桶排序，你需要知道输入数据的上界和下界，看看数据的分布情况，再考虑是否用桶排序，当然如果能用好桶排序，效率还是很高的！</p>
+<p>在这里用java给大家实现一个桶排序。假设序列为：<code>1 8 7 44 42 46 38 34 33 17 15 16 27 28 24</code>；我们选用5个桶进行桶排序。</p>
+<p>实现过程</p>
+<p>1.找出待排序数组中的最大值max、最小值min<br>
+2.我们使用 动态数组ArrayList 作为桶，桶里放的元素也用 ArrayList 存储。桶的数量为(max-min)/arr.length+1<br>
+3.遍历数组 arr，计算每个元素 arr[i] 放的桶<br>
+4.每个桶各自排序<br>
+5.遍历桶数组，把排序好的元素放进输出数组</p>
+<p>代码实现：</p>
+<pre><code class="language-java">package com.lin;
+import java.util.ArrayList;
+import java.util.Collections;
+public class BucketSort {
+    public static void bucketSort(int[] arr) {
+
+        int max = Integer.MIN_VALUE;
+
+        int min = Integer.MAX_VALUE;
+        //找出待排序数组中的最大值max、最小值min
+        for (int i = 0; i &lt; arr.length; i++) {
+
+            max = Math.max(max, arr[i]);
+
+            min = Math.min(min, arr[i]);
+        }
+
+        //桶数
+        int bucketNum = (max - min) / arr.length + 1;
+        //创建动态ArrayList数组作为桶 桶里面放的元素也用ArrayList 储存
+        //数组当中的元素声明为整形
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; bucketArr = new ArrayList&lt;&gt;(bucketNum);
+        for (int i = 0; i &lt; bucketNum; i++) {
+            bucketArr.add(new ArrayList&lt;Integer&gt;());
+        }
+
+        //将每个元素放入桶
+        for (int i = 0; i &lt; arr.length; i++) {
+
+            int num = (arr[i] - min) / (arr.length);
+            bucketArr.get(num).add(arr[i]);
+
+        }
+
+        //对每个桶进行排序
+        for (int i = 0; i &lt; bucketArr.size(); i++) {
+            Collections.sort(bucketArr.get(i));
+        }
+        System.out.println(bucketArr.toString());
+
+    }
+
+    public static void main(String[] args) {
+        int[] arr;
+        arr = new int[]{1,8,7,44,42,46,38,34,33,17,15,16,27,28,24};
+        bucketSort(arr);
+    }
+}
+</code></pre>
+<h2 id="基数排序">基数排序</h2>
+<p>基数排序(桶排序)排序的基本介绍和排序思路：<br>
+1.基数排序(桶排序)基本介绍：<br>
+（1）基数排序（radix sort）属于“分配式排序”（distribution sort），又称“桶子法”（bucket sort）或bin sort，顾名思义，它是通过键值的各个位的值，将要排序的元素分配至某些“桶”中，达到排序的作用<br>
+（2）基数排序法是属于稳定性的排序，基数排序法的是效率高的稳定性排序法<br>
+（3）基数排序(Radix Sort)是桶排序的扩展<br>
+（4）基数排序是1887年赫尔曼·何乐礼发明的。它是这样实现的：将整数按位数切割成不同的数字，然后按每个位数分别比较。</p>
+<p>2.基数排序(桶排序)的排序思路：将所有待比较数值统一为同样的数位长度，数位较短的数前面补零。然后，从最低位开始，依次进行一次排序。这样从最低位排序一直到最高位排序完成以后, 数列就变成一个有序序列</p>
+<p>3.基数排序(桶排序)的排序示意图：<br>
+对数组{53, 3, 542, 748, 14, 214}进行基数排序<br>
+第一轮排序示意图：</p>
+<p>第二轮排序示意图：</p>
+<p>第三轮排序示意图：</p>
+<p>注意：需要几轮排序，是看数组中最大数的位数的，例如一个数组中最大数是千位的数，那么只需要4轮排序就可以将此数组排列成为一个有序数组</p>
+<p>代码实现：</p>
+<h1 id="算法复杂度和相关知识点">算法复杂度和相关知识点</h1>
+<p><img src="//tvax3.sinaimg.cn/large/007bjbYxgy1gp7zr47lzmj30h50ahwhf.jpg" alt="20201016142328851" loading="lazy"><br>
+<img src="//tva4.sinaimg.cn/large/007bjbYxgy1gp7zr982g4j30a10dtdh2.jpg" alt="20201016142256128-1617523891859" loading="lazy"></p>
+
+              </div>
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Lindamao
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://lindamao0753.github.io/post/algorithm/" title="基本算法">基本算法</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="JUC" href="https://lindamao0753.github.io/post/juc/">JUC</a>
+        <a class="nav-mobile-next" title="JUC" href="https://lindamao0753.github.io/post/juc/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
+      
+    </div>
+  </div>
+</div>
+              
+                
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-box">
+  <footer class="footer">
+    <div class="copyright">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | © 2019-2020 Theme By HsxyHao
+    </div>
+    <div class="poweredby">
+      <p class="copyright text-muted">Copyright ©<span>lindamao</span><br><a href="https://github.com/getgridea/gridea" class="Themeinfo" one-link-mark="yes">Powered by Gridea</a></p>
+    </div>
+  </footer>
+  
+  
+  <div class="pisces back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    
+    <span class="scrollpercent">
+      <span id="back_to_top_text">0</span>%
+    </span>
+    
+  </div>
+  
+  
+  
+</div>
+<script>
+
+  let sideBarOpen = 'sidebar-open';
+  let body = document.body;
+  let back2Top = document.querySelector('#back_to_top'),
+  back2TopText = document.querySelector('#back_to_top_text'),
+  drawerBox = document.querySelector('#drawer_box'),
+  rightSideBar = document.querySelector('.sidebar'),
+  viewport = document.querySelector('body');
+
+  function scrollAnimation(currentY, targetY) {
+   
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
+
+  back2Top.addEventListener("click", function(e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+  
+  window.addEventListener('scroll', function(e) {
+    let percent = document.scrollingElement.scrollTop / (document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+  
+  let hasCacu = false;
+  window.onresize = function() {
+    if (window.width > 991) {
+      calcuHeight();
+    } else {
+      hasCacu = false;
+    }
+  }
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (!hasCacu && back2Top.classList.contains('pisces') || back2Top.classList.contains('gemini')) {
+      let sideBar = document.querySelector('.sidebar');
+      let navUl = document.querySelector('#site_nav');
+      sideBar.style = 'margin-top:' + (navUl.offsetHeight + navUl.offsetTop + 15) + 'px;';
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+  
+  let open = false, MOTION_TIME = 300, RIGHT_MOVE_DIS = '320px';
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll('.right-motion');
+    let right = drawerBox.classList.contains('right');
+
+    let transitionDir = right ? "transition.slideRightIn" : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingRight: '0px'
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingLeft: '0px'
+      };
+    }
+
+    drawerBox.onclick = function() {
+      open = !open;
+      window.Velocity(rightSideBar, 'stop');
+      window.Velocity(viewport, 'stop');
+      window.Velocity(rightMotions, 'stop');
+      if (open) {
+        window.Velocity(rightSideBar, {
+          width: RIGHT_MOVE_DIS
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, transitionDir,{ });
+          }
+        })
+        window.Velocity(viewport, openProp,{
+          duration: MOTION_TIME
+        });
+      } else {
+        window.Velocity(rightSideBar, {
+          width: '0px'
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, {
+              opacity: 0
+            });
+          }
+        })
+        window.Velocity(viewport, closeProp ,{
+          duration: MOTION_TIME
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle('muse-line');
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    }
+  }
+
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+
+</script>
+    </div>
+  </body>
+  <script src="/media/js/motion.js"></script>
+</html>
