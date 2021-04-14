@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lindamao0753.github.io</id>
     <title>Lindamao</title>
-    <updated>2021-04-04T12:44:17.161Z</updated>
+    <updated>2021-04-14T07:46:41.944Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lindamao0753.github.io"/>
     <link rel="self" href="https://lindamao0753.github.io/atom.xml"/>
@@ -10,6 +10,976 @@
     <logo>https://lindamao0753.github.io/images/avatar.png</logo>
     <icon>https://lindamao0753.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Lindamao</rights>
+    <entry>
+        <title type="html"><![CDATA[IO框架]]></title>
+        <id>https://lindamao0753.github.io/post/io/</id>
+        <link href="https://lindamao0753.github.io/post/io/">
+        </link>
+        <updated>2021-04-14T07:39:10.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="流的概念">流的概念</h1>
+<ul>
+<li>
+<p><strong>概念</strong>：内存与存储设备之间传输数据的通道。</p>
+</li>
+<li>
+<p>水借助<strong>管道</strong>传输；数据借助<strong>流</strong>传输。</p>
+</li>
+<li>
+<p>内存与存储设备之间传输数据的通道</p>
+</li>
+</ul>
+<h2 id=""><img src="//tva3.sinaimg.cn/large/007bjbYxly1gpjbh6pkutj30l3062myc.jpg" alt="1998506-20200914231017273-598093604" loading="lazy"></h2>
+<h1 id="流的分类"><strong>流的分类</strong></h1>
+<h2 id="按方向重点"><strong>按方向【重点】</strong></h2>
+<ul>
+<li><strong>输入流</strong>：将&lt;<strong>存储设备</strong>&gt;中的内容<strong>读入到</strong>&lt;<strong>内存</strong>&gt;中。</li>
+<li><strong>输出流</strong>：将&lt;<strong>内存</strong>&gt;中的内容<strong>写入到</strong>&lt;<strong>存储设备</strong>&gt;中。</li>
+</ul>
+<figure data-type="image" tabindex="1"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gpjbhfsx2tj317f06rq3u.jpg" alt="5f9cea1b1cd1bbb86b8b4f67" loading="lazy"></figure>
+<h2 id="按单位"><strong>按单位</strong></h2>
+<ul>
+<li><strong>字节流</strong>：以<strong>字节</strong>为单位，可以读写<strong>所有数据</strong>。</li>
+<li><strong>字符流</strong>：以<strong>字符</strong>为单位，只能读写<strong>文本数据</strong>。</li>
+</ul>
+<h2 id="按功能"><strong>按功能</strong></h2>
+<ul>
+<li><strong>字节流</strong>：具有<strong>实际传输数据的读写</strong>功能。</li>
+<li><strong>过滤流</strong>：在<strong>节点流的基础</strong>之上增强功能。</li>
+</ul>
+<hr>
+<h1 id="字节流"><strong>字节流</strong></h1>
+<figure data-type="image" tabindex="2"><img src="//tvax3.sinaimg.cn/large/007bjbYxly1gpjbhkn3fxj31s91c143m.jpg" alt="5f9d7ecb1cd1bbb86bce7018" loading="lazy"></figure>
+<h2 id="字节流的父类抽象类"><strong>字节流的父类（抽象类）</strong></h2>
+<ul>
+<li>
+<p>I<strong>nputStream</strong></p>
+<p>字节输入流（写入）</p>
+<ul>
+<li><code>public int read(){}</code></li>
+<li><code>public int read(byte[] b){}</code></li>
+<li><code>public int read(byte[] b,int off,int len){}</code></li>
+</ul>
+</li>
+<li>
+<p>OutputStream</p>
+<p>字节输出流（读）</p>
+<ul>
+<li><code>public void write(int n){}</code></li>
+<li><code>public void write(byte[] b){}</code></li>
+<li><code>public void write(byte[] b,int off,int len){}</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="字节流的子类"><strong>字节流的子类</strong></h2>
+<h3 id="文件字节流"><strong>文件字节流</strong></h3>
+<ul>
+<li><strong>FileInputStream</strong>
+<ul>
+<li><code>public int read()</code>//从输入流中读取<strong>一个字节数据</strong>，返回读到的字节数据，如果达到文件末尾，返回-1。</li>
+<li><code>public int read(byte[] b)</code>//从输入流中读取<strong>字节数组长度的字节数据</strong>存入数组中，返回实际读到的字节数；如果达到文件的尾部，则返回-1。</li>
+</ul>
+</li>
+<li><strong>FileOutputStream</strong>
+<ul>
+<li><code>public void write(int b)</code>//将<strong>指定字节</strong>写入输出流。</li>
+<li><code>public void write(bute[] b)</code>//一次写多个字节，将b数组中所有字节，写入输出流。</li>
+</ul>
+</li>
+</ul>
+<p><strong>FileInputStream</strong>的使用</p>
+<pre><code class="language-java">package lin;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+/**
+ * 演示文件字节输入流的使用
+ * FileInputStream
+ */
+public class Demo1 {
+    public static void main(String[] args) throws IOException {
+        //文件内容：abcdefg
+        FileInputStream fileInputStream=new FileInputStream(&quot;D:\\aaa.txt&quot;);
+
+        //read();读入单个字节
+        int data=fileInputStream.read();
+        System.out.println((char)data);//a
+        //一次一次的读入需要使用循环来实现
+        while((data=fileInputStream.read())!=-1) {
+            System.out.print((char)data);
+        }//因为第一次的时候已a经被读取过了  bcdefg
+
+        //read(byte[] b);读入多个字节 通过数组来实现
+        byte[] b=new byte[1024];//大小为1024 的缓冲区
+        int count=0;
+        while((count=fileInputStream.read(b))!=-1) {
+            //count为一次性读取的字节个数 根据缓冲区(数组)大小而定
+            System.out.println(new String(b,0,count));
+        }//bcdefg
+
+        //关闭流 用完要关闭
+        fileInputStream.close();
+    }
+}
+</code></pre>
+<p><strong>FileOutputStream</strong> 的使用</p>
+<pre><code class="language-java">package lin;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+/**
+ * 演示文件字节输出流的使用
+ * FileOutputStream
+ */
+public class Demo2 {
+    public static void main(String[] args) throws IOException {
+        //如果没有文件会自动创建 //重载方法 后面的参数为boolean 默认为false true为开启覆盖 也就是执行一次就在后面追加
+        FileOutputStream fileOutputStream=new FileOutputStream(&quot;d:\\bbb.txt&quot;,true);
+
+        //write(int b);  单个写入
+        fileOutputStream.write(97);//97Ascall对应的是字母a
+        fileOutputStream.write('b');
+        fileOutputStream.write('c');
+
+        //write(byte[] b); 一次性写入多个
+        fileOutputStream.write(new String(&quot;helloworld&quot;).getBytes());
+        //此时文件bbb.txt内容为abc	helloworld
+
+        //关闭流
+        fileOutputStream.close();
+        System.out.println(&quot;执行完毕&quot;);
+
+    }
+}
+</code></pre>
+<h3 id="文件字节流小案例"><strong>文件字节流小案例</strong></h3>
+<pre><code class="language-java">package lin;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+/**
+ * 使用文件字节流复制文件
+ */
+public class Demo3 {
+    public static void main(String[] args) throws IOException {
+        //将图片读取到输入流
+        FileInputStream fileInputStream=new FileInputStream(&quot;d:\\bg.jpg&quot;);
+        //从输出流写入数据
+        FileOutputStream fileOutputStream=new FileOutputStream(&quot;d:\\bg2.jpg&quot;);
+
+        int count;//保存一次读取到的实际个数
+        byte[] buf=new byte[1024];
+
+        while((count=fileInputStream.read(buf))!=-1) {
+            fileOutputStream.write(buf, 0, count);
+        }
+        System.out.println(&quot;复制成功&quot;);
+
+        //关闭流
+        fileInputStream.close();
+
+        fileOutputStream.close();
+    }
+}
+</code></pre>
+<h3 id="字节缓冲流"><strong>字节缓冲流</strong></h3>
+<ul>
+<li>
+<p><strong>缓冲流</strong>：BufferedInputStream/BufferedOutputStream</p>
+<ul>
+<li><strong>提高IO效率，减少访问磁盘的次数</strong>；</li>
+<li>数据存储在<strong>缓冲区</strong>中。flush可以将缓存区的内容写入文件，也可以直接close。</li>
+</ul>
+<p>读取</p>
+<pre><code class="language-java">package lin;
+
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+/**
+ * 使用字节缓冲流读取
+ * BufferedInputStream
+ */
+public class Demo4 {
+    public static void main(String[] args) throws IOException {
+        //使用该输入流每次会从硬盘读入 先创建FileInputStream对象
+        FileInputStream fileInputStream=new FileInputStream(&quot;d:\\aaa.txt&quot;);
+        //缓冲流需要一个底层流
+
+        //缓冲流每次从缓冲区读取 创建缓冲流对象再把先创建FileInputStream对象放进去
+        BufferedInputStream bufferedInputStream=new BufferedInputStream(fileInputStream);
+
+        //一次次读取
+//        int data;
+//
+//        while((data=bufferedInputStream.read())!=-1) {
+//            System.out.print((char)data);
+//        }
+
+        //我们也可以自己创建一个缓冲区；
+        //每次读取从自己创建的缓冲区中读取（效率更高）。
+        int count;//读取文件当中的长度
+        byte[] buf=new byte[1024];
+        //read需要三个参数 数组 offest 一次性读取的长度 读取的长度不小于实际读取的长度将会分开进行读取
+        while((count=bufferedInputStream.read(buf,0,buf.length))!=-1) {
+            //count为一次性读取到的实际个数
+            System.out.println(new String(buf,0,count));
+        }
+        //关闭缓冲流就可以将字节流关闭掉了
+        bufferedInputStream.close();
+    }
+}
+</code></pre>
+<p>写入</p>
+<pre><code class="language-java">/**
+ * 使用字节缓冲流写入文件
+ * BufferedOutputStream
+ */
+public class Demo5 {
+	public static void main(String[] args) throws IOException {
+		FileOutputStream fileOutputStream=new FileOutputStream(&quot;d:\\buf.txt&quot;);
+		//缓冲流将数据写入到缓冲区
+		BufferedOutputStream bufferedOutputStream=new BufferedOutputStream(fileOutputStream);
+		//写入文件
+		bufferedOutputStream.write(&quot;helloworld&quot;.getBytes());
+		bufferedOutputStream.flush();
+		
+		//其实内部也会调用flush
+		bufferedOutputStream.close();
+	}
+}
+</code></pre>
+</li>
+</ul>
+<hr>
+<h1 id="对象流"><strong>对象流</strong></h1>
+<ul>
+<li>
+<p><strong>对象流</strong>：ObjectOutputStream/ObjectInputStream</p>
+<ul>
+<li>增加了缓冲区功能。</li>
+<li>增强了读写8种基本数据类型和字符串功能。</li>
+<li>增强了读写对象的功能：
+<ul>
+<li><code>readObject()</code>//从流中读取一个对象。</li>
+<li><code>writeObject(Object obj)</code>向流中写入一个对象。</li>
+</ul>
+</li>
+</ul>
+<p><strong>使用流传输对象的过程称为序列化、反序列化。</strong></p>
+</li>
+</ul>
+<p>一、基本概念</p>
+<p>1、序列化和反序列化的定义：</p>
+<p>(1)Java序列化就是指把Java对象<strong>转换</strong>为字节序列的过程</p>
+<p>​    Java反序列化就是指把字节序列<strong>恢复</strong>为Java对象的过程。</p>
+<p>对象的序列化主要有两种<strong>用途</strong>：</p>
+<ul>
+<li>把对象的字节序列永久地保存到硬盘上，通常存放在一个文件中；（<strong>持久化对象</strong>）</li>
+<li>在网络上传送对象的字节序列。（<strong>网络传输对象</strong>）</li>
+</ul>
+<p>(2)序列化最重要的作用：在传递和保存对象时.保证对象的<strong>完整性</strong>和<strong>可传递性</strong>。对象转换为有序字节流,以便在网络上传输或者保存在本地文件中。</p>
+<p>反序列化的最重要的作用：根据字节流中保存的对象状态及描述信息，通过反序列化<strong>重建</strong>对象。</p>
+<p>总结：核心作用就是对象状态的<strong>保存和重建</strong>。（整个过程核心点就是字节流中所保存的对象状态及描述信息</p>
+<h2 id="序列化"><strong>序列化</strong></h2>
+<p><strong>实体类</strong></p>
+<pre><code class="language-java">/**
+ * 学生类
+ */
+public class Student {
+	private String name;
+	private int age;
+	public Student(String name, int age) {
+		super();
+		this.name = name;
+		this.age = age;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	@Override
+	public String toString() {
+		return &quot;Student [name=&quot; + name + &quot;, age=&quot; + age + &quot;]&quot;;
+	}	
+}
+</code></pre>
+<p><strong>序列化</strong></p>
+<pre><code class="language-java">package lin;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+/**
+
+ * 使用ObjectOutputStream实现对象的序列化（写入操作 ）
+ * 注：序列化的类必要要实现Serializable接口
+ */
+public class Demo6 {
+    public static void main(String[] args) throws IOException {
+        //这个文件后缀名表示二进制文件，但你可以写成其他如obj等任意后缀。
+        FileOutputStream fileOutputStream=new FileOutputStream(&quot;d:\\stu.bin&quot;);
+        //创建ObjectOutputStream对象再把FileOutputStream放进去
+        ObjectOutputStream objectOutputStream=new ObjectOutputStream(fileOutputStream);
+        //序列化（写入操作）
+        Student tang=new Student(&quot;唐瑞&quot;, 21);
+        //写入对象
+        objectOutputStream.writeObject(tang);
+        //关闭
+        objectOutputStream.close();
+        System.out.println(&quot;序列化完毕&quot;);
+    }
+}
+</code></pre>
+<p>测试：</p>
+<figure data-type="image" tabindex="3"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gpjbi0lvbbj30rt03bq3g.jpg" alt="image-20210413215816407" loading="lazy"></figure>
+<p><strong>注</strong>：执行上述代码后IDE会抛出<code>java.io.NotSerializableException</code>，意思是Student类不能被序列化，需要实现Serializable接口。</p>
+<pre><code class="language-java">COPY//不需要实现任何方法
+public class Student implements Serializable{ }
+</code></pre>
+<p>Serializable其实是一个标志接口，用来标志该类是否可以被序列化。我们进到该接口的源码可以发现里面不含任何属性和抽象方法。</p>
+<pre><code class="language-java">COPYpublic interface Serializable {
+}
+</code></pre>
+<h2 id="反序列化"><strong>反序列化</strong></h2>
+<pre><code class="language-java">/**
+ * 使用ObjectInputStream实现反序列化（读取重构对象）
+ */
+public class Demo7 {
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		FileInputStream fileInputStream=new FileInputStream(&quot;d:\\stu.bin&quot;);
+		ObjectInputStream objectInputStream=new ObjectInputStream(fileInputStream);
+		//读取文件（反序列化）
+		Student student=(Student) objectInputStream.readObject();
+		
+		objectInputStream.close();
+		
+		System.out.println(&quot;执行完毕&quot;);
+		System.out.println(student.toString());
+	}
+}
+</code></pre>
+<h2 id="序列化和反序列化注意事项"><strong>序列化和反序列化注意事项</strong></h2>
+<ul>
+<li>
+<p>序列化类必须实现Serializable接口，前文已经说过。</p>
+</li>
+<li>
+<p>序列化类中的对象属性也要求实现Serializable接口。也就是说如果Student类中有一个<strong>Grad类型</strong>的属性<code>private Grad info;</code>那么Grad这个类也要实现<strong>Serializable接口</strong>。</p>
+</li>
+<li>
+<p>序列化类中可以添加序列化版本号ID，以<strong>保证序列化的类和被序列化的类是同一个类</strong>。在上面的代码中我并没有添加序列号版本，虽然IDE没有报错，但是会显示一个警告，提示我添加序列化版本号（串行版本标识）。我们可以在Student类中添加：</p>
+<pre><code class="language-java">private static final long serialVersionUID = 66666L;
+</code></pre>
+<p>此时再运行Demo7就会报一个无效类的异常：</p>
+<pre><code class="language-java">xception in thread &quot;main&quot; java.io.InvalidClassException: lin.Student; local class incompatible: stream classdesc serialVersionUID = 66666, local class serialVersionUID = 4654189144663945418
+</code></pre>
+<p>意思就是两个类的serialVersionUID不一样。可以看到之前虽然没有显式添加序列版本号，但它已经自动生成了一个。我们再运行一下Demo6序列化，再运行Demo7反序列化就可以正常执行了。</p>
+</li>
+<li>
+<p>使用transient（短暂的）修饰属性，可以<strong>避免该属性被序列化</strong>。用它来修饰age：</p>
+<pre><code class="language-java">private transient int age;
+</code></pre>
+<p>把tang这个对象序列化后再反序列化，这个对象的age属性就变成了0。</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="4"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gpjbi7uzgaj30b501b3yb.jpg" alt="image-20210413221400791" loading="lazy"></figure>
+<ul>
+<li>
+<p><strong>静态属性</strong>不能被序列化。</p>
+</li>
+<li>
+<p>可以利用<strong>集合来序列化多个对象</strong>：</p>
+<p><strong>写</strong></p>
+<pre><code class="language-java">ArrayList&lt;Student&gt; arrayList=new ArrayList&lt;Student&gt;();
+arrayList.add(s1);
+arrayList.add(s2);
+arrayList.add(s3);
+objectOutputStream.writeObject(arrayList);
+</code></pre>
+<p><strong>读</strong></p>
+<pre><code class="language-java">ArrayList&lt;Student&gt; list=(ArrayList&lt;Student&gt;)objectInputStream.readObject();
+</code></pre>
+</li>
+</ul>
+<hr>
+<h1 id="编码方式"><strong>编码方式</strong></h1>
+<ul>
+<li>
+<p>IOS-8859-1</p>
+<p>收录除ASCII外，还包括西欧、希腊语、泰语、阿拉伯语、希伯来语对应的文字符号。采用1个字节来表示，最多只能表示256个字符。</p>
+</li>
+<li>
+<p>UTF-8</p>
+<p>针对Unicode码表的<strong>可变长度字符编码</strong>。国际上使用的编码，也称为“<strong>万国码</strong>”，收录了几乎所有国家的常用字符。采用1至3个字节来表示一个字符。</p>
+</li>
+<li>
+<p>GB2312</p>
+<p>简体中文，采用1个或2个字节来表示字符，95年之前所采用的编码。</p>
+</li>
+<li>
+<p>GBK</p>
+<p>简体中文的扩充，GB2312的升级版本。</p>
+</li>
+<li>
+<p>BIG5</p>
+<p>台湾，繁体中文。</p>
+</li>
+</ul>
+<p>**当编码方式和解码方式不一致时，会出现乱码。**假如Demo1中的文件内容不是字母而是“<strong>我爱中国</strong>”这样的汉字，那么读取出来的信息就是乱码。因为字节流按字节输入输出，而这四个汉字占了12个字节（一个汉字占三个字节），把一个汉字按一个一个字节读入自然会出现问题，这时就需要使用字符流。</p>
+<hr>
+<h1 id="字符流"><strong>字符流</strong></h1>
+<figure data-type="image" tabindex="5"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gpjbihnvpfj31s61ai0yo.jpg" alt="5f9ef3151cd1bbb86b28470e-1618385996020" loading="lazy"></figure>
+<h2 id="字符流的父类抽象类"><strong>字符流的父类（抽象类）</strong>：</h2>
+<ul>
+<li>
+<p>**Reader：**字符输入流</p>
+<ul>
+<li>
+<p><code>public int read()</code></p>
+<p>从流中读取单个字符，用整型来返回读取的字符；当读到流底部时返回-1。</p>
+</li>
+<li>
+<p><code>public int read(char[] c)</code></p>
+<p>从流中读取字符保存到c数组中，返回读取的字符个数，当读到流底部时返回-1。</p>
+</li>
+<li>
+<p><code>public int read(char[] cbuf,int off,int len){}</code></p>
+<p>抽象方法。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>**Writer：**字符输出流</p>
+<ul>
+<li>
+<p><code>public void write(int n)</code></p>
+<p>写入单个字符，只能写入包含16位低阶字节的整型数值，16位高阶字节将会被忽略。</p>
+</li>
+<li>
+<p><code>public void write(String str)</code></p>
+<p>写入一个字符串。</p>
+</li>
+<li>
+<p><code>public void write(char[] cbuf)</code></p>
+<p>写入一个字符数组。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="字符流的子类"><strong>字符流的子类</strong></h2>
+<ul>
+<li>
+<p><strong>FileReader：</strong></p>
+<ul>
+<li>
+<p><code>public int read()</code></p>
+<p>继承自<strong>InputStreamReader</strong>类。读取单个字符，返回读取的字符，当读到流底部时返回-1。</p>
+</li>
+<li>
+<p><code>public int read(char[] c)</code></p>
+<p>继承自Reader类。</p>
+</li>
+<li>
+<p><code>public int read(char[] cbuf,int offset,int length)</code></p>
+<p>继承自InputStreamReader类。从流中读取部分字符到cbuf中指定位置，返回读取到的字符个数，当读到流底部时返回-1。</p>
+</li>
+</ul>
+<pre><code class="language-java">public class Demo1 {
+	public static void main(String[] args) throws IOException {	
+		//文件内容：
+		//要是能活在梦里，我情愿醒不过来。
+		FileReader fileReader=new FileReader(&quot;d:\\cbuf.txt&quot;);
+		int data;
+		//read();与字节流不同，该方法读取单个字符而不是字节
+		while((data=fileReader.read())!=-1) {
+			System.out.print((char)data);
+		}
+        //输出：
+        //要是能活在梦里，我情愿醒不过来。
+		fileReader.close();
+	}
+}
+</code></pre>
+<p>注意：</p>
+<p>这里如果用字节流输出 会出现乱码<br>
+<img src="//tvax2.sinaimg.cn/large/007bjbYxly1gpjbj5trn9j30hc00jglf.jpg" alt="image-20210413222704014" loading="lazy"><br>
+原因在上面描述过</p>
+<p><strong>这里记录我遇到的一个问题</strong>：</p>
+<blockquote>
+<p>上述代码执行后理应是正常输出一段文字，但我这里出现了文字乱码。猜测是编码出现了问题，于是查看本地文本的保存格式为UTF-8，感觉也没错，于是打开JDK API查看FileReader类的描述：</p>
+<blockquote>
+<p>Convenience class for reading character files. The constructors of this class assume that the default character encoding and the default byte-buffer size are appropriate. To specify these values yourself, construct an InputStreamReader on a FileInputStream.</p>
+</blockquote>
+<p>大意就是该类的构造方法有一个默认的字符编码格式和一个默认字节缓冲区，并没有指明这个编码格式就是UTF-8。于是查看系统默认编码，打开CMD输入chcp，得到一个值为936的活动编码页，通过查询得知该代码页所对应的国家（地区）或语言为：中国 - 简体中文(GB2312)。这与本地所保存的文本编码UTF-8不一致，所以导致了文字乱码的出现。而要指定编码格式需要创建一个InputStreamReader或FileInputStream对象使用其构造方法。</p>
+<p>以下是我在本地能正常运行的代码：</p>
+<pre><code class="language-java">public class Demo1 {
+	public static void main(String[] args) throws IOException {	
+        //指定编码格式
+		InputStreamReader inputStreamReader=new InputStreamReader(new FileInputStream(&quot;d:\\cbuf.txt&quot;),&quot;UTF-8&quot;);
+		int data;
+		while((data=inputStreamReader.read())!=-1) {
+			System.out.print((char)data);
+		}
+		inputStreamReader.close();
+	}
+}
+</code></pre>
+</blockquote>
+<p>这里的保存文件的编码格式如图 若将代码中的编码格式改外其他格式会出现乱码</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="6"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gpjbjelo5zj30q503pjrc.jpg" alt="image-20210413223034371" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gpjbjkumt6j30ep00s742.jpg" alt="image-20210413223611264" loading="lazy"></figure>
+<ul>
+<li>
+<p><strong>FileWriter:</strong></p>
+<ul>
+<li>
+<p><code>public void write(int c)</code></p>
+<p>继承自OutputStreamWriter类，写入一个字符。</p>
+</li>
+<li>
+<p><code>public void write(String str)</code></p>
+<p>继承自Writer类。</p>
+</li>
+<li>
+<p><code>public void Write(char[] cbuf)</code></p>
+<p>继承自Writer类。</p>
+</li>
+</ul>
+<pre><code class="language-java">package chara;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+/**
+ * 使用FileWriter写入文件
+ */
+public class Demo3 {
+    public static void main(String[] args) throws IOException {
+        //创建FileWriter对象
+        FileWriter fileWriter=new FileWriter(&quot;d:\\w.txt&quot;);
+        //写入
+        fileWriter.write(&quot;给自己一个希望。&quot;);
+
+        //关闭
+        fileWriter.close();
+        System.out.println(&quot;执行完毕&quot;);
+    }
+}
+</code></pre>
+</li>
+</ul>
+<h3 id="字符流小案例"><strong>字符流小案例</strong></h3>
+<pre><code class="language-java">/**
+ * 使用FileReader和FileWrite复制文本文件
+ *  注：不能复制图片或二进制文件 否则会出现错误
+ * 	使用字节流可以复制二进制文件
+ */
+public class Demo4 {
+	public static void main(String[] args) throws IOException {
+		InputStreamReader inputStreamReader=new InputStreamReader(new FileInputStream(&quot;d:\\w.txt&quot;));
+		FileWriter fileWriter=new FileWriter(&quot;d:\\w2.txt&quot;);
+		//读写
+		int data=0;
+		while((data=inputStreamReader.read())!=-1) {
+			fileWriter.write(data);			
+		}
+		
+		inputStreamReader.close();
+		fileWriter.close();
+		System.out.println(&quot;执行完毕&quot;);
+	}
+}
+</code></pre>
+<h3 id="字符缓冲流"><strong>字符缓冲流</strong></h3>
+<ul>
+<li>
+<p><strong>缓冲流</strong>：BufferedReader/BufferedWriter</p>
+<ul>
+<li><strong>高效读写</strong></li>
+<li><strong>支持换行输入符</strong></li>
+<li><strong>可一次写一行、读一行</strong>。</li>
+</ul>
+<pre><code class="language-java">package chara;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
+/**
+ * PrintWriter的使用 原数据打印
+ */
+public class Demo6 {
+    public static void main(String[] args) throws FileNotFoundException {
+
+        PrintWriter printWriter=new PrintWriter(&quot;d:\\p.txt&quot;);
+        //打印到文件
+        printWriter.println(97);//97 将不会再打印成ASCAll对应的字符a
+        printWriter.println('b');//b
+        printWriter.println(3.14);//3.14
+        printWriter.println(true);//true
+
+        printWriter.close();
+        System.out.println(&quot;执行完毕&quot;);
+  }
+}
+</code></pre>
+</li>
+</ul>
+<h3 id="打印流"><strong>打印流</strong></h3>
+<ul>
+<li>
+<p><strong>PrintWriter：</strong></p>
+<ul>
+<li>封装了print()/println()方法，支持写入后换行。</li>
+<li><strong>支持数据原样打印</strong>。</li>
+</ul>
+<pre><code class="language-java">/**
+ * PrintWriter的使用
+ */
+public class Demo6 {
+	public static void main(String[] args) throws FileNotFoundException {
+		PrintWriter printWriter=new PrintWriter(&quot;d:\\p.txt&quot;);
+		//打印到文件
+		printWriter.println(97);//97
+		printWriter.println('b');//b
+		printWriter.println(3.14);//3.14
+		printWriter.println(true);//true
+		
+		printWriter.close();
+		System.out.println(&quot;执行完毕&quot;);
+	}
+}
+</code></pre>
+</li>
+</ul>
+<h3 id="转换流"><strong>转换流</strong></h3>
+<ul>
+<li>
+<p><strong>桥转换流</strong>：InputStreamReader/OutputStreamWriter</p>
+<ul>
+<li><strong>可将字节流转换为字符流</strong>。</li>
+<li>可设置字符的编码方式。</li>
+</ul>
+<p>其实这个在上面的Demo中我已经用过了，这里不再演示InputStreamReader的使用。</p>
+<pre><code class="language-java">/**
+ * 使用OutputStreamWriter写入文件
+ */
+public class Demo7 {
+	public static void main(String[] args) throws IOException {
+		//可以自行指定编码
+		OutputStreamWriter outputStreamWriter=new OutputStreamWriter(new FileOutputStream(&quot;d:\\info.txt&quot;));
+		
+		outputStreamWriter.write(&quot;知道的越多，不明白的也就更多，学海无涯。&quot;);
+		
+		outputStreamWriter.close();
+		System.out.println(&quot;执行完毕&quot;);
+	}
+}
+</code></pre>
+</li>
+</ul>
+<hr>
+<h1 id="file类"><strong>File类</strong></h1>
+<ul>
+<li>
+<p><strong>概念</strong>：代表物理盘符中的一个<strong>文件</strong>或者<strong>文件夹</strong>。</p>
+</li>
+<li>
+<p><strong>方法</strong>：</p>
+<ul>
+<li>
+<p><code>public boolean CreateNewFile()</code></p>
+<p>当且仅当指定的文件名不存在时创建一个指定的新的、空的文件。创建成功返回true，如果指定文件名已存在返回false。</p>
+</li>
+<li>
+<p><code>public boolean mkdir()</code></p>
+<p>创建一个指定路径名的文件夹。当且仅当文件夹被创建时返回true，否则返回false。</p>
+</li>
+<li>
+<p><code>public boolean delete()</code></p>
+<p>删除一个指定的文件或文件夹，文件夹必须为空才能被删除。当且仅当指定的文件或文件夹被删除时返回true，否则返回false。</p>
+</li>
+<li>
+<p><code>public boolean exists()</code></p>
+<p>检查指定的文件或文件夹是否存在。当且仅当指定的文件或者文件夹存在时返回true，否则返回false。</p>
+</li>
+<li>
+<p><code>public File[] listFiles()</code></p>
+<p>列出目录中的所有内容，返回一个指定路径名中的文件数组，如果指定的路径名不代表一个文件夹（目录）就返回null。</p>
+</li>
+<li>
+<p><code>public boolean renameTo(File dest)</code></p>
+<p>重命名一个路径名所指定的文件。当且仅当修改操作成功时返回true，否则返回false。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件操作"><strong>文件操作</strong></h2>
+<pre><code class="language-java">/**
+ * 演示文件操作
+ * 分隔符
+ */
+public class Demo1 {
+	public static void main(String[] args) throws IOException, InterruptedException {
+		//输出：
+		//路径分隔符：;
+		//名称分隔符：\
+		separator();
+		
+		fileOp();
+	}
+	public static void separator() {
+		System.out.println(&quot;路径分隔符：&quot;+File.pathSeparator);
+		System.out.println(&quot;名称分隔符：&quot;+File.separator);
+	}
+	public static void fileOp() throws IOException, InterruptedException {
+		//1.创建文件
+		File file=new File(&quot;d:\\file.txt&quot;);
+		if(!file.exists()) {
+			boolean flag=file.createNewFile();			
+			System.out.println(&quot;创建状态：&quot;+flag);
+		}
+		
+		//2.删除文件
+		//2.1 直接删除
+		/* System.out.println(&quot;删除结果：&quot;+file.delete()); */
+		//2.2 使用JVM退出时删除（不是自己删除）
+		file.deleteOnExit();
+		//调用休眠程序观察删除操作
+		Thread.sleep(5000);
+		
+		//3.获取文件信息
+		System.out.println(&quot;文件绝对路径：&quot;+file.getAbsolutePath());
+		System.out.println(&quot;获取路径：&quot;+file.getPath());
+		System.out.println(&quot;获取父目录：&quot;+file.getParent());
+		System.out.println(&quot;获取文件名称：&quot;+file.getName());
+		System.out.println(&quot;获取文件长度：&quot;+file.length());
+		System.out.println(&quot;获取文件创建时间：&quot;+new Date(file.lastModified()).toLocaleString());
+		
+		//4.判断
+		System.out.println(&quot;是否可写：&quot;+file.canWrite());
+		System.out.println(&quot;是否可读：&quot;+file.canRead());
+		System.out.println(&quot;是否隐藏：&quot;+file.isHidden());
+		System.out.println(&quot;是否是文件：&quot;+file.isFile());
+		System.out.println(&quot;是否是文件夹：&quot;+file.isDirectory());
+	}
+}
+</code></pre>
+<h2 id="文件夹操作"><strong>文件夹操作</strong></h2>
+<pre><code class="language-java">/**
+ * 文件夹的操作
+ */
+public class Demo2 {
+	public static void main(String[] args) {
+		directorOp();
+	}
+	public static void  directorOp() {
+		//1.创建文件夹
+		File dir=new File(&quot;d:\\aaa\\bbb\\ccc&quot;);
+		if (!dir.exists()) {
+			//mkdir();只能创建单级目录
+			boolean flag=dir.mkdirs();//创建多级目录
+			System.out.println(&quot;创建结果：&quot;+flag);
+		}
+		
+		//2.删除文件夹
+		//2.1 直接删除（必须为空目录）
+		//System.out.println(&quot;删除结果：&quot;+dir.delete());
+		//2.2 使用jvm删除
+		dir.deleteOnExit();
+		
+		//3.获取文件夹信息
+		System.out.println(&quot;获取绝对路径：&quot;+dir.getAbsolutePath());
+		System.out.println(&quot;获取路径：&quot;+dir.getPath());
+		System.out.println(&quot;获取父目录：&quot;+dir.getParent());
+		System.out.println(&quot;获取创建时间：&quot;+new Date(dir.lastModified()).toLocaleString());
+		System.out.println(&quot;文件夹名称：&quot;+dir.getName());
+		
+		//4.判断
+		System.out.println(&quot;是否隐藏：&quot;+dir.isHidden());
+		System.out.println(&quot;是否是文件：&quot;+dir.isFile());
+		
+		//5.遍历文件夹
+		File dir2=new File(&quot;d:\\&quot;);
+		String[] files=dir2.list();
+		for (String string : files) {
+			System.out.println(string);
+		}		
+	}
+}
+</code></pre>
+<h2 id="文件过滤器"><strong>文件过滤器</strong></h2>
+<ul>
+<li>
+<p><strong>FileFilter接口：</strong></p>
+<p><code>public interface FileFilter</code></p>
+<ul>
+<li><code>boolean accepte(File pathname)</code></li>
+<li>当调用File类中的<strong>listFiles()<strong>方法时，支持传入</strong>FileFilter接口实现类</strong>，对获取的文件进行<strong>过滤</strong>，只有<strong>满足</strong>条件的文件才可以出现在listFiles()的返回值中。</li>
+</ul>
+<p>在上文Demo2中添加演示代码：</p>
+<pre><code class="language-java">public static void  directorOp() {
+    File[] files1=dir2.listFiles(new FileFilter() {		
+        @Override
+        public boolean accept(File pathname) {
+            if(pathname.getName().endsWith(&quot;.txt&quot;)) {
+                return true;
+            }
+            return false;
+        }
+    });
+    for (File file : files1) {
+        System.out.println(file.getName());
+    }
+}
+</code></pre>
+</li>
+</ul>
+<p>测试：</p>
+<figure data-type="image" tabindex="8"><img src="//tvax3.sinaimg.cn/large/007bjbYxly1gpjbjxzks2j30f704z3yf.jpg" alt="image-20210414112604473" loading="lazy"></figure>
+<h2 id="文件操作小案例"><strong>文件操作小案例</strong></h2>
+<pre><code class="language-java">/**
+ * 1.递归遍历文件夹
+ * 2.递归删除文件夹
+ */
+public class Demo3 {
+	public static void main(String[] args) {
+		//略
+	}
+	//案例1：递归遍历文件夹
+	public static void listDer(File dir) {
+		File[] files=dir.listFiles();
+		if(files!=null&amp;&amp;files.length&gt;0) {
+			for (File file : files) {
+				if (file.isDirectory()) {
+					listDer(file);
+				}else {
+					System.out.println(file.getName());
+				}
+			}
+		}
+	}
+	//案例2：递归删除文件夹
+	public static void deleteDir(File dir) {
+		File[] files=dir.listFiles();
+		if (files!=null&amp;&amp;files.length&gt;0) {
+			for (File file : files) {
+				if (file.isDirectory()) {
+					deleteDir(file);
+				}else {
+					file.delete();
+				}				
+			}
+		}	
+		dir.delete();	
+	}
+}
+</code></pre>
+<hr>
+<h1 id="补充properties"><strong>补充：Properties</strong></h1>
+<ul>
+<li>
+<p>**Properties：**<strong>属性集合</strong></p>
+</li>
+<li>
+<p><strong>特点：</strong></p>
+</li>
+<li>
+<p>存储属性名和属性值（键值对）。</p>
+<ul>
+<li>属性名和属性值都是字符串类型。</li>
+<li><strong>没有泛型</strong>。</li>
+<li>和<strong>流</strong>有关（<strong>所以没有整理在集合里面</strong>）。</li>
+</ul>
+</li>
+<li>
+<p><strong>方法：</strong></p>
+<ul>
+<li>
+<p><code>public String getProperty(String key)</code></p>
+<p>根据key在属性列表里查找value，如果原始属性列表找不到就去默认属性列表找。返回key所对应的value。</p>
+</li>
+<li>
+<p><code>public void list(PrintWriter out)</code></p>
+<p>将属性列表打印在指定的输出流上，在debug时很有用。</p>
+</li>
+<li>
+<p><code>public Object setProperty(String key,String value)</code></p>
+<p>内部调用的是Hashtable的put方法，将key和value成对地保存在属性列表中。返回这个key上一个对应的value，没有就返回null。</p>
+</li>
+</ul>
+<p>Properties可以保<strong>存在一个流中或是从一个流中加载</strong>，属性列表中的每个键<strong>值对都是一个字符串</strong>。一个属性列表可以包括另一个第二属性列表来作为它的默认值，如果在原始属性列表中没有找到key时就搜索第二属性列表。</p>
+<pre><code class="language-java">package Pro;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Properties;
+import java.util.Set;
+
+/**
+ * 演示集合properties的使用
+ */
+public class Demo1 {
+    public static void main(String[] args) throws IOException {
+        //创建properties
+        Properties properties=new Properties();
+        //添加数据 前面为键 后面为值
+        properties.setProperty(&quot;username&quot;, &quot;tangrui&quot;);
+        properties.setProperty(&quot;age&quot;, &quot;21&quot;);
+        System.out.println(properties.toString());
+
+        //遍历
+        //3.1 keySet 略
+        //3.2 entrySet 略
+        //3.3 stringPropertyNames()
+        System.out.println(&quot;利用stringPropertyNames遍历&quot;);
+        Set&lt;String&gt; set=properties.stringPropertyNames();
+        for (String string : set) {
+            System.out.println(string+&quot; &quot;+properties.getProperty(string));
+        }
+        //和流有关的方法
+        //list
+        System.out.println(&quot;利用list打印&quot;);
+        PrintWriter printWriter=new PrintWriter(&quot;d:\\print.txt&quot;);
+        //将刚才的值打印进去
+        properties.list(printWriter);
+        printWriter.close();
+        //store保存
+        System.out.println(&quot;利用store保存&quot;);
+        FileOutputStream fileOutputStream=new FileOutputStream(&quot;d:\\s.properties&quot;);
+        //后面打印注释信息 并且会将时间信息打印出来
+        properties.store(fileOutputStream, &quot;NOTES&quot;);
+        fileOutputStream.close();
+        //load加载
+        System.out.println(&quot;load加载&quot;);
+        Properties properties2=new Properties();
+        FileInputStream fileInputStream=new FileInputStream(&quot;d:\\s.properties&quot;);
+        properties2.load(fileInputStream);
+        fileInputStream.close();
+        System.out.println(properties2.toString());
+    }
+}
+</code></pre>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[基本算法]]></title>
         <id>https://lindamao0753.github.io/post/algorithm/</id>
