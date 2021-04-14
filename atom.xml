@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lindamao0753.github.io</id>
     <title>Lindamao</title>
-    <updated>2021-04-14T07:47:03.630Z</updated>
+    <updated>2021-04-14T08:11:20.706Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lindamao0753.github.io"/>
     <link rel="self" href="https://lindamao0753.github.io/atom.xml"/>
@@ -10,6 +10,3259 @@
     <logo>https://lindamao0753.github.io/images/avatar.png</logo>
     <icon>https://lindamao0753.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Lindamao</rights>
+    <entry>
+        <title type="html"><![CDATA[集合框架]]></title>
+        <id>https://lindamao0753.github.io/post/Collection/</id>
+        <link href="https://lindamao0753.github.io/post/Collection/">
+        </link>
+        <updated>2021-04-14T07:47:18.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="集合概述">集合概述</h1>
+<hr>
+<ul>
+<li><strong>概念</strong>：对象的容器，定义了对多个对象进项操作的的常用方法。可实现数组的功能。</li>
+<li><strong>和数组的区别</strong>：</li>
+</ul>
+<ol>
+<li>数组长度固定，集合长度不固定。</li>
+<li>数组可以存储基本类型和引用类型，集合只能存储引用类型。</li>
+</ol>
+<ul>
+<li><strong>位置</strong>： java.util.*;</li>
+</ul>
+<h2 id="collection体系集合"><strong>Collection体系集合</strong></h2>
+<hr>
+<figure data-type="image" tabindex="1"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gpjbr5pskoj30rq0dk0we.jpg" alt="5f9912e21cd1bbb86b6c3035" loading="lazy"></figure>
+<h3 id="collection父接口"><strong>Collection父接口</strong></h3>
+<hr>
+<ul>
+<li>
+<p><strong>特点</strong>：代表一组任意类型的对象，无序、无下标、不能重复。</p>
+</li>
+<li>
+<p><strong>方法</strong>：</p>
+<ul>
+<li><code>boolean add(Object obj) //添加一个对象。</code></li>
+<li><code>boolean addAll(Collection c) //讲一个集合中的所有对象添加到此集合中。</code></li>
+<li><code>void clear() //清空此集合中的所有对象。</code></li>
+<li><code>boolean contains(Object o) //检查此集合中是否包含o对象。</code></li>
+<li><code>boolean equals(Object o) //比较此集合是否与指定对象相等。</code></li>
+<li><code>boolean isEmpty() //判断此集合是否为空。</code></li>
+<li><code>boolean remove(Object o) //在此集合中移除o对象。</code></li>
+<li><code>int size() //返回此集合中的元素个数。</code></li>
+<li><code>Object[] toArray() //姜此集合转换成数组。</code></li>
+</ul>
+<p>实例代码1</p>
+<pre><code class="language-java">COPY
+ /**
+ * Collection接口的使用（一）
+ * 1.添加元素
+ * 2.删除元素
+ * 3.遍历元素
+ * 4.判断
+ */
+public class Demo1{
+    pubic static void main(String[] args){
+        //创建集合
+        Collection collection=new ArrayList();        
+//      * 1.添加元素
+        Collection.add(&quot;苹果&quot;);
+        Collection.add(&quot;西瓜&quot;);
+        Collection.add(&quot;榴莲&quot;);
+        System.out.println(&quot;元素个数：&quot;+collection.size());
+        System.out.println(collection);
+//      * 2.删除元素
+        collection.remove(&quot;榴莲&quot;);
+        System.out.println(&quot;删除之后：&quot;+collection.size());
+//      * 3.遍历元素
+        //3.1 使用增强for 
+        for(Object object : collection){
+            System.out.println(object);
+        }
+        //3.2 使用迭代器（迭代器专门用来遍历集合的一种方式）
+        //hasnext();判断是否有下一个元素 有返回true 反之false
+        //next();获取下一个元素
+        //remove();删除当前元素
+        Iterator iterator=collection.Itertor();
+        while(iterator.hasnext()){
+            String object=(String)iterator.next();
+            System.out.println(s);
+            //删除操作
+            //collection.remove(s);引发错误：并发修改异常
+            //iterator.remove();应使用迭代器的方法
+//      * 4.判断
+        System.out.println(collection.contains(&quot;西瓜&quot;));//true
+        System.out.println(collection.isEmpty());//false
+        }
+    }
+}
+
+</code></pre>
+<p>这里要注意一个点是我们不能在迭代器迭代的时候使用collection的remov方法 否则就会出现如下并发修改异常的异常 我们应当使用迭代器当中的remove方法</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="2"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gpjbrhjq6hj30tb03cn14.jpg" alt="image-20210405145218129" loading="lazy"></figure>
+<p>实例代码2</p>
+<pre><code class="language-java">COPY/**
+ * Collection接口的使用（二）
+ * 1.添加元素
+ * 2.删除元素
+ * 3.遍历元素
+ * 4.判断
+ */
+public class Demo2 {
+	public static void main(String[] args) {
+		Collection collection=new ArrayList();
+		Student s1=new Student(&quot;张三&quot;,18);
+		Student s2=new Student(&quot;李四&quot;, 20);
+		Student s3=new Student(&quot;王五&quot;, 19);
+		//1.添加数据
+		collection.add(s1);
+		collection.add(s2);
+		collection.add(s3);
+		//collection.add(s3);可重复添加相同对象
+		System.out.println(&quot;元素个数：&quot;+collection.size());
+		System.out.println(collection.toString());
+		//2.删除数据
+		collection.remove(s1);
+		System.out.println(&quot;删除之后：&quot;+collection.size());
+		//3.遍历数据
+		//3.1 增强for(foreach 没有下标 不能通过for循环来遍历)
+		for(Object object:collection) {
+			Student student=(Student) object;
+			System.out.println(student.toString());
+		}
+		//3.2迭代器
+		//迭代过程中不能使用collection的删除方法
+		Iterator iterator=collection.iterator();
+		while (iterator.hasNext()) {
+			Student student=(Student) iterator.next();
+			System.out.println(student.toString());
+		}
+		//4.判断和上一块代码类似。
+        
+	}
+}
+</code></pre>
+<p>注意点：如果remove里面放的是new一个新的对象的话 并且数据与上面的一模一样 是并不能将其删除</p>
+<p>因为：</p>
+<p>new 一个对象，表示 新生成一个对象，分配新的内存空间。 两者是不在同一个区域里面 只不过是属性 相同而已</p>
+<p>clear方法：</p>
+<p>添加元素的时候只是把 对象当中的指针地址放进去了 所以清除的是是其中的地址而已 也就是元素的信息 而这些对象实际上还是存在的</p>
+<p>对象类</p>
+<pre><code class="language-java">COPY/**
+ * 学生类
+ */
+public class Student {
+	private String name;
+	private int age;
+	public Student(String name, int age) {
+		super();
+		this.name = name;
+		this.age = age;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return &quot;Student [name=&quot; + name + &quot;, age=&quot; + age +&quot;]&quot;;
+	}
+}
+</code></pre>
+<h3 id="collection子接口"><strong>Collection子接口</strong></h3>
+<hr>
+<h4 id="list集合"><strong>List集合</strong></h4>
+<ul>
+<li>
+<p><strong>特点</strong>：有序、有下标、元素可以重复。</p>
+</li>
+<li>
+<p><strong>方法</strong>：</p>
+<ul>
+<li><code>void add(int index,Object o) //在index位置插入对象o（也就是说可以指定位置插入）。</code></li>
+<li><code>boolean addAll(index,Collection c) //将一个集合中的元素添加到此集合中的index位置。</code></li>
+<li><code>Object get(int index) //返回集合中指定位置的元素。</code></li>
+<li><code>List subList(int fromIndex,int toIndex) //返回fromIndex和toIndex之间的集合元素。</code></li>
+<li>......</li>
+</ul>
+<p>注意在List当中还有其专门的迭代器 而且功能更加的强大</p>
+<p>实例代码3</p>
+<pre><code class="language-java">package lin.colle;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+/**
+ * List子接口的使用（一）
+ * 特点：1.有序有下标 2.可以重复
+ *
+ * 1.添加元素
+ * 2.删除元素
+ * 3.遍历元素
+ * 4.判断
+ * 5.获取位置
+ */
+public class Demo3 {
+    public static void main(String[] args) {
+        List list=new ArrayList&lt;&gt;();
+        //1.添加元素
+        list.add(&quot;tang&quot;);
+        list.add(&quot;he&quot;);
+        list.add(0,&quot;yu&quot;);//插入操作
+        System.out.println(&quot;元素个数：&quot;+list.size());
+        System.out.println(list.toString());
+        //2.删除元素
+        list.remove(0);
+        //list.remove(&quot;yu&quot;);结果同上
+        System.out.println(&quot;删除之后：&quot;+list.size());
+        System.out.println(list.toString());
+        //3.遍历元素
+        //3.1 使用for遍历(因为list有下标)
+        for(int i=0;i&lt;list.size();++i) {
+            System.out.println(list.get(i));
+        }
+        //3.2 使用增强for
+        System.out.println(&quot;3.2 使用增强for&quot;);
+        for(Object object:list) {
+            System.out.println(object);
+
+        }
+        //3.3 使用迭代器
+        System.out.println(&quot;3.3 使用迭代器&quot;);
+        Iterator iterator=list.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+
+        }
+        //3.4使用列表迭代器，listIterator可以双向遍历，添加、删除及修改元素。
+        ListIterator listIterator=list.listIterator();
+        //从前往后
+        System.out.println(&quot;3.4使用列表迭代器&quot;);
+        System.out.println(&quot;正序输出&quot;);
+        while(listIterator.hasNext()) {
+          System.out.println(listIterator.next());
+
+            }
+        //从后往前（此时“遍历指针”已经指向末尾 否则指针默认是从0开始的前面没有元素 也就找不到了）
+        System.out.println(&quot;逆序输出&quot;);
+        while(listIterator.hasPrevious()) {
+            System.out.println(listIterator.previous());
+        }
+        //4.判断
+        System.out.println(list.isEmpty());
+        System.out.println(list.contains(&quot;tang&quot;));
+        //5.获取位置
+        System.out.println(list.indexOf(&quot;tang&quot;));
+    }
+}
+</code></pre>
+<p>实例代码4</p>
+<pre><code class="language-java">COPY/**
+ * List子接口的使用（二）
+ * 1.添加元素
+ * 2.删除元素
+ * 3.遍历元素
+ * 4.判断
+ * 5.获取位置
+ */
+public class Demo4 {
+	public static void main(String[] args) {
+		List list=new ArrayList();
+		//1.添加数字数据（自动装箱）当数据放进去的时候就已经不是原来的基本数据类型了
+		list.add(20);
+		list.add(30);
+		list.add(40);
+		list.add(50);
+		System.out.println(&quot;元素个数：&quot;+list.size());
+	System.out.println(list.toString());
+		//2.删除元素
+	list.remove(0);
+        //需要注意的是这里的remove方法里面放的是index参数 因为这时候往里面添加的元素是int类型的参数
+	//list.remove(20);很明显数组越界错误，改成如下
+		//list.remove(Object(20));
+		//list.remove(new Integer(20));
+		System.out.println(&quot;元素个数：&quot;+list.size());
+		System.out.println(list.toString());
+		//3-5不再演示，与之前类似
+		//6.补充方法subList，返回子集合，含头不含尾
+		List list2=list.subList(1, 3);
+	System.out.println(list2.toString());	
+	}
+}
+</code></pre>
+<p>2.当中删除元素的分析：</p>
+<p>并非整数缓存机制，而是方法重载，传入对象就按照值删除，传入int型就按index删除</p>
+<p><strong>点击源码查看到</strong></p>
+<p>当remove里面删除放的是index的时候返回的是当前元素的值  如果放的是参数的话返回的是boolean值</p>
+</li>
+</ul>
+<hr>
+<h4 id="list实现类"><strong>List实现类</strong></h4>
+<h5 id="arraylist重点"><strong>ArrayList[重点]</strong></h5>
+<ul>
+<li>
+<p>数组结构实现(实际还是个数组)，查询块、增删慢；</p>
+</li>
+<li>
+<p>JDK1.2版本，运行效率快、线程不安全。</p>
+</li>
+</ul>
+<p>实例代码5</p>
+<pre><code class="language-java">package lin.colle;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ListIterator;
+/**
+ * ArrayList的使用
+ * 存储结构：数组；
+ * 特点：查找遍历速度快，增删慢。
+ * 1.添加元素
+ * 2.删除元素
+ * 3.遍历元素
+ * 4.判断
+ * 5.查找
+ */
+public class Demo5 {
+    public static void main(String[] args) {
+        ArrayList arrayList=new ArrayList&lt;&gt;();
+        System.out.println(&quot;1.添加元素&quot;);
+        //1.添加元素
+        Student s1=new Student(&quot;林&quot;, 21);
+        Student s2=new Student(&quot;大&quot;, 22);
+        Student s3=new Student(&quot;毛&quot;, 21);
+        arrayList.add(s1);
+        arrayList.add(s2);
+        arrayList.add(s3);
+        System.out.println(&quot;元素个数：&quot;+arrayList.size());
+        System.out.println(arrayList.toString());
+        //2.删除元素
+//        System.out.println(&quot;2.删除元素&quot;);
+//        arrayList.remove(s1);
+        arrayList.remove(new Student(&quot;毛&quot;, 21));
+        //注：这样可以删除吗（不可以）？显然这是两个不同的对象。
+        //假如两个对象属性相同便认为其是同一对象，那么如何修改代码？
+        //3.遍历元素
+        //3.1使用迭代器
+        System.out.println(&quot;        System.out.println(\&quot;\&quot;);\n&quot;);
+        Iterator iterator=arrayList.iterator();
+        while(iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+        System.out.println(&quot;3.2使用列表迭代器&quot;);
+        //3.2使用列表迭代器
+        ListIterator listIterator=arrayList.listIterator();
+        //从前往后遍历
+        System.out.println(&quot;从前往后遍历&quot;);
+        while(listIterator.hasNext()) {
+            System.out.println(listIterator.next());
+        }
+        //这里因为指针已经移到了最后面了 所以不要再用准备将指针往后面移动的操作
+        //从后往前遍历
+        System.out.println(&quot;从后往前遍历&quot;);
+        while(listIterator.hasPrevious()) {
+            System.out.println(listIterator.previous());
+        }
+        //4.判断
+        System.out.println(&quot;判断&quot;);
+        System.out.println(arrayList.isEmpty());
+        //System.out.println(arrayList.contains(new Student(&quot;何&quot;, 22)));
+        //注：与上文相同的问题。
+        //5.查找
+        System.out.println(&quot;查找&quot; +
+                &quot;&quot;);
+        System.out.println(arrayList.indexOf(s1));
+    }
+}
+</code></pre>
+<p>还是针对之remove方法中创建一个属性一摸一样的新对象尝试看看能不能删除</p>
+<p>测试:</p>
+<figure data-type="image" tabindex="3"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gpjbrx2mpej30k60c1t9h.jpg" alt="image-20210407120023761" loading="lazy"></figure>
+<p>测试发现并不能删除</p>
+<p>解决方法：</p>
+<p>Object里的equals(this==obj)用地址和当前对象比较，如果想实现代码</p>
+<p>中的问题，可以在<strong>学生类</strong>中重写equals方法：</p>
+<pre><code class="language-java">@Override
+    public boolean equals(Object obj) {
+        //1.是否为同一对象 同一个对象自然就一样
+        if (this==obj){
+            return true;
+        }
+        //2.判断是否为空 为空就直接肯定不会一样
+        if (obj==null){
+            return false;
+        }
+        //3.判断是否是Student类型 如果是就说明类型相同 此时再将对象强制转换一下
+        //因为需要使用对象成员 所以需要判断并且强制转换
+        if (obj instanceof Student){
+            Student student = (Student) obj;
+            if (this.name.equals(student.getName())&amp;&amp;this.age==student.age){
+                return true;
+            }
+
+        }
+        //当这些条件不满足的时候就返回fasle
+        return false;
+    }
+</code></pre>
+<p>再次测试发现：</p>
+<figure data-type="image" tabindex="4"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gpjbsp4oakj30er097wew.jpg" alt="image-20210407120634022" loading="lazy"></figure>
+<p>成功的将属性相同的对象删除掉了</p>
+<h5 id="arraylit源码分析">ArrayLit源码分析</h5>
+<p>概括的说，ArrayList 是一个动态数组，它是线程不安全的，允许元素为null。<br>
+其底层数据结构依然是数组，它实现了List<E>, RandomAccess, Cloneable, java.io.Serializable接口，其中<strong>RandomAccess</strong>代表了其拥有随机快速访问的能力，ArrayList可以以**O(1)**的时间复杂度去根据下标访问元素。</p>
+<p>因其<strong>底层数据结构是数组</strong>，所以可想而知，它是占据一块<strong>连续</strong>的内存空间（<strong>容量就是数组的length</strong>），所以它也有数组的<strong>缺点</strong>，空间效率不高。</p>
+<p>由于数组的<strong>内存连续</strong>，可以根据下标以O1的时间读写(改查)元素，因此时间效率很高。</p>
+<p>当集合中的元素<strong>超出</strong>这个容量，便会进行<strong>扩容</strong>操作。扩容操作也是ArrayList 的一个<strong>性能消耗比较大</strong>的地方，所以若我们可以提前预知数据的规模，应该通过public ArrayList(int initialCapacity) {}构造方法，<strong>指定集合的大小，去构建ArrayList实例，以减少扩容次数，提高效率</strong>。</p>
+<p>或者在需要扩容的时候，<strong>手动调用</strong>public void ensureCapacity(int minCapacity) {}方法扩容。<br>
+不过该方法是ArrayList的API，不是List接口里的，所以使用时需要<strong>强转</strong>:<br>
+((ArrayList)list).ensureCapacity(30);</p>
+<p><strong>当每次修改结构时，增加导致扩容，或者删，都会修改modCount</strong>。</p>
+<p>先点进源码查看</p>
+<h6 id="构造方法"><strong>构造方法：</strong></h6>
+<pre><code class="language-java">//存储集合元素的底层实现：真正存放元素的数组
+transient Object[] elementData; // non-private to simplify nested class access
+//当前元素数量
+private int size;
+
+//默认构造方法
+public ArrayList() {
+    //默认构造方法只是简单的将 空数组赋值给了elementData
+    this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
+}
+
+//空数组
+private static final Object[] EMPTY_ELEMENTDATA = {};
+//带初始容量的构造方法
+//如果传入参数，则代表指定ArrayList的初始数组长度，传入参数如果是大于等于0，则使用用户的参数初始化，如果用户传入的参数小于0，则抛出异常，构造方法如下： 
+public ArrayList(int initialCapacity) {
+    //如果初始容量大于0，则新建一个长度为initialCapacity的Object数组.
+    //注意这里并没有修改size(对比第三个构造函数)
+    if (initialCapacity &gt; 0) {
+        this.elementData = new Object[initialCapacity];
+    } else if (initialCapacity == 0) {//如果容量为0，直接将EMPTY_ELEMENTDATA赋值给elementData
+        this.elementData = EMPTY_ELEMENTDATA;
+    } else {//容量小于0，直接抛出异常
+        throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+
+                                           initialCapacity);
+    }
+}
+
+//利用别的集合类来构建ArrayList的构造函数
+public ArrayList(Collection&lt;? extends E&gt; c) {
+    //直接利用Collection.toArray()方法得到一个对象数组，并赋值给elementData 
+    elementData = c.toArray();
+    //因为size代表的是集合元素数量，所以通过别的集合来构造ArrayList时，要给size赋值
+    if ((size = elementData.length) != 0) {
+        // c.toArray might (incorrectly) not return Object[] (see 6260652)
+        if (elementData.getClass() != Object[].class)//这里是当c.toArray出错，没有返回Object[]时，利用Arrays.copyOf 来复制集合c中的元素到elementData数组中
+            elementData = Arrays.copyOf(elementData, size, Object[].class);
+    } else {
+        //如果集合c元素数量为0，则将空数组EMPTY_ELEMENTDATA赋值给elementData 
+        // replace with empty array.
+        this.elementData = EMPTY_ELEMENTDATA;
+    }
+}
+</code></pre>
+<h6 id="参数">参数</h6>
+<pre><code class="language-java">	// 序列化id
+	private static final long serialVersionUID = 8683452581122892189L;
+	// 默认初始的容量
+	private static final int DEFAULT_CAPACITY = 10;
+	// 一个空对象
+	private static final Object[] EMPTY_ELEMENTDATA = new Object[0];
+	// 一个空对象，如果使用默认构造函数创建，则默认对象内容默认是该值
+	private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = new Object[0];
+	// 当前数据对象存放地方，当前对象不参与序列化
+	transient Object[] elementData;
+	// 当前数组长度
+	private int size;
+	// 数组最大长度
+	private static final int MAX_ARRAY_SIZE = 2147483639;
+
+</code></pre>
+<pre><code class="language-java">COPY//这是一个空的数组
+private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
+public ArrayList() {
+    this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
+}
+</code></pre>
+<p>这段源码说明当你没有向集合中添加任何元素时，集合容量为0。那么默认的10个容量怎么来的呢？</p>
+<p>这就得看看add方法的源码了：</p>
+<hr>
+<p>这里大家要注意一下<strong>Collection.toArray()<strong>这个方法，在Collection子类各大集合的源码中，高频使用了这个方法去</strong>获得某Collection的所有元素</strong>。</p>
+<p>关于方法：<strong>Arrays.copyOf(elementData, size, Object[].class)</strong>，就是根据class的类型来决定是new 还是反射去构造一个泛型数组，同时利用native函数，批量赋值元素至新数组中。<br>
+如下：</p>
+<pre><code class="language-java">public static &lt;T,U&gt; T[] copyOf(U[] original, int newLength, Class&lt;? extends T[]&gt; newType) {
+    @SuppressWarnings(&quot;unchecked&quot;)
+    //根据class的类型来决定是new 还是反射去构造一个泛型数组
+    T[] copy = ((Object)newType == (Object)Object[].class)
+        ? (T[]) new Object[newLength]
+        : (T[]) Array.newInstance(newType.getComponentType(), newLength);
+    //利用native函数，批量赋值元素至新数组中。
+    System.arraycopy(original, 0, copy, 0,
+                     Math.min(original.length, newLength));
+    return copy;
+}
+</code></pre>
+<p>值得注意的是，<strong>System.arraycopy</strong>也是一个很高频的函数，大家要留意一下。</p>
+<pre><code class="language-java">public static native void arraycopy(Object src,  int  srcPos,
+                                    Object dest, int destPos,
+                                    int length);
+</code></pre>
+<h6 id="常用api">常用API：</h6>
+<p><strong>1.增</strong></p>
+<p>add的方法有两个，一个是<strong>带一个参数</strong>的，一个是<strong>带两个参数</strong>的。<br>
+<strong>add(E e) 方法</strong></p>
+<p>add主要的<strong>执行逻辑</strong>如下：<br>
+1）确保数组已使用长度（size）加1之后足够存下 下一个数据<br>
+2）修改次数modCount 标识自增1，如果当前数组已使用长度（size）加1后的大于当前的数组长度，则调用grow方法，增长数组。</p>
+<p>grow方法会将当前数组的长度变为原来容量的1.5倍。<br>
+3）确保新增的数据有地方存储之后，则将新元素添加到位于size的位置上。<br>
+4）返回添加成功布尔值。</p>
+<p>添加元素方法入口：</p>
+<pre><code class="language-java">    public boolean add(E e) {
+        //扩容的操作 当容量不够的时候就把容量扩大
+        ensureCapacityInternal(size + 1);  // Increments modCount!!
+        //想数组中添加元素
+        elementData[size++] = e;
+        return true;
+    }
+</code></pre>
+<p>确保添加的元素有地方存储，当第一次添加元素的时候this.size+1 的值是<strong>1</strong>，所以第一次添加的时候会将当前elementData数组的长度变为10：</p>
+<pre><code class="language-java">//最初的数组容量为0     
+private void ensureCapacityInternal(int minCapacity) {
+		//第一次判断数组当中为空 默认的数组的数组也是空 所以第一次添加条件成立
+        if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
+           	//max函数比较当前容量和默认容量 当前为0 默认为10 所以返回大的是10 所以第一次添加完成之后就变成了10
+            minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);
+        }
+    //扩容完成执行小面的操作
+        ensureExplicitCapacity(minCapacity);
+    }
+</code></pre>
+<p>将修改次数（modCount）<strong>自增1</strong>，判断是否需要扩充数组长度,判断条件就是用当前所需的数组最小长度与数组的长度对比，如果大于0，则增长数组长度。</p>
+<pre><code class="language-java">//当前容量为10
+private void ensureExplicitCapacity(int minCapacity) {
+    	//修改次数+1
+        modCount++;
+        // overflow-conscious code
+    	//当前容量为哦10 减去数组的长度0大于0
+        if (minCapacity - elementData.length &gt; 0)
+            //执行扩容操作
+            grow(minCapacity);
+    }
+</code></pre>
+<p>如果当前的数组已使用空间（size）加1之后 大于数组长度，则增大数组容量，扩大为原来的1.5倍。</p>
+<pre><code class="language-java">//此时的minCapacity为10
+private void grow(int minCapacity) {
+        // overflow-conscious code
+    	//旧的容量为当前数组的长度为0
+        int oldCapacity = elementData.length;
+    	//扩容操作
+    	//新的长度为旧的加上旧的右移1位 0+0还是0
+    	//假设此时的数组的长度已经到达10 的时候 就会变成15
+        int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);
+    	//判断最新的容量是否大于之前的最小容量 目的是让最新的容量要大于等于之前的最小容量
+        if (newCapacity - minCapacity &lt; 0)
+        
+            newCapacity = minCapacity;
+        if (newCapacity - MAX_ARRAY_SIZE &gt; 0)
+            //MAX_ARRAY_SIZE是个超级大的数字 如果数组不是很大的话是下面的条件一般是不会成立的
+            newCapacity = hugeCapacity(minCapacity);
+        // minCapacity is usually close to size, so this is a win:
+    	//第一次创建数组 此时的数组长度为newCapacity的大小 
+    	//后面也是如此
+        elementData = Arrays.copyOf(elementData, newCapacity);
+    }
+</code></pre>
+<p><strong>add(int index, E element)方法</strong></p>
+<p><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gpjbwrf5yfj30i20aft8k.jpg" alt="20180903022120663" loading="lazy"><br>
+这个方法其实和上面的add类似，该方法可以按照元素的位置，指定位置插入元素，具体的执行逻辑如下：<br>
+1）rangeCheckForAdd(index)<strong>确保数插入的位置小于等于当前数组长度，并且不小于0</strong>，否则抛出异常</p>
+<p>2）确保数组已使用长度（size）加1之后足够存下 下一个数据</p>
+<p>3）修改次数（modCount）标识自增1，如果当前数组已使用长度（size）加1后的大于当前的数组长度，则调用grow方法，增长数组</p>
+<p>4）<strong>grow</strong>方法会将当前数组的长度变为原来容量的1.5倍。</p>
+<p>5）确保有足够的容量之后，使用System.arraycopy 将需要插入的位置（index）<strong>后面的元素统统往后移动一位</strong>。</p>
+<p>6）将新的数据内容存放到数组的指定位置（<strong>index</strong>）上</p>
+<pre><code class="language-java"> public void add(int index, E element) {
+        rangeCheckForAdd(index);
+
+        ensureCapacityInternal(size + 1);  // Increments modCount!!
+     	//通过数组复制的方式复制一次数组
+        System.arraycopy(elementData, index, elementData, index + 1,
+                         size - index);
+        elementData[index] = element;
+        size++;
+    }
+</code></pre>
+<p>注意：使用该方法的话将导致指定位置后面的数组元素<strong>全部重新移动，即往后移动一位</strong>。</p>
+<p><strong>总结：</strong><br>
+add、addAll。<br>
+先判断是否越界，是否需要扩容。<br>
+如果扩容， 就复制数组。<br>
+然后设置对应下标元素值。</p>
+<p>值得注意的是：<br>
+1 <strong>如果需要扩容的话，默认扩容一半。如果扩容一半不够，就用目标的size作为扩容后的容量。</strong><br>
+2 <strong>在扩容成功后，会修改modCount</strong></p>
+<p><strong>2.删</strong></p>
+<pre><code class="language-java">//根据索引来判断删除
+public E remove(int index) {
+    rangeCheck(index);//判断是否越界
+    modCount++;//修改modeCount 因为结构改变了
+    E oldValue = elementData(index);//读出要删除的值
+    int numMoved = size - index - 1;
+    if (numMoved &gt; 0)
+        System.arraycopy(elementData, index+1, elementData, index,
+                         numMoved);//用复制 覆盖数组数据
+    elementData[--size] = null; // clear to let GC do its work  //置空原尾部数据 不再强引用， 可以GC掉
+    return oldValue;
+}
+    //根据下标从数组取值 并强转对象
+    E elementData(int index) {
+        return (E) elementData[index];
+    }
+
+//删除该元素在数组中第一次出现的位置上的数据。 如果有该元素返回true，如果false。
+public boolean remove(Object o) {
+    if (o == null) {
+        for (int index = 0; index &lt; size; index++)
+            if (elementData[index] == null) {
+                fastRemove(index);//根据index删除元素
+                return true;
+            }
+    } else {
+        for (int index = 0; index &lt; size; index++)
+            if (o.equals(elementData[index])) {
+                fastRemove(index);
+                return true;
+            }
+    }
+    return false;
+}
+
+//不会越界 不用判断 ，也不需要取出该元素。
+private void fastRemove(int index) {
+    modCount++;//修改modCount
+    int numMoved = size - index - 1;//计算要移动的元素数量
+    if (numMoved &gt; 0)
+        System.arraycopy(elementData, index+1, elementData, index,
+                         numMoved);//以复制覆盖元素 完成删除
+    elementData[--size] = null; // clear to let GC do its work  //置空 不再强引用
+}
+
+//批量删除
+public boolean removeAll(Collection&lt;?&gt; c) {
+    Objects.requireNonNull(c);//判空
+    return batchRemove(c, false);
+}
+//批量移动
+private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) {
+    final Object[] elementData = this.elementData;
+    int r = 0, w = 0;//w 代表批量删除后 数组还剩多少元素
+    boolean modified = false;
+    try {
+        //高效的保存两个集合公有元素的算法
+        for (; r &lt; size; r++)
+            if (c.contains(elementData[r]) == complement) // 如果 c里不包含当前下标元素， 
+                elementData[w++] = elementData[r];//则保留
+    } finally {
+        // Preserve behavioral compatibility with AbstractCollection,
+        // even if c.contains() throws.
+        if (r != size) { //出现异常会导致 r !=size , 则将出现异常处后面的数据全部复制覆盖到数组里。
+            System.arraycopy(elementData, r,
+                             elementData, w,
+                             size - r);
+            w += size - r;//修改 w数量
+        }
+        if (w != size) {//置空数组后面的元素
+            // clear to let GC do its work
+            for (int i = w; i &lt; size; i++)
+                elementData[i] = null;
+            modCount += size - w;//修改modCount
+            size = w;// 修改size
+            modified = true;
+        }
+    }
+    return modified;
+}
+</code></pre>
+<p><strong>小结：</strong><br>
+1 删除操作<strong>一定会修改modCount</strong>，且<strong>可能涉及到数组的复制</strong>，<strong>相对低效</strong>。<br>
+2 批量删除中，涉及高效的保存两个集合公有元素的算法，可以留意一下。</p>
+<p><strong>3.改</strong></p>
+<p>不会修改modCount，相对增删是高效的操作。</p>
+<pre><code class="language-java">public E set(int index, E element) {
+    rangeCheck(index);//越界检查
+    E oldValue = elementData(index); //取出元素 
+    elementData[index] = element;//覆盖元素
+    return oldValue;//返回元素
+}
+</code></pre>
+<p><strong>4 查</strong><br>
+不会修改modCount，相对增删是高效的操作。</p>
+<pre><code class="language-java">public E get(int index) {
+    rangeCheck(index);//越界检查
+    return elementData(index); //下标取数据
+}
+E elementData(int index) {
+    return (E) elementData[index];
+}
+</code></pre>
+<p><strong>5 清空，clear</strong><br>
+会修改modCount。</p>
+<pre><code class="language-java">public void clear() {
+    modCount++;//修改modCount
+    // clear to let GC do its work
+    for (int i = 0; i &lt; size; i++)  //将所有元素置null
+        elementData[i] = null;
+
+    size = 0; //修改size 
+
+}
+</code></pre>
+<p><strong>6 包含 contain</strong></p>
+<pre><code class="language-java">//普通的for循环寻找值，只不过会根据目标对象是否为null分别循环查找。
+public boolean contains(Object o) {
+    return indexOf(o) &gt;= 0;
+}
+//普通的for循环寻找值，只不过会根据目标对象是否为null分别循环查找。
+public int indexOf(Object o) {
+    if (o == null) {
+        for (int i = 0; i &lt; size; i++)
+            if (elementData[i]==null)
+                return i;
+    } else {
+        for (int i = 0; i &lt; size; i++)
+            if (o.equals(elementData[i]))
+                return i;
+    }
+    return -1;
+}
+</code></pre>
+<p><strong>7 判空 isEmpty()</strong></p>
+<pre><code class="language-java">public boolean isEmpty() {
+    return size == 0;
+}
+</code></pre>
+<p><strong>8 迭代器 Iterator.</strong></p>
+<pre><code class="language-java">public Iterator&lt;E&gt; iterator() {
+    return new Itr();
+}
+/**
+
+ * An optimized version of AbstractList.Itr
+   */
+   private class Itr implements Iterator&lt;E&gt; {
+   int cursor;       // index of next element to return //默认是0
+   int lastRet = -1; // index of last element returned; -1 if no such  //上一次返回的元素 (删除的标志位)
+   int expectedModCount = modCount; //用于判断集合是否修改过结构的 标志
+
+   public boolean hasNext() {
+       return cursor != size;//游标是否移动至尾部
+   }
+
+   @SuppressWarnings(&quot;unchecked&quot;)
+   public E next() {
+       checkForComodification();
+       int i = cursor;
+       if (i &gt;= size)//判断是否越界
+           throw new NoSuchElementException();
+       Object[] elementData = ArrayList.this.elementData;
+       if (i &gt;= elementData.length)//再次判断是否越界，在 我们这里的操作时，有异步线程修改了List
+           throw new ConcurrentModificationException();
+       cursor = i + 1;//游标+1
+       return (E) elementData[lastRet = i];//返回元素 ，并设置上一次返回的元素的下标
+   }
+
+   public void remove() {//remove 掉 上一次next的元素
+       if (lastRet &lt; 0)//先判断是否next过
+           throw new IllegalStateException();
+       checkForComodification();//判断是否修改过
+
+       try {
+           ArrayList.this.remove(lastRet);//删除元素 remove方法内会修改 modCount 所以后面要更新Iterator里的这个标志值
+           cursor = lastRet; //要删除的游标
+           lastRet = -1; //不能重复删除 所以修改删除的标志位
+           expectedModCount = modCount;//更新 判断集合是否修改的标志，
+       } catch (IndexOutOfBoundsException ex) {
+           throw new ConcurrentModificationException();
+       }
+
+   }
+   //判断是否修改过了List的结构，如果有修改，抛出异常
+   final void checkForComodification() {
+       if (modCount != expectedModCount)
+           throw new ConcurrentModificationException();
+
+   }
+</code></pre>
+<p><strong>总结</strong></p>
+<ul>
+<li>增删改查中， 增导致扩容，则会修改modCount，删一定会修改。 改和查一定不会修改modCount。</li>
+<li><strong>扩容操作会导致数组复制</strong>，批量删除会导致 找出两个集合的交集，以及数组复制操作**，因此，增、删都相对低效**。 而 改、查都是很高效的操作。</li>
+<li>因此，结合特点，在使用中，以Android中最常用的展示列表为例，列表滑动时需要展示每一个Item（element）的数组，所以 查 操作是最高频的。相对来说，增操作 只有在列表加载更多时才会用到 ，而且是在列表尾部插入，所以也不需要移动数据的操作。而删操作则更低频。 <strong>故选用ArrayList作为保存数据的结构</strong>。</li>
+<li>在面试中还有可能会问到和Vector的区别，内部也是数组做的，区别在于Vector在API上都加了synchronized所以它是线程安全的，以及Vector扩容时，是<strong>翻倍size</strong>，而ArrayList是扩容50%。</li>
+</ul>
+<h5 id="vector"><strong>Vector</strong></h5>
+<p><strong>特点</strong></p>
+<ul>
+<li>
+<p>数组结构实现，查询快、增删慢；</p>
+</li>
+<li>
+<p>JDK1.0版本，运行效率慢、线程安全(在方法当中加锁了)。</p>
+<pre><code class="language-java">package lin.colle;
+
+import java.util.Enumeration;
+import java.util.Vector;
+/**
+ * Vector的演示使用
+ *
+ *1.添加数据
+ *2.删除数据
+ *3.遍历
+ *4.判断
+ */
+public class Demo6{
+    public static void main(String[] args) {
+        Vector vector=new Vector&lt;&gt;();
+        //1.添加数据
+        vector.add(&quot;tang&quot;);
+        vector.add(&quot;he&quot;);
+        vector.add(&quot;yu&quot;);
+        System.out.println(&quot;元素个数：&quot;+vector.size());
+        //2.删除数据
+        /*
+         * vector.remove(0); vector.remove(&quot;tang&quot;);
+         */
+        //3.遍历
+        //使用枚举器
+        Enumeration enumeration=vector.elements();
+        while (enumeration.hasMoreElements()) {
+            String s = (String) enumeration.nextElement();
+            System.out.println(s);
+        }
+        //4.判断
+        System.out.println(vector.isEmpty());
+        System.out.println(vector.contains(&quot;he&quot;));
+        //5. Vector其他方法
+        //firstElement()  lastElement()  ElementAt();
+    }
+}
+
+</code></pre>
+</li>
+</ul>
+<p><strong>这里面的枚举器的遍历方式有点类似于迭代器当中的</strong></p>
+<p>查看源码elements：</p>
+<pre><code class="language-java">public Enumeration&lt;E&gt; elements() {
+    return new Enumeration&lt;E&gt;() {
+        int count = 0;
+		//类似于hasnext
+        public boolean hasMoreElements() {
+            return count &lt; elementCount;
+        }
+		//类似于next方法
+        public E nextElement() {
+            synchronized (Vector.this) {
+                if (count &lt; elementCount) {
+                    return elementData(count++);
+                }
+            }
+            throw new NoSuchElementException(&quot;Vector Enumeration&quot;);
+        }
+    };
+}
+</code></pre>
+<p><code>LinkedList</code>内部是一个链表的实现，一个节点除了保持自身的数据外，还持有前，后两个节点的引用。所以就数据存储上来说，它相比使用数组作为底层数据结构的<code>ArrayList</code>来说，会更加耗费空间。但也正因为这个特性，它删除，插入节点很快！LinkedList没有任何同步手段，所以多线程环境须慎重考虑，可以使用<code>Collections.synchronizedList(new LinkedList(...));</code>保证线程安全。</p>
+<pre><code class="language-java">package lin.colle;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+
+/**
+ * LinkedList的用法
+ * 存储结构：双向链表
+ * 1.添加元素
+ * 2.删除元素
+ * 3.遍历
+ * 4.判断
+ */
+public class Demo7 {
+    public static void main(String[] args) {
+        LinkedList linkedList=new LinkedList&lt;&gt;();
+        Student s1=new Student(&quot;唐&quot;, 21);
+        Student s2=new Student(&quot;何&quot;, 22);
+        Student s3=new Student(&quot;余&quot;, 21);
+        //1.添加元素
+        linkedList.add(s1);
+        linkedList.add(s2);
+        linkedList.add(s3);
+        linkedList.add(s3);
+        System.out.println(&quot;元素个数：&quot;+linkedList.size());
+        System.out.println(linkedList.toString());
+        System.out.println(&quot;根据索引获取元素&quot;);
+        System.out.println(linkedList.get(0));
+        //2.删除元素
+        /*
+         * linkedList.remove(new Student(&quot;唐&quot;, 21));
+         * System.out.println(linkedList.toString());
+         */
+        //3.遍历
+        //3.1 使用for
+        System.out.println(&quot;使用for&quot;);
+        for(int i=0;i&lt;linkedList.size();++i) {
+            System.out.println(linkedList.get(i));
+        }
+
+        //3.2 使用增强for
+        System.out.println(&quot;使用增强for&quot;);
+        for(Object object:linkedList) {
+            Student student=(Student) object;
+            System.out.println(student.toString());
+        }
+        //3.3 使用迭代器
+        System.out.println(&quot;使用迭代器&quot;);
+        Iterator iterator =linkedList.iterator();
+        while (iterator.hasNext()) {
+            Student student = (Student) iterator.next();
+            System.out.println(student.toString());
+        }
+        //3.4 使用列表迭代器（略）
+        //4. 判断
+        System.out.println(&quot;判断&quot;);
+        System.out.println(linkedList.contains(s1));
+        System.out.println(linkedList.isEmpty());
+        System.out.println(linkedList.indexOf(s3));
+    }
+}
+</code></pre>
+<h5 id="linkedlist源码分析"><strong>LinkedList源码分析</strong></h5>
+<p>看一下LinkedList在体系当中的<strong>位置</strong><br>
+<img src="//tva1.sinaimg.cn/large/007bjbYxly1gpjbxfkl52j30qh0eydlx.jpg" alt="image" loading="lazy"></p>
+<p>在数据结构中LinkedList的样子是：</p>
+<figure data-type="image" tabindex="5"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gpjby3sy79j30tl08ugm8.jpg" alt="20190503162903886" loading="lazy"></figure>
+<p>其中的节点Node主要由<strong>三部分</strong>组成；<strong>pre：前驱引用</strong>，<strong>ele1：节点信息</strong>，<strong>next：后驱引用</strong>。还有两个<strong>引用</strong>，分别指向<strong>头结点的firs</strong>t和指向<strong>尾结点的last</strong>.</p>
+<p><strong>参数</strong></p>
+<pre><code class="language-java">public class LinkedList&lt;E&gt;
+    extends AbstractSequentialList&lt;E&gt;
+    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
+{
+	//元素个数
+    transient int size = 0;
+/**
+ * 指向第一个节点
+ * 
+ */
+transient Node&lt;E&gt; first;
+
+/**
+ * 指向最后一个节点
+ */
+transient Node&lt;E&gt; last;
+.
+}
+</code></pre>
+<p>LinedList的字段比较少，<strong>多添加了两个引用fi</strong>rst和last用来指向头尾节点，和<strong>一个size</strong>用来存储节点的个数，这样当计算元素个数的时候，只需要O(1)的时间复杂度。</p>
+<p>关于Node类型我们再进入到类里看看：</p>
+<pre><code class="language-java">COPYprivate static class Node&lt;E&gt; {
+   	//元素
+    E item;
+    //后继结点
+    Node&lt;E&gt; next;
+   	//前驱结点
+    Node&lt;E&gt; prev;
+
+    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {	
+        this.item = element;
+        this.next = next;
+        this.prev = prev;
+    }
+}
+</code></pre>
+<p>首先item存放的是实际数据；next指向下一个结点而prev指向上一个结点。</p>
+<p>Node带参构造方法的三个参数分别是前一个结点、存储的数据、后一个结点，调用这个构造方法时将它们赋值给当前对象。</p>
+<p>LinkedList是如何添加元素的呢？</p>
+<p>先看看<strong>add方法</strong>：</p>
+<p>add方法默认是在尾部插入的</p>
+<pre><code class="language-java">COPYpublic boolean add(E e) {
+	//往链表的尾部插入元素
+    linkLast(e);
+    return true;
+}
+</code></pre>
+<p>进入到linkLast方法：</p>
+<pre><code class="language-java"> /**
+     *在尾部插入一个新节点
+     */
+    void linkLast(E e) {
+        final Node&lt;E&gt; l = last;//创建一个指向尾部的指针 第一次创建的时候为空
+        final Node&lt;E&gt; newNode = new Node&lt;&gt;(l, e, null);//创建新节点，新节点的前一个节点为当前的尾结点
+        last = newNode;//last引用指向新节点
+        if (l == null)//第一次创建的时时候为空 所以新节点就为第一个结点
+           
+            first = newNode;
+        else
+            //当不是第一次创建的时候 l就变成了前一个结点
+            l.next = newNode;
+        
+        //链表大小+1
+        size++;
+        //修改次数+1
+        modCount++;
+    }
+</code></pre>
+<p>假设刚开始new了一个LinkedList对象，first和last属性都为空，调用add进入到linkLast方法。</p>
+<p>首先创建一个Node变量 l 将last（此时为空）赋给它，然后new一个newNode变量存储数据，并且它的前驱指向l，后继指向null；再把last指向newNode。如下图所示：</p>
+<p><img src="//tva3.sinaimg.cn/large/007bjbYxly1gpjbzvxjxyj30rs04s74h.jpg" alt="5f9a62a01cd1bbb86bc58487" loading="lazy"><br>
+如果满足if条件，<strong>说明这是添加的第一个结点</strong>，将first指向newNode：</p>
+<figure data-type="image" tabindex="6"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gpjc0g7jtgj30c40660sr.jpg" alt="5f9a631c1cd1bbb86bc59ca6" loading="lazy"></figure>
+<p>至此，LinkedList对象的第一个数据添加完毕。假设需要再添加一个数据，我们可以再来走一遍，过程同上不再赘述，图示如下：</p>
+<figure data-type="image" tabindex="7"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gpjc0lm5tcj30sv0g8jsl.jpg" alt="5f9a680e1cd1bbb86bc681f6" loading="lazy"></figure>
+<hr>
+<h6 id="addint-index-e-element-在指定位置插入新元素">add(int index, E element) 在指定位置插入新元素</h6>
+<pre><code class="language-java">public void add(int index, E element) {
+    //检查索引是否越界或者小于开始的位置
+    checkPositionIndex(index);
+    //如果索引的位置是大小的位置 也就是在尾部插入就调用linkLast(element)方法 也就是在尾部插入 
+    //这个方法在上面的add方法已经提到了
+    if (index == size)
+        linkLast(element);
+    else
+        //否则就在元素之前插入
+        linkBefore(element, node(index));
+}
+</code></pre>
+<p>看 linkBefore源码：</p>
+<pre><code class="language-java">//参数为插入元素 成功插入的结点
+void linkBefore(E e, Node&lt;E&gt; succ) {
+    // assert succ != null;
+    //成功插入的节点不能为空
+    //将插入节点的前驱指向指向pred节点
+    final Node&lt;E&gt; pred = succ.prev;
+    //创建一个一新的节点 前驱为pred 后继为succ
+    final Node&lt;E&gt; newNode = new Node&lt;&gt;(pred, e, succ);
+    //将成功插入的节点的前驱结点变为为新节点
+    succ.prev = newNode;
+    if (pred == null)
+        //如果成功插入结点的前驱结点为空 则这个结点就认为是是第一个节点
+        first = newNode;
+    
+    else
+        //如果不为为空 则这pred的后继指向就是新节点 也就是说新节点成功的插入在了某个结点的后面 
+       
+        pred.next = newNode;
+    size++;
+    modCount++;
+}
+</code></pre>
+<p>根据图来理解</p>
+<p>假设现在链表中有三个节点,现在想添加新的节点4 并放到E2节点的前面 放到E1节点的后面调用node方法后找到的第二个节点E2，则进入方法后，结构如下：</p>
+<figure data-type="image" tabindex="8"><img src="https:////upload-images.jianshu.io/upload_images/10089464-e4c8e4289e269784.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/646/format/webp" alt="img" loading="lazy"></figure>
+<p>接着，将succ的prev赋值给pred，并且构造新节点E4，E4的prev和next分别为pred和suc，同时将新节点E4赋值为succ的prev引用，则现在结构如下：</p>
+<figure data-type="image" tabindex="9"><img src="https:////upload-images.jianshu.io/upload_images/10089464-c40b1661acf975f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/732/format/webp" alt="img" loading="lazy"></figure>
+<p>LinkedList</p>
+<p>接着，将新节点赋值给pred节点的next引用，结构如下：</p>
+<figure data-type="image" tabindex="10"><img src="https:////upload-images.jianshu.io/upload_images/10089464-fb0f2f30380346b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/733/format/webp" alt="img" loading="lazy"></figure>
+<p>LinkedList</p>
+<p>最后，size+1，modCount+1，推出方法，本地变量succ，pred销毁，最后结构如下：</p>
+<figure data-type="image" tabindex="11"><img src="https:////upload-images.jianshu.io/upload_images/10089464-505bd8eb8aef8bde.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/784/format/webp" alt="img" loading="lazy"></figure>
+<p>再看看从头部插入大方法：</p>
+<pre><code class="language-java">/**
+     * 在头部插入一个新节点
+     */
+    private void linkFirst(E e) {
+        final Node&lt;E&gt; f = first;//1、创建一个引用
+        final Node&lt;E&gt; newNode = new Node&lt;&gt;(null, e, f);//2、创建新节点，它的下一个节点为当前的头结点
+        first = newNode;//3、头引用指向新节点
+        if (f == null)//如果没有头结点，只有尾结点
+            last = newNode;//新节点为尾结点
+        else
+            f.prev = newNode;//4、否则之前的头结点的前引用指向新节点
+        size++;
+        modCount++;
+    }
+</code></pre>
+<p>其实具体的和尾部插入的方法是一样的</p>
+<p>图解：</p>
+<p><img src="//tva1.sinaimg.cn/large/007bjbYxly1gpjc1gus3pj30nh08kgm8.jpg" alt="20190503165055674" loading="lazy"><br>
+get()方法 根据索引来获取元素</p>
+<h6 id="e-getint-index获取指定节点数据">E get(int index)获取指定节点数据</h6>
+<pre><code class="language-java">public E get(int index) {
+    checkElementIndex(index);
+    //返回结点索引的元素
+    return node(index).item;
+}
+</code></pre>
+<p>直接调用node方法：</p>
+<pre><code class="language-java"> /**
+     * 返回指定位置的节点
+     */
+    Node&lt;E&gt; node(int index) {
+       
+        if (index &lt; (size &gt;&gt; 1)) { //如果index在前半段
+            Node&lt;E&gt; x = first;//从头开始找
+            for (int i = 0; i &lt; index; i++)
+                x = x.next;
+            return x;
+        } else {//在后半段
+            Node&lt;E&gt; x = last;
+            for (int i = size - 1; i &gt; index; i--)//从后往前找
+                x = x.prev;
+            return x;
+        }
+</code></pre>
+<ol>
+<li>判断index在链表的哪边。</li>
+<li>遍历查找index或者size-index次，找出对应节点。<br>
+这里我们知道，相比于数组的直接索引获取，遍历获取节点效率并不高。</li>
+</ol>
+<h6 id="removeint-index移除指定节点">remove(int index)移除指定节点</h6>
+<pre><code class="language-java">public E remove(int index) {
+        checkElementIndex(index);
+        return unlink(node(index));
+    }
+</code></pre>
+<ol>
+<li>检查index位置</li>
+<li>调用node方法获取节点，接着调用<code>unlink(E e)</code></li>
+</ol>
+<pre><code class="language-java">E unlink(Node&lt;E&gt; x) {
+        // assert x != null;
+        //1、找到保存节点信息，找到前置和后继节点
+        final E element = x.item;//保存要删除节点的信息
+        final Node&lt;E&gt; next = x.next;//保存后继节点
+        final Node&lt;E&gt; prev = x.prev;//保存前置节点
+		//2、修改前置指针
+        if (prev == null) {//如果前置为空，
+            first = next;//则后置节点为第一个节点
+        } else {
+            prev.next = next;//否则将前置节点的下一个节点指向后继
+            x.prev = null;//将要删除节点的引用置空
+        }
+		//3、修改后继指针
+        if (next == null) {//后继为空，则前置节点为最后节点
+            last = prev;
+        } else {
+            next.prev = prev;//否则后继节点的引用指向前置
+            x.next = null;//将要删除节点的引用置空
+        }
+		//4、将节点置空，方便GC
+        x.item = null;//节点置空，GC
+        size--;
+        modCount++;
+        return element;
+    }
+</code></pre>
+<p>图解：</p>
+<p>1、找到保存节点信息，找到前置和后继节点</p>
+<p><img src="//tva2.sinaimg.cn/large/007bjbYxly1gpjc1rv5paj30qs06rgm5.jpg" alt="20190503170525131" loading="lazy"><br>
+2、修改前置指针</p>
+<p><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gpjc20w3kwj30rv060gm4.jpg" alt="2019050317072748" loading="lazy"><br>
+3、修改后继指针</p>
+<p><img src="//tva3.sinaimg.cn/large/007bjbYxly1gpjc26o20yj30r606rt98.jpg" alt="20190503170804872" loading="lazy"><br>
+4、将节点置空，方便GC</p>
+<figure data-type="image" tabindex="12"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gpjc2cjoifj30pm06idgc.jpg" alt="20190503170853923" loading="lazy"></figure>
+<p><strong>其他的操作：</strong></p>
+<pre><code class="language-java">    、//检索头结点元
+   public E peek() {
+       
+    final Node&lt;E&gt; f = first;
+     return (f == null) ? null : f.item;
+         }
+    */
+/**
+ * 与peek()作用一样
+ */
+public E element() {
+    return getFirst();
+}
+/**
+ * 删除并返回第一个节点
+ */
+public E poll() {
+    final Node&lt;E&gt; f = first;
+    return (f == null) ? null : unlinkFirst(f);
+}
+/**
+ * 与poll()作用一样
+ */
+public E remove() {
+    return removeFirst();
+}
+/**
+ * 在尾部添加节点与add()一样
+ */
+public boolean offer(E e) {
+    return add(e);
+}
+// Deque operations
+/**
+ * 在头部插入节点
+ */
+public boolean offerFirst(E e) {
+    addFirst(e);
+    return true;
+}
+</code></pre>
+<p><strong>总结：</strong></p>
+<p>不管是单向队列还是双向队列还是栈，其实都是对链表的头结点和尾结点进行操作，它们的操作和linkBefore()和unlink()类似，只不过一个是对链表两端操作，一个是对链表中间操作。可以说这四个方法都是linkBefore()和unlink()方法的特殊情况，因此不难理解它们的内部实现，在此不多做介绍。到这里，我们对LinkedList的分析也即将结束，对全文中的重点做个总结：</p>
+<ul>
+<li>LinkedList是基于双向链表实现的，不论是增删改查方法还是队列和栈的实现，都可通过操作结点实现</li>
+<li>LinkedList无需提前指定容量，因为基于链表操作，集合的容量随着元素的加入自动增加</li>
+<li>LinkedList删除元素后集合占用的内存自动缩小，无需像ArrayList一样调用trimToSize()方法</li>
+<li>LinkedList的所有方法没有进行同步，因此它也不是线程安全的，应该避免在多线程环境下使用</li>
+<li>以上分析基于JDK1.8，其他版本会有些出入，因此不能一概而论</li>
+</ul>
+<h5 id="arraylist和linkedlist区别"><strong>ArrayList和LinkedList区别</strong></h5>
+<p>1、<strong>数据结构不同</strong></p>
+<p>ArrayList是Array(<strong>动态数组</strong>)的数据结构，LinkedList是Link(**链表)**的数据结构。</p>
+<p>2、<strong>效率不同</strong></p>
+<p>当随机访问List（get和set操作）时，ArrayList比LinkedList的效率更高，因为L<strong>inkedList是线性的数据</strong>存储方式，所以需要移动指针从前往后依次查找。</p>
+<p>当对数据进行增加和删除的操作(add和remove操作)时，LinkedList比ArrayList的效率更高，因为ArrayList是数组，所以在其中进行增删操作时，会对操作点之后所有数据的下标索引造成影响，需要进行数据的移动。</p>
+<p>3、<strong>自由性不同</strong></p>
+<p>ArrayList自由性较低，因为它需要手动的设置固定大小的容量，但是它的使用比较方便，只需要创建，然后添加数据，通过调用下标进行使用；</p>
+<p>而LinkedList自由性较高，能够动态的随数据量的变化而变化，但是它不便于使用。</p>
+<p>4、<strong>主要控件开销不同</strong></p>
+<p>ArrayList主要控件开销在于需要在lList列表预留一定空间；</p>
+<p>而LinkList主要控件开销在于需要存储结点信息以及结点指针信息。</p>
+<figure data-type="image" tabindex="13"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gpjc2sc4oej313x0e3q5m.jpg" alt="5f9a6b371cd1bbb86bc74cda" loading="lazy"></figure>
+<hr>
+<h4 id="泛型概述"><strong>泛型概述</strong></h4>
+<ul>
+<li>Java泛型是JDK1.5中引入的一个新特性，其本质是参数化类型，把类型作为参数传递。</li>
+<li>常见形式有泛型类、泛型接口、泛型方法。</li>
+<li>语法：
+<ul>
+<li>&lt;T,…&gt; T称为类型占位符，表示一种引用类型。</li>
+</ul>
+</li>
+<li>好处：
+<ul>
+<li>提高代码的重用性。</li>
+<li>防止类型转换异常，提高代码的安全性。</li>
+</ul>
+</li>
+</ul>
+<h5 id="泛型类"><strong>泛型类</strong></h5>
+<pre><code class="language-java">package lin.gene;
+/**
+ * 泛型类
+ * 语法：类名&lt;T&gt;
+ * T是类型占位符，表示一种引用类型，编写多个使用逗号隔开 可以任意的命令 但是最好规范一些
+ *
+ */
+public class myGeneric&lt;T&gt;{
+    //1.创建泛型变量
+    //注意：不能使用new来创建，因为泛型是不确定的类型，也可能拥有私密的构造方法 所以不能够直接实例化对象。
+    T t;
+    //2.泛型作为方法的参数
+    public void show(T t) {
+        System.out.println(t);
+    }
+    //泛型作为方法的返回值 返回值类型必须为与泛型类型值相同
+    public T getT() {
+        return t;
+    }
+
+}
+</code></pre>
+<p>系统默认的无参构造方法被有参构造方法覆盖，编译器不能再提供无参构造方法</p>
+<h5 id="泛型接口"><strong>泛型接口</strong></h5>
+<pre><code class="language-java">package lin.gene;
+/**
+ * 泛型方法
+ * 语法：&lt;T&gt; 返回类型
+ */
+public class MyGenericMethod {
+    public &lt;T&gt; void show(T t) {
+        System.out.println(&quot;泛型方法&quot;+t);
+    }
+    //可以在方法上定义返回值类型为参数
+    public &lt;T&gt; T show1(T t) {
+        System.out.println(&quot;泛型方法&quot;+t);
+        return t;
+
+    }
+}
+</code></pre>
+<p>实现方法：</p>
+<pre><code class="language-java">package lin.gene;
+/**
+ * 实现接口时确定泛型类(因此实现的时候必须为实现类当时的类型)
+ */
+public class MyInterfaceImpl implements MyInterface&lt;String&gt;{
+    @Override
+    public String server(String t) {
+        System.out.println(t);
+        return t;
+    }
+}
+
+package lin.gene;
+/**
+ * 实现接口时不确定泛型类
+ */
+public class MyInterfaceImpl2&lt;T&gt; implements MyInterface&lt;T&gt;{
+    @Override
+    public T server(T t) {
+        System.out.println(t);
+        return t;
+    }
+}
+</code></pre>
+<h5 id="泛型方法"><strong>泛型方法</strong></h5>
+<pre><code class="language-java">package lin.gene;
+/**
+ * 泛型方法
+ * 语法：&lt;T&gt; 返回类型
+ */
+public class MyGenericMethod {
+    public &lt;T&gt; void show(T t) {
+        System.out.println(&quot;泛型方法&quot;+t);
+    }
+    //可以在方法上定义返回值类型为参数
+    public &lt;T&gt; T show1(T t) {
+        System.out.println(&quot;泛型方法&quot;+t);
+        return t;
+
+    }
+}
+</code></pre>
+<p>测试类：</p>
+<pre><code class="language-java">package lin.gene;
+/**
+ * 注意：
+ * 1.泛型只能使用引用类型
+ * 2.不同泛型类型的对象不能相互赋值
+ */
+public class testGeneric {
+    public static void main(String[] args) {
+        //使用泛型类创建对象 在创建对象的时候可以选择泛型的类型 也可以不选择不选择默认为Object
+        System.out.println(&quot;泛型类测试&quot;);
+        myGeneric&lt;String&gt; myGeneric1=new myGeneric&lt;String&gt;();
+        myGeneric1.t=&quot;tang&quot;;
+        myGeneric1.show(&quot;he&quot;);
+
+        myGeneric&lt;Integer&gt; myGeneric2=new myGeneric&lt;Integer&gt;();
+        myGeneric2.t=10;
+        myGeneric2.show(20);
+        Integer integer=myGeneric2.getT();
+
+        myGeneric objectmyGeneric = new myGeneric();
+        //此时不能为t赋值 因为没有认定类型 但是可以一些方法方法
+        objectmyGeneric.show(&quot;hello&quot;);
+
+        System.out.println(&quot;泛型接口测试 确定泛型类型&quot;);
+        //测试
+        MyInterfaceImpl myInterfaceImpl=new MyInterfaceImpl();
+        myInterfaceImpl.server(&quot;xxx&quot;);
+        //xxx
+        System.out.println(&quot;泛型接口测试 不确定泛型类型&quot;);
+        MyInterfaceImpl2&lt;Integer&gt; myInterfaceImpl2=new MyInterfaceImpl2&lt;Integer&gt;();
+        myInterfaceImpl2.server(2000);
+        //2000
+
+        System.out.println(&quot;测试泛型方法&quot;);
+        //创建对象
+        MyGenericMethod myGenericMethod=new MyGenericMethod();
+        //此时将鼠标放在参数上面 方法会根据实际的参数将其进行装箱操作  如果没有放入任何的值就为Object
+        myGenericMethod.show(&quot;tang&quot;);
+        myGenericMethod.show(200);
+        myGenericMethod.show(3.14);
+
+        myGenericMethod.show1(200);
+    }
+
+
+}
+</code></pre>
+<h5 id="泛型集合"><strong>泛型集合</strong></h5>
+<ul>
+<li>
+<p><strong>概念</strong>：参数化类型、类型安全的集合，强制集合元素的类型必须一致。</p>
+</li>
+<li>
+<p>特点</p>
+<ul>
+<li>编译时即可检查，而非运行时抛出异常。</li>
+</ul>
+</li>
+<li>
+<p>访问时，不必类型转换（拆箱）。</p>
+<ul>
+<li>不同泛型指尖引用不能相互赋值，泛型不存在多态。</li>
+</ul>
+</li>
+</ul>
+<p>之前我们在创建LinkedList类型对象的时候并没有使用泛型，但是进到它的源码中会发现：</p>
+<pre><code class="language-java">COPYpublic class LinkedList&lt;E&gt;
+    extends AbstractSequentialList&lt;E&gt;
+    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable{//略}
+</code></pre>
+<p>它是一个泛型类，而我之前使用的时候并没有传递，说明java语法是允许的，这个时候传递的类型是Object类，虽然它是所有类的父类，可以存储任意的类型，但是在遍历、获取元素时需要原来的类型就要进行强制转换。这个时候就会出现一些问题，假如往链表里存储了许多不同类型的数据，在强转的时候就要判断每一个原来的类型，这样就很容易出现错误。</p>
+<p>泛型的好处 ：</p>
+<p>当定义了泛型的时候 往数组当中添加元素的时候 当元素很多而且类型很多的时候 如果我们将要对其进行遍历输出的时候 我们并不知道元素的类型 如果要强制进行转换的话可能会出现错误 如果提前定义好了 规定好了之后就会避免出现这异常</p>
+<figure data-type="image" tabindex="14"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gpjc34friwj30ku0720tk.jpg" alt="image-20210408130020419" loading="lazy"></figure>
+<p>如上图 ：规定了我们只能添加Student的类型的元素</p>
+<p>不在刚开始定义数据类型 并且添加不同类型的元素 并且对其强制转换</p>
+<figure data-type="image" tabindex="15"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gpjc3fnvufj30js07kwf9.jpg" alt="image-20210408130406076" loading="lazy"></figure>
+<p>运行：</p>
+<figure data-type="image" tabindex="16"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gpjc3lf1g8j313102daab.jpg" alt="image-20210408130533065" loading="lazy"></figure>
+<p>发现会出现类型转换的错误;</p>
+<p>总结：</p>
+<p>强制转换的时候需要注意类型</p>
+<h4 id="set集合概述"><strong>Set集合概述</strong></h4>
+<h5 id="set子接口"><strong>Set子接口</strong></h5>
+<ul>
+<li><strong>特点</strong>：无序、无下标、元素不可重复。</li>
+<li><strong>方法</strong>：全部继承自Collection中的方法。</li>
+</ul>
+<pre><code class="language-java">package lin.se;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+/**
+ * 测试Set接口的使用
+ * 特点：1.无序，没有下标；2.重复
+ * 1.添加数据
+ * 2.删除数据
+ * 3.遍历【重点】
+ * 4.判断
+ */
+public class Demo1 {
+    public static void main(String[] args) {
+        //这里不能通过set来直接地的创建对象 因为set为接口 而且set接口继承了collection
+        Set&lt;String&gt; set=new HashSet&lt;String&gt;();
+        //1.添加数据
+        set.add(&quot;tang&quot;);
+        set.add(&quot;he&quot;);
+        set.add(&quot;yu&quot;);
+        System.out.println(&quot;数据个数：&quot;+set.size());
+        System.out.println(set.toString());//无序输出
+        //2.删除数据
+        /*
+         * set.remove(&quot;tang&quot;); System.out.println(set.toString());
+         */
+        //3.遍历【重点】
+        //3.1 使用增强for
+        for (String string : set) {
+            System.out.println(string);
+        }
+        //3.2 使用迭代器
+        Iterator&lt;String&gt; iterator=set.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+        //4.判断
+        System.out.println(set.contains(&quot;tang&quot;));
+        System.out.println(set.isEmpty());
+    }
+}
+</code></pre>
+<h4 id="set实现类"><strong>Set实现类</strong></h4>
+<h5 id="hashset重点"><strong>HashSet[重点]</strong></h5>
+<p>hashset的底层数据结构是哈希表 哈希表的构成是数组+链表+红黑树</p>
+<p>先了解一下哈希表</p>
+<p><strong>一、什么是Hash表</strong><br>
+要想知道什么是哈希表，那得先了解哈希函数<br>
+<strong>哈希函数</strong><br>
+对比之前的二叉排序树 二叉平衡树 红黑树 B B+树，它们的查找都是先从根节点进行查找，从节点取出数据或索引与查找值进行比较。那么，有没有一种函数H，根据这个函数和查找关键字key，可以直接确定查找值所在位置，而不需要一个个比较。这样就**“预先知道”**key所在的位置，直接找到数据，提升效率。<br>
+即<br>
+<strong>地址index=H（key）</strong><br>
+说白了，hash函数就是根据key计算出应该存储地址的位置，而哈希表是基于哈希函数建立的一种查找表</p>
+<p><strong>二、哈希函数的构造方法</strong><br>
+根据前人经验，统计出如下几种常用hash函数的构造方法：<br>
+<strong>直接定制法</strong><br>
+哈希函数为关键字的线性函数如 H（key）=a*key+b<br>
+这种构造方法比较简便，均匀，但是有很大限制，仅限于地址大小=关键字集合的情况<br>
+使用举例：<br>
+假设需要统计中国人口的年龄分布，以10为最小单元。今年是2018年，那么10岁以内的分布在2008-2018，20岁以内的分布在1998-2008……假设2018代表2018-2008直接的数据，那么关键字应该是2018，2008，1998……<br>
+那么可以构造哈希函数H（key）=（2018-key）/10=201-key/10<br>
+那么hash表建立如下</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>index</td>
+<td>key</td>
+<td>年龄</td>
+<td>人数（假设数据）</td>
+</tr>
+<tr>
+<td>0</td>
+<td>2018</td>
+<td>0-10</td>
+<td>200W</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2008</td>
+<td>10-20</td>
+<td>250W</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1998</td>
+<td>20-30</td>
+<td>253W</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1988</td>
+<td>30-40</td>
+<td>300W</td>
+</tr>
+<tr>
+<td>……</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>数字分析法</strong><br>
+假设关键字集合中的每个关键字key都是由s位数字组成（k 1 , k 2 , … … , k）,分析key中的全体数据，并从中提取分布均匀的若干位或他们的组合构成全体</p>
+<p>使用举例<br>
+我们知道身份证号是有规律的，现在我们要存储一个班级学生的身份证号码，假设这个班级的学生都出生在同一个地区，同一年，那么他们的身份证的前面数位都是相同的，那么我们可以截取后面不同的几位存储，假设有5位不同，那么就用这五位代表地址。<br>
+H（key）=key%100000<br>
+此种方法通常用于数字位数较长的情况，必须数字存在一定规律，其必须知道数字的分布情况，比如上面的例子，我们事先知道这个班级的学生出生在同一年，同一个地区。<br>
+<strong>平方取中法</strong><br>
+如果关键字的每一位都有某些数字重复出现频率很高的现象，可以先求关键字的平方值，通过平方扩大差异，而后取中间数位作为最终存储地址。<br>
+使用举例<br>
+比如key=1234 1234^2=1522756 取227作hash地址<br>
+比如key=4321 4321^2=18671041 取671作hash地址<br>
+这种方法适合事先不知道数据并且数据长度较小的情况<br>
+<strong>折叠法</strong><br>
+如果数字的位数很多，可以将数字分割为几个部分，取他们的叠加和作为hash地址<br>
+使用举例<br>
+比如key=123 456 789<br>
+我们可以存储在61524，取末三位，存在524的位置<br>
+该方法适用于数字位数较多且事先不知道数据分布的情况<br>
+<strong>除留余数法</strong>用的较多<br>
+H（key）=key MOD p （p&lt;=m m为表长）<br>
+很明显，如何选取p是个关键问题。</p>
+<p>使用举例<br>
+比如我们存储3 6 9，那么p就不能取3<br>
+因为 3 MOD 3 == 6 MOD 3 == 9 MOD 3<br>
+p应为不大于m的质数或是不含20以下的质因子的合数，这样可以减少地址的重复（冲突）</p>
+<p>比如key = 7，39，18，24，33，21时取表长m为9 p为7 那么存储如下</p>
+<table>
+<thead>
+<tr>
+<th>index</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td>7</td>
+<td>21（冲突后移）</td>
+<td></td>
+<td>24</td>
+<td>4</td>
+<td>18（冲突后移）</td>
+<td>33冲突后移）</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>随机数法</strong> H（key） =Random（key） 取关键字的随机函数值为它的散列地址<br>
+<strong>hash函数设计的考虑因素</strong><br>
+1.计算散列地址所需要的时间（即hash函数本身不要太复杂）<br>
+2.关键字的长度<br>
+3.表长<br>
+4.关键字分布是否均匀，是否有规律可循<br>
+5.设计的hash函数在满足以上条件的情况下尽量减少冲突</p>
+<p><strong>三、哈希冲突</strong><br>
+即不同key值产生相同的地址，H（key1）=H（key2）<br>
+比如我们上面说的存储3 6 9，p取3是<br>
+3 MOD 3 == 6 MOD 3 == 9 MOD 3<br>
+此时3 6 9都发生了hash冲突</p>
+<p>哈希冲突的解决方案<br>
+不管hash函数设计的如何巧妙，总会有特殊的key导致hash冲突，特别是对动态查找表来说。<br>
+hash函数解决冲突的方法有以下几个常用的方法<br>
+1.开放定制法<br>
+2.链地址法<br>
+3.公共溢出区法<br>
+建立一个特殊存储空间，专门存放冲突的数据。此种方法适用于数据和冲突较少的情况。<br>
+4.再散列法<br>
+准备若干个hash函数，如果使用第一个hash函数发生了冲突，就使用第二个hash函数，第二个也冲突，使用第三个……<br>
+重点了解一下开放定制法和链地址法</p>
+<p><strong>开放定制法</strong><br>
+首先有一个H（key）的哈希函数<br>
+如果H（key1）=H（keyi）<br>
+那么keyi存储位置H i = ( H ( k e y ) + d i ) M O D m H_i=(H(key)+d_i)MOD</p>
+<figure data-type="image" tabindex="17"><img src="//tvax3.sinaimg.cn/large/007bjbYxly1gpjc3udgy6j30am05djrj.jpg" alt="image-20210408164805042" loading="lazy"></figure>
+<p><strong>注意</strong><br>
+增量di应该具有以下特点（完备性）：产生的Hi（地址）均不相同，且所产生的s（m-1）个Hi能覆盖hash表中的所有地址</p>
+<p>平方探测时表长m必须为4j+3的质数（平方探测表长有限制）</p>
+<p>随机探测时m和di没有公因子（随机探测di有限制）<br>
+三种开放定址法解决冲突方案的例子<br>
+废话不多说，上例子就明白了<br>
+有一组数据<br>
+19 01 23 14 55 68 11 86 37要存储在表长11的数组中，其中H（key）=key MOD 11<br>
+那么按照上面三种解决冲突的方法，存储过程如下：<br>
+（表格解释：从前向后插入数据，如果插入位置已经占用，发生冲突，冲突的另起一行，计算地址，直到地址可用，后面冲突的继续向下另起一行。最终结果取最上面的数据（因为是最“占座”的数据））<br>
+线性探测再散列<br>
+我们取di=1，即冲突后存储在冲突后一个位置，如果仍然冲突继续向后</p>
+<table>
+<thead>
+<tr>
+<th>index</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td>55</td>
+<td>1</td>
+<td></td>
+<td>14</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>19</td>
+<td>86</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>23冲突</td>
+<td>23</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>68冲突</td>
+<td>68冲突</td>
+<td>68</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>11冲突</td>
+<td>11冲突</td>
+<td>11冲突</td>
+<td>11冲突</td>
+<td>11冲突</td>
+<td>11</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>37冲突</td>
+<td>37冲突</td>
+<td>37</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>最终存储结果</td>
+<td>55</td>
+<td>1</td>
+<td>23</td>
+<td>14</td>
+<td>68</td>
+<td>11</td>
+<td>37</td>
+<td></td>
+<td>19</td>
+<td>86</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>平方探测再散列</strong><br>
+<img src="//tva1.sinaimg.cn/large/007bjbYxly1gpjc419tg1j30tl06lq32.jpg" alt="image-20210408165009172" loading="lazy"><br>
+<strong>随机探测在散列（双探测再散列）</strong> 发生冲突后 H（key）‘=(H(key)+di)MOD m 在该例子中 H（key）=key MOD 11 我们取di=key MOD 10 +1 则有如下结果：</p>
+<figure data-type="image" tabindex="18"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gpjc4hiyosj30tf0a1aab.jpg" alt="image-20210408165031318" loading="lazy"></figure>
+<p><strong>链地址法</strong><br>
+产生hash冲突后在存储数据后面加一个指针，指向后面冲突的数据<br>
+上面的例子，用链地址法则是下面这样：</p>
+<figure data-type="image" tabindex="19"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gpjc4m49d8j30b80dt74i.jpg" alt="image-20210408165046298" loading="lazy"></figure>
+<p><strong>四、hash表的查找</strong><br>
+查找过程和造表过程一致，假设采用开放定址法处理冲突，则查找过程为：<br>
+对于给定的key，计算hash地址index = H（key）<br>
+如果数组arr【index】的值为空 则查找不成功<br>
+如果数组arr【index】== key 则查找成功<br>
+否则 使用冲突解决方法求下一个地址，直到arr【index】== key或者 arr【index】==null</p>
+<p><strong>hash表的查找效率</strong><br>
+决定hash表查找的ASL因素：<br>
+1）选用的hash函数<br>
+2）选用的处理冲突的方法<br>
+3）hash表的饱和度，装载因子 α=n/m(n表示实际装载数据长度 m为表长)<br>
+一般情况，假设hash函数是均匀的，则在讨论ASL时可以不考虑它的因素<br>
+hash表的ASL是处理冲突方法和装载因子的函数<br>
+前人已经证明，查找成功时如下结果：</p>
+<figure data-type="image" tabindex="20"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gpjc4w2nxkj30a90bejtk.jpg" alt="image-20210408165106641" loading="lazy"></figure>
+<p>可以看到无论哪个函数，装载因子越大，平均查找长度越大，那么装载因子α越小越好？也不是，就像100的表长只存一个数据，α是小了，但是空间利用率不高啊，这里就是时间空间的取舍问题了。通常情况下，认为α=0.75是时间空间综合利用效率最高的情况。</p>
+<p>上面的这个表可是特别有用的。假设我现在有10个数据，想使用链地址法解决冲突，并要求平均查找长度&lt;2<br>
+那么有1+α/2 &lt;2<br>
+α&lt;2<br>
+即 n/m&lt;2 (n=10)<br>
+m&gt;10/2<br>
+m&gt;5 即采用链地址法，使得平均查找长度&lt; 2 那么m&gt;5</p>
+<p>之前我的博客讨论过各种树的平均查找长度，他们都是基于存储数据n的函数，而hash表不同，他是基于装载因子的函数，也就是说，当数据n增加时，我可以通过增加表长m，以维持装载因子不变，确保ASL不变。<br>
+那么hash表的构造应该是这样的：</p>
+<p><strong>五、hash表的删除</strong><br>
+首先链地址法是可以直接删除元素的，但是开放定址法是不行的，拿前面的双探测再散列来说，假如我们删除了元素1，将其位置置空，那 23就永远找不到了。正确做法应该是删除之后置入一个原来不存在的数据，比如-1</p>
+<ul>
+<li>基于HashCode计算元素存放位置。</li>
+<li>当存入元素的哈希码相同时，会调用equals进行确认，如结果为true，则拒绝后者存入。</li>
+</ul>
+<p>OK 接下来上代码</p>
+<p>人类：</p>
+<pre><code class="language-java">package lin.se;
+
+import java.util.Objects;
+
+/**
+ * 人类
+ */
+public class Person {
+    private String name;
+    private int age;
+    public Person(String name,int age) {
+        this.name = name;
+        this.age = age;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        
+        this.age = age;
+    }
+
+}
+</code></pre>
+<p>hashset实现</p>
+<pre><code class="language-java">package lin.se;
+
+import java.util.HashSet;
+import java.util.Iterator;
+
+/**
+ * HashSet集合的使用
+ * 存储结构：哈希表（数组+链表+红黑树）
+ * 1.添加元素
+ * 2.删除元素
+ * 3.遍历
+ * 4.判断
+ */
+public class Demo2 {
+    public static void main(String[] args) {
+        HashSet&lt;Person&gt; hashSet=new HashSet&lt;&gt;();
+        Person p1=new Person(&quot;林&quot;,21);
+        Person p2=new Person(&quot;大&quot;, 22);
+        Person p3=new Person(&quot;毛&quot;, 21);
+        System.out.println(&quot;添加元素&quot;);
+        //1.添加元素
+        hashSet.add(p1);
+        hashSet.add(p2);
+        hashSet.add(p3);
+        //重复，添加失败
+        hashSet.add(p3);
+        //直接new一个相同属性的对象，依然会被添加，不难理解。
+        //假如相同属性便认为是同一个对象，怎么修改？
+        hashSet.add(new Person(&quot;毛&quot;, 21));
+        System.out.println(hashSet.toString());
+        //2.删除元素
+        System.out.println(&quot;删除元素&quot;);
+        hashSet.remove(p2);
+        //3.遍历
+        //3.1 增强for
+        System.out.println(&quot;增强for&quot;);
+        for (Person person : hashSet) {
+            System.out.println(person);
+        }
+        //3.2 迭代器
+        System.out.println(&quot;迭代器&quot;);
+        Iterator&lt;Person&gt; iterator=hashSet.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+        System.out.println(&quot;判断&quot;);
+        //4.判断
+        System.out.println(hashSet.isEmpty());
+        //直接new一个相同属性的对象结果输出是false
+        //注：假如相同属性便认为是同一个对象，我们应当重写方法
+        System.out.println(hashSet.contains(new Person(&quot;林&quot;, 21)));
+    }
+}
+</code></pre>
+<p>测试：</p>
+<figure data-type="image" tabindex="21"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gpjc57yo5wj30cq08p0t2.jpg" alt="image-20210408162814395" loading="lazy"></figure>
+<p>看到了和ArrayList当中同样的问题 此时的解决方法是重写hashcode方法和equals方法</p>
+<p><strong>注</strong>：hashSet存储过程：</p>
+<ol>
+<li>根据hashCode计算保存的位置，如果位置为空，则直接保存，否则执行第二步。</li>
+<li>执行equals方法，如果方法返回true，则认为是重复，拒绝存储，否则形成链表。</li>
+</ol>
+<p>存储过程实际上就是重复依据，要实现“注”里的问题，可以重写hashCode和equals代码：</p>
+<pre><code class="language-java">@Override
+public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + age;
+    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    return result;
+}
+@Override
+public boolean equals(Object obj) {
+    if (this == obj)
+        return true;
+    if (obj == null)
+        return false;
+    if (getClass() != obj.getClass())
+        return false;
+    Person other = (Person) obj;
+    if (age != other.age)
+        return false;
+    if (name == null) {
+        if (other.name != null)
+            return false;
+    } else if (!name.equals(other.name))
+        return false;
+    return true;
+}
+</code></pre>
+<p>重写hashcode和equals方法之后解决了上面问题；</p>
+<p><strong>hashCode方法里为什么要使用31这个数字大概有两个原因</strong>：</p>
+<ol>
+<li>31是一个质数，这样的数字在计算时可以尽量减少散列冲突。</li>
+<li>可以提高执行效率，因为31*i=(i&lt;&lt;5)-i，31乘以一个数可以转换成移位操作，这样能快一点；但是也有网上一些人对这两点提出质疑。</li>
+</ol>
+<p><strong>源码分析：</strong></p>
+<p><strong>核心成员变核心</strong></p>
+<pre><code class="language-tsx">    //HashSet底层是基于HashMap存储数据，该map的key就是HashSet要存放的数据
+    private transient HashMap&lt;E,Object&gt; map;
+    //该变量用来填充上一个map的value字段，因为HashSet关注的是map的Key
+    private static final Object PRESENT = new Object();
+</code></pre>
+<p><strong>无参构造函数</strong></p>
+<pre><code class="language-cpp">    public HashSet() {
+        //实例化map成员变量
+        map = new HashMap&lt;&gt;();
+    }
+</code></pre>
+<p>说明：</p>
+<ul>
+<li>hashSet底层是基于hashMap实现的，hashSet存放的数据实际就是hashMap的key，而hashMap的value存放的是一个静态的final对象PERSENT;</li>
+<li>当调用hashSet无参构造函数的时候，实际只是实例化了hashMap对象。</li>
+</ul>
+<p><strong>add(E e)方法实现</strong></p>
+<pre><code class="language-java">    //添加一个元素，如果该元素已经存在，则返回true，如果不存在，则返回false
+    public boolean add(E e) {
+        //往map中添加元素，返回null，说明是第一个往map中添加该key
+        return map.put(e, PRESENT)==null;
+    }
+</code></pre>
+<p>说明：</p>
+<ul>
+<li>往hashSet中添加元素，实际是往map成员变量里面添加对应的key和value；</li>
+<li>map 中的key实际就是要添加的元素，value是一个固定的对象；</li>
+<li>当第一次往map中添加key时，添加成功返回null，所以当第一次往hashSet中添加元素时，会返回true；</li>
+<li>由于hashMap中的key不能重复，所以hashSet不能存储重复元素；</li>
+</ul>
+<p>remove(Object o)方法实现</p>
+<pre><code class="language-cpp">   //删除指定的元素，删除成功返回true
+   public boolean remove(Object o) {
+        //实际是删除map中的一个对象
+        return map.remove(o)==PRESENT;
+    }
+</code></pre>
+<p>说明：</p>
+<ul>
+<li>当hashSet删除一个元素时，实际是操作map删除对应的元素；</li>
+<li>当删除map中一个不存在的对象是，会返回null，所以这里当返回PERSENT时，说明之前hashSet往map中添加过对应的元素，因此，当remove(o)返回true时，说明之前已经存在该元素，并且成功删除；当返回false时，说明之前并没有添加过该对象；</li>
+</ul>
+<p><strong>iterator()方法实现</strong></p>
+<pre><code class="language-cpp">    //获取hashSet的迭代器
+    public Iterator&lt;E&gt; iterator() {
+        //调用map获取keySet
+        return map.keySet().iterator();
+    }
+</code></pre>
+<p>说明</p>
+<ul>
+<li>hashset获取迭代器实际是获取map的keySet的iterator；</li>
+</ul>
+<p><strong>size()方法实现</strong></p>
+<pre><code class="language-cpp">    public int size() {
+        return map.size();
+    }
+</code></pre>
+<p>说明</p>
+<ul>
+<li>size方法实际是调用map.size方法；</li>
+</ul>
+<p><strong>总结</strong></p>
+<p>hashSet底层是基于hashMap实现的，hashSet存储的元素对应hashMap的key，因为hashMap不能存储重复的Key，所以hashSet不能存放重复元素；由于hashMap的key是基于hashCode存储对象的，所以hashSet中存放的对象也是无序的；hashSet也没有提供get方法，可以通过Iterator迭代器获取数据。</p>
+<h5 id="treeset"><strong>TreeSet</strong></h5>
+<ul>
+<li>基于排序顺序实现不重复。</li>
+<li>实现了SortedSet接口，对集合元素自动排序。</li>
+<li>元素对象的类型必须实现Comparable接口，指定排序规则。</li>
+<li>通过CompareTo方法确定是否为重复元素。</li>
+</ul>
+<pre><code class="language-java">COPY/**
+ * 使用TreeSet保存数据
+ * 存储结构：红黑树
+ * 要求：元素类必须实现Comparable接口，compareTo方法返回0，认为是重复元素 
+ */
+public class Demo4 {
+	public static void main(String[] args) {
+		TreeSet&lt;Person&gt; persons=new TreeSet&lt;Person&gt;();
+		Person p1=new Person(&quot;tang&quot;,21);
+		Person p2=new Person(&quot;he&quot;, 22);
+		Person p3=new Person(&quot;yu&quot;, 21);
+		//1.添加元素
+		persons.add(p1);
+		persons.add(p2);
+		persons.add(p3);
+		//注：直接添加会报类型转换错误，需要实现Comparable接口
+		System.out.println(persons.toString());
+		//2.删除元素
+		persons.remove(p1);
+		persons.remove(new Person(&quot;he&quot;, 22));
+		System.out.println(persons.toString());
+		//3.遍历（略）
+		//4.判断
+		System.out.println(persons.contains(new Person(&quot;yu&quot;, 21)));
+	}
+}
+</code></pre>
+<p>测试：</p>
+<figure data-type="image" tabindex="22"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gpjc5w8fhoj310g03yq3j.jpg" alt="image-20210408172154272" loading="lazy"></figure>
+<p>当添加了人类的时候出现异常  Person cannot be cast to java.lang.Comparable</p>
+<p>说明treeset在放入元素的时候会进行比较 但是Person类当中我们并没有为其定义比较规则 因此 treeset 在比较的时候就知道该如何比较起来</p>
+<p>解决方法时在Person类继承Comparable接口并重写方法</p>
+<p>查看Comparable接口的源码，发现只有一个compareTo抽象方法，在人类中实现它：</p>
+<pre><code class="language-java">public class Person implements Comparable&lt;Person&gt;{
+    @Override
+	//1.先按姓名比
+	//2.再按年龄比
+	public int compareTo(Person o) {
+		int n1=this.getName().compareTo(o.getName());
+		int n2=this.age-o.getAge();
+		return n1==0?n2:n1;
+	}
+}
+</code></pre>
+<p>除了实现Comparable接口里的比较方法，TreeSet也提供了一个带比较器Comparator的构造方法，使用<strong>匿名内部类</strong>来实现它：</p>
+<pre><code class="language-java">package lin.se;
+import lin.se.Person;
+import java.util.Comparator;
+import java.util.TreeSet;
+
+/**
+ * TreeSet的使用
+ * Comparator：实现定制比较（比较器）
+ */
+public class Demo4{
+    public static void main(String[] args) {
+        //Comparator是接口 不能直接实例化 通过匿名内部类实现
+        TreeSet&lt;Person&gt; persons=new TreeSet&lt;Person&gt;(new Comparator&lt;Person&gt;() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                // 先按年龄比较
+                // 再按姓名比较
+                int n1=o1.getAge()-o2.getAge();
+                int n2=o1.getName().compareTo(o2.getName());
+                //如果年龄相等 就返回n2的比较值 否则就直接返回n1
+                return n1==0?n2:n1;
+            }
+        });
+        Person p1=new Person(&quot;tang&quot;,21);
+        Person p2=new Person(&quot;he&quot;, 22);
+        Person p3=new Person(&quot;yu&quot;, 21);
+        Person p4=new Person(&quot;yu&quot;, 19);
+
+        persons.add(p1);
+        persons.add(p2);
+        persons.add(p3);
+        persons.add(p4);
+        System.out.println(persons.toString());
+    }
+}
+</code></pre>
+<p>接下来我们来做一个小案例：</p>
+<p>利用Comparator接口实现定制比较</p>
+<pre><code class="language-java">COPY
+/**
+ * 要求：使用TreeSet集合实现字符串按照长度进行排序
+ * helloworld tangrui hechengyang wangzixu yuguoming
+ * Comparator接口实现定制比较
+ */
+public class Demo6 {
+	public static void main(String[] args) {
+		TreeSet&lt;String&gt; treeSet=new TreeSet&lt;String&gt;(new Comparator&lt;String&gt;() {
+			@Override
+			//先比较字符串长度
+			//再比较字符串
+			public int compare(String o1, String o2) {
+				int n1=o1.length()-o2.length();
+				int n2=o1.compareTo(o2);
+				return n1==0?n2:n1;
+			}			
+		});
+		treeSet.add(&quot;helloworld&quot;);
+		treeSet.add(&quot;tangrui&quot;);
+		treeSet.add(&quot;hechenyang&quot;);
+		treeSet.add(&quot;yuguoming&quot;);
+		treeSet.add(&quot;wangzixu&quot;);
+		System.out.println(treeSet.toString());
+        //输出[tangrui, wangzixu, yuguoming, hechenyang, helloworld]
+	}
+}
+</code></pre>
+<hr>
+<p><strong>Map体系集合</strong></p>
+<ul>
+<li>
+<p><strong>Map接口的特点</strong>：</p>
+<ol>
+<li><strong>用于存储任意键值对(Key-Value)</strong>。</li>
+<li>键：无序、无下标、不允许重复（唯一）。</li>
+<li>值：无序、无下标、允许重复。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="map集合概述"><strong>Map集合概述</strong></h2>
+<ul>
+<li>
+<p><strong>特点</strong>：存储一对数据（Key-Value），无序、无下标，键不可重复。</p>
+</li>
+<li>
+<p><strong>方法</strong>：</p>
+<ul>
+<li><code>V put(K key,V value)</code>//将对象存入到集合中，关联键值。key重复则覆盖原值。</li>
+</ul>
+</li>
+<li>
+<p><code>Object get(Object key)</code>//根据键获取相应的值。</p>
+<ul>
+<li><code>Set&lt;K&gt;</code>//返回所有的key</li>
+<li><code>Collection&lt;V&gt; values()</code>//返回包含所有值的Collection集合。</li>
+<li><code>Set&lt;Map.Entry&lt;K,V&gt;&gt;</code>//键值匹配的set集合</li>
+</ul>
+<pre><code class="language-java">package lin.Ma;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Map接口的使用
+ * 特点：1.存储键值对 2.键不能重复，值可以重复 3.无序
+ */
+public class Demo1 {
+    public static void main(String[] args) {
+        Map&lt;String,Integer&gt; map=new HashMap&lt;String, Integer&gt;();
+        System.out.println(&quot;添加元素&quot;);
+        //1.添加元素
+        map.put(&quot;tang&quot;, 21);
+        map.put(&quot;he&quot;, 22);
+        map.put(&quot;fan&quot;, 23);
+        System.out.println(map.toString());
+        //2.删除元素
+        System.out.println(&quot;删除元素&quot;);
+        map.remove(&quot;he&quot;);
+        System.out.println(map.toString());
+        //3.遍历
+        //3.1 使用keySet();
+        System.out.println(&quot;使用keySet()遍历&quot;);
+        for (String key : map.keySet()) {
+            System.out.println(key+&quot; &quot;+map.get(key));
+        }
+        System.out.println(&quot;entrySet()遍历&quot;);
+        //3.2 使用entrySet();效率较高
+        for (Map.Entry&lt;String, Integer&gt; entry : map.entrySet()) {
+            System.out.println(entry.getKey()+&quot; &quot;+entry.getValue());
+        }
+    }
+}
+</code></pre>
+</li>
+</ul>
+<hr>
+<h3 id="map集合的实现类"><strong>Map集合的实现类</strong></h3>
+<h4 id="hashmap重点"><strong>HashMap【重点】</strong></h4>
+<p>HashMap 是一个<strong>关联数组</strong>、<strong>哈希表</strong>，它是<strong>线程不安全</strong>的，允许<strong>key为null,value为null</strong>。遍历时<strong>无序</strong>。<br>
+其底层数据结构是<strong>数组称之为哈希桶</strong>，每个桶里面放的是链表，链表中的每个节点，就是哈希表中的每个元素。<br>
+在JDK8中，当链表长度达到8，会转化成<strong>红黑树</strong>，以提升它的查询、插入效率，它<strong>实现了Map&lt;K,V&gt;, Cloneable, Serializable接口</strong>。</p>
+<p>因其底层哈希桶的数据结构是<strong>数组</strong>，所以也会涉及到<strong>扩容</strong>的问题。</p>
+<p>当HashMap的容量达<strong>到threshold域值</strong>时，就会触发扩容。扩容前后，哈希桶的<strong>长度</strong>一定会是<strong>2的次方</strong>。<br>
+这样在根据key的hash值寻找对应的哈希桶时，可以用<strong>位运算替代取余操作</strong>，更加高效。</p>
+<p>而key的hash值，并不仅仅只是key对象的hashCode()方法的返回值，还会经过<strong>扰动函数</strong>的扰动，以使hash值更加均衡。<br>
+因为hashCode()是int类型，取值范围是40多亿，只要哈希函数映射的比较均匀松散，<strong>碰撞几率</strong>是很小的。<br>
+但就算原本的hashCode()取得很好，每个key的hashCode()不同，但是由于HashMap的<strong>哈希桶的长度远比hash取值范围小</strong>，默认是<strong>16</strong>，所以当对hash值以桶的长度取余，以找到存放该key的桶的下标时，由于取余是通过与操作完成的，会忽略hash值的高位。因此只有hashCode()的低位参加运算，发生不同的hash值，但是得到的index相同的情况的几率会大大增加，这种情况称之为hash碰撞。 即，碰撞率会增大。</p>
+<p>扰动函数就是为了<strong>解决hash碰撞</strong>的。它会综合hash值高位和低位的特征，并存放在低位，因此在与运算时，相当于高低位一起参与了运算，以减少hash碰撞的概率。（在JDK8之前，扰动函数会扰动四次，JDK8简化了这个操作）</p>
+<p>扩容操作时，会new一个新的Node数组作为哈希桶，然后将原哈希表中的所有数据(Node节点)移动到新的哈希桶中，相当于对原哈希表中所有的数据重新做了一个put操作。所以<strong>性能消耗</strong>很大，可想而知，在哈希表的容量越大时，性能消耗越明显。</p>
+<p>扩容时，如果发生过哈希碰撞，节点数小于8个。则要根据链表上每个节点的哈希值，依次放入新哈希桶对应下标位置。<br>
+因为扩容是容量翻倍，所以原链表上的每个节点，现在可能存放在原来的下标，即low位， 或者扩容后的下标，即high位。 high位= low位+原哈希桶容量<br>
+如果追加节点后，链表数量》=8，则转化为红黑树</p>
+<p>由迭代器的实现可以看出，遍历HashMap时，顺序是按照哈希桶从低到高，链表从前往后，依次遍历的。属于<strong>无序集合</strong>。</p>
+<ul>
+<li>
+<p>JDK1.2版本，线程不安全，运行效率快；允许用null作为key或是value。</p>
+<pre><code class="language-java">COPY/**
+   * 学生类
+   */
+  public class Student {
+  	private String name;
+  	private int id;	
+  	public Student(String name, int id) {
+  		super();
+  		this.name = name;
+  		this.id = id;
+  	}
+  	public String getName() {
+  		return name;
+  	}
+  	public void setName(String name) {
+  		this.name = name;
+  	}
+  	public int getId() {
+  		return id;
+  	}
+  	public void setId(int id) {
+  		this.id = id;
+  	}
+  	@Override
+  	public String toString() {
+  		return &quot;Student [name=&quot; + name + &quot;, age=&quot; + id + &quot;]&quot;;
+  	}
+  }
+</code></pre>
+<pre><code class="language-java">package lin.Ma;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * HashMap的使用
+ * 存储结构：哈希表（数组+链表+红黑树）
+ */
+public class Demo2 {
+    public static void main(String[] args) {
+        HashMap&lt;Student, String&gt; hashMap=new HashMap&lt;Student, String&gt;();
+        Student s1=new Student(&quot;林&quot;, 36);
+        Student s2=new Student(&quot;大&quot;, 101);
+        Student s3=new Student(&quot;毛&quot;, 10);
+        System.out.println(&quot;添加元素&quot;);
+        //1.添加元素
+        hashMap.put(s1, &quot;成都&quot;);
+        hashMap.put(s2, &quot;杭州&quot;);
+        hashMap.put(s3, &quot;郑州&quot;);
+        //添加失败，但会更新值 检测是key是否相同 相同的话就将新值覆盖旧值
+        hashMap.put(s3,&quot;上海&quot;);
+        //添加成功，不过两个属性一模一样；
+        //注：假如相同属性便认为是同一个对象，怎么修改？
+        hashMap.put(new Student(&quot;毛&quot;, 10),&quot;上海&quot;);
+        System.out.println(hashMap.toString());
+        System.out.println(&quot;删除元素&quot;);
+        //2.删除元素
+        hashMap.remove(s3);
+        System.out.println(hashMap.toString());
+        //3.遍历
+        //3.1 使用keySet()遍历
+        System.out.println(&quot;使用keySet()遍历&quot;);
+        for (Student key : hashMap.keySet()) {
+            System.out.println(key+&quot; &quot;+hashMap.get(key));
+        }
+        //3.2 使用entrySet()遍历
+        System.out.println(&quot;使用entrySet()遍历&quot;);
+        for (Map.Entry&lt;Student, String&gt; entry : hashMap.entrySet()) {
+            System.out.println(entry.getKey()+&quot; &quot;+entry.getValue());
+        }
+        //4.判断
+        //注：同上
+        System.out.println(&quot;判断&quot;);
+        System.out.println(hashMap.containsKey(new Student(&quot;毛&quot;, 10)));
+        System.out.println(hashMap.containsValue(&quot;成都&quot;));
+    }
+}
+</code></pre>
+<p>注：和之前说过的HashSet类似，重复依据是hashCode和equals方法，重写即可：</p>
+<pre><code class="language-java"> @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student)) return false;
+        Student student = (Student) o;
+        return id == student.id &amp;&amp;
+                Objects.equals(name, student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, id);
+    }
+</code></pre>
+<h4 id="hashmap源码分析"><strong>HashMap源码分析</strong></h4>
+<p><strong>参数</strong>：</p>
+</li>
+<li>
+<p>默认初始化容量：<code>static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // aka 16</code></p>
+<ul>
+<li>数组最大容量：<code>static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;</code></li>
+</ul>
+</li>
+<li>
+<p>默认加载因子：<code>static final float DEFAULT_LOAD_FACTOR = 0.75f;</code></p>
+</li>
+<li>
+<p>链表调整为红黑树的链表长度阈值（JDK1.8）：<code>static final int TREEIFY_THRESHOLD = 8;</code></p>
+</li>
+<li>
+<p>红黑树调整为链表的链表长度阈值（JDK1.8）：<code>static final int UNTREEIFY_THRESHOLD = 6;</code></p>
+</li>
+<li>
+<p>链表调整为红黑树的数组最小阈值（JDK1.8）：<code>static final int MIN_TREEIFY_CAPACITY = 64;</code></p>
+</li>
+<li>
+<p>HashMap存储的数组：<code>transient Node&lt;K,V&gt;[] table;</code></p>
+</li>
+<li>
+<p>HashMap存储的元素个数：<code>transient int size;</code></p>
+<p>一些问题：</p>
+<blockquote>
+<ul>
+<li>默认加载因子是什么？
+<ul>
+<li>就是判断数组是否扩容的一个因子。假如数组容量为100，如果HashMap的存储元素个数超过了100*0.75=75，那么就会进行扩容。</li>
+</ul>
+</li>
+<li>链表调整为红黑树的链表长度阈值是什么？
+<ul>
+<li>假设在数组中下标为3的位置已经存储了数据，当新增数据时通过哈希码得到的存储位置又是3，那么就会在该位置形成一个链表，当链表过长时就会转换成红黑树以提高执行效率，这个阈值就是链表转换成红黑树的最短链表长度；</li>
+</ul>
+</li>
+<li>红黑树调整为链表的链表长度阈值是什么？
+<ul>
+<li>当红黑树的元素个数小于该阈值时就会转换成链表。</li>
+</ul>
+</li>
+<li>链表调整为红黑树的数组最小阈值是什么？
+<ul>
+<li>并不是只要链表长度大于8就可以转换成红黑树，在前者条件成立的情况下，数组的容量必须大于等于64才会进行转换。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>HashMap的数组table存储的就是一个个的Node&lt;K,V&gt;类型，很清晰地看到有一对键值，还有一个指向next的指针（以下只截取了部分源码）：</p>
+<pre><code class="language-java">COPYstatic class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
+      final K key;
+      V value;
+      Node&lt;K,V&gt; next;
+  }
+</code></pre>
+<p>之前的代码中在new对象时调用的是HashMap的无参构造方法，进入到该构造方法的源码查看一下：</p>
+<pre><code class="language-java">COPYpublic HashMap() {
+      this.loadFactor = DEFAULT_LOAD_FACTOR; // all other fields defaulted
+  }
+</code></pre>
+<p>发现没什么内容，只是赋值了一个默认加载因子；而在上文我们观察到源码中table和size都没有赋予初始值，说明刚创建的HashMap对象没有分配容量，并不拥有默认的16个空间大小，这样做的目的是为了节约空间，此时table为null，size为0。</p>
+<p>当我们往对象里添加元素时调用put方法：</p>
+<pre><code class="language-java">COPYpublic V put(K key, V value) {
+      return putVal(hash(key), key, value, false, true);
+  }
+</code></pre>
+<p>put方法把key和value传给了putVal，同时还传入了一个hash(Key)所返回的值，这是一个产生哈希值的方法，再进入到putVal方法（部分源码）：</p>
+<pre><code class="language-java">COPYfinal V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+                    boolean evict) {
+      Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
+      if ((tab = table) == null || (n = tab.length) == 0)
+          n = (tab = resize()).length;
+      if ((p = tab[i = (n - 1) &amp; hash]) == null)
+          tab[i] = newNode(hash, key, value, null);
+      else{
+          //略
+      }
+  }
+</code></pre>
+<p>这里面创建了一个tab数组和一个Node变量p，第一个if实际是判断table是否为空，而我们现在只关注刚创建HashMap对象时的状态，此时tab和table都为空，满足条件，执行内部代码，这条代码其实就是把resize()所返回的结果赋给tab，n就是tab的长度，resize顾名思义就是重新调整大小。查看resize()源码（部分）：</p>
+<pre><code class="language-java">COPYfinal Node&lt;K,V&gt;[] resize() {
+      Node&lt;K,V&gt;[] oldTab = table;
+      int oldCap = (oldTab == null) ? 0 : oldTab.length;
+      int oldThr = threshold;
+      if (oldCap &gt; 0);
+      else if (oldThr &gt; 0);
+      else {               // zero initial threshold signifies using defaults
+          newCap = DEFAULT_INITIAL_CAPACITY;
+          newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
+      } 
+      @SuppressWarnings({&quot;rawtypes&quot;,&quot;unchecked&quot;})
+      Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])new Node[newCap];
+      table = newTab;
+      return newTab;
+  }
+</code></pre>
+<p>该方法首先把table及其长度赋值给oldTab和oldCap；threshold是阈值的意思，此时为0，所以前两个if先不管，最后else里newCap的值为默认初始化容量16；往下创建了一个newCap大小的数组并将其赋给了table，刚创建的HashMap对象就在这里获得了初始容量。然后我们再回到putVal方法，第二个if就是根据哈希码得到的tab中的一个位置是否为空，为空便直接添加元素，此时数组中无元素所以直接添加。至此HashMap对象就完成了第一个元素的添加。当添加的元素超过16*0.75=12时，就会进行扩容：</p>
+<pre><code class="language-java">COPYfinal V putVal(int hash, K key, V value, boolean onlyIfAbsent,boolean evict){
+      if (++size &gt; threshold)
+          resize();
+  }
+</code></pre>
+<p>扩容的代码如下（部分）：</p>
+<pre><code class="language-java">COPYfinal Node&lt;K,V&gt;[] resize() {
+      int oldCap = (oldTab == null) ? 0 : oldTab.length;
+      int newCap;
+      if (oldCap &gt; 0) {
+          if (oldCap &gt;= MAXIMUM_CAPACITY) {//略}
+          else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp;
+                   oldCap &gt;= DEFAULT_INITIAL_CAPACITY)
+      }
+  }
+</code></pre>
+<p>核心部分是else if里的移位操作，<strong>也就是说每次扩容都是原来大小的两倍</strong>。</p>
+</li>
+<li>
+<p><em>注</em>*：额外说明的一点是在JDK1.8以前链表是头插入，JDK1.8以后链表是尾插入。</p>
+</li>
+</ul>
+<hr>
+<h4 id="hashset源码分析"><strong>HashSet源码分析</strong></h4>
+<p><strong>一、带着问题分析</strong></p>
+<p>（1）HashMap的底层数据结构是什么？</p>
+<p>（2）HashMap中增删改查操作的底部实现原理是什么？</p>
+<p>（3）HashMap是如何实现扩容的？</p>
+<p>（4）HashMap是如何解决hash冲突的？</p>
+<p>（7）HashMap为什么是非线程安全的？</p>
+<p>下面我们就带着这些问题，揭开HashMap的面纱。</p>
+<p><strong>二、认识HashMap</strong></p>
+<p>HashMap最早是在jdk1.2中开始出现的，一直到jdk1.7一直没有太大的变化。但是到了jdk1.8突然进行了一个很大的改动。其中一个最显著的改动就是：</p>
+<blockquote>
+<p>之前jdk1.7的存储结构是数组+链表，到了jdk1.8变成了<strong>数组+链表+红黑树。</strong></p>
+</blockquote>
+<p>另外，HashMap是非线程安全的，也就是说在多个线程同时对HashMap中的某个元素进行增删改操作的时候，是不能保证数据的一致性的。</p>
+<p>下面我们就开始一步一步的分析。</p>
+<p><strong>三、深入分析HashMap</strong></p>
+<p><strong>1、底层数据结构</strong></p>
+<p>为了进行一个对比分析，我们先给出一个jdk1.7的存储结构图</p>
+<p><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gpjc6ca62nj30p00fagm4.jpg" alt="v2-13f265dfbfe4f6bf0505cd31d7b3cf47_r" loading="lazy"><br>
+从上图我们可以看到，在jdk1.7中，首先是把元素放在一个个数组里面，后来存放的数据元素越来越多，于是就出现了链表，对于数组中的每一个元素，都可以有一条链表来存储元素。这就是有名的“拉链式”存储方法。</p>
+<p>就这样用了几年，后来存储的元素越来越多，链表也越来越长，在查找一个元素时候效率不仅没有提高（链表不适合查找，适合增删），反倒是下降了不少，于是就对这条链表进行了一个改进。如何改进呢？就是把这条链表变成一个适合查找的树形结构，没错就是红黑树。于是HashMap的存储数据结构就变成了下面的这种。</p>
+<figure data-type="image" tabindex="23"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gpjc6gbb9hj30vr0gs3zz.jpg" alt="v2-14ccbe757a467d874cb7999f62caddcd_r" loading="lazy"></figure>
+<p>我们会发现优化的部分就是把链表结构变成了红黑树。原来jdk1.7的优点是增删效率高，于是在jdk1.8的时候，不仅仅增删效率高，而且查找效率也提升了。</p>
+<p><strong>注意：不是说变成了红黑树效率就一定提高了，只有在链表的长度不小于8，而且数组的长度不小于64的时候才会将链表转化为红黑树，</strong></p>
+<p><strong>问题一：什么是红黑树呢？</strong></p>
+<p>红黑树是一个自平衡的二叉查找树，也就是说红黑树的查找效率是非常的高，查找效率会从链表的o(n)降低为o(logn)。如果之前没有了解过红黑树的话，也没关系，你就记住红黑树的查找效率很高就OK了。</p>
+<p><strong>问题二：为什么不一下子把整个链表变为红黑树呢？</strong></p>
+<p>这个问题的意思是这样的，就是说我们为什么非要等到链表的长度大于等于8的时候，才转变成红黑树？在这里可以从两方面来解释</p>
+<p>（1）构造红黑树要比构造链表复杂，在链表的节点不多的时候，从整体的性能看来， 数组+链表+红黑树的结构可能不一定比数组+链表的结构性能高。就好比杀鸡焉用牛刀的意思。</p>
+<p>（2）HashMap频繁的扩容，会造成底部红黑树不断的进行拆分和重组，这是非常耗时的。因此，也就是链表长度比较长的时候转变成红黑树才会显著提高效率。</p>
+<p>OK，到这里相信我们对hashMap的底层数据结构有了一个认识。现在带着上面的结构图，看一下如何存储一个元素。</p>
+<p><strong>2、存储元素put</strong></p>
+<p>我们在存储一个元素的时候，大多是使用下面的这种方式。</p>
+<pre><code class="language-java">public class Test {
+    public static void main(String[] args) {
+        HashMap&lt;String, Integer&gt; map= new HashMap&lt;&gt;();
+        //存储一个元素
+        map.put(&quot;张三&quot;, 20);
+    }
+}
+</code></pre>
+<p>在这里HashMap&lt;String, Integer&gt;，第一个参数是<strong>键</strong>，第二个参数是<strong>值</strong>，合起来叫做<strong>键值对</strong>。存储的时候只需要调用put方法即可。那底层的实现原理是怎么样的呢？这里还是先给出一个流程图</p>
+<figure data-type="image" tabindex="24"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gpjc6o3n57j30ub0t4dip.jpg" alt="v2-bb8ee0ee1c0cc51537ae5f8e02038102_r" loading="lazy"></figure>
+<p>上面这个流程，不知道你能否看到，红色字迹的是三个判断框，也是转折点，我们使用文字来梳理一下这个流程：</p>
+<p>（1）第一步：调用put方法传入键值对</p>
+<p>（2）第二步：使用hash算法计算hash值</p>
+<p>（3）第三步：根据hash值确定存放的位置，判断是否和其他键值对位置发生了冲突</p>
+<p>（4）第四步：若没有发生冲突，直接存放在数组中即可</p>
+<p>（5）第五步：若发生了冲突，还要判断此时的数据结构是什么？</p>
+<p>（6）第六步：若此时的数据结构是红黑树，那就直接插入红黑树中</p>
+<p>（7）第七步：若此时的数据结构是链表，判断插入之后是否大于等于8</p>
+<p>（8）第八步：插入之后大于8了，就要先调整为红黑树，在插入</p>
+<p>（9）第九步：插入之后不大于8，那么就直接插入到链表尾部即可。</p>
+<p>上面就是插入数据的整个流程，光看流程还不行，我们还需要深入到源码中去看看底部是如何按照这个流程写代码的。</p>
+<p>通过进入put的源码来查看</p>
+<pre><code class="language-java">public V put(K key, V value) {
+     return putVal(hash(key), key, value, false, true);
+}
+</code></pre>
+<p>也就是说，put方法其实调用的是<strong>putVal</strong>方法。putVal方法有5个参数：</p>
+<p>（1）第一个参数hash：调用了hash方法计算hash值</p>
+<p>（2）第二个参数key：就是我们传入的key值，也就是例子中的张三</p>
+<p>（3）第三个参数value：就是我们传入的value值，也就是例子中的20</p>
+<p>（4）第四个参数onlyIfAbsent：也就是当键相同时，不修改已存在的值</p>
+<p>（5）第五个参数evict ：如果为false，那么数组就处于创建模式中，所以一般为true。</p>
+<p>知道了这5个参数的含义，我们就进入到这个putVal方法中。</p>
+<pre><code class="language-java">    final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+                   boolean evict) {
+        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
+        //第一部分
+        if ((tab = table) == null || (n = tab.length) == 0)
+            n = (tab = resize()).length;
+        //第二部分
+        if ((p = tab[i = (n - 1) &amp; hash]) == null)
+            tab[i] = newNode(hash, key, value, null);
+        //第三部分
+        else {
+            Node&lt;K,V&gt; e; K k;
+            //第三部分第一小节
+            if (p.hash == hash &amp;&amp;
+                ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+                e = p;
+            //第三部分第二小节
+            else if (p instanceof TreeNode)
+                e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
+            //第三部分第三小节
+            else {
+                for (int binCount = 0; ; ++binCount) {
+                    //第三小节第一段
+                    if ((e = p.next) == null) {
+                        p.next = newNode(hash, key, value, null);
+                        if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                            treeifyBin(tab, hash);
+                        break;
+                    }
+                    //第三小节第一段
+                    if (e.hash == hash &amp;&amp;
+                        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                        break;
+                    //第三小节第三段
+                    p = e;
+                }
+            }
+            //第三部分第四小节
+            if (e != null) { // existing mapping for key
+                V oldValue = e.value;
+                if (!onlyIfAbsent || oldValue == null)
+                    e.value = value;
+                afterNodeAccess(e);
+                return oldValue;
+            }
+        }
+        ++modCount;
+        //第四部分
+        if (++size &gt; threshold)
+            resize();
+        afterNodeInsertion(evict);
+        return null;
+    }
+</code></pre>
+<p>把代码进行拆分（整体分了四大部分）：</p>
+<p>（1）Node&lt;K,V&gt;[] tab中<strong>tab</strong>表示的就是<strong>数组</strong>。Node&lt;K,V&gt; p中p表示的就是当前插入的节点</p>
+<p>（2）第一部分：</p>
+<pre><code class="language-java">if ((tab = table) == null || (n = tab.length) == 0)
+       n = (tab = resize()).length;
+</code></pre>
+<p>这一部分表示的意思是如果数组是空的(在还没开始创建的时候默认就是空的)，那么就通过resize方法来创建一个新的数组。</p>
+<p>在这里resize方法(重新调节大小)先不说明，在下一小节扩容的时候会提到。</p>
+<p>（3）第二部分：</p>
+<pre><code class="language-java">if ((p = tab[i = (n - 1) &amp; hash]) == null)
+      tab[i] = newNode(hash, key, value, null);
+</code></pre>
+<p>i表示在数组中插入的位置，计算的方式为(n - 1) &amp; hash。在这里需要<strong>判断插入的位置是否是冲突</strong>的，<strong>如果不冲突就直接newNode，插入到数组中即可</strong>，这就和流程图中第一个判断框对应了。</p>
+<p>如果插入的hash值冲突了，那就转到第三部分，<strong>处理冲突</strong></p>
+<p>（4）第三部分：</p>
+<pre><code class="language-java">        else {
+            Node&lt;K,V&gt; e; K k;
+            //第三部分a
+            if (p.hash == hash &amp;&amp;
+                ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+                e = p;
+            //第三部分b
+            else if (p instanceof TreeNode)
+                e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
+            //第三部分c
+            else {
+                for (int binCount = 0; ; ++binCount) {
+                    //第三小节第一段
+                    if ((e = p.next) == null) {
+                        p.next = newNode(hash, key, value, null);
+                        if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                            treeifyBin(tab, hash);
+                        break;
+                    }
+                    //第三小节第一段
+                    if (e.hash == hash &amp;&amp;
+                        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                        break;
+                    //第三小节第三段
+                    p = e;
+                }
+            }
+            //第三部分d
+            if (e != null) { // existing mapping for key
+                V oldValue = e.value;
+                if (!onlyIfAbsent || oldValue == null)
+                    e.value = value;
+                afterNodeAccess(e);
+                return oldValue;
+            }
+        }
+</code></pre>
+<p>我们会看到，处理冲突还真是麻烦，好在我们对这一部分又进行了划分</p>
+<p>a）第三部分第一小节：</p>
+<pre><code class="language-java">if (p.hash == hash 
+     &amp;&amp;((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+     e = p;
+</code></pre>
+<p>在这里判断table[i]中的元素是否与插入的<strong>key</strong>一样，若相同那就直接使用插入的值<strong>p替换掉旧的值e</strong>（也就是键值相同的时候将值替换掉）。</p>
+<p>b）第三部分第二小节：</p>
+<pre><code class="language-java">else if (p instanceof TreeNode)
+       e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
+</code></pre>
+<p>判断插入的<strong>数据结构</strong>是红黑树还是链表，在这里表示如果是红黑树，那就直接<strong>putTreeVa</strong>l到红黑树中。这就和流程图里面的第二个判断框对应了。</p>
+<p>c）第三部分第三小节：</p>
+<pre><code class="language-java">//第三部分c
+else {
+     for (int binCount = 0; ; ++binCount) {
+        //第三小节第一段
+         if ((e = p.next) == null) {
+              p.next = newNode(hash, key, value, null);
+              if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                  treeifyBin(tab, hash);
+                  break;
+         }
+         //第三小节第一段
+         if (e.hash == hash &amp;&amp;
+               ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+              break;
+         //第三小节第三段
+         p = e;
+    }
+}
+</code></pre>
+<p>如果数据结构是<strong>链表</strong>，<strong>首先要遍历table数组是否存在</strong>，如果<strong>不存在直接newNode(hash, key, value, null)。如果存在了直接使用新的value替换掉旧的</strong>。</p>
+<p><strong>注意一点</strong>：不存在并且在链表末尾插入元素的时候，会判断<strong>binCount &gt;= TREEIFY_THRESHOLD - 1</strong>。也就是判断当前链表的长度是否大于阈值8，如果大于那就会把当前链表转变成红黑树，方法是treeifyBin。这也就和流程图中第三个判断框对应了。</p>
+<p>（5）第四部分：</p>
+<pre><code class="language-java">if (++size &gt; threshold)
+        resize();
+afterNodeInsertion(evict);
+return null;
+</code></pre>
+<p>插入成功之后，还要判断一下实<strong>际存在的键值对数量size是否大于阈值threshold</strong>（数组的大小*因子0.75）。如果大于那就开始<strong>扩容</strong>了。</p>
+<p><strong>3、扩容</strong></p>
+<p>为什么扩容呢？很明显就是当前容量不够，也就是put了太多的元素。为此我们还是先给出一个流程图，再来进行分析。</p>
+<figure data-type="image" tabindex="25"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gpjc6wosozj30lo0mtmyd.jpg" alt="v2-f43eafe4e5d4d7616f885335fc185f3d_r" loading="lazy"></figure>
+<p>这个扩容就比较简单了，HaspMap扩容就是就是<strong>先计算 新的hash表容量和新的容量阀值</strong>，<strong>然后初始化一个新的hash表，将旧的键值对重新映射在新的hash表里</strong>。</p>
+<p>如果在旧的hash表里涉及到红黑树，那么在映射到新的hash表中还涉及到红黑树的拆分。整个流程也正常扩容一个容量的过程，根据流程图结合代码来分析：</p>
+<pre><code class="language-java">    final Node&lt;K,V&gt;[] resize() {
+        Node&lt;K,V&gt;[] oldTab = table;
+        int oldCap = (oldTab == null) ? 0 : oldTab.length;
+        int oldThr = threshold;
+        int newCap, newThr = 0;
+        //第一部分：扩容
+        if (oldCap &gt; 0) {
+            if (oldCap &gt;= MAXIMUM_CAPACITY) {
+                threshold = Integer.MAX_VALUE;
+                return oldTab;
+            }
+            else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp;
+                     oldCap &gt;= DEFAULT_INITIAL_CAPACITY)
+                newThr = oldThr &lt;&lt; 1; // double threshold
+        }
+        //第二部分：设置阈值
+        else if (oldThr &gt; 0) // initial capacity was placed in threshold
+            newCap = oldThr;
+        else {               // zero initial threshold signifies using defaults
+            newCap = DEFAULT_INITIAL_CAPACITY;
+            newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
+        }
+        if (newThr == 0) {
+            float ft = (float)newCap * loadFactor;
+            newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (float)MAXIMUM_CAPACITY ?
+                      (int)ft : Integer.MAX_VALUE);
+        }
+        threshold = newThr;
+        @SuppressWarnings({&quot;rawtypes&quot;,&quot;unchecked&quot;})
+            Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])new Node[newCap];
+        table = newTab;
+        //第三部分：旧数据保存在新数组里面
+        if (oldTab != null) {
+            for (int j = 0; j &lt; oldCap; ++j) {
+                Node&lt;K,V&gt; e;
+                if ((e = oldTab[j]) != null) {
+                    oldTab[j] = null;
+                    //只有一个节点，通过索引位置直接映射
+                    if (e.next == null)
+                        newTab[e.hash &amp; (newCap - 1)] = e;
+                    //如果是红黑树，需要进行树拆分然后映射
+                    else if (e instanceof TreeNode)
+                        ((TreeNode&lt;K,V&gt;)e).split(this, newTab, j, oldCap);
+                    else {
+                         //如果是多个节点的链表，将原链表拆分为两个链表
+                        Node&lt;K,V&gt; loHead = null, loTail = null;
+                        Node&lt;K,V&gt; hiHead = null, hiTail = null;
+                        Node&lt;K,V&gt; next;
+                        do {
+                            next = e.next;
+                            if ((e.hash &amp; oldCap) == 0) {
+                                if (loTail == null)
+                                    loHead = e;
+                                else
+                                    loTail.next = e;
+                                loTail = e;
+                            }
+                            else {
+                                if (hiTail == null)
+                                    hiHead = e;
+                                else
+                                    hiTail.next = e;
+                                hiTail = e;
+                            }
+                        } while ((e = next) != null);
+                        //链表1存于原索引
+                        if (loTail != null) {
+                            loTail.next = null;
+                            newTab[j] = loHead;
+                        }
+                        //链表2存于原索引加上原hash桶长度的偏移量
+                        if (hiTail != null) {
+                            hiTail.next = null;
+                            newTab[j + oldCap] = hiHead;
+                        }
+                    }
+                }
+            }
+        }
+        return newTab;
+    }
+</code></pre>
+<p>同样分段分析：</p>
+<p>（1）第一部分：</p>
+<pre><code class="language-java">//第一部分：扩容
+if (oldCap &gt; 0) {
+      if (oldCap &gt;= MAXIMUM_CAPACITY) {
+           threshold = Integer.MAX_VALUE;
+           return oldTab;
+      }
+      else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp;
+          oldCap &gt;= DEFAULT_INITIAL_CAPACITY)
+            newThr = oldThr &lt;&lt; 1; // double threshold
+}
+</code></pre>
+<p>根据代码也能看明白：首先如果超过了数组的最大容量，那么就直接将阈值设置为整数最大值，然后如果没有超过，那就扩容为原来的2倍，这里要注意是oldThr &lt;&lt; 1，移位操作来实现的。</p>
+<p>（2）第二部分：</p>
+<pre><code class="language-java">//第二部分：设置阈值
+else if (oldThr &gt; 0) //阈值已经初始化了，就直接使用
+      newCap = oldThr;
+else {    // 没有初始化阈值那就初始化一个默认的容量和阈值 （阈值的大小为默认容量*加载因子） 
+      newCap = DEFAULT_INITIAL_CAPACITY;
+      newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
+}
+if (newThr == 0) {
+      float ft = (float)newCap * loadFactor;
+      newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (float)MAXIMUM_CAPACITY ?
+                      (int)ft : Integer.MAX_VALUE);
+}
+//为当前的容量阈值赋值
+threshold = newThr;
+@SuppressWarnings({&quot;rawtypes&quot;,&quot;unchecked&quot;})
+Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])new Node[newCap];
+table = newTab;
+</code></pre>
+<p>首先第一个else if表示如果阈值已经初始化过了，那就直接使用旧的阈值。然后第二个else表示如果没有初始化，那就初始化一个新的数组容量和新的阈值。</p>
+<p>（3）第三部分</p>
+<p>第三部分同样也很复杂，就是把旧数据复制到新数组里面。这里面需要注意的有下面几种情况：</p>
+<p>A：扩容后，若hash值新增参与运算的位=0，那么元素在扩容后的位置=原始位置</p>
+<p>B：扩容后，若hash值新增参与运算的位=1，那么元素在扩容后的位置=原始位置+扩容后的旧位置。</p>
+<p>hash值新增参与运算的位是什么呢？我们把hash值转变成二进制数字，新增参与运算的位就是倒数第五位。</p>
+<p>这里面有一个非常好的设计理念，扩容后长度为原hash表的2倍，于是把hash表分为两半，分为低位和高位，如果能把原链表的键值对， 一半放在低位，一半放在高位，而且是通过e.hash &amp; oldCap == 0来判断，这个判断有什么优点呢？</p>
+<p>举个例子：n = 16，二进制为10000，第5位为1，e.hash &amp; oldCap 是否等于0就取决于e.hash第5 位是0还是1，这就相当于有50%的概率放在新hash表低位，50%的概率放在新hash表高位。</p>
+<p>OK，到这一步基本上就算是把扩容这一部分讲完了，还有一个问题没有解决，也就是说存储的原理讲明白了，存储的元素多了如何扩容也明白了，扩容之后出现了地址冲突怎么办呢？</p>
+<p><strong>4、解决地址冲突</strong></p>
+<p>解决地址冲突的前提是计算的<strong>hash值出现了重复</strong>，我们就先来看看HashMap中，是如何计算hash值的。</p>
+<pre><code class="language-java">static final int hash(Object key) {
+     int h;
+     return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+}
+</code></pre>
+<p>代码是超级简单，hash值其实就是通过hashcode与16异或计算的来的，为什么要使用异或运算呢？画一张图你就明白了：</p>
+<figure data-type="image" tabindex="26"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gpjc75b8bqj30i40dymyd.jpg" alt="v2-fe6755c8e427026b155c867f11efdbd0_r" loading="lazy"></figure>
+<p>也就是说，通过异或运算能够是的计算出来的hash比较均匀，不容易出现冲突。但是偏偏出现了冲突现象，这时候该如何去解决呢？</p>
+<p><strong>在数据结构中，我们处理hash冲突常使用的方法有：开发定址法、再哈希法、链地址法、建立公共溢出区。而hashMap中处理hash冲突的方法就是链地址法。</strong></p>
+<p>这种方法的基本思想是将所有哈希地址为i的元素构成一个称为同义词链的单链表，并将单链表的头指针存在哈希表的第i个单元中，因而查找、插入和删除主要在同义词链中进行。链地址法适用于经常进行插入和删除的情况。</p>
+<figure data-type="image" tabindex="27"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gpjc7sgn0rj30lr0a5t9i.jpg" alt="v2-08b1b12dfb7507704d45ecca236ebf91_r" loading="lazy"></figure>
+<p>相信大家都能看明白，出现地址冲突的时候，一个接一个排成一条链就OK了。正好与HashMap底层的数据结构相呼应。</p>
+<p><strong>5、构造一个HashMap</strong></p>
+<p>上面可能出现的问题，我们都已经说明了，关于他的构造方法却姗姗来迟。下面我们好好说一下他的构造方法：</p>
+<p>他的构造方法一共有四个：</p>
+<p>第一个：</p>
+<pre><code class="language-java">public HashMap() {
+     this.loadFactor = DEFAULT_LOAD_FACTOR; 
+}
+</code></pre>
+<p>第二个：</p>
+<pre><code class="language-java">public HashMap(int initialCapacity) {
+     this(initialCapacity, DEFAULT_LOAD_FACTOR);
+}
+</code></pre>
+<p>第三个：</p>
+<pre><code class="language-java">public HashMap(Map&lt;? extends K, ? extends V&gt; m) {
+    this.loadFactor = DEFAULT_LOAD_FACTOR;
+    putMapEntries(m, false);
+}
+</code></pre>
+<p>第四个：</p>
+<pre><code class="language-java">   public HashMap(int initialCapacity, float loadFactor) {
+        if (initialCapacity &lt; 0)
+            throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +
+                                               initialCapacity);
+        if (initialCapacity &gt; MAXIMUM_CAPACITY)
+            initialCapacity = MAXIMUM_CAPACITY;
+        if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))
+            throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +
+                                               loadFactor);
+        this.loadFactor = loadFactor;
+        this.threshold = tableSizeFor(initialCapacity);
+    }
+</code></pre>
+<p>这四个构造方法很明显第四个最麻烦，我们就来分析一下第四个构造方法，其他三个自然而然也就明白了。上面出现了两个新的名词：loadFactor和initialCapacity。我们一个一个来分析：</p>
+<p>（1）initialCapacity初始容量</p>
+<p>官方要求我们要输入<strong>一个2的N次幂的值</strong>，比如说2、4、8、16等等这些，但是我们忽然一个不小心，输入了一个20怎么办？没关系，虚拟机会根据你输入的值，<strong>找一个离20最近的2的N次幂的值，比如说16离他最近，就取16为初始容量</strong>。</p>
+<p>（2）<strong>loadFactor负载因子</strong></p>
+<p>负载因子，默认值是0.75。<strong>负载因子表示一个散列表的空间的使用程度</strong>，有这样一个公式：initailCapacity*loadFactor=HashMap的容量。 所以负载因子越大则散列表的装填程度越高，也就是能容纳更多的元素，元素多了，链表大了，所以此时索引效率就会降低。反之，负载因子越小则链表中的数据量就越稀疏，此时会对空间造成烂费，但是此时索引效率高。</p>
+<p>为什么默认值会是0.75呢？我们截取一段jdk文档：</p>
+<figure data-type="image" tabindex="28"><img src="//tvax3.sinaimg.cn/large/007bjbYxly1gpjc7znk6ej30ct09s3zl.jpg" alt="v2-4e6b224503e39e90b9419946ba2f7166_r" loading="lazy"></figure>
+<figure data-type="image" tabindex="29"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gpjc9g59cjj30d20cq74n.jpg" alt="v2-2936da1806372ffe26efa072de7da934_r" loading="lazy"></figure>
+<p>看第三行Poisson_distribution这不就是泊淞分布嘛。而且最关键的就是</p>
+<p>当桶中元素到达8个的时候，概率已经变得非常小，也就是说用0.75作为加载因子，<strong>每个碰撞位置的链表长度超过８个是几乎不可能的</strong>。</p>
+<p><strong>6、HashMap为什么是非线程安全的？</strong></p>
+<p>想要解决这个问题，答案很简单，因为源码里面方法全部都是非线程安全的呀，你根本找不到synchronized这样的关键字。保证不了线程安全。于是出现了ConcurrentHashMap。</p>
+<p>了解完HashMap之后，再回过头来看之前的HashSet源码，为什么放在后面写你们看一下源码就知道了（部分）：</p>
+<pre><code class="language-java">COPYpublic class HashSet&lt;E&gt;
+      extends AbstractSet&lt;E&gt;
+      implements Set&lt;E&gt;, Cloneable, java.io.Serializable
+  {
+      private transient HashMap&lt;E,Object&gt; map;
+      private static final Object PRESENT = new Object();
+      public HashSet() {
+          map = new HashMap&lt;&gt;();
+      }
+  }
+</code></pre>
+<p>可以看见HashSet的存储结构就是HashMap，那它的存储方式是怎样的呢？可以看一下add方法：</p>
+<pre><code class="language-java">COPYpublic boolean add(E e) {
+      return map.put(e, PRESENT)==null;
+  }
+</code></pre>
+<p><strong>很明了地发现它的add方法调用的就是map的put方法，把元素作为map的key传进去的</strong></p>
+<p>小结：</p>
+<ul>
+<li>运算尽量都用位运算代替，更高效。</li>
+<li>对于扩容导致需要新建数组存放更多元素时，除了要将老数组中的元素迁移过来，也记得将老数组中的引用置null，以便GC</li>
+<li>取下标 是用 哈希值 与运算 （桶的长度-1） i = (n - 1) &amp; hash。 由于桶的长度是2的n次方，这么做其实是等于 一个模运算。但是效率更高</li>
+<li>扩容时，如果发生过哈希碰撞，节点数小于8个。则要根据链表上每个节点的哈希值，依次放入新哈希桶对应下标位置。</li>
+<li>因为扩容是容量翻倍，所以原链表上的每个节点，现在可能存放在原来的下标，即low位， 或者扩容后的下标，即high位。 high位= low位+原哈希桶容量</li>
+<li>利用哈希值 与运算 旧的容量 ，if ((e.hash &amp; oldCap) == 0),可以得到哈希值去模后，是大于等于oldCap还是小于oldCap，等于0代表小于oldCap，应该存放在低位，否则存放在高位。这里又是一个利用位运算 代替常规运算的高效点</li>
+<li>如果追加节点后，链表数量》=8，则转化为红黑树</li>
+<li>插入节点操作时，有一些空实现的函数，用作LinkedHashMap重写使用。</li>
+</ul>
+<p><strong>常用API:</strong></p>
+<p><strong>5 增、改</strong><br>
+<strong>1往表中插入或覆盖一个key-value</strong></p>
+<pre><code class="language-java">    public V put(K key, V value) {
+        //先根据key，取得hash值。 再调用上一节的方法插入节点
+        return putVal(hash(key), key, value, false, true);
+    }
+</code></pre>
+<p>这个根据key取hash值的函数也要关注一下，它称之为“扰动函数”，关于这个函数的用处 开头已经总结过了：</p>
+<pre><code class="language-java">static final int hash(Object key) {
+    int h;
+    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+}
+</code></pre>
+<p>而key的hash值，并不仅仅只是key对象的hashCode()方法的返回值，还会经过扰动函数的扰动，以使hash值更加均衡。<br>
+因为hashCode()是int类型，取值范围是40多亿，只要哈希函数映射的比较均匀松散，碰撞几率是很小的。<br>
+但就算原本的hashCode()取得很好，每个key的hashCode()不同，但是由于HashMap的哈希桶的长度远比hash取值范围小，默认是16，所以当对hash值以桶的长度取余，以找到存放该key的桶的下标时，由于取余是通过与操作完成的，会忽略hash值的高位。因此只有hashCode()的低位参加运算，发生不同的hash值，但是得到的index相同的情况的几率会大大增加，这种情况称之为hash碰撞。 即，碰撞率会增大。</p>
+<p><strong>扰动函数</strong>就是为了解决hash碰撞的。它会综合hash值高位和低位的特征，并存放在低位，因此在与运算时，相当于高低位一起参与了运算，以减少hash碰撞的概率。（在JDK8之前，扰动函数会扰动四次，JDK8简化了这个操作）</p>
+<p><strong>2往表中批量增加数据</strong></p>
+<pre><code class="language-java"> public void putAll(Map&lt;? extends K, ? extends V&gt; m) {
+        //这个函数上一节也已经分析过。//将另一个Map的所有元素加入表中，参数evict初始化时为false，其他情况为true
+        putMapEntries(m, true);
+    }
+</code></pre>
+<p><strong>3 只会往表中插入 key-value, 若key对应的value之前存在，不会覆盖。（jdk8增加的方法）</strong></p>
+<pre><code class="language-java"> @Override
+    public V putIfAbsent(K key, V value) {
+        return putVal(hash(key), key, value, true, true);
+    }
+</code></pre>
+<p><strong>6 删</strong><br>
+<strong>以key为条件删除</strong><br>
+如果key对应的value存在，则删除这个键值对。 并返回value。如果不存在 返回null。</p>
+<p>6 删<br>
+以key为条件删除<br>
+如果key对应的value存在，则删除这个键值对。 并返回value。如果不存在 返回null。</p>
+<pre><code class="language-java">public V remove(Object key) {
+    Node&lt;K,V&gt; e;
+    return (e = removeNode(hash(key), key, null, false, true)) == null ?
+        null : e.value;
+}
+
+</code></pre>
+<p>//从哈希表中删除某个节点， 如果参数matchValue是true，则必须key 、value都相等才删除。<br>
+//如果movable参数是false，在删除节点时，不移动其他节点</p>
+<pre><code class="language-java">final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
+                           boolean matchValue, boolean movable) {
+    // p 是待删除节点的前置节点
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, index;
+    //如果哈希表不为空，则根据hash值算出的index下 有节点的话。
+    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
+        (p = tab[index = (n - 1) &amp; hash]) != null) {
+        //node是待删除节点
+        Node&lt;K,V&gt; node = null, e; K k; V v;
+        //如果链表头的就是需要删除的节点
+        if (p.hash == hash &amp;&amp;
+            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+            node = p;//将待删除节点引用赋给node
+        else if ((e = p.next) != null) {//否则循环遍历 找到待删除节点，赋值给node
+            if (p instanceof TreeNode)
+                node = ((TreeNode&lt;K,V&gt;)p).getTreeNode(hash, key);
+            else {
+                do {
+                    if (e.hash == hash &amp;&amp;
+                        ((k = e.key) == key ||
+                         (key != null &amp;&amp; key.equals(k)))) {
+                        node = e;
+                        break;
+                    }
+                    p = e;
+                } while ((e = e.next) != null);
+            }
+        }
+        //如果有待删除节点node，  且 matchValue为false，或者值也相等
+        if (node != null &amp;&amp; (!matchValue || (v = node.value) == value ||
+                             (value != null &amp;&amp; value.equals(v)))) {
+            if (node instanceof TreeNode)
+                ((TreeNode&lt;K,V&gt;)node).removeTreeNode(this, tab, movable);
+            else if (node == p)//如果node ==  p，说明是链表头是待删除节点
+                tab[index] = node.next;
+            else//否则待删除节点在表中间
+                p.next = node.next;
+            ++modCount;//修改modCount
+            --size;//修改size
+            afterNodeRemoval(node);//LinkedHashMap回调函数
+            return node;
+        }
+    }
+    return null;
+}
+</code></pre>
+<pre><code class="language-java"> void afterNodeRemoval(Node&lt;K,V&gt; p) { }
+</code></pre>
+<p><strong>以key value 为条件删除</strong></p>
+<pre><code class="language-java"> @Override
+    public boolean remove(Object key, Object value) {
+        //这里传入了value 同时matchValue为true
+        return removeNode(hash(key), key, value, true, true) != null;
+    }
+</code></pre>
+<p>7 查<br>
+<strong>以key为条件，找到返回value。没找到返回null</strong></p>
+<pre><code class="language-java">   public V get(Object key) {
+        Node&lt;K,V&gt; e;
+        //传入扰动后的哈希值 和 key 找到目标节点Node
+        return (e = getNode(hash(key), key)) == null ? null : e.value;
+    }
+</code></pre>
+<pre><code class="language-java">   //传入扰动后的哈希值 和 key 找到目标节点Node
+    final Node&lt;K,V&gt; getNode(int hash, Object key) {
+        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;
+        //查找过程和删除基本差不多， 找到返回节点，否则返回null
+        if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
+            (first = tab[(n - 1) &amp; hash]) != null) {
+            if (first.hash == hash &amp;&amp; // always check first node
+                ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))
+                return first;
+            if ((e = first.next) != null) {
+                if (first instanceof TreeNode)
+                    return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);
+                do {
+                    if (e.hash == hash &amp;&amp;
+                        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                        return e;
+                } while ((e = e.next) != null);
+            }
+        }
+        return null;
+    }
+</code></pre>
+<h3 id="判断是否包含该key">判断是否包含该key</h3>
+<pre><code class="language-java">    public boolean containsKey(Object key) {
+        return getNode(hash(key), key) != null;
+</code></pre>
+<p>判断是否包含value</p>
+<pre><code class="language-java"> public boolean containsValue(Object value) {
+        Node&lt;K,V&gt;[] tab; V v;
+        //遍历哈希桶上的每一个链表
+        if ((tab = table) != null &amp;&amp; size &gt; 0) {
+            for (int i = 0; i &lt; tab.length; ++i) {
+                for (Node&lt;K,V&gt; e = tab[i]; e != null; e = e.next) {
+                    //如果找到value一致的返回true
+                    if ((v = e.value) == value ||
+                        (value != null &amp;&amp; value.equals(v)))
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+</code></pre>
+<p><strong>java8新增，带默认值的get方法</strong><br>
+以key为条件，找到了返回value。否则返回defaultValue</p>
+<pre><code class="language-java">@Override
+public V getOrDefault(Object key, V defaultValue) {
+    Node&lt;K,V&gt; e;
+    return (e = getNode(hash(key), key)) == null ? defaultValue : e.value;
+}
+</code></pre>
+<p><strong>遍历</strong></p>
+<pre><code class="language-java">//缓存 entrySet
+    transient Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;
+     */
+    public Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet() {
+        Set&lt;Map.Entry&lt;K,V&gt;&gt; es;
+        return (es = entrySet) == null ? (entrySet = new EntrySet()) : es;
+    }
+</code></pre>
+<pre><code class="language-java">   final class EntrySet extends AbstractSet&lt;Map.Entry&lt;K,V&gt;&gt; {
+        public final int size()                 { return size; }
+        public final void clear()               { HashMap.this.clear(); }
+        //一般我们用到EntrySet，都是为了获取iterator
+        public final Iterator&lt;Map.Entry&lt;K,V&gt;&gt; iterator() {
+            return new EntryIterator();
+        }
+        //最终还是调用getNode方法
+        public final boolean contains(Object o) {
+            if (!(o instanceof Map.Entry))
+                return false;
+            Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;) o;
+            Object key = e.getKey();
+            Node&lt;K,V&gt; candidate = getNode(hash(key), key);
+            return candidate != null &amp;&amp; candidate.equals(e);
+        }
+        //最终还是调用removeNode方法
+        public final boolean remove(Object o) {
+            if (o instanceof Map.Entry) {
+                Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;) o;
+                Object key = e.getKey();
+                Object value = e.getValue();
+                return removeNode(hash(key), key, value, true, true) != null;
+            }
+            return false;
+        }
+        //。。。
+    }
+</code></pre>
+<p><strong>//EntryIterator的实现：</strong></p>
+<pre><code class="language-java">final class EntryIterator extends HashIterator
+    implements Iterator&lt;Map.Entry&lt;K,V&gt;&gt; {
+    public final Map.Entry&lt;K,V&gt; next() { return nextNode(); }
+}
+</code></pre>
+<p>bstract class HashIterator {<br>
+Node&lt;K,V&gt; next;        // next entry to return<br>
+Node&lt;K,V&gt; current;     // current entry<br>
+int expectedModCount;  // for fast-fail<br>
+int index;             // current slot</p>
+<pre><code class="language-java">    HashIterator() {
+        //因为hashmap也是线程不安全的，所以要保存modCount。用于fail-fast策略
+        expectedModCount = modCount;
+        Node&lt;K,V&gt;[] t = table;
+        current = next = null;
+        index = 0;
+        //next 初始时，指向 哈希桶上第一个不为null的链表头
+        if (t != null &amp;&amp; size &gt; 0) { // advance to first entry
+            do {} while (index &lt; t.length &amp;&amp; (next = t[index++]) == null);
+        }
+    }
+
+    public final boolean hasNext() {
+        return next != null;
+    }
+
+    //由这个方法可以看出，遍历HashMap时，顺序是按照哈希桶从低到高，链表从前往后，依次遍历的。属于无序集合。
+    final Node&lt;K,V&gt; nextNode() {
+        Node&lt;K,V&gt;[] t;
+        Node&lt;K,V&gt; e = next;
+        //fail-fast策略
+        if (modCount != expectedModCount)
+            throw new ConcurrentModificationException();
+        if (e == null)
+            throw new NoSuchElementException();
+        //依次取链表下一个节点，
+        if ((next = (current = e).next) == null &amp;&amp; (t = table) != null) {
+            //如果当前链表节点遍历完了，则取哈希桶下一个不为null的链表头
+            do {} while (index &lt; t.length &amp;&amp; (next = t[index++]) == null);
+        }
+        return e;
+    }
+
+    public final void remove() {
+        Node&lt;K,V&gt; p = current;
+        if (p == null)
+            throw new IllegalStateException();
+        fail-fast策略
+        if (modCount != expectedModCount)
+            throw new ConcurrentModificationException();
+        current = null;
+        K key = p.key;
+        //最终还是利用removeNode 删除节点
+        removeNode(hash(key), key, null, false, false);
+        expectedModCount = modCount;
+    }
+}
+</code></pre>
+<p><strong>与HashTable的区别</strong></p>
+<ul>
+<li>与之相比HashTable是线程安全的，且不允许key、value是null。</li>
+<li>HashTable默认容量是11。</li>
+<li>HashTable是直接使用key的hashCode(key.hashCode())作为hash值，不像HashMap内部使用static final int hash(Object key)扰动函数</li>
+<li>对key的hashCode进行扰动后作为hash值。</li>
+<li>HashTable取哈希桶下标是直接用模运算%.（因为其默认容量也不是2的n次方。所以也无法用位运算替代模运算）</li>
+<li>扩容时，新容量是原来的2倍+1。int newCapacity = (oldCapacity &lt;&lt; 1) + 1;</li>
+<li>Hashtable是Dictionary的子类同时也实现了Map接口，HashMap是Map接口的一个实现类；</li>
+</ul>
+<h4 id="hashtable"><strong>Hashtable</strong></h4>
+<ul>
+<li>
+<p>JDK1.0版本，线程安全，运行效率慢；不允许null作为key或是value。</p>
+</li>
+<li>
+<p>初始容量11，加载因子0.75。</p>
+<p>这个集合在开发过程中已经不用了，稍微了解即可。</p>
+</li>
+</ul>
+<h4 id="properties"><strong>Properties</strong></h4>
+<ul>
+<li>Hashtable的子类，要求key和value都是String。通常用于配置文件的读取。</li>
+</ul>
+<p>它继承了Hashtable的方法，与流关系密切，此处不详解。</p>
+<h4 id="treemap"><strong>TreeMap</strong></h4>
+<ul>
+<li>实现了SortedMap接口（是Map的子接口），可以对key自动排序。</li>
+</ul>
+<pre><code class="language-java">COPY/**
+ * TreeMap的使用
+ * 存储结构：红黑树
+ */
+public class Demo3 {
+	public static void main(String[] args) {
+		TreeMap&lt;Student, Integer&gt; treeMap=new TreeMap&lt;Student, Integer&gt;();
+		Student s1=new Student(&quot;tang&quot;, 36);
+		Student s2=new Student(&quot;yu&quot;, 101);
+		Student s3=new Student(&quot;he&quot;, 10);
+		//1.添加元素
+		treeMap.put(s1, 21);
+		treeMap.put(s2, 22);
+		treeMap.put(s3, 21);
+		//不能直接打印，需要实现Comparable接口，因为红黑树需要比较大小
+		System.out.println(treeMap.toString());
+		//2.删除元素
+		treeMap.remove(new Student(&quot;he&quot;, 10));
+		System.out.println(treeMap.toString());
+		//3.遍历
+		//3.1 使用keySet()
+		for (Student key : treeMap.keySet()) {
+			System.out.println(key+&quot; &quot;+treeMap.get(key));
+		}
+		//3.2 使用entrySet()
+		for (Entry&lt;Student, Integer&gt; entry : treeMap.entrySet()) {
+			System.out.println(entry.getKey()+&quot; &quot;+entry.getValue());
+		}
+		//4.判断
+		System.out.println(treeMap.containsKey(s1));
+		System.out.println(treeMap.isEmpty());		
+	}
+}
+</code></pre>
+<p>在学生类中实现Comparable接口：</p>
+<pre><code class="language-java">COPYpublic class Student implements Comparable&lt;Student&gt;{
+    @Override
+    public int compareTo(Student o) {
+        int n1=this.id-o.id;
+        return n1;
+}
+</code></pre>
+<p>除此之外还可以使用比较器来定制比较：</p>
+<pre><code class="language-java">COPYTreeMap&lt;Student, Integer&gt; treeMap2=new TreeMap&lt;Student, Integer&gt;(new Comparator&lt;Student&gt;() {
+    @Override
+    public int compare(Student o1, Student o2) {
+        // 略
+        return 0;
+    }			
+});
+</code></pre>
+<h4 id="treeset源码"><strong>TreeSet源码</strong></h4>
+<p>和HashSet类似，放在TreeMap之后讲便一目了然（部分）：</p>
+<pre><code class="language-java">COPYpublic class TreeSet&lt;E&gt; extends AbstractSet&lt;E&gt;
+    implements NavigableSet&lt;E&gt;, Cloneable, java.io.Serializable
+{
+    private transient NavigableMap&lt;E,Object&gt; m;
+    private static final Object PRESENT = new Object();
+    TreeSet(NavigableMap&lt;E,Object&gt; m) {
+        this.m = m;
+    }
+    public TreeSet() {
+        this(new TreeMap&lt;E,Object&gt;());
+    }
+}
+</code></pre>
+<p>TreeSet的存储结构实际上就是TreeMap，再来看其存储方式：</p>
+<pre><code class="language-java">COPYpublic boolean add(E e) {
+    return m.put(e, PRESENT)==null;
+}
+</code></pre>
+<p>它的add方法调用的就是TreeMap的put方法，将元素作为key传入到存储结构中。</p>
+<hr>
+<h2 id="collections工具类"><strong>Collections工具类</strong></h2>
+<ul>
+<li>
+<p><strong>概念</strong>：集合工具类，定义了除了存取以外的集合常用方法。</p>
+</li>
+<li>
+<p><strong>方法</strong>：</p>
+<ul>
+<li><code>public static void reverse(List&lt;?&gt; list)</code>//反转集合中元素的顺序</li>
+<li><code>public static void shuffle(List&lt;?&gt; list)</code>//随机重置集合元素的顺序</li>
+<li><code>public static void sort(List&lt;T&gt; list)</code>//升序排序（元素类型必须实现Comparable接口）</li>
+</ul>
+<pre><code class="language-java">package lin.colle;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * 演示Collections工具类的使用
+ *
+ */
+public class Demo8 {
+    public static void main(String[] args) {
+        List&lt;Integer&gt; list=new ArrayList&lt;Integer&gt;();
+        list.add(20);
+        list.add(10);
+        list.add(30);
+        list.add(90);
+        list.add(70);
+
+
+        //sort排序
+        System.out.println(list.toString());
+        Collections.sort(list);
+        System.out.println(list.toString());
+        System.out.println(&quot;---------&quot;);
+
+        //binarySearch二分查找
+        int i=Collections.binarySearch(list, 10);
+        System.out.println(i);
+
+        //copy复制
+        List&lt;Integer&gt; list2=new ArrayList&lt;Integer&gt;();
+        for(int i1=0;i1&lt;5;++i1) {
+            list2.add(0);
+        }
+        //该方法要求目标元素容量大于等于源目标
+        Collections.copy(list2, list);
+        System.out.println(list2.toString());
+
+        //reserve反转
+        Collections.reverse(list2);
+        System.out.println(list2.toString());
+
+        //shuffle 打乱
+        Collections.shuffle(list2);
+        System.out.println(list2.toString());
+
+        //补充：list转成数组 
+        //将基本数据类型转为成为一个集合的时候需要转换成包装类型	
+        Integer[] arr=list.toArray(new Integer[0]);
+        System.out.println(arr.length);
+        //补充：数组转成集合
+        String[] nameStrings= {&quot;tang&quot;,&quot;he&quot;,&quot;yu&quot;};
+        //受限集合(将数组转为成的集合)不能添加和删除 因为数组的长度是固定的
+        List&lt;String&gt; list3= Arrays.asList(nameStrings);
+
+        System.out.println(list3);
+
+        //注：基本类型转成集合时需要修改为包装类
+    }
+}
+</code></pre>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[IO框架]]></title>
         <id>https://lindamao0753.github.io/post/io/</id>
