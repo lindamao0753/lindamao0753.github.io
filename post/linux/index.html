@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="keywords" content="Gridea静态个人博客">
+<meta name="description" content="好好学习">
+<meta name="theme-color" content="#212529">
+<title>Linux | Lindamao</title>
+<link rel="shortcut icon" href="/favicon.ico?v=1624852136618">
+<link rel="stylesheet" href="/styles/main.css">
+<link rel="stylesheet" href="/media/css/pisces.css">
+
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+<link href="/media/hljs/styles/idea.css" rel="stylesheet">  
+
+<script src="/media/hljs/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+    <meta name="description" content="Linux" />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div class="head-top-line"></div>
+    <div class="header-box">
+      
+<div class=" pisces">
+  <header class="header bg-color ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>Lindamao</span>
+            </a>  
+          
+        </div>
+        
+          <p class="subtitle">好好学习</p>
+        
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/" target="_self">
+                  <i class="fa fa-home"></i> 首页
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/archives" target="_self">
+                  <i class="fa fa-archive"></i> 归档
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/tags" target="_self">
+                  <i class="fa fa-tags"></i> 标签
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/post/about" target="_self">
+                  <i class="fa fa-user"></i> 关于
+                </a>
+              
+            </li>
+          
+          <li class="nav-item">
+            <a>
+              <i class="fa fa-search"></i> 搜索
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+    </div>
+    <div class="main-continer">
+      
+      <div class="section-layout pisces ">
+        <div class="section-layout-wrapper">
+          
+
+<div class="sidebar">
+  
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+      <div class="sidebar-body pisces" id="sidebar_body">
+        
+          
+            <div style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto" id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li><a href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4">常用的基本命令</a>
+<ul>
+<li><a href="#%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86">目录管理</a>
+<ul>
+<li><a href="#%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E5%92%8C%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84">绝对路径和相对路径</a></li>
+<li><a href="#%E5%A4%84%E7%90%86%E7%9B%AE%E5%BD%95%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">处理目录的常用命令</a>
+<ul>
+<li><a href="#ls-%E5%88%97%E5%87%BA%E7%9B%AE%E5%BD%95">ls （列出目录）</a></li>
+<li><a href="#cd-%E5%88%87%E6%8D%A2%E7%9B%AE%E5%BD%95">cd （切换目录）</a></li>
+<li><a href="#pwd-%E6%98%BE%E7%A4%BA%E7%9B%AE%E5%89%8D%E6%89%80%E5%9C%A8%E7%9A%84%E7%9B%AE%E5%BD%95">pwd ( 显示目前所在的目录 )</a></li>
+<li><a href="#mkdir-%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9B%AE%E5%BD%95">mkdir （创建新目录）</a></li>
+<li><a href="#rmdir-%E5%88%A0%E9%99%A4%E7%A9%BA%E7%9A%84%E7%9B%AE%E5%BD%95">rmdir ( 删除空的目录 )</a></li>
+<li><a href="#cp-%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95">cp ( 复制文件或目录 )</a></li>
+<li><a href="#rm-%E7%A7%BB%E9%99%A4%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95">rm ( 移除文件或目录 )</a></li>
+<li><a href="#mv-%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6%E4%B8%8E%E7%9B%AE%E5%BD%95%E6%88%96%E4%BF%AE%E6%94%B9%E5%90%8D%E7%A7%B0">mv  ( 移动文件与目录，或修改名称 )</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%B1%9E%E6%80%A7">基本属性</a>
+<ul>
+<li><a href="#%E7%9C%8B%E6%87%82%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7">看懂文件属性</a></li>
+<li><a href="#%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7">修改文件属性</a></li>
+</ul>
+</li>
+<li><a href="#%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%9F%A5%E7%9C%8B">文件内容查看</a>
+<ul>
+<li><a href="#%E6%A6%82%E8%BF%B0">概述</a></li>
+<li><a href="#cat-%E7%94%B1%E7%AC%AC%E4%B8%80%E8%A1%8C%E5%BC%80%E5%A7%8B%E6%98%BE%E7%A4%BA%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9">cat 由第一行开始显示文件内容</a></li>
+<li><a href="#tac">tac</a></li>
+<li><a href="#nl-%E6%98%BE%E7%A4%BA%E8%A1%8C%E5%8F%B7">nl  显示行号</a></li>
+<li><a href="#more-%E4%B8%80%E9%A1%B5%E4%B8%80%E9%A1%B5%E7%BF%BB%E5%8A%A8">more  一页一页翻动</a></li>
+<li><a href="#less-%E4%B8%80%E9%A1%B5%E4%B8%80%E9%A1%B5%E7%BF%BB%E5%8A%A8%E4%BB%A5%E4%B8%8B%E5%AE%9E%E4%BE%8B%E8%BE%93%E5%87%BAetcmanconfig%E6%96%87%E4%BB%B6%E7%9A%84%E5%86%85%E5%AE%B9">less  一页一页翻动，以下实例输出/etc/man.config文件的内容：</a></li>
+<li><a href="#head-%E5%8F%96%E5%87%BA%E6%96%87%E4%BB%B6%E5%89%8D%E9%9D%A2%E5%87%A0%E8%A1%8C">head  取出文件前面几行</a></li>
+<li><a href="#tail-%E5%8F%96%E5%87%BA%E6%96%87%E4%BB%B6%E5%90%8E%E9%9D%A2%E5%87%A0%E8%A1%8C">tail  取出文件后面几行</a></li>
+<li><a href="#%E6%8B%93%E5%B1%95linux-%E9%93%BE%E6%8E%A5%E6%A6%82%E5%BF%B5">拓展：Linux 链接概念</a>
+<ul>
+<li><a href="#%E7%A1%AC%E8%BF%9E%E6%8E%A5"><strong>硬连接</strong></a></li>
+<li><a href="#%E8%BD%AF%E8%BF%9E%E6%8E%A5"><strong>软连接</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1; 
+let active = 'active-show', activeClass = 'active-current';
+let tocWrapper = document.querySelector('#toc_wrapper');
+let tocContent = tocWrapper.children[0];
+let autoNumber = tocWrapper&&tocWrapper.classList.contains('auto-number');
+
+function addTocNumber(elem, deep) {
+  if (!elem) {
+    return;
+  }
+  let prop = elem.__proto__;
+
+  if (prop === HTMLUListElement.prototype) {
+    for (let i = 0; i < elem.children.length; i++) {
+      addTocNumber(elem.children[i], deep + (i + 1) + '.');
+    }
+  } else if (prop === HTMLLIElement.prototype) {
+    // 保存li元素
+    if (elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+      lList.push(elem);
+    }
+    for (let i = 0; i < elem.children.length; i++) {
+      let cur = elem.children[i];
+      if (cur.__proto__ === HTMLAnchorElement.prototype) {
+        if (autoNumber) {
+          cur.text =  deep + ' ' + cur.text;
+        }
+      } else if (cur.__proto__ === HTMLUListElement.prototype) {
+        addTocNumber(cur, deep);
+      }
+    }
+  }
+}
+
+function removeParentActiveClass() {
+  let parents = tocContent.querySelectorAll('.'+active)
+  parents.forEach(function(elem) {
+    elem.classList.remove(active);
+  });
+}
+
+function addActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.add(activeClass);
+  }
+}
+
+function removeActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.remove(activeClass);
+  }
+}
+
+function addActiveLiElemment(elem, parent) {
+  if (!elem || elem === parent) {
+    return;
+  } else {
+    if (elem.__proto__ === HTMLLIElement.prototype) {
+      elem.classList.add(active);
+    }
+    addActiveLiElemment(elem.parentElement, parent);
+  }
+}
+
+function showToc() {
+  if (tocWrapper) {
+    postBody = document.querySelector('#post_body');
+    for (let i = 0; i < postBody.children.length; i++) {
+      if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+        hList.push(postBody.children[i]);
+      }
+    }
+    if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+    } else if (tocWrapper.classList.contains('no_compress')){
+      tocContent.classList.add('expanded');
+    } else {
+      if (hList.length > 10) {
+        active = 'active-hidden'
+        tocContent.classList.add('closed');
+      } else {
+        tocContent.classList.add('expanded');
+      }
+    }
+  }
+}
+
+(function() {
+  // 处理不是从#一级标题开始目录
+  if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+    let con = tocContent.children[0].children[0];
+    tocContent.innerHTML = con.innerHTML;
+  }
+  addTocNumber(tocContent, '');
+})();
+
+document.addEventListener('scroll', function(e) {
+  if (lList.length <= 0) {
+    return;
+  }
+  let scrollTop = document.scrollingElement.scrollTop + 10;
+  let dir;
+
+  if (lastTop - scrollTop > 0) {
+    dir = 'up';
+  } else {
+    dir = 'down';
+  }
+
+  lastTop = scrollTop;
+  if (scrollTop <= 0) {
+    if (lastIndex >= 0 && lastIndex < hList.length) {
+      lList[lastIndex].classList.remove(activeClass);
+    }
+    return;
+  }
+
+  let current = 0, hasFind = false;
+  for (let i = 0; i < hList.length; i++) {
+    if (hList[i].offsetTop > scrollTop) {
+      current = i;
+      hasFind = true;
+      break;
+    }
+  }
+  if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+    current = hList.length - 1;
+  } else {
+    current--;
+  }
+  if (dir === 'down') {
+    if (current > lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex) 
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  } else {
+    if (current < lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex);
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  }
+});
+
+window.addEventListener('load', function() {
+  showToc();
+  document.querySelector('#sidebar').style='display: block;';
+  tocWrapper.classList.add('toc-active');
+  setTimeout(function() {
+    if ("createEvent" in document) {
+      let evt = document.createEvent("HTMLEvents");
+      evt.initEvent("scroll", false, true);
+      document.dispatchEvent(evt);
+    }
+    else {
+      document.fireEvent("scroll");
+    }
+  }, 500)
+})
+
+</script>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc && postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  if (sidebarBody) {
+    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+      let hasFix = false;
+      let scrollEl = document.querySelector('.main-continer');
+      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+      window.addEventListener('scroll', function(e) {
+        if (document.scrollingElement.scrollTop >= limitTop) {
+          if (!hasFix) {
+            sidebar.classList.add('sidebar-fixed');
+            hasFix = true;
+          }
+        } else {
+          if (hasFix) {
+            sidebar.classList.remove('sidebar-fixed');
+            hasFix = false;
+          }
+        }
+      });
+    }
+  }
+  
+</script>
+          <div class="section-box box-shadow-wrapper">
+            <div class="section bg-color post post-page">
+              <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://lindamao0753.github.io/post/linux/">
+      Linux
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span>发布于</span>
+      <span>2021-06-28</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>19分钟</span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>4788<span class="pc-show">字数</span></span>
+    </span>
+    
+      
+      
+        
+      
+      <span id="/post/linux/" data-flag-title="Linux" class="meta-item pc-show leancloud_visitors">
+        <span class="post-meta-divider">|</span>
+        <i class="fa fa-eye"></i>
+        <span>浏览量：<span class="leancloud-visitors-count" ></span></span>
+      </span>
+    
+  </div>
+</header>
+              <div class="post-body next-md-body" id="post_body">
+                <h1 id="常用的基本命令">常用的基本命令</h1>
+<h2 id="目录管理">目录管理</h2>
+<h3 id="绝对路径和相对路径">绝对路径和相对路径</h3>
+<p>我们知道Linux的目录结构为树状结构，最顶级的目录为根目录 /。</p>
+<p>其他目录通过挂载可以将它们添加到树中，通过解除挂载可以移除它们。</p>
+<p>在开始本教程前我们需要先知道什么是绝对路径与相        对路径。</p>
+<p><strong>绝对路径：</strong></p>
+<p>路径的写法，由根目录 / 写起，例如：/usr/share/doc 这个目录。</p>
+<p><strong>相对路径：</strong></p>
+<p>路径的写法，不是由 / 写起，例如由 /usr/share/doc 要到 /usr/share/man 底下时，可以写成：cd ../man 这就是相对路径的写法啦！</p>
+<h3 id="处理目录的常用命令">处理目录的常用命令</h3>
+<p>接下来我们就来看几个常见的处理目录的命令吧：</p>
+<ul>
+<li>ls: 列出目录</li>
+<li>cd：切换目录</li>
+<li>pwd：显示目前的目录</li>
+<li>mkdir：创建一个新的目录</li>
+<li>rmdir：删除一个空的目录</li>
+<li>cp: 复制文件或目录</li>
+<li>rm: 移除文件或目录</li>
+<li>mv: 移动文件与目录，或修改文件与目录的名称</li>
+</ul>
+<p>你可以使用 <em>man [命令]</em> 来查看各个命令的使用文档，如 ：man cp。</p>
+<h4 id="ls-列出目录">ls （列出目录）</h4>
+<p>在Linux系统当中， ls 命令可能是最常被运行的。</p>
+<p>语法：</p>
+<pre><code>[root@www ~]# ls [-aAdfFhilnrRSt] 目录名称
+</code></pre>
+<p>选项与参数：</p>
+<ul>
+<li>-a ：全部的文件，连同隐藏文件( 开头为 . 的文件) 一起列出来(常用)</li>
+<li>-l ：长数据串列出，包含文件的属性与权限等等数据；(常用)</li>
+</ul>
+<p>将目录下的所有文件列出来(含属性与隐藏档)</p>
+<pre><code>[root@www ~]# ls -al ~
+</code></pre>
+<h4 id="cd-切换目录">cd （切换目录）</h4>
+<p>cd是Change Directory的缩写，这是用来变换工作目录的命令。</p>
+<p>语法：</p>
+<pre><code>cd [相对路径或绝对路径]
+</code></pre>
+<p>测试：</p>
+<pre><code># 切换到用户目录下
+[root@kuangshen /]# cd home  
+
+# 使用 mkdir 命令创建 kuangstudy 目录
+[root@kuangshen home]# mkdir kuangstudy
+
+# 进入 kuangstudy 目录
+[root@kuangshen home]# cd kuangstudy
+
+# 回到上一级
+[root@kuangshen kuangstudy]# cd ..
+
+# 回到根目录
+[root@kuangshen kuangstudy]# cd /
+
+# 表示回到自己的家目录，亦即是 /root 这个目录
+[root@kuangshen kuangstudy]# cd ~
+</code></pre>
+<p>接下来大家多操作几次应该就可以很好的理解 cd 命令的。</p>
+<h4 id="pwd-显示目前所在的目录">pwd ( 显示目前所在的目录 )</h4>
+<p>pwd 是 <strong>Print Working Directory</strong> 的缩写，也就是显示目前所在目录的命令。</p>
+<pre><code>[root@kuangshen kuangstudy]#pwd [-P]
+</code></pre>
+<p>选项与参数：<strong>-P</strong> ：显示出确实的路径，而非使用连接(link) 路径。</p>
+<p>测试：</p>
+<pre><code># 单纯显示出目前的工作目录
+[root@kuangshen ~]# pwd
+/root
+
+# 如果是链接，要显示真实地址，可以使用 -P参数
+[root@kuangshen /]# cd bin
+[root@kuangshen bin]# pwd -P
+/usr/bin
+</code></pre>
+<h4 id="mkdir-创建新目录">mkdir （创建新目录）</h4>
+<p>如果想要创建新的目录的话，那么就使用mkdir (make directory)吧。</p>
+<pre><code>mkdir [-mp] 目录名称
+</code></pre>
+<p>选项与参数：</p>
+<ul>
+<li>-m ：配置文件的权限喔！直接配置，不需要看默认权限 (umask) 的脸色～</li>
+<li>-p ：帮助你直接将所需要的目录(包含上一级目录)递归创建起来！</li>
+</ul>
+<p>测试：</p>
+<pre><code># 进入我们用户目录下
+[root@kuangshen /]# cd /home
+
+# 创建一个 test 文件夹
+[root@kuangshen home]# mkdir test
+
+# 创建多层级目录
+[root@kuangshen home]# mkdir test1/test2/test3/test4
+mkdir: cannot create directory ‘test1/test2/test3/test4’:
+No such file or directory  # &lt;== 没办法直接创建此目录啊！
+
+# 加了这个 -p 的选项，可以自行帮你创建多层目录！
+[root@kuangshen home]# mkdir -p test1/test2/test3/test4
+
+# 创建权限为 rwx--x--x 的目录。
+[root@kuangshen home]# mkdir -m 711 test2
+[root@kuangshen home]# ls -l
+drwxr-xr-x 2 root root  4096 Mar 12 21:55 test
+drwxr-xr-x 3 root root  4096 Mar 12 21:56 test1
+drwx--x--x 2 root root  4096 Mar 12 21:58 test2
+</code></pre>
+<h4 id="rmdir-删除空的目录">rmdir ( 删除空的目录 )</h4>
+<p>语法：</p>
+<pre><code>rmdir [-p] 目录名称
+</code></pre>
+<p>选项与参数：**-p ：**连同上一级『空的』目录也一起删除</p>
+<p>测试：</p>
+<pre><code># 看看有多少目录存在？[root@kuangshen home]# ls -ldrwxr-xr-x 2 root root  4096 Mar 12 21:55 testdrwxr-xr-x 3 root root  4096 Mar 12 21:56 test1drwx--x--x 2 root root  4096 Mar 12 21:58 test2# 可直接删除掉，没问题[root@kuangshen home]# rmdir test# 因为尚有内容，所以无法删除！[root@kuangshen home]# rmdir test1rmdir: failed to remove ‘test1’: Directory not empty# 利用 -p 这个选项，立刻就可以将 test1/test2/test3/test4 依次删除。[root@kuangshen home]# rmdir -p test1/test2/test3/test4
+</code></pre>
+<p>注意：这个 rmdir 仅能删除空的目录，你可以使用 rm 命令来删除非空目录，后面我们会将！</p>
+<h4 id="cp-复制文件或目录">cp ( 复制文件或目录 )</h4>
+<p>语法：</p>
+<pre><code>[root@www ~]# cp [-adfilprsu] 来源档(source) 目标档(destination)[root@www ~]# cp [options] source1 source2 source3 .... directory
+</code></pre>
+<p>选项与参数：</p>
+<ul>
+<li>**-a：**相当於 -pdr 的意思，至於 pdr 请参考下列说明；(常用)</li>
+<li>**-p：**连同文件的属性一起复制过去，而非使用默认属性(备份常用)；</li>
+<li>**-d：**若来源档为连结档的属性(link file)，则复制连结档属性而非文件本身；</li>
+<li>**-r：**递归持续复制，用於目录的复制行为；(常用)</li>
+<li>**-f：**为强制(force)的意思，若目标文件已经存在且无法开启，则移除后再尝试一次；</li>
+<li>**-i：**若目标档(destination)已经存在时，在覆盖时会先询问动作的进行(常用)</li>
+<li>**-l：**进行硬式连结(hard link)的连结档创建，而非复制文件本身。</li>
+<li>**-s：**复制成为符号连结档 (symbolic link)，亦即『捷径』文件；</li>
+<li>**-u：**若 destination 比 source 旧才升级 destination ！</li>
+</ul>
+<p>测试：</p>
+<pre><code># 找一个有文件的目录，我这里找到 root目录[root@kuangshen home]# cd /root[root@kuangshen ~]# lsinstall.sh[root@kuangshen ~]# cd /home# 复制 root目录下的install.sh 到 home目录下[root@kuangshen home]# cp /root/install.sh /home[root@kuangshen home]# lsinstall.sh# 再次复制，加上-i参数，增加覆盖询问？[root@kuangshen home]# cp -i /root/install.sh /homecp: overwrite ‘/home/install.sh’? y # n不覆盖，y为覆盖
+</code></pre>
+<h4 id="rm-移除文件或目录">rm ( 移除文件或目录 )</h4>
+<p>语法：</p>
+<pre><code>rm [-fir] 文件或目录
+</code></pre>
+<p>选项与参数：</p>
+<ul>
+<li>-f ：就是 force 的意思，忽略不存在的文件，不会出现警告信息；</li>
+<li>-i ：互动模式，在删除前会询问使用者是否动作</li>
+<li>-r ：递归删除啊！最常用在目录的删除了！这是非常危险的选项！！！</li>
+</ul>
+<p>测试：</p>
+<pre><code># 将刚刚在 cp 的实例中创建的 install.sh删除掉！[root@kuangshen home]# rm -i install.shrm: remove regular file ‘install.sh’? y# 如果加上 -i 的选项就会主动询问喔，避免你删除到错误的档名！# 尽量不要在服务器上使用 rm -rf /
+</code></pre>
+<h4 id="mv-移动文件与目录或修改名称">mv  ( 移动文件与目录，或修改名称 )</h4>
+<p>语法：</p>
+<pre><code>[root@www ~]# mv [-fiu] source destination[root@www ~]# mv [options] source1 source2 source3 .... directory
+</code></pre>
+<p>选项与参数：</p>
+<ul>
+<li>-f ：force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖；</li>
+<li>-i ：若目标文件 (destination) 已经存在时，就会询问是否覆盖！</li>
+<li>-u ：若目标文件已经存在，且 source 比较新，才会升级 (update)</li>
+</ul>
+<p>测试：</p>
+<pre><code># 复制一个文件到当前目录[root@kuangshen home]# cp /root/install.sh /home# 创建一个文件夹 test[root@kuangshen home]# mkdir test# 将复制过来的文件移动到我们创建的目录，并查看[root@kuangshen home]# mv install.sh test[root@kuangshen home]# lstest[root@kuangshen home]# cd test[root@kuangshen test]# lsinstall.sh# 将文件夹重命名，然后再次查看！[root@kuangshen test]# cd ..[root@kuangshen home]# mv test mvtest[root@kuangshen home]# lsmvtest
+</code></pre>
+<h2 id="基本属性">基本属性</h2>
+<h3 id="看懂文件属性">看懂文件属性</h3>
+<p>Linux系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。为了保护系统的安全性，Linux系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
+<p>在Linux中我们可以使用<code>ll</code>或者<code>ls –l</code>命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
+<figure data-type="image" tabindex="1"><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img" loading="lazy"></figure>
+<p>实例中，boot文件的第一个属性用&quot;d&quot;表示。&quot;d&quot;在Linux中代表该文件是一个目录文件。</p>
+<p>在Linux中第一个字符代表这个文件是目录、文件或链接文件等等：</p>
+<ul>
+<li>当为[ <strong>d</strong> ]则是目录</li>
+<li>当为[ <strong>-</strong> ]则是文件；</li>
+<li>若是[ <strong>l</strong> ]则表示为链接文档 ( link file )；</li>
+<li>若是[ <strong>b</strong> ]则表示为装置文件里面的可供储存的接口设备 ( 可随机存取装置 )；</li>
+<li>若是[ <strong>c</strong> ]则表示为装置文件里面的串行端口设备，例如键盘、鼠标 ( 一次性读取装置 )。</li>
+</ul>
+<p>接下来的字符中，以三个为一组，且均为『rwx』 的三个参数的组合。</p>
+<p>其中，[ r ]代表可读(read)、[ w ]代表可写(write)、[ x ]代表可执行(execute)。</p>
+<p>要注意的是，这三个权限的位置不会改变，如果没有权限，就会出现减号[ - ]而已。</p>
+<p>每个文件的属性由左边第一部分的10个字符来确定（如下图）：</p>
+<figure data-type="image" tabindex="2"><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img" loading="lazy"></figure>
+<p>从左至右用0-9这些数字来表示。</p>
+<p>第0位确定文件类型，第1-3位确定属主（该文件的所有者）拥有该文件的权限。第4-6位确定属组（所有者的同组用户）拥有该文件的权限，第7-9位确定其他用户拥有该文件的权限。</p>
+<p>其中：</p>
+<p>第1、4、7位表示读权限，如果用&quot;r&quot;字符表示，则有读权限，如果用&quot;-&quot;字符表示，则没有读权限；</p>
+<p>第2、5、8位表示写权限，如果用&quot;w&quot;字符表示，则有写权限，如果用&quot;-&quot;字符表示没有写权限；</p>
+<p>第3、6、9位表示可执行权限，如果用&quot;x&quot;字符表示，则有执行权限，如果用&quot;-&quot;字符表示，则没有执行权限。</p>
+<p>对于文件来说，它都有一个特定的所有者，也就是对该文件具有所有权的用户。</p>
+<p>同时，在Linux系统中，用户是按组分类的，一个用户属于一个或多个组。</p>
+<p>文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户。</p>
+<p>因此，Linux系统按文件所有者、文件所有者同组用户和其他用户来规定了不同的文件访问权限。</p>
+<p>在以上实例中，boot 文件是一个目录文件，属主和属组都为 root。</p>
+<h3 id="修改文件属性">修改文件属性</h3>
+<p><strong>1、chgrp：更改文件属组</strong></p>
+<pre><code>chgrp [-R] 属组名 文件名
+</code></pre>
+<p>-R：递归更改文件属组，就是在更改某个目录文件的属组时，如果加上-R的参数，那么该目录下的所有文件的属组都会更改。</p>
+<p><strong>2、chown：更改文件属主，也可以同时更改文件属组</strong></p>
+<pre><code>chown [–R] 属主名 文件名chown [-R] 属主名：属组名 文件名
+</code></pre>
+<p><strong>3、chmod：更改文件9个属性</strong></p>
+<pre><code>chmod [-R] xyz 文件或目录
+</code></pre>
+<p>Linux文件属性有两种设置方法，一种是数字，一种是符号。</p>
+<p>Linux文件的基本权限就有九个，分别是owner/group/others三种身份各有自己的read/write/execute权限。</p>
+<p>先复习一下刚刚上面提到的数据：文件的权限字符为：『-rwxrwxrwx』， 这九个权限是三个三个一组的！其中，我们可以使用数字来代表各个权限，各权限的分数对照表如下：</p>
+<pre><code>r:4     w:2         x:1
+</code></pre>
+<p>每种身份(owner/group/others)各自的三个权限(r/w/x)分数是需要累加的，例如当权限为：[-rwxrwx---] 分数则是：</p>
+<ul>
+<li>owner = rwx = 4+2+1 = 7</li>
+<li>group = rwx = 4+2+1 = 7</li>
+<li>others= --- = 0+0+0 = 0</li>
+</ul>
+<pre><code>chmod 770 filename
+</code></pre>
+<p>可以自己下去多进行测试！</p>
+<h2 id="文件内容查看">文件内容查看</h2>
+<h3 id="概述">概述</h3>
+<p>Linux系统中使用以下命令来查看文件的内容：</p>
+<ul>
+<li>cat 由第一行开始显示文件内容</li>
+<li>tac 从最后一行开始显示，可以看出 tac 是 cat 的倒着写！</li>
+<li>nl  显示的时候，顺道输出行号！</li>
+<li>more 一页一页的显示文件内容</li>
+<li>less 与 more 类似，但是比 more 更好的是，他可以往前翻页！</li>
+<li>head 只看头几行</li>
+<li>tail 只看尾巴几行</li>
+</ul>
+<p>你可以使用 *man [命令]*来查看各个命令的使用文档，如 ：man cp。</p>
+<h3 id="cat-由第一行开始显示文件内容">cat 由第一行开始显示文件内容</h3>
+<p>语法：</p>
+<pre><code>cat [-AbEnTv]
+</code></pre>
+<p>选项与参数：</p>
+<ul>
+<li>-A ：相当於 -vET 的整合选项，可列出一些特殊字符而不是空白而已；</li>
+<li>-b ：列出行号，仅针对非空白行做行号显示，空白行不标行号！</li>
+<li>-E ：将结尾的断行字节 $ 显示出来；</li>
+<li>-n ：列印出行号，连同空白行也会有行号，与 -b 的选项不同；</li>
+<li>-T ：将 [tab] 按键以 ^I 显示出来；</li>
+<li>-v ：列出一些看不出来的特殊字符</li>
+</ul>
+<p>测试：</p>
+<pre><code># 查看网络配置: 文件地址 /etc/sysconfig/network-scripts/
+[root@kuangshen ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+BOOTPROTO=dhcp
+ONBOOT=yes
+</code></pre>
+<h3 id="tac">tac</h3>
+<p>tac与cat命令刚好相反，文件内容从最后一行开始显示，可以看出 tac 是 cat 的倒着写！如：</p>
+<pre><code>[root@kuangshen ~]# tac /etc/sysconfig/network-scripts/ifcfg-eth0
+ONBOOT=yes
+BOOTPROTO=dhcp
+DEVICE=eth0
+</code></pre>
+<h3 id="nl-显示行号">nl  显示行号</h3>
+<p>语法：</p>
+<pre><code>nl [-bnw] 文件
+</code></pre>
+<p>选项与参数：</p>
+<ul>
+<li>-b ：指定行号指定的方式，主要有两种：-b a ：表示不论是否为空行，也同样列出行号(类似 cat -n)；-b t ：如果有空行，空的那一行不要列出行号(默认值)；</li>
+<li>-n ：列出行号表示的方法，主要有三种：-n ln ：行号在荧幕的最左方显示；-n rn ：行号在自己栏位的最右方显示，且不加 0 ；-n rz ：行号在自己栏位的最右方显示，且加 0 ；</li>
+<li>-w ：行号栏位的占用的位数。</li>
+</ul>
+<p>测试：</p>
+<pre><code>[root@kuangshen ~]# nl /etc/sysconfig/network-scripts/ifcfg-eth0
+1DEVICE=eth0
+2BOOTPROTO=dhcp
+3ONBOOT=yes
+</code></pre>
+<h3 id="more-一页一页翻动">more  一页一页翻动</h3>
+<p>在 more 这个程序的运行过程中，你有几个按键可以按的：</p>
+<ul>
+<li>空白键 (space)：代表向下翻一页；</li>
+<li>Enter   ：代表向下翻『一行』；</li>
+<li>/字串   ：代表在这个显示的内容当中，向下搜寻『字串』这个关键字；</li>
+<li>:f    ：立刻显示出档名以及目前显示的行数；</li>
+<li>q    ：代表立刻离开 more ，不再显示该文件内容。</li>
+<li>b 或 [ctrl]-b ：代表往回翻页，不过这动作只对文件有用，对管线无用。</li>
+</ul>
+<pre><code>[root@kuangshen etc]# more /etc/csh.login....(中间省略)....--More--(28%) # 重点在这一行喔！你的光标也会在这里等待你的命令
+</code></pre>
+<h3 id="less-一页一页翻动以下实例输出etcmanconfig文件的内容">less  一页一页翻动，以下实例输出/etc/man.config文件的内容：</h3>
+<p>less运行时可以输入的命令有：</p>
+<ul>
+<li>空白键  ：向下翻动一页；</li>
+<li>[pagedown]：向下翻动一页；</li>
+<li>[pageup] ：向上翻动一页；</li>
+<li>/字串  ：向下搜寻『字串』的功能；</li>
+<li>?字串  ：向上搜寻『字串』的功能；</li>
+<li>n   ：重复前一个搜寻 (与 / 或 ? 有关！)</li>
+<li>N   ：反向的重复前一个搜寻 (与 / 或 ? 有关！)</li>
+<li>q   ：离开 less 这个程序；</li>
+</ul>
+<pre><code>[root@kuangshen etc]# more /etc/csh.login....(中间省略)....:   # 这里可以等待你输入命令！
+</code></pre>
+<h3 id="head-取出文件前面几行">head  取出文件前面几行</h3>
+<p>语法：</p>
+<pre><code>head [-n number] 文件
+</code></pre>
+<p>选项与参数：<strong>-n</strong> 后面接数字，代表显示几行的意思！</p>
+<p>默认的情况中，显示前面 10 行！若要显示前 20 行，就得要这样：</p>
+<pre><code>[root@kuangshen etc]# head -n 20 /etc/csh.login
+</code></pre>
+<h3 id="tail-取出文件后面几行">tail  取出文件后面几行</h3>
+<p>语法：</p>
+<pre><code>tail [-n number] 文件
+</code></pre>
+<p>选项与参数：</p>
+<ul>
+<li>-n ：后面接数字，代表显示几行的意思</li>
+</ul>
+<p>默认的情况中，显示最后 10 行！若要显示最后 20 行，就得要这样：</p>
+<pre><code>[root@kuangshen etc]# tail -n 20 /etc/csh.login
+</code></pre>
+<h3 id="拓展linux-链接概念">拓展：Linux 链接概念</h3>
+<p>Linux 链接分两种，一种被称为硬链接（Hard Link），另一种被称为符号链接（Symbolic Link）。</p>
+<p>情况下，<strong>ln</strong> 命令产生硬链接。</p>
+<h4 id="硬连接"><strong>硬连接</strong></h4>
+<p>硬连接指通过索引节点来进行连接。在 Linux 的文件系统中，保存在磁盘分区中的文件不管是什么类型都给它分配一个编号，称为索引节点号(Inode Index)。在 Linux 中，多个文件名指向同一索引节点是存在的。比如：A 是 B 的硬链接（A 和 B 都是文件名），则 A 的目录项中的 inode 节点号与 B 的目录项中的 inode 节点号相同，即一个 inode 节点对应两个不同的文件名，两个文件名指向同一个文件，A 和 B 对文件系统来说是完全平等的。删除其中任何一个都不会影响另外一个的访问。</p>
+<p>硬连接的作用是允许一个文件拥有多个有效路径名，这样用户就可以建立硬连接到重要文件，以防止“误删”的功能。其原因如上所述，因为对应该目录的索引节点有一个以上的连接。只删除一个连接并不影响索引节点本身和其它的连接，只有当最后一个连接被删除后，文件的数据块及目录的连接才会被释放。也就是说，文件真正删除的条件是与之相关的所有硬连接文件均被删除。</p>
+<h4 id="软连接"><strong>软连接</strong></h4>
+<p>另外一种连接称之为符号连接（Symbolic Link），也叫软连接。软链接文件有类似于 Windows 的快捷方式。它实际上是一个特殊的文件。在符号连接中，文件实际上是一个文本文件，其中包含的有另一文件的位置信息。比如：A 是 B 的软链接（A 和 B 都是文件名），A 的目录项中的 inode 节点号与 B 的目录项中的 inode 节点号不相同，A 和 B 指向的是两个不同的 inode，继而指向两块不同的数据块。但是 A 的数据块中存放的只是 B 的路径名（可以根据这个找到 B 的目录项）。A 和 B 之间是“主从”关系，如果 B 被删除了，A 仍然存在（因为两个是不同的文件），但指向的是一个无效的链接。</p>
+<p><strong>测试：</strong></p>
+<pre><code>[root@kuangshen /]# cd /home
+[root@kuangshen home]# touch f1 # 创建一个测试文件f1
+[root@kuangshen home]# ls
+f1
+[root@kuangshen home]# ln f1 f2     # 创建f1的一个硬连接文件f2
+[root@kuangshen home]# ln -s f1 f3   # 创建f1的一个符号连接文件f3
+[root@kuangshen home]# ls -li       # -i参数显示文件的inode节点信息
+397247 -rw-r--r-- 2 root root     0 Mar 13 00:50 f1
+397247 -rw-r--r-- 2 root root     0 Mar 13 00:50 f2
+397248 lrwxrwxrwx 1 root root     2 Mar 13 00:50 f3 -&gt; f1
+</code></pre>
+<p>从上面的结果中可以看出，硬连接文件 f2 与原文件 f1 的 inode 节点相同，均为 397247，然而符号连接文件的 inode 节点不同。</p>
+<pre><code># echo 字符串输出 &gt;&gt; f1 输出到 f1文件
+[root@kuangshen home]# echo &quot;I am f1 file&quot; &gt;&gt;f1
+[root@kuangshen home]# cat f1
+I am f1 file
+[root@kuangshen home]# cat f2
+I am f1 file
+[root@kuangshen home]# cat f3
+I am f1 file
+[root@kuangshen home]# rm -f f1
+[root@kuangshen home]# cat f2
+I am f1 file
+[root@kuangshen home]# cat f3
+cat: f3: No such file or directory
+</code></pre>
+<p>通过上面的测试可以看出：当删除原始文件 f1 后，硬连接 f2 不受影响，但是符号连接 f1 文件无效；</p>
+<p>依此您可以做一些相关的测试，可以得到以下全部结论：</p>
+<ul>
+<li>删除符号连接f3,对f1,f2无影响；</li>
+<li>删除硬连接f2，对f1,f3也无影响；</li>
+<li>删除原文件f1，对硬连接f2没有影响，导致符号连接f3失效；</li>
+<li>同时删除原文件f1,硬连接f2，整个文件会真正的被删除。</li>
+</ul>
+<figure data-type="image" tabindex="3"><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img" loading="lazy"></figure>
+
+              </div>
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Lindamao
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://lindamao0753.github.io/post/linux/" title="Linux">Linux</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+        <i class="fa fa-chevron-left"></i>
+        <a class="nav-pc-next" title="Redis" href="https://lindamao0753.github.io/post/redis/">Redis</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="Redis" href="https://lindamao0753.github.io/post/redis/">上一篇</a>
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="集合框架" href="https://lindamao0753.github.io/post/Collection/">集合框架</a>
+        <a class="nav-mobile-next" title="集合框架" href="https://lindamao0753.github.io/post/Collection/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
+      
+    </div>
+  </div>
+</div>
+              
+                
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-box">
+  <footer class="footer">
+    <div class="copyright">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | © 2019-2020 Theme By HsxyHao
+    </div>
+    <div class="poweredby">
+      <p class="copyright text-muted">Copyright ©<span>lindamao</span><br><a href="https://github.com/getgridea/gridea" class="Themeinfo" one-link-mark="yes">Powered by Gridea</a></p>
+    </div>
+  </footer>
+  
+  
+  <div class="pisces back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    
+    <span class="scrollpercent">
+      <span id="back_to_top_text">0</span>%
+    </span>
+    
+  </div>
+  
+  
+  
+</div>
+<script>
+
+  let sideBarOpen = 'sidebar-open';
+  let body = document.body;
+  let back2Top = document.querySelector('#back_to_top'),
+  back2TopText = document.querySelector('#back_to_top_text'),
+  drawerBox = document.querySelector('#drawer_box'),
+  rightSideBar = document.querySelector('.sidebar'),
+  viewport = document.querySelector('body');
+
+  function scrollAnimation(currentY, targetY) {
+   
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
+
+  back2Top.addEventListener("click", function(e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+  
+  window.addEventListener('scroll', function(e) {
+    let percent = document.scrollingElement.scrollTop / (document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+  
+  let hasCacu = false;
+  window.onresize = function() {
+    if (window.width > 991) {
+      calcuHeight();
+    } else {
+      hasCacu = false;
+    }
+  }
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (!hasCacu && back2Top.classList.contains('pisces') || back2Top.classList.contains('gemini')) {
+      let sideBar = document.querySelector('.sidebar');
+      let navUl = document.querySelector('#site_nav');
+      sideBar.style = 'margin-top:' + (navUl.offsetHeight + navUl.offsetTop + 15) + 'px;';
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+  
+  let open = false, MOTION_TIME = 300, RIGHT_MOVE_DIS = '320px';
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll('.right-motion');
+    let right = drawerBox.classList.contains('right');
+
+    let transitionDir = right ? "transition.slideRightIn" : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingRight: '0px'
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingLeft: '0px'
+      };
+    }
+
+    drawerBox.onclick = function() {
+      open = !open;
+      window.Velocity(rightSideBar, 'stop');
+      window.Velocity(viewport, 'stop');
+      window.Velocity(rightMotions, 'stop');
+      if (open) {
+        window.Velocity(rightSideBar, {
+          width: RIGHT_MOVE_DIS
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, transitionDir,{ });
+          }
+        })
+        window.Velocity(viewport, openProp,{
+          duration: MOTION_TIME
+        });
+      } else {
+        window.Velocity(rightSideBar, {
+          width: '0px'
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, {
+              opacity: 0
+            });
+          }
+        })
+        window.Velocity(viewport, closeProp ,{
+          duration: MOTION_TIME
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle('muse-line');
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    }
+  }
+
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+
+</script>
+    </div>
+  </body>
+  <script src="/media/js/motion.js"></script>
+</html>
