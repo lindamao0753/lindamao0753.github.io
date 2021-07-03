@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="keywords" content="Gridea静态个人博客">
+<meta name="description" content="好好学习">
+<meta name="theme-color" content="#212529">
+<title> ElasticSearch | Lindamao</title>
+<link rel="shortcut icon" href="/favicon.ico?v=1625279759745">
+<link rel="stylesheet" href="/styles/main.css">
+<link rel="stylesheet" href="/media/css/pisces.css">
+
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+<link href="/media/hljs/styles/idea.css" rel="stylesheet">  
+
+<script src="/media/hljs/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+    <meta name="description" content=" ElasticSearch" />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div class="head-top-line"></div>
+    <div class="header-box">
+      
+<div class=" pisces">
+  <header class="header bg-color ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>Lindamao</span>
+            </a>  
+          
+        </div>
+        
+          <p class="subtitle">好好学习</p>
+        
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/" target="_self">
+                  <i class="fa fa-home"></i> 首页
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/archives" target="_self">
+                  <i class="fa fa-archive"></i> 归档
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/tags" target="_self">
+                  <i class="fa fa-tags"></i> 标签
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/post/about" target="_self">
+                  <i class="fa fa-user"></i> 关于
+                </a>
+              
+            </li>
+          
+          <li class="nav-item">
+            <a>
+              <i class="fa fa-search"></i> 搜索
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+    </div>
+    <div class="main-continer">
+      
+      <div class="section-layout pisces ">
+        <div class="section-layout-wrapper">
+          
+
+<div class="sidebar">
+  
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+      <div class="sidebar-body pisces" id="sidebar_body">
+        
+          
+            <div style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto" id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li><a href="#1-elasticsearch%E6%A6%82%E8%BF%B0">1. ElasticSearch概述</a></li>
+<li><a href="#2-es%E4%B8%8Esolr%E7%9A%84%E5%B7%AE%E5%88%AB">2. ES与Solr的差别</a>
+<ul>
+<li><a href="#21-solr%E7%AE%80%E4%BB%8B">2.1. Solr简介</a></li>
+<li><a href="#22-lucene%E7%AE%80%E4%BB%8B">2.2. Lucene简介</a></li>
+<li><a href="#23-es-vs-solr">2.3. ES VS Solr</a></li>
+</ul>
+</li>
+<li><a href="#3-elasticsearch-%E5%AE%89%E8%A3%85">3. ElasticSearch 安装</a></li>
+<li><a href="#4-kibana%E5%AE%89%E8%A3%85">4. Kibana安装</a></li>
+<li><a href="#5-es%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5">5. ES核心概念</a></li>
+<li><a href="#6-ik%E5%88%86%E8%AF%8D%E5%99%A8">6. IK分词器</a></li>
+<li><a href="#7-restful%E9%A3%8E%E6%A0%BC%E8%AF%B4%E6%98%8E">7. Restful风格说明</a></li>
+<li><a href="#8-%E5%85%B3%E4%BA%8E%E6%96%87%E6%A1%A3%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">8. 关于文档的基本操作</a></li>
+<li><a href="#9-%E9%9B%86%E6%88%90springboot">9. 集成SpringBoot</a></li>
+<li><a href="#10-%E5%AE%9E%E6%88%98%E6%A8%A1%E6%8B%9F%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2-%E4%BA%AC%E4%B8%9C%E6%90%9C%E7%B4%A2">10. 实战：模拟全文搜索-京东搜索</a></li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1; 
+let active = 'active-show', activeClass = 'active-current';
+let tocWrapper = document.querySelector('#toc_wrapper');
+let tocContent = tocWrapper.children[0];
+let autoNumber = tocWrapper&&tocWrapper.classList.contains('auto-number');
+
+function addTocNumber(elem, deep) {
+  if (!elem) {
+    return;
+  }
+  let prop = elem.__proto__;
+
+  if (prop === HTMLUListElement.prototype) {
+    for (let i = 0; i < elem.children.length; i++) {
+      addTocNumber(elem.children[i], deep + (i + 1) + '.');
+    }
+  } else if (prop === HTMLLIElement.prototype) {
+    // 保存li元素
+    if (elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+      lList.push(elem);
+    }
+    for (let i = 0; i < elem.children.length; i++) {
+      let cur = elem.children[i];
+      if (cur.__proto__ === HTMLAnchorElement.prototype) {
+        if (autoNumber) {
+          cur.text =  deep + ' ' + cur.text;
+        }
+      } else if (cur.__proto__ === HTMLUListElement.prototype) {
+        addTocNumber(cur, deep);
+      }
+    }
+  }
+}
+
+function removeParentActiveClass() {
+  let parents = tocContent.querySelectorAll('.'+active)
+  parents.forEach(function(elem) {
+    elem.classList.remove(active);
+  });
+}
+
+function addActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.add(activeClass);
+  }
+}
+
+function removeActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.remove(activeClass);
+  }
+}
+
+function addActiveLiElemment(elem, parent) {
+  if (!elem || elem === parent) {
+    return;
+  } else {
+    if (elem.__proto__ === HTMLLIElement.prototype) {
+      elem.classList.add(active);
+    }
+    addActiveLiElemment(elem.parentElement, parent);
+  }
+}
+
+function showToc() {
+  if (tocWrapper) {
+    postBody = document.querySelector('#post_body');
+    for (let i = 0; i < postBody.children.length; i++) {
+      if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+        hList.push(postBody.children[i]);
+      }
+    }
+    if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+    } else if (tocWrapper.classList.contains('no_compress')){
+      tocContent.classList.add('expanded');
+    } else {
+      if (hList.length > 10) {
+        active = 'active-hidden'
+        tocContent.classList.add('closed');
+      } else {
+        tocContent.classList.add('expanded');
+      }
+    }
+  }
+}
+
+(function() {
+  // 处理不是从#一级标题开始目录
+  if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+    let con = tocContent.children[0].children[0];
+    tocContent.innerHTML = con.innerHTML;
+  }
+  addTocNumber(tocContent, '');
+})();
+
+document.addEventListener('scroll', function(e) {
+  if (lList.length <= 0) {
+    return;
+  }
+  let scrollTop = document.scrollingElement.scrollTop + 10;
+  let dir;
+
+  if (lastTop - scrollTop > 0) {
+    dir = 'up';
+  } else {
+    dir = 'down';
+  }
+
+  lastTop = scrollTop;
+  if (scrollTop <= 0) {
+    if (lastIndex >= 0 && lastIndex < hList.length) {
+      lList[lastIndex].classList.remove(activeClass);
+    }
+    return;
+  }
+
+  let current = 0, hasFind = false;
+  for (let i = 0; i < hList.length; i++) {
+    if (hList[i].offsetTop > scrollTop) {
+      current = i;
+      hasFind = true;
+      break;
+    }
+  }
+  if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+    current = hList.length - 1;
+  } else {
+    current--;
+  }
+  if (dir === 'down') {
+    if (current > lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex) 
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  } else {
+    if (current < lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex);
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  }
+});
+
+window.addEventListener('load', function() {
+  showToc();
+  document.querySelector('#sidebar').style='display: block;';
+  tocWrapper.classList.add('toc-active');
+  setTimeout(function() {
+    if ("createEvent" in document) {
+      let evt = document.createEvent("HTMLEvents");
+      evt.initEvent("scroll", false, true);
+      document.dispatchEvent(evt);
+    }
+    else {
+      document.fireEvent("scroll");
+    }
+  }, 500)
+})
+
+</script>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc && postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  if (sidebarBody) {
+    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+      let hasFix = false;
+      let scrollEl = document.querySelector('.main-continer');
+      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+      window.addEventListener('scroll', function(e) {
+        if (document.scrollingElement.scrollTop >= limitTop) {
+          if (!hasFix) {
+            sidebar.classList.add('sidebar-fixed');
+            hasFix = true;
+          }
+        } else {
+          if (hasFix) {
+            sidebar.classList.remove('sidebar-fixed');
+            hasFix = false;
+          }
+        }
+      });
+    }
+  }
+  
+</script>
+          <div class="section-box box-shadow-wrapper">
+            <div class="section bg-color post post-page">
+              <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://lindamao0753.github.io/post/elasticsearch/">
+       ElasticSearch
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span>发布于</span>
+      <span>2021-06-30</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>18分钟</span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>3245<span class="pc-show">字数</span></span>
+    </span>
+    
+      
+      
+        
+      
+      <span id="/post/elasticsearch/" data-flag-title=" ElasticSearch" class="meta-item pc-show leancloud_visitors">
+        <span class="post-meta-divider">|</span>
+        <i class="fa fa-eye"></i>
+        <span>浏览量：<span class="leancloud-visitors-count" ></span></span>
+      </span>
+    
+  </div>
+</header>
+              <div class="post-body next-md-body" id="post_body">
+                <h1 id="1-elasticsearch概述">1. ElasticSearch概述</h1>
+<figure data-type="image" tabindex="1"><img src="https://img-blog.csdnimg.cn/2020090917111970.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://img-blog.csdnimg.cn/20200909171530181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<h1 id="2-es与solr的差别">2. ES与Solr的差别</h1>
+<h2 id="21-solr简介">2.1. Solr简介</h2>
+<figure data-type="image" tabindex="3"><img src="https://img-blog.csdnimg.cn/20200909172717254.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<h2 id="22-lucene简介">2.2. Lucene简介</h2>
+<figure data-type="image" tabindex="4"><img src="https://img-blog.csdnimg.cn/20200909172848939.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<h2 id="23-es-vs-solr">2.3. ES VS Solr</h2>
+<figure data-type="image" tabindex="5"><img src="https://img-blog.csdnimg.cn/20200909173431643.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<h1 id="3-elasticsearch-安装">3. ElasticSearch 安装</h1>
+<figure data-type="image" tabindex="6"><img src="https://img-blog.csdnimg.cn/20200909173851629.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<p><a href="https://www.elastic.co/cn/">官网</a></p>
+<p>ElasticSearch: https://mirrors.huaweicloud.com/elasticsearch/?C=N&amp;O=D<br>
+logstash: https://mirrors.huaweicloud.com/logstash/?C=N&amp;O=D<br>
+kibana: https://mirrors.huaweicloud.com/kibana/?C=N&amp;O=D</p>
+<ul>
+<li>认识目录</li>
+</ul>
+<figure data-type="image" tabindex="7"><img src="https://img-blog.csdnimg.cn/20200909180913899.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<ol start="3">
+<li>测试访问</li>
+</ol>
+<figure data-type="image" tabindex="8"><img src="https://img-blog.csdnimg.cn/20200909181424754.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="https://img-blog.csdnimg.cn/2020090918274551.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<p>这个，没有测试，等后期回来再看！<a href="https://www.bilibili.com/video/BV17a4y1x7zq?p=5">head的插件</a></p>
+<figure data-type="image" tabindex="10"><img src="https://img-blog.csdnimg.cn/20210201142313582.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
+<h1 id="4-kibana安装">4. Kibana安装</h1>
+<p>开箱即用</p>
+<p>配置文件</p>
+<pre><code class="language-yml">server.port: 5601
+server.host: &quot;0.0.0.0&quot;
+elasticsearch.hosts: [&quot;http://192.168.1.30:9201&quot;]
+kibana.index: &quot;.kibana&quot;
+i18n.locale: &quot;zh-CN&quot;			# 中文汉化
+</code></pre>
+<p>访问测试</p>
+<figure data-type="image" tabindex="11"><img src="https://img-blog.csdnimg.cn/20200909190146731.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<h1 id="5-es核心概念">5. ES核心概念</h1>
+<ul>
+<li>索引</li>
+<li>字段类型（mapping）</li>
+<li>文档（document）</li>
+</ul>
+<figure data-type="image" tabindex="12"><img src="https://img-blog.csdnimg.cn/20200909192956336.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<figure data-type="image" tabindex="13"><img src="https://img-blog.csdnimg.cn/202009091931291.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<figure data-type="image" tabindex="14"><img src="https://img-blog.csdnimg.cn/20200909193601700.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<figure data-type="image" tabindex="15"><img src="https://img-blog.csdnimg.cn/2020090919370995.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<figure data-type="image" tabindex="16"><img src="https://img-blog.csdnimg.cn/20200909193900932.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<figure data-type="image" tabindex="17"><img src="https://img-blog.csdnimg.cn/20200909193947555.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<figure data-type="image" tabindex="18"><img src="https://img-blog.csdnimg.cn/20200909194207851.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<h1 id="6-ik分词器">6. IK分词器</h1>
+<ul>
+<li><a href="https://github.com/medcl/elasticsearch-analysis-ik/releases?after=v7.8.0">下载链接</a></li>
+<li>解压放入到es对应的plugins下即可</li>
+<li>重启观察ES，发现ik插件被加载了</li>
+</ul>
+<figure data-type="image" tabindex="19"><img src="https://img-blog.csdnimg.cn/2020091009234593.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<ul>
+<li>
+<p>也可以通过bin目录下elasticsearch-plugin list 查看已经加载的插件</p>
+</li>
+<li>
+<p>使用kibana测试</p>
+<ul>
+<li>ik_smart: 最少切分</li>
+</ul>
+<figure data-type="image" tabindex="20"><img src="https://img-blog.csdnimg.cn/20200910100025320.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<ul>
+<li>ik_max_word为最细粒度划分！穷尽词库的可能， 字典！</li>
+</ul>
+<figure data-type="image" tabindex="21"><img src="https://img-blog.csdnimg.cn/20200910100206747.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+</li>
+<li>
+<p>ik分词器增加自己的配置！</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="22"><img src="https://img-blog.csdnimg.cn/20200910101747942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<ul>
+<li>重启ES 和 Kibana</li>
+</ul>
+<figure data-type="image" tabindex="23"><img src="https://img-blog.csdnimg.cn/20200910101410113.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<figure data-type="image" tabindex="24"><img src="https://img-blog.csdnimg.cn/20200910101948607.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<h1 id="7-restful风格说明">7. Restful风格说明</h1>
+<figure data-type="image" tabindex="25"><img src="https://img-blog.csdnimg.cn/20200910102407169.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<blockquote>
+<p>基础测试</p>
+</blockquote>
+<ul>
+<li>创建一个索引！</li>
+</ul>
+<pre><code class="language-bash">PUT /索引名/~类型名~/文档id
+{请求体}
+
+# PUT 创建命令  test1 索引 type1 类型 1 id
+PUT test1/type1/1
+{
+  &quot;name&quot;: &quot;xiaofan&quot;,
+  &quot;age&quot;: 28
+}
+
+# 返回结果
+# 警告信息： 不支持在文档索引请求中的指定类型
+# 而是使用无类型的断点(/{index}/_doc/{id}, /{index}/_doc, or /{index}/_create/{id}).
+{
+  &quot;_index&quot; : &quot;test1&quot;,	# 索引
+  &quot;_type&quot; : &quot;type1&quot;,	# 类型（已经废弃）
+  &quot;_id&quot; : &quot;1&quot;,			# id
+  &quot;_version&quot; : 1,		# 版本
+  &quot;result&quot; : &quot;created&quot;,	# 操作类型
+  &quot;_shards&quot; : {			# 分片信息
+    &quot;total&quot; : 2,
+    &quot;successful&quot; : 1,
+    &quot;failed&quot; : 0
+  },
+  &quot;_seq_no&quot; : 0,
+  &quot;_primary_term&quot; : 1
+}
+</code></pre>
+<figure data-type="image" tabindex="26"><img src="https://img-blog.csdnimg.cn/20200910105816144.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<ul>
+<li>指定字段的类型（创建规则）</li>
+</ul>
+<figure data-type="image" tabindex="27"><img src="https://img-blog.csdnimg.cn/20200910113123847.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<ul>
+<li>获取具体的索引规则</li>
+</ul>
+<pre><code class="language-bash"># GET test2
+
+{
+  &quot;test2&quot; : {
+    &quot;aliases&quot; : { },
+    &quot;mappings&quot; : {
+      &quot;properties&quot; : {
+        &quot;age&quot; : {
+          &quot;type&quot; : &quot;integer&quot;
+        },
+        &quot;birthday&quot; : {
+          &quot;type&quot; : &quot;date&quot;
+        },
+        &quot;name&quot; : {
+          &quot;type&quot; : &quot;text&quot;
+        }
+      }
+    },
+    &quot;settings&quot; : {
+      &quot;index&quot; : {
+        &quot;creation_date&quot; : &quot;1599708623941&quot;,
+        &quot;number_of_shards&quot; : &quot;1&quot;,
+        &quot;number_of_replicas&quot; : &quot;1&quot;,
+        &quot;uuid&quot; : &quot;ANWnhwArSMSl8k8iipgH1Q&quot;,
+        &quot;version&quot; : {
+          &quot;created&quot; : &quot;7080099&quot;
+        },
+        &quot;provided_name&quot; : &quot;test2&quot;
+      }
+    }
+  }
+}
+
+# 查看默认的规则
+PUT /test3/_doc/1
+{
+  &quot;name&quot;: &quot;狂神说Java&quot;,
+  &quot;age&quot;: 28,
+  &quot;birthday&quot;: &quot;1997-01-05&quot;
+}
+
+# GET test3
+
+{
+  &quot;test3&quot; : {
+    &quot;aliases&quot; : { },
+    &quot;mappings&quot; : {
+      &quot;properties&quot; : {
+        &quot;age&quot; : {
+          &quot;type&quot; : &quot;long&quot;
+        },
+        &quot;birthday&quot; : {
+          &quot;type&quot; : &quot;date&quot;
+        },
+        &quot;name&quot; : {
+          &quot;type&quot; : &quot;text&quot;,
+          &quot;fields&quot; : {
+            &quot;keyword&quot; : {
+              &quot;type&quot; : &quot;keyword&quot;,
+              &quot;ignore_above&quot; : 256
+            }
+          }
+        }
+      }
+    },
+    &quot;settings&quot; : {
+      &quot;index&quot; : {
+        &quot;creation_date&quot; : &quot;1599708906181&quot;,
+        &quot;number_of_shards&quot; : &quot;1&quot;,
+        &quot;number_of_replicas&quot; : &quot;1&quot;,
+        &quot;uuid&quot; : &quot;LzPLCDgeQn6tdKo3xBBpbw&quot;,
+        &quot;version&quot; : {
+          &quot;created&quot; : &quot;7080099&quot;
+        },
+        &quot;provided_name&quot; : &quot;test3&quot;
+      }
+    }
+  }
+}
+
+</code></pre>
+<figure data-type="image" tabindex="28"><img src="https://img-blog.csdnimg.cn/20200910114250259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<ul>
+<li>修改索引 POST</li>
+</ul>
+<pre><code class="language-bash"># 只会修改指定项，其他内容保证不变
+POST /test3/_doc/1/_update
+{
+  &quot;doc&quot;: {
+    &quot;name&quot;:&quot;暴徒狂神&quot;
+  }
+}
+
+# GET test3/_doc/1
+
+{
+  &quot;_index&quot; : &quot;test3&quot;,
+  &quot;_type&quot; : &quot;_doc&quot;,
+  &quot;_id&quot; : &quot;1&quot;,
+  &quot;_version&quot; : 2,
+  &quot;_seq_no&quot; : 1,
+  &quot;_primary_term&quot; : 1,
+  &quot;found&quot; : true,
+  &quot;_source&quot; : {
+    &quot;name&quot; : &quot;暴徒狂神&quot;,
+    &quot;age&quot; : 28,
+    &quot;birthday&quot; : &quot;1997-01-05&quot;
+  }
+}
+
+</code></pre>
+<figure data-type="image" tabindex="29"><img src="https://img-blog.csdnimg.cn/20200910115620763.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<h1 id="8-关于文档的基本操作">8. 关于文档的基本操作</h1>
+<ul>
+<li>基本操作（简单的查询）</li>
+</ul>
+<pre><code class="language-bash">put /kuangshen/user/1
+{
+  &quot;name&quot;: &quot;狂神说&quot;,
+  &quot;age&quot;: 23,
+  &quot;desc&quot;: &quot;一顿操作猛如虎，一看工资2500&quot;,
+  &quot;tags&quot;: [&quot;码农&quot;, &quot;技术宅&quot;, &quot;直男&quot;]
+}
+
+put /kuangshen/user/2
+{
+  &quot;name&quot;: &quot;张三&quot;,
+  &quot;age&quot;: 28,
+  &quot;desc&quot;: &quot;法外狂徒&quot;,
+  &quot;tags&quot;: [&quot;旅游&quot;, &quot;渣男&quot;, &quot;交友&quot;]
+}
+
+put /kuangshen/user/3
+{
+  &quot;name&quot;: &quot;李四&quot;,
+  &quot;age&quot;: 30,
+  &quot;desc&quot;: &quot;不知道怎么描述&quot;,
+  &quot;tags&quot;: [&quot;旅游&quot;, &quot;靓女&quot;, &quot;唱歌&quot;]
+}
+
+GET kuangshen/user/1
+
+
+GET kuangshen/user/_search?q=name:狂神
+</code></pre>
+<ul>
+<li>复杂操作(排序、分页、高亮、模糊查询、标准查询！)</li>
+</ul>
+<figure data-type="image" tabindex="30"><img src="https://img-blog.csdnimg.cn/20200910140701583.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<pre><code class="language-bash"># 模糊查询
+GET kuangshen/user/_search
+{
+  &quot;query&quot;: {
+    &quot;match&quot;: {
+      &quot;name&quot;: &quot;狂神&quot;
+    }
+  }
+}
+
+# 对查询结果进行字段过滤
+GET kuangshen/user/_search
+{
+  &quot;query&quot;: {
+    &quot;match&quot;: {
+      &quot;name&quot;: &quot;狂神&quot;
+    }
+  },
+  &quot;_source&quot;: [&quot;name&quot;, &quot;desc&quot;]
+}
+
+# 排序
+GET kuangshen/user/_search
+{
+  &quot;query&quot;: {
+    &quot;match&quot;: {
+      &quot;name&quot;: &quot;狂神&quot;
+    }
+  },
+  &quot;sort&quot;:[{
+    &quot;age&quot;: &quot;asc&quot;
+  }]
+}
+
+# 分页
+GET kuangshen/user/_search
+{
+  &quot;query&quot;: {
+    &quot;match&quot;: {
+      &quot;name&quot;: &quot;狂神&quot;
+    }
+  },
+  &quot;sort&quot;:[{
+    &quot;age&quot;: &quot;asc&quot;
+  }], 
+  &quot;from&quot;: 0,
+  &quot;size&quot;: 2
+}
+</code></pre>
+<blockquote>
+<p>布尔值条件查询</p>
+</blockquote>
+<pre><code class="language-bash"># 多条件查询 must 相当于and
+GET kuangshen/user/_search
+{
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;must&quot;: [
+        {&quot;match&quot;: {
+          &quot;name&quot;: &quot;狂神&quot;
+        }},
+        {&quot;match&quot;: {
+          &quot;age&quot;: 23
+        }}
+      ]
+    }
+  }
+}
+
+# 多条件查询 should 相当于or
+GET kuangshen/user/_search
+{
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;should&quot;: [
+        {&quot;match&quot;: {
+          &quot;name&quot;: &quot;狂神说&quot;
+        }},
+        {&quot;match&quot;: {
+          &quot;age&quot;: 25
+        }}
+      ]
+    }
+  }
+}
+
+# 多条件查询 must_not 相当于 not
+GET kuangshen/user/_search
+{
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;must_not&quot;: [
+        {&quot;match&quot;: {
+          &quot;age&quot;: 25
+        }}
+      ]
+    }
+  }
+}
+
+
+# 过滤查询1 age &gt; 24
+GET kuangshen/user/_search
+{
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;must&quot;: [
+        {&quot;match&quot;: {
+          &quot;name&quot;: &quot;狂神&quot;
+        }}
+      ],
+      &quot;filter&quot;: [
+        {&quot;range&quot;: {
+          &quot;age&quot;: {
+            &quot;gt&quot;: 24
+          }
+        }}
+      ]
+    }
+  }
+}
+
+# 过滤器2  22&lt;age&lt;30 
+GET kuangshen/user/_search
+{
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;must&quot;: [
+        {&quot;match&quot;: {
+          &quot;name&quot;: &quot;狂神&quot;
+        }}
+      ],
+      &quot;filter&quot;: [
+        {&quot;range&quot;: {
+          &quot;age&quot;: {
+            &quot;lt&quot;: 30,
+            &quot;gt&quot;: 22
+          }
+        }}
+      ]
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>多条件查询</p>
+</blockquote>
+<pre><code class="language-bash">GET kuangshen/user/_search
+{
+  &quot;query&quot;: {
+    &quot;match&quot;: {
+      &quot;tags&quot;: &quot;技术 男&quot;
+    }
+  }
+}
+</code></pre>
+<figure data-type="image" tabindex="31"><img src="https://img-blog.csdnimg.cn/20200910144807544.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<figure data-type="image" tabindex="32"><img src="https://img-blog.csdnimg.cn/2020091014524041.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<blockquote>
+<p>keyword类型不会被分词器解析</p>
+<p>term: 精确匹配</p>
+</blockquote>
+<pre><code class="language-bash"># 定义类型PUT xiaofan_test_db{  &quot;mappings&quot;: {    &quot;properties&quot;: {      &quot;name&quot;: {        &quot;type&quot;: &quot;text&quot;      },      &quot;desc&quot;: {        &quot;type&quot;: &quot;keyword&quot;      }    }  }}PUT /xiaofan_test_db/_doc/1{  &quot;name&quot;: &quot;小范说Java Name&quot;,  &quot;desc&quot;: &quot;小范说Java Desc&quot;}PUT /xiaofan_test_db/_doc/2{  &quot;name&quot;: &quot;小范说Java Name&quot;,  &quot;desc&quot;: &quot;小范说Java Desc 2&quot;}# 按照keyword类型精准匹配GET xiaofan_test_db/_search{  &quot;query&quot;: {    &quot;term&quot;: {      &quot;desc&quot;: &quot;小范说Java Desc&quot;    }  }}# 结果：{  &quot;took&quot; : 0,  &quot;timed_out&quot; : false,  &quot;_shards&quot; : {    &quot;total&quot; : 1,    &quot;successful&quot; : 1,    &quot;skipped&quot; : 0,    &quot;failed&quot; : 0  },  &quot;hits&quot; : {    &quot;total&quot; : {      &quot;value&quot; : 1,      &quot;relation&quot; : &quot;eq&quot;    },    &quot;max_score&quot; : 0.6931471,    &quot;hits&quot; : [      {        &quot;_index&quot; : &quot;test_db&quot;,        &quot;_type&quot; : &quot;_doc&quot;,        &quot;_id&quot; : &quot;1&quot;,        &quot;_score&quot; : 0.6931471,        &quot;_source&quot; : {          &quot;name&quot; : &quot;小范说Java Name&quot;,          &quot;desc&quot; : &quot;小范说Java Desc&quot;        }      }    ]  }}# 按照text类型匹配GET xiaofan_test_db/_search{  &quot;query&quot;: {    &quot;term&quot;: {      &quot;name&quot;: &quot;小&quot;    }  }}# 结果：{  &quot;took&quot; : 0,  &quot;timed_out&quot; : false,  &quot;_shards&quot; : {    &quot;total&quot; : 1,    &quot;successful&quot; : 1,    &quot;skipped&quot; : 0,    &quot;failed&quot; : 0  },  &quot;hits&quot; : {    &quot;total&quot; : {      &quot;value&quot; : 2,      &quot;relation&quot; : &quot;eq&quot;    },    &quot;max_score&quot; : 0.18232156,    &quot;hits&quot; : [      {        &quot;_index&quot; : &quot;test_db&quot;,        &quot;_type&quot; : &quot;_doc&quot;,        &quot;_id&quot; : &quot;1&quot;,        &quot;_score&quot; : 0.18232156,        &quot;_source&quot; : {          &quot;name&quot; : &quot;小范说Java Name&quot;,          &quot;desc&quot; : &quot;小范说Java Desc&quot;        }      },      {        &quot;_index&quot; : &quot;test_db&quot;,        &quot;_type&quot; : &quot;_doc&quot;,        &quot;_id&quot; : &quot;2&quot;,        &quot;_score&quot; : 0.18232156,        &quot;_source&quot; : {          &quot;name&quot; : &quot;小范说Java Name&quot;,          &quot;desc&quot; : &quot;小范说Java Desc 2&quot;        }      }    ]  }}
+</code></pre>
+<blockquote>
+<p>多个值匹配精确查询</p>
+</blockquote>
+<pre><code class="language-bash">PUT /test_db/_doc/3{  &quot;t1&quot;: &quot;22&quot;,  &quot;t2&quot;: &quot;2020-09-10&quot;}PUT /test_db/_doc/4{  &quot;t1&quot;: &quot;33&quot;,  &quot;t2&quot;: &quot;2020-09-11&quot;}GET test_db/_search{  &quot;query&quot;: {    &quot;bool&quot;: {      &quot;should&quot;: [        {          &quot;term&quot;: {            &quot;t1&quot;: &quot;22&quot;          }        },         {          &quot;term&quot;: {            &quot;t1&quot;: &quot;33&quot;          }        }      ]    }  }}
+</code></pre>
+<blockquote>
+<p>高亮查询</p>
+</blockquote>
+<pre><code class="language-bash">GET kuangshen/user/_search{  &quot;query&quot;: {    &quot;match&quot;: {      &quot;name&quot;: &quot;狂神&quot;    }  },  &quot;highlight&quot;: {    &quot;pre_tags&quot;: &quot;&lt;p class='key' style='color:red'&gt;&quot;,    &quot;post_tags&quot;: &quot;&lt;/p&gt;&quot;,     &quot;fields&quot;: {      &quot;name&quot;: {}    }  }}# 结果显示：#! Deprecation: [types removal] Specifying types in search requests is deprecated.{  &quot;took&quot; : 1,  &quot;timed_out&quot; : false,  &quot;_shards&quot; : {    &quot;total&quot; : 1,    &quot;successful&quot; : 1,    &quot;skipped&quot; : 0,    &quot;failed&quot; : 0  },  &quot;hits&quot; : {    &quot;total&quot; : {      &quot;value&quot; : 2,      &quot;relation&quot; : &quot;eq&quot;    },    &quot;max_score&quot; : 1.3862942,    &quot;hits&quot; : [      {        &quot;_index&quot; : &quot;kuangshen&quot;,        &quot;_type&quot; : &quot;user&quot;,        &quot;_id&quot; : &quot;1&quot;,        &quot;_score&quot; : 1.3862942,        &quot;_source&quot; : {          &quot;name&quot; : &quot;狂神说&quot;,          &quot;age&quot; : 23,          &quot;desc&quot; : &quot;一顿操作猛如虎，一看工资2500&quot;,          &quot;tags&quot; : [            &quot;码农&quot;,            &quot;技术宅&quot;,            &quot;直男&quot;          ]        },        &quot;highlight&quot; : {          &quot;name&quot; : [            &quot;&lt;p class='key' style='color:red'&gt;狂&lt;/p&gt;&lt;p class='key' style='color:red'&gt;神&lt;/p&gt;说&quot;          ]        }      },      {        &quot;_index&quot; : &quot;kuangshen&quot;,        &quot;_type&quot; : &quot;user&quot;,        &quot;_id&quot; : &quot;4&quot;,        &quot;_score&quot; : 1.0892314,        &quot;_source&quot; : {          &quot;name&quot; : &quot;狂神说前端&quot;,          &quot;age&quot; : 25,          &quot;desc&quot; : &quot;大王叫我来巡山&quot;,          &quot;tags&quot; : [            &quot;码农1&quot;,            &quot;技术宅1&quot;,            &quot;直男1&quot;          ]        },        &quot;highlight&quot; : {          &quot;name&quot; : [            &quot;&lt;p class='key' style='color:red'&gt;狂&lt;/p&gt;&lt;p class='key' style='color:red'&gt;神&lt;/p&gt;说前端&quot;          ]        }      }    ]  }}
+</code></pre>
+<h1 id="9-集成springboot">9. 集成SpringBoot</h1>
+<ul>
+<li>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high.html">官网</a></p>
+</li>
+<li>
+<p>添加依赖</p>
+</li>
+</ul>
+<pre><code class="language-xml">&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;    &lt;artifactId&gt;spring-boot-starter-data-elasticsearch&lt;/artifactId&gt;&lt;/dependency&gt;
+</code></pre>
+<ul>
+<li>自定义配置</li>
+</ul>
+<pre><code class="language-java">package com.xiaofan.config;import org.apache.http.HttpHost;import org.elasticsearch.client.RestClient;import org.elasticsearch.client.RestHighLevelClient;import org.springframework.context.annotation.Bean;import org.springframework.context.annotation.Configuration;@Configurationpublic class ElasticSearchClientConfig {    @Bean    public RestHighLevelClient restHighLevelClient() {        RestHighLevelClient client = new RestHighLevelClient(            RestClient.builder(                new HttpHost(&quot;192.168.1.30&quot;, 9201, &quot;http&quot;)            )        );        return client;    }}
+</code></pre>
+<ul>
+<li>编写测试类</li>
+</ul>
+<pre><code class="language-java">package com.xiaofan;import com.alibaba.fastjson.JSON;import com.xiaofan.pojo.User;import org.apache.http.entity.ContentType;import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;import org.elasticsearch.action.bulk.BulkRequest;import org.elasticsearch.action.bulk.BulkResponse;import org.elasticsearch.action.delete.DeleteRequest;import org.elasticsearch.action.delete.DeleteResponse;import org.elasticsearch.action.get.GetRequest;import org.elasticsearch.action.get.GetResponse;import org.elasticsearch.action.index.IndexRequest;import org.elasticsearch.action.index.IndexResponse;import org.elasticsearch.action.search.SearchRequest;import org.elasticsearch.action.search.SearchResponse;import org.elasticsearch.action.support.master.AcknowledgedResponse;import org.elasticsearch.action.update.UpdateRequest;import org.elasticsearch.action.update.UpdateResponse;import org.elasticsearch.client.RequestOptions;import org.elasticsearch.client.RestHighLevelClient;import org.elasticsearch.client.indices.CreateIndexRequest;import org.elasticsearch.client.indices.CreateIndexResponse;import org.elasticsearch.client.indices.GetIndexRequest;import org.elasticsearch.common.unit.TimeValue;import org.elasticsearch.common.xcontent.XContentType;import org.elasticsearch.index.query.MatchAllQueryBuilder;import org.elasticsearch.index.query.QueryBuilders;import org.elasticsearch.index.query.TermQueryBuilder;import org.elasticsearch.search.SearchHit;import org.elasticsearch.search.builder.SearchSourceBuilder;import org.elasticsearch.search.fetch.subphase.FetchSourceContext;import org.junit.jupiter.api.Test;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.beans.factory.annotation.Qualifier;import org.springframework.boot.test.context.SpringBootTest;import java.io.IOException;import java.util.ArrayList;import java.util.concurrent.TimeUnit;@SpringBootTestclass EsApiApplicationTests {	public static final String INDEX = &quot;xiaofan_test_index&quot;;	@Autowired	@Qualifier(value = &quot;restHighLevelClient&quot;)	private RestHighLevelClient client;	// 创建索引	@Test	void testCreateIndex() throws IOException {		// 1. 创建索引请求		CreateIndexRequest request = new CreateIndexRequest(INDEX);		// 2. 客户端执行请求， IndicesClient，请求后获得响应		CreateIndexResponse createIndexResponse = client.indices().create(request, RequestOptions.DEFAULT);		System.out.println(createIndexResponse);	}	// 测试索引存在	@Test	void testExistsIndex() throws IOException {		GetIndexRequest request = new GetIndexRequest(INDEX);		boolean exists = client.indices().exists(request, RequestOptions.DEFAULT);		System.out.println(exists);	}	// 删除索引	@Test	void testDeleteIndex() throws IOException {		DeleteIndexRequest request = new DeleteIndexRequest(INDEX);		AcknowledgedResponse acknowledgedResponse = client.indices().delete(request, RequestOptions.DEFAULT);		System.out.println(acknowledgedResponse.isAcknowledged());	}	// 添加文档	@Test	void testAddDocument() throws IOException {		User user = new User(&quot;狂神说&quot;, 28);		IndexRequest request = new IndexRequest(INDEX);		// 规则 PUT /index/_doc/1		request.id(&quot;1&quot;);		request.timeout(TimeValue.timeValueSeconds(1));		// 将数据放入请求 json		request.source(JSON.toJSONString(user), XContentType.JSON);		IndexResponse response = client.index(request, RequestOptions.DEFAULT);		System.out.println(response.toString());		System.out.println(response.status());	}	// 获取文档 判断是否存在 GET /index/_doc/1	@Test	void testIsExists() throws IOException {		GetRequest request = new GetRequest(INDEX, &quot;1&quot;);		// 不获取返回的 _source 的上下文了		request.fetchSourceContext(new FetchSourceContext(false));		request.storedFields(&quot;_none_&quot;);		boolean exists = client.exists(request, RequestOptions.DEFAULT);		System.out.println(exists);	}	// 获取文档	/**	 * 返回结果：	 * {&quot;age&quot;:28,&quot;name&quot;:&quot;狂神说&quot;}	 * {&quot;_index&quot;:&quot;xiaofan_test_index&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;1&quot;,&quot;_version&quot;:1,&quot;_seq_no&quot;:0,&quot;_primary_term&quot;:1,&quot;found&quot;:true,&quot;_source&quot;:{&quot;age&quot;:28,&quot;name&quot;:&quot;狂神说&quot;}}	 */	@Test	void testGetDocument() throws IOException {		GetRequest request = new GetRequest(INDEX, &quot;1&quot;);		GetResponse response = client.get(request, RequestOptions.DEFAULT);		System.out.println(response.getSourceAsString());		System.out.println(response);	}	// 更新文档	@Test	void testUpdateDocument() throws IOException {		UpdateRequest request = new UpdateRequest(INDEX, &quot;1&quot;);		request.timeout(&quot;1s&quot;);		User user = new User(&quot;小范说Java&quot;, 18);		request.doc(JSON.toJSONString(user), XContentType.JSON);		UpdateResponse updateResponse = client.update(request, RequestOptions.DEFAULT);		System.out.println(updateResponse);	}	// 删除文档	@Test	void testDeleteDocument() throws IOException {		DeleteRequest request = new DeleteRequest(INDEX, &quot;1&quot;);		request.timeout(&quot;1s&quot;);		DeleteResponse deleteResponse = client.delete(request, RequestOptions.DEFAULT);		System.out.println(deleteResponse);	}	// 批量插入数据（修改，删除类似操作）	@Test	void testBulkRequest() throws IOException {		BulkRequest request = new BulkRequest();		request.timeout(&quot;10s&quot;);		ArrayList&lt;User&gt; users = new ArrayList&lt;&gt;();		users.add(new User(&quot;kuangshen1&quot;, 21));		users.add(new User(&quot;kuangshen2&quot;, 22));		users.add(new User(&quot;kuangshen3&quot;, 23));		users.add(new User(&quot;xiaofan1&quot;, 18));		users.add(new User(&quot;xiaofan2&quot;, 19));		// 批处理请求， 修改，删除，只要在这里修改相应的请求就可以		for (int i = 0; i &lt; users.size(); i++) {			request.add(new IndexRequest(INDEX)					.id(String.valueOf(i + 1))					.source(JSON.toJSONString(users.get(i)), XContentType.JSON));		}		BulkResponse bulkResponse = client.bulk(request, RequestOptions.DEFAULT);		//是否失败，返回false表示成功		System.out.println(bulkResponse.hasFailures());	}	// 查询文档	@Test	void testSearch() throws IOException {		SearchRequest searchRequest = new SearchRequest(INDEX);		// 构建搜索条件		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();		// 查询条件， 可以使用QueryBuilders工具类实现		// QueryBuilders.termQuery 精确		// QueryBuilders.matchLLQuery() 匹配所有		TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery(&quot;name&quot;, &quot;kuangshen1&quot;);		// MatchAllQueryBuilder matchAllQueryBuilder = QueryBuilders.matchAllQuery();		sourceBuilder.query(termQueryBuilder);		sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));		searchRequest.source(sourceBuilder);		SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);		System.out.println(JSON.toJSON(searchResponse.getHits()));		System.out.println(&quot;======================================&quot;);		for (SearchHit documentFields : searchResponse.getHits().getHits()) {			System.out.println(documentFields.getSourceAsMap());		}	}}
+</code></pre>
+<h1 id="10-实战模拟全文搜索-京东搜索">10. 实战：模拟全文搜索-京东搜索</h1>
+<ul>
+<li>
+<p>github链接：https://github.com/fanjianhai/CODE/tree/main/SpringBoot/springboot-11-elasticsearch-jd</p>
+</li>
+<li>
+<p>搭建springboot项目，添加依赖，修改es版本</p>
+</li>
+</ul>
+<pre><code class="language-xml">&lt;properties&gt;    &lt;java.version&gt;1.8&lt;/java.version&gt;    &lt;elasticsearch.version&gt;7.9.2&lt;/elasticsearch.version&gt;&lt;/properties&gt;&lt;dependencies&gt;    &lt;dependency&gt;        &lt;groupId&gt;com.alibaba&lt;/groupId&gt;        &lt;artifactId&gt;fastjson&lt;/artifactId&gt;        &lt;version&gt;1.2.73&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;        &lt;groupId&gt;org.jsoup&lt;/groupId&gt;        &lt;artifactId&gt;jsoup&lt;/artifactId&gt;        &lt;version&gt;1.13.1&lt;/version&gt;    &lt;/dependency&gt;&lt;/dependencies&gt;
+</code></pre>
+<ul>
+<li>整体效果</li>
+</ul>
+<figure data-type="image" tabindex="33"><img src="https://img-blog.csdnimg.cn/20200914120729179.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+
+              </div>
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Lindamao
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://lindamao0753.github.io/post/elasticsearch/" title=" ElasticSearch"> ElasticSearch</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+        <i class="fa fa-chevron-left"></i>
+        <a class="nav-pc-next" title="Nginx" href="https://lindamao0753.github.io/post/nginx/">Nginx</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="Nginx" href="https://lindamao0753.github.io/post/nginx/">上一篇</a>
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="Git" href="https://lindamao0753.github.io/post/git/">Git</a>
+        <a class="nav-mobile-next" title="Git" href="https://lindamao0753.github.io/post/git/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
+      
+    </div>
+  </div>
+</div>
+              
+                
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-box">
+  <footer class="footer">
+    <div class="copyright">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | © 2019-2020 Theme By HsxyHao
+    </div>
+    <div class="poweredby">
+      <p class="copyright text-muted">Copyright ©<span>lindamao</span><br><a href="https://github.com/getgridea/gridea" class="Themeinfo" one-link-mark="yes"></a></p>
+    </div>
+  </footer>
+  
+  
+  <div class="pisces back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    
+    <span class="scrollpercent">
+      <span id="back_to_top_text">0</span>%
+    </span>
+    
+  </div>
+  
+  
+  
+</div>
+<script>
+
+  let sideBarOpen = 'sidebar-open';
+  let body = document.body;
+  let back2Top = document.querySelector('#back_to_top'),
+  back2TopText = document.querySelector('#back_to_top_text'),
+  drawerBox = document.querySelector('#drawer_box'),
+  rightSideBar = document.querySelector('.sidebar'),
+  viewport = document.querySelector('body');
+
+  function scrollAnimation(currentY, targetY) {
+   
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
+
+  back2Top.addEventListener("click", function(e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+  
+  window.addEventListener('scroll', function(e) {
+    let percent = document.scrollingElement.scrollTop / (document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+  
+  let hasCacu = false;
+  window.onresize = function() {
+    if (window.width > 991) {
+      calcuHeight();
+    } else {
+      hasCacu = false;
+    }
+  }
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (!hasCacu && back2Top.classList.contains('pisces') || back2Top.classList.contains('gemini')) {
+      let sideBar = document.querySelector('.sidebar');
+      let navUl = document.querySelector('#site_nav');
+      sideBar.style = 'margin-top:' + (navUl.offsetHeight + navUl.offsetTop + 15) + 'px;';
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+  
+  let open = false, MOTION_TIME = 300, RIGHT_MOVE_DIS = '320px';
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll('.right-motion');
+    let right = drawerBox.classList.contains('right');
+
+    let transitionDir = right ? "transition.slideRightIn" : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingRight: '0px'
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingLeft: '0px'
+      };
+    }
+
+    drawerBox.onclick = function() {
+      open = !open;
+      window.Velocity(rightSideBar, 'stop');
+      window.Velocity(viewport, 'stop');
+      window.Velocity(rightMotions, 'stop');
+      if (open) {
+        window.Velocity(rightSideBar, {
+          width: RIGHT_MOVE_DIS
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, transitionDir,{ });
+          }
+        })
+        window.Velocity(viewport, openProp,{
+          duration: MOTION_TIME
+        });
+      } else {
+        window.Velocity(rightSideBar, {
+          width: '0px'
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, {
+              opacity: 0
+            });
+          }
+        })
+        window.Velocity(viewport, closeProp ,{
+          duration: MOTION_TIME
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle('muse-line');
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    }
+  }
+
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+
+</script>
+    </div>
+  </body>
+  <script src="/media/js/motion.js"></script>
+</html>
