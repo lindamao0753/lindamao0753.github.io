@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://lindamao0753.github.io</id>
+    <id>https://lindamao.cn</id>
     <title>Lindamao</title>
-    <updated>2021-07-13T05:17:32.987Z</updated>
+    <updated>2021-07-13T05:17:52.927Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://lindamao0753.github.io"/>
-    <link rel="self" href="https://lindamao0753.github.io/atom.xml"/>
+    <link rel="alternate" href="https://lindamao.cn"/>
+    <link rel="self" href="https://lindamao.cn/atom.xml"/>
     <subtitle>好好学习</subtitle>
-    <logo>https://lindamao0753.github.io/images/avatar.png</logo>
-    <icon>https://lindamao0753.github.io/favicon.ico</icon>
+    <logo>https://lindamao.cn/images/avatar.png</logo>
+    <icon>https://lindamao.cn/favicon.ico</icon>
     <rights>All rights reserved 2021, Lindamao</rights>
     <entry>
         <title type="html"><![CDATA[Nginx]]></title>
-        <id>https://lindamao0753.github.io/post/nginx/</id>
-        <link href="https://lindamao0753.github.io/post/nginx/">
+        <id>https://lindamao.cn/post/nginx/</id>
+        <link href="https://lindamao.cn/post/nginx/">
         </link>
         <updated>2021-07-13T01:58:00.000Z</updated>
         <content type="html"><![CDATA[<h1 id="什么是nginx">什么是nginx</h1>
@@ -475,8 +475,8 @@ http{
     </entry>
     <entry>
         <title type="html"><![CDATA[Docker]]></title>
-        <id>https://lindamao0753.github.io/post/docker/</id>
-        <link href="https://lindamao0753.github.io/post/docker/">
+        <id>https://lindamao.cn/post/docker/</id>
+        <link href="https://lindamao.cn/post/docker/">
         </link>
         <updated>2021-07-13T01:38:55.000Z</updated>
         <content type="html"><![CDATA[<p>​</p>
@@ -1882,8 +1882,8 @@ ENTRYPOINT  [&quot;java&quot;,&quot;-jar&quot;,&quot;/app.jar&quot;]
     </entry>
     <entry>
         <title type="html"><![CDATA[Redis]]></title>
-        <id>https://lindamao0753.github.io/post/redis/</id>
-        <link href="https://lindamao0753.github.io/post/redis/">
+        <id>https://lindamao.cn/post/redis/</id>
+        <link href="https://lindamao.cn/post/redis/">
         </link>
         <updated>2021-06-28T03:48:01.000Z</updated>
         <content type="html"><![CDATA[<!-- more -->
@@ -4768,8 +4768,8 @@ public class RedisUtil {
     </entry>
     <entry>
         <title type="html"><![CDATA[Linux]]></title>
-        <id>https://lindamao0753.github.io/post/linux/</id>
-        <link href="https://lindamao0753.github.io/post/linux/">
+        <id>https://lindamao.cn/post/linux/</id>
+        <link href="https://lindamao.cn/post/linux/">
         </link>
         <updated>2021-06-28T03:46:33.000Z</updated>
         <content type="html"><![CDATA[<h1 id="常用的基本命令">常用的基本命令</h1>
@@ -5137,8 +5137,8 @@ cat: f3: No such file or directory
     </entry>
     <entry>
         <title type="html"><![CDATA[集合框架]]></title>
-        <id>https://lindamao0753.github.io/post/Collection/</id>
-        <link href="https://lindamao0753.github.io/post/Collection/">
+        <id>https://lindamao.cn/post/Collection/</id>
+        <link href="https://lindamao.cn/post/Collection/">
         </link>
         <updated>2021-04-14T07:47:18.000Z</updated>
         <content type="html"><![CDATA[<h1 id="集合概述">集合概述</h1>
@@ -8390,8 +8390,8 @@ public class Demo8 {
     </entry>
     <entry>
         <title type="html"><![CDATA[IO框架]]></title>
-        <id>https://lindamao0753.github.io/post/io/</id>
-        <link href="https://lindamao0753.github.io/post/io/">
+        <id>https://lindamao.cn/post/io/</id>
+        <link href="https://lindamao.cn/post/io/">
         </link>
         <updated>2021-04-14T07:39:10.000Z</updated>
         <content type="html"><![CDATA[<h1 id="流的概念">流的概念</h1>
@@ -9360,8 +9360,8 @@ public class Demo1 {
     </entry>
     <entry>
         <title type="html"><![CDATA[基本算法]]></title>
-        <id>https://lindamao0753.github.io/post/algorithm/</id>
-        <link href="https://lindamao0753.github.io/post/algorithm/">
+        <id>https://lindamao.cn/post/algorithm/</id>
+        <link href="https://lindamao.cn/post/algorithm/">
         </link>
         <updated>2021-04-04T12:13:02.000Z</updated>
         <content type="html"><![CDATA[<!-- more -->
@@ -10080,8 +10080,8 @@ public class BucketSort {
     </entry>
     <entry>
         <title type="html"><![CDATA[JUC]]></title>
-        <id>https://lindamao0753.github.io/post/juc/</id>
-        <link href="https://lindamao0753.github.io/post/juc/">
+        <id>https://lindamao.cn/post/juc/</id>
+        <link href="https://lindamao.cn/post/juc/">
         </link>
         <updated>2021-03-28T04:50:08.000Z</updated>
         <content type="html"><![CDATA[<!-- more -->
@@ -13353,8 +13353,8 @@ public class DeadLockDemo {
     </entry>
     <entry>
         <title type="html"><![CDATA[Fork/Join框架基本使用]]></title>
-        <id>https://lindamao0753.github.io/post/forkjoin/</id>
-        <link href="https://lindamao0753.github.io/post/forkjoin/">
+        <id>https://lindamao.cn/post/forkjoin/</id>
+        <link href="https://lindamao.cn/post/forkjoin/">
         </link>
         <updated>2021-03-22T13:42:44.000Z</updated>
         <content type="html"><![CDATA[<!-- more -->
@@ -13727,8 +13727,8 @@ public class Merge2 {
     </entry>
     <entry>
         <title type="html"><![CDATA[多线程]]></title>
-        <id>https://lindamao0753.github.io/post/Multithreading/</id>
-        <link href="https://lindamao0753.github.io/post/Multithreading/">
+        <id>https://lindamao.cn/post/Multithreading/</id>
+        <link href="https://lindamao.cn/post/Multithreading/">
         </link>
         <updated>2021-03-16T04:38:31.000Z</updated>
         <content type="html"><![CDATA[<h1 id="1-创建线程的两种方法">1、创建线程的两种方法</h1>
