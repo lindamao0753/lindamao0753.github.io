@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lindamao0753.github.io</id>
     <title>Lindamao</title>
-    <updated>2021-07-03T02:36:02.123Z</updated>
+    <updated>2021-07-13T02:53:15.244Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lindamao0753.github.io"/>
     <link rel="self" href="https://lindamao0753.github.io/atom.xml"/>
@@ -15,12 +15,12 @@
         <id>https://lindamao0753.github.io/post/nginx/</id>
         <link href="https://lindamao0753.github.io/post/nginx/">
         </link>
-        <updated>2021-07-03T02:34:04.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="1-什么是nginx">1. 什么是nginx</h1>
+        <updated>2021-07-13T01:58:00.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="什么是nginx">什么是nginx</h1>
 <p>Nginx (&quot;engine x&quot;) 是一个高性能的 HTTP 和反向代理服务器,特点是占有内存少，并发能力强。</p>
 <p>Nginx 可以作为静态页面的 web 服务器，同时还支持 CGI 协议的动态语言，比如 perl、php等，但是不支持 java。Java 程序只能通过与 tomcat 配合完成。Nginx 专为性能优化而开发，性能是其最重要的考量,实现上非常注重效率 ，能经受高负载的考验,有报告表明能支持高达 50,000 个并发连接数。</p>
-<h1 id="2-正向代理与反向代理">2. 正向代理与反向代理</h1>
-<h2 id="21-概念">2.1 概念</h2>
+<h1 id="正向代理与反向代理">正向代理与反向代理</h1>
+<h2 id="概念">概念</h2>
 <p><strong>正向代理</strong>是一个位于客户端和目标服务器之间的代理服务器(中间服务器)。为了从原始服务器取得内容，客户端向代理服务器发送一个请求，并且指定目标服务器，之后代理向目标服务器转交并且将获得的内容返回给客户端。正向代理的情况下客户端必须要进行一些特别的设置才能使用。</p>
 <p><strong>反向代理</strong>正好相反。对于客户端来说，反向代理就好像目标服务器。并且客户端不需要进行任何设置。客户端向反向代理发送请求，接着反向代理判断请求走向何处，并将请求转交给客户端，使得这些内容就好似他自己一样，一次客户端并不会感知到反向代理后面的服务，也因此不需要客户端做任何设置，只需要把反向代理服务器当成真正的服务器就好了。</p>
 <h2 id="一-什么是代理">一 什么是代理</h2>
@@ -46,751 +46,1838 @@
 <p><strong>正向代理即是客户端代理, 代理客户端, 服务端不知道实际发起请求的客户端.</strong></p>
 <p><strong>反向代理即是服务端代理, 代理服务端, 客户端不知道实际提供服务的服务端</strong></p>
 <h4 id="看图理解一">看图理解一：</h4>
-<p><strong><img src="https://img2018.cnblogs.com/blog/1350514/201903/1350514-20190313105354768-2077480083.png" alt="img" loading="lazy"></strong></p>
+<figure data-type="image" tabindex="2"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf3frop5yj30ie0by78n.jpg" alt="1350514-20190313105354768-2077480083-1626140634845" loading="lazy"></figure>
 <h4 id="看图理解二">看图理解二：</h4>
-<figure data-type="image" tabindex="2"><img src="https://img2018.cnblogs.com/blog/1350514/201903/1350514-20190313105516378-237949533.png" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf3ew7o2kj30el0hudhs.jpg" alt="1350514-20190313105516378-237949533" loading="lazy"></figure>
 <p>正向代理中，proxy和client同属一个LAN，对server透明；<br>
 反向代理中，proxy和server同属一个LAN，对client透明。<br>
 实际上proxy在两种代理中做的事都是代为收发请求和响应，不过从结构上来看正好左右互换了下，所以把后出现的那种代理方式叫成了反向代理</p>
 <h4 id="总结">总结：</h4>
 <p>正向代理: 买票的黄牛</p>
 <p>反向代理: 租房的代理</p>
-<h1 id="3-负载均衡">3. 负载均衡</h1>
+<h1 id="负载均衡">负载均衡</h1>
 <p><em><strong>增加服务器的数量，然后将请求分发到各个服务器上，将原先请求集中到单个服务器上的情况改为将请求分发到多个服务器上，将负载分发到不同的服务器，也就是我们所说的负\载均衡</strong></em></p>
 <h1 id="静分离">静分离</h1>
 <p>为了加快网站的解析速度，可以把动态页面和静态页面由不同的服务器来解析，加快解析速度。降低原来单个服务器的压力。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[ ElasticSearch]]></title>
-        <id>https://lindamao0753.github.io/post/elasticsearch/</id>
-        <link href="https://lindamao0753.github.io/post/elasticsearch/">
-        </link>
-        <updated>2021-06-30T03:21:22.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="1-elasticsearch概述">1. ElasticSearch概述</h1>
-<figure data-type="image" tabindex="1"><img src="https://img-blog.csdnimg.cn/2020090917111970.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<figure data-type="image" tabindex="2"><img src="https://img-blog.csdnimg.cn/20200909171530181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<h1 id="2-es与solr的差别">2. ES与Solr的差别</h1>
-<h2 id="21-solr简介">2.1. Solr简介</h2>
-<figure data-type="image" tabindex="3"><img src="https://img-blog.csdnimg.cn/20200909172717254.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<h2 id="22-lucene简介">2.2. Lucene简介</h2>
-<figure data-type="image" tabindex="4"><img src="https://img-blog.csdnimg.cn/20200909172848939.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<h2 id="23-es-vs-solr">2.3. ES VS Solr</h2>
-<figure data-type="image" tabindex="5"><img src="https://img-blog.csdnimg.cn/20200909173431643.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<h1 id="3-elasticsearch-安装">3. ElasticSearch 安装</h1>
-<figure data-type="image" tabindex="6"><img src="https://img-blog.csdnimg.cn/20200909173851629.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<p><a href="https://www.elastic.co/cn/">官网</a></p>
-<p>ElasticSearch: https://mirrors.huaweicloud.com/elasticsearch/?C=N&amp;O=D<br>
-logstash: https://mirrors.huaweicloud.com/logstash/?C=N&amp;O=D<br>
-kibana: https://mirrors.huaweicloud.com/kibana/?C=N&amp;O=D</p>
-<ul>
-<li>认识目录</li>
-</ul>
-<figure data-type="image" tabindex="7"><img src="https://img-blog.csdnimg.cn/20200909180913899.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<ol start="3">
-<li>测试访问</li>
-</ol>
-<figure data-type="image" tabindex="8"><img src="https://img-blog.csdnimg.cn/20200909181424754.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<figure data-type="image" tabindex="9"><img src="https://img-blog.csdnimg.cn/2020090918274551.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<p>这个，没有测试，等后期回来再看！<a href="https://www.bilibili.com/video/BV17a4y1x7zq?p=5">head的插件</a></p>
-<figure data-type="image" tabindex="10"><img src="https://img-blog.csdnimg.cn/20210201142313582.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
-<h1 id="4-kibana安装">4. Kibana安装</h1>
-<p>开箱即用</p>
-<p>配置文件</p>
-<pre><code class="language-yml">server.port: 5601
-server.host: &quot;0.0.0.0&quot;
-elasticsearch.hosts: [&quot;http://192.168.1.30:9201&quot;]
-kibana.index: &quot;.kibana&quot;
-i18n.locale: &quot;zh-CN&quot;			# 中文汉化
+<h1 id="常用命令">常用命令</h1>
+<p>以下命令nginx已经通过apt安装好了，有nginx命令。</p>
+<h2 id="1-查看版本">1. 查看版本</h2>
+<pre><code class="language-shell">nginx -v
 </code></pre>
-<p>访问测试</p>
-<figure data-type="image" tabindex="11"><img src="https://img-blog.csdnimg.cn/20200909190146731.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<h1 id="5-es核心概念">5. ES核心概念</h1>
-<ul>
-<li>索引</li>
-<li>字段类型（mapping）</li>
-<li>文档（document）</li>
-</ul>
-<figure data-type="image" tabindex="12"><img src="https://img-blog.csdnimg.cn/20200909192956336.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<figure data-type="image" tabindex="13"><img src="https://img-blog.csdnimg.cn/202009091931291.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<figure data-type="image" tabindex="14"><img src="https://img-blog.csdnimg.cn/20200909193601700.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<figure data-type="image" tabindex="15"><img src="https://img-blog.csdnimg.cn/2020090919370995.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<figure data-type="image" tabindex="16"><img src="https://img-blog.csdnimg.cn/20200909193900932.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<figure data-type="image" tabindex="17"><img src="https://img-blog.csdnimg.cn/20200909193947555.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<figure data-type="image" tabindex="18"><img src="https://img-blog.csdnimg.cn/20200909194207851.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<h1 id="6-ik分词器">6. IK分词器</h1>
-<ul>
-<li><a href="https://github.com/medcl/elasticsearch-analysis-ik/releases?after=v7.8.0">下载链接</a></li>
-<li>解压放入到es对应的plugins下即可</li>
-<li>重启观察ES，发现ik插件被加载了</li>
-</ul>
-<figure data-type="image" tabindex="19"><img src="https://img-blog.csdnimg.cn/2020091009234593.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<ul>
-<li>
-<p>也可以通过bin目录下elasticsearch-plugin list 查看已经加载的插件</p>
-</li>
-<li>
-<p>使用kibana测试</p>
-<ul>
-<li>ik_smart: 最少切分</li>
-</ul>
-<figure data-type="image" tabindex="20"><img src="https://img-blog.csdnimg.cn/20200910100025320.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<ul>
-<li>ik_max_word为最细粒度划分！穷尽词库的可能， 字典！</li>
-</ul>
-<figure data-type="image" tabindex="21"><img src="https://img-blog.csdnimg.cn/20200910100206747.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-</li>
-<li>
-<p>ik分词器增加自己的配置！</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="22"><img src="https://img-blog.csdnimg.cn/20200910101747942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<ul>
-<li>重启ES 和 Kibana</li>
-</ul>
-<figure data-type="image" tabindex="23"><img src="https://img-blog.csdnimg.cn/20200910101410113.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<figure data-type="image" tabindex="24"><img src="https://img-blog.csdnimg.cn/20200910101948607.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<h1 id="7-restful风格说明">7. Restful风格说明</h1>
-<figure data-type="image" tabindex="25"><img src="https://img-blog.csdnimg.cn/20200910102407169.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<blockquote>
-<p>基础测试</p>
-</blockquote>
-<ul>
-<li>创建一个索引！</li>
-</ul>
-<pre><code class="language-bash">PUT /索引名/~类型名~/文档id
-{请求体}
+<p>如果你想同时看到更详细的配置项，使用 -V</p>
+<pre><code class="language-shell">nginx -V
+</code></pre>
+<h2 id="2-查看-nginx-配置语法的正确性">2. 查看 Nginx 配置语法的正确性</h2>
+<pre><code class="language-shell">sudo nginx -t
+</code></pre>
+<p>这里如果用大写 T，效果就是 测试、丢弃并退出</p>
+<pre><code class="language-shell">sudo nginx -T
+</code></pre>
+<h2 id="3-为nginx指定一个配置文件">3. 为Nginx指定一个配置文件</h2>
+<pre><code class="language-shell">nginx -c &lt;/path/config&gt; #为Nginx指定一个配置文件，来代替缺省值conf/nginx.conf
+</code></pre>
+<h2 id="4-启动-nginx-服务">4. 启动 Nginx 服务</h2>
+<pre><code class="language-shell">sudo systemctl start nginx #systemd
+OR
+    sudo service nginx start   #sysvinit
+</code></pre>
+<h2 id="5-开机自启动">5. 开机自启动</h2>
+<pre><code class="language-shell">sudo systemctl enable nginx #systemd
+或
+sudo service nginx enable   #sysv init
+</code></pre>
+<h2 id="6-重启-nginx-服务">6. 重启 Nginx 服务</h2>
+<p>重启的意思是，停止 然后 启动</p>
+<pre><code class="language-shell">sudo systemctl restart nginx #systemd
+或
+sudo service nginx restart   #sysv init
+</code></pre>
+<h2 id="7-查看-nginx-服务状态">7. 查看 Nginx 服务状态</h2>
+<p>这条是看运行时的服务状态信息的。</p>
+<pre><code class="language-shell">sudo systemctl status nginx #systemd
+或
+sudo service nginx status   #sysvinit
+</code></pre>
+<h2 id="8-重载-nginx-服务">8. 重载 Nginx 服务</h2>
+<p>重载是重新加载 配置文件，看命令：</p>
+<pre><code class="language-shell">sudo systemctl reload nginx #systemd
+或
+sudo service nginx reload   #sysvinit
+</code></pre>
+<h2 id="9-停止-nginx-服务">9. 停止 Nginx 服务</h2>
+<p>不管你是什么原因想停了它，都可以用：</p>
+<pre><code class="language-shell">sudo systemctl stop nginx #systemd
+OR
+sudo service nginx stop   #sysvinit
+</code></pre>
+<h2 id="10-查看命令帮助">10. 查看命令帮助</h2>
+<p>如果还有什么不懂，或者想知道其他命令，就用这个</p>
+<pre><code class="language-shell">systemctl -h nginx
+</code></pre>
+<h1 id="配置文件">配置文件</h1>
+<p>nginx 安装目录下，其默认的配置文件都放在这个目录的 conf 目录下，而主配置文件 nginx.conf 也在其中，后续对 nginx 的使用基本上都是对此配置文件进行相应的修改</p>
+<h2 id="第一部分全局块">第一部分：全局块</h2>
+<p>从配置文件开始到 events 块之间的内容，主要会设置一些影响 nginx 服务器整体运行的配置指令，主要包括配置运行 Nginx 服务器的用户（组）、允许生成的 worker process 数，进程 PID 存放路径、日志存放路径和类型以及配置文件的引入等。</p>
+<p>比如上面第一行配置的：</p>
+<p>这是 Nginx 服务器并发处理服务的关键配置，worker_processes 值越大，可以支持的并发处理量也越多，但是会受到硬件、软件等设备的制约</p>
+<h2 id="第二部分events-块">第二部分：events 块</h2>
+<p>events 块涉及的指令主要影响 Nginx 服务器与用户的网络连接，常用的设置包括是否开启对多 work process 下的网络连接进行序列化，是否允许同时接收多个网络连接，选取哪种事件驱动模型来处理连接请求，每个 word process 可以同时支持的最大连接数等。</p>
+<h2 id="第三部分http-块">第三部分：http 块</h2>
+<p>这算是 Nginx 服务器配置中最频繁的部分，代理、缓存和日志定义等绝大多数功能和第三方模块的配置都在这里。</p>
+<p>需要注意的是：http 块也可以包括 <strong>http</strong> <strong>全局块</strong>、<strong>server</strong> <strong>块</strong>。</p>
+<h3 id="1-http全局块">1. http全局块</h3>
+<p>http 全局块配置的指令包括文件引入、MIME-TYPE 定义、日志自定义、连接超时时间、单链接请求数上限等。</p>
+<p><strong>upstream</strong>（上游服务器设置，主要为反向代理、负载均衡相关配置，upstream 的指令用于设置一系列的后端服务器，设置反向代理及后端服务器的负载均衡</p>
+<h3 id="2-server块">2. server块</h3>
+<p>这块和虚拟主机有密切关系，虚拟主机从用户角度看，和一台独立的硬件主机是完全一样的，该技术的产生是为了节省互联网服务器硬件成本。</p>
+<p>每个 http 块可以包括多个 server 块，而每个 server 块就相当于一个虚拟主机。</p>
+<p>而每个 server 块也分为全局 server 块，以及可以同时包含多个 locaton 块。</p>
+<h4 id="1全局-server-块">1.全局 server 块</h4>
+<p>最常见的配置是本虚拟机主机的监听配置和本虚拟主机的名称或 IP 配置。</p>
+<h4 id="2-location块">2. location块</h4>
+<p>一个 server 块可以配置多个 location 块。</p>
+<p>这块的主要作用是基于 Nginx 服务器接收到的请求字符串（例如 server_name/uri-string），对虚拟主机名称（也可以是 IP 别名）之外的字符串（例如 前面的 /uri-string）进行匹配，对特定的请求进行处理。地址定向、数据缓存和应答控制等功能，还有许多第三方模块的配置也在这里进行。</p>
+<h2 id="nginxconf-详细的配置文件介绍">nginx.conf 详细的配置文件介绍</h2>
+<pre><code class="language-properties">#定义Nginx运行的用户和用户组
+user www www; 
 
-# PUT 创建命令  test1 索引 type1 类型 1 id
-PUT test1/type1/1
-{
-  &quot;name&quot;: &quot;xiaofan&quot;,
-  &quot;age&quot;: 28
+#nginx进程数，通常设置成和cpu的数量相等
+worker_processes 4; 
+
+#全局错误日志定义类型，[debug | info | notice | warn | error | crit]
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+
+#进程pid文件
+#pid        logs/nginx.pid;
+
+
+#指定进程可以打开的最大描述符：数目
+#工作模式与连接数上限
+##这个指令是指当一个nginx进程打开的最多文件描述符数目，理论值应该是最多打开文件数（ulimit -n）与nginx进程数相除，但是nginx分配请求并不是那么均匀，所以最好与ulimit -n 的值保持一致。
+#这是因为nginx调度时分配请求到进程并不是那么的均衡，所以假如填写10240，总并发量达到3-4万时就有进程可能超过10240了，这时会返回502错误。
+worker_rlimit_nofile 65535;
+
+
+events {
+    #参考事件模型，use [ kqueue | rtsig | epoll | /dev/poll | select | poll ]; epoll模型
+    #是Linux 2.6以上版本内核中的高性能网络I/O模型，linux建议epoll，如果跑在FreeBSD上面，就用kqueue模型。
+    #补充说明：
+    #与apache相类，nginx针对不同的操作系统，有不同的事件模型
+    #A）标准事件模型
+    #Select、poll属于标准事件模型，如果当前系统不存在更有效的方法，nginx会选择select或poll
+    #B）高效事件模型
+    #Kqueue：使用于FreeBSD 4.1+, OpenBSD 2.9+, NetBSD 2.0 和 MacOS X.使用双处理器的MacOS X系统使用kqueue可能会造成内核崩溃。
+    #Epoll：使用于Linux内核2.6版本及以后的系统。
+    #/dev/poll：使用于Solaris 7 11/99+，HP/UX 11.22+ (eventport)，IRIX 6.5.15+ 和 Tru64 UNIX 5.1A+。
+    #Eventport：使用于Solaris 10。 为了防止出现内核崩溃的问题， 有必要安装安全补丁。
+    use epoll
+    
+    
+    #单个进程最大连接数（最大连接数=连接数+进程数）
+    #根据硬件调整，和前面工作进程配合起来用，尽量大，但是别把cup跑到100%就行。
+    worker_connections  1024;
+    
+    #keepalive 超时时间
+    keepalive_timeout 60;
+    
+    #客户端请求头部的缓冲区大小。这个可以根据你的系统分页大小来设置，一般一个请求头的大小不会超过1k，不过由于一般系统分页都要大于1k，所以这里设置为分页大小。
+    #分页大小可以用命令getconf PAGESIZE 取得。
+    #[root@web001 ~]# getconf PAGESIZE
+    #但也有client_header_buffer_size超过4k的情况，但是client_header_buffer_size该值必须设置为“系统分页大小”的整倍数。
+    client_header_buffer_size 4k;
+    
+    #这个将为打开文件指定缓存，默认是没有启用的，max指定缓存数量，建议和打开文件数一致，inactive是指经过多长时间文件没被请求后删除缓存。
+    open_file_cache max=65535 inactive=60s;
+    
+    
+    #这个是指多长时间检查一次缓存的有效信息。
+    #语法:open_file_cache_valid time 默认值:open_file_cache_valid 60 使用字段:http, server, location 这个指令指定了何时需要检查open_file_cache中缓存项目的有效信息.
+    open_file_cache_valid 80s;
+    
+    
+    #open_file_cache指令中的inactive参数时间内文件的最少使用次数，如果超过这个数字，文件描述符一直是在缓存中打开的，如上例，如果有一个文件在inactive时间内一次没被使用，它将被移除。
+    #语法:open_file_cache_min_uses number 默认值:open_file_cache_min_uses 1 使用字段:http, server, location  这个指令指定了在open_file_cache指令无效的参数中一定的时间范围内可以使用的最小文件数,如果使用更大的值,文件描述符在cache中总是打开状态.
+    open_file_cache_min_uses 1;
+    
+    #语法:open_file_cache_errors on | off 默认值:open_file_cache_errors off 使用字段:http, server, location 这个指令指定是否在搜索一个文件是记录cache错误.
+    open_file_cache_errors on;
 }
 
-# 返回结果
-# 警告信息： 不支持在文档索引请求中的指定类型
-# 而是使用无类型的断点(/{index}/_doc/{id}, /{index}/_doc, or /{index}/_create/{id}).
-{
-  &quot;_index&quot; : &quot;test1&quot;,	# 索引
-  &quot;_type&quot; : &quot;type1&quot;,	# 类型（已经废弃）
-  &quot;_id&quot; : &quot;1&quot;,			# id
-  &quot;_version&quot; : 1,		# 版本
-  &quot;result&quot; : &quot;created&quot;,	# 操作类型
-  &quot;_shards&quot; : {			# 分片信息
-    &quot;total&quot; : 2,
-    &quot;successful&quot; : 1,
-    &quot;failed&quot; : 0
-  },
-  &quot;_seq_no&quot; : 0,
-  &quot;_primary_term&quot; : 1
-}
-</code></pre>
-<figure data-type="image" tabindex="26"><img src="https://img-blog.csdnimg.cn/20200910105816144.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<ul>
-<li>指定字段的类型（创建规则）</li>
-</ul>
-<figure data-type="image" tabindex="27"><img src="https://img-blog.csdnimg.cn/20200910113123847.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<ul>
-<li>获取具体的索引规则</li>
-</ul>
-<pre><code class="language-bash"># GET test2
 
-{
-  &quot;test2&quot; : {
-    &quot;aliases&quot; : { },
-    &quot;mappings&quot; : {
-      &quot;properties&quot; : {
-        &quot;age&quot; : {
-          &quot;type&quot; : &quot;integer&quot;
-        },
-        &quot;birthday&quot; : {
-          &quot;type&quot; : &quot;date&quot;
-        },
-        &quot;name&quot; : {
-          &quot;type&quot; : &quot;text&quot;
+#设定http服务器，利用它的反向代理功能提供负载均衡支持
+http{
+    #文件扩展名与文件类型映射表
+    include mime.types;
+    
+    #默认文件类型
+    default_type application/octet-stream;
+    
+    #默认编码
+    charset utf-8;
+    
+    #服务器名字的hash表大小
+    #保存服务器名字的hash表是由指令server_names_hash_max_size 和server_names_hash_bucket_size所控制的。参数hash bucket size总是等于hash表的大小，并且是一路处理器缓存大小的倍数。在减少了在内存中的存取次数后，使在处理器中加速查找hash表键值成为可能。如果hash bucket size等于一路处理器缓存的大小，那么在查找键的时候，最坏的情况下在内存中查找的次数为2。第一次是确定存储单元的地址，第二次是在存储单元中查找键 值。因此，如果Nginx给出需要增大hash max size 或 hash bucket size的提示，那么首要的是增大前一个参数的大小.
+    server_names_hash_bucket_size 128;
+    
+    #客户端请求头部的缓冲区大小。这个可以根据你的系统分页大小来设置，一般一个请求的头部大小不会超过1k，不过由于一般系统分页都要大于1k，所以这里设置为分页大小。分页大小可以用命令getconf PAGESIZE取得。
+    client_header_buffer_size 32k;
+    
+    #客户请求头缓冲大小。nginx默认会用client_header_buffer_size这个buffer来读取header值，如果header过大，它会使用large_client_header_buffers来读取。
+    large_client_header_buffers 4 64k;
+    
+    #设定通过nginx上传文件的大小
+    client_max_body_size 8m;
+    
+    #开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。注意：如果图片显示不正常把这个改成off。
+    #sendfile指令指定 nginx 是否调用sendfile 函数（zero copy 方式）来输出文件，对于普通应用，必须设为on。如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络IO处理速度，降低系统uptime。
+    sendfile on;
+    
+     #开启目录列表访问，合适下载服务器，默认关闭。
+    autoindex on;
+    
+      #此选项允许或禁止使用socke的TCP_CORK的选项，此选项仅在使用sendfile的时候使用
+    tcp_nopush on;
+     
+    tcp_nodelay on;
+    
+    #长连接超时时间，单位是秒
+    keepalive_timeout 120;
+    
+    #FastCGI相关参数是为了改善网站的性能：减少资源占用，提高访问速度。下面参数看字面意思都能理解。
+    fastcgi_connect_timeout 300;
+    fastcgi_send_timeout 300;
+    fastcgi_read_timeout 300;
+    fastcgi_buffer_size 64k;
+    fastcgi_buffers 4 64k;
+    fastcgi_busy_buffers_size 128k;
+    fastcgi_temp_file_write_size 128k;
+    
+    #gzip模块设置
+    gzip on; #开启gzip压缩输出
+    gzip_min_length 1k;    #最小压缩文件大小
+    gzip_buffers 4 16k;    #压缩缓冲区
+    gzip_http_version 1.0; #压缩版本（默认1.1，前端如果是squid2.5请使用1.0）
+    gzip_comp_level 2;     #压缩等级
+    gzip_types text/plain application/x-javascript text/css application/xml;    #压缩类型，默认就已经包含textml，所以下面就不用再写了，写上去也不会有问题，但是会有一个warn。
+    gzip_vary on;
+
+    #开启限制IP连接数的时候需要使用
+    #limit_zone crawler $binary_remote_addr 10m;
+    
+    
+    #负载均衡配置
+    upstream piao.jd.com {
+     
+        #upstream的负载均衡，weight是权重，可以根据机器配置定义权重。weigth参数表示权值，权值越高被分配到的几率越大。
+        server 192.168.80.121:80 weight=3;
+        server 192.168.80.122:80 weight=2;
+        server 192.168.80.123:80 weight=3;
+
+        #nginx的upstream目前支持4种方式的分配
+        #1、轮询（默认）
+        #每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。
+        #2、weight
+        #指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。
+        #例如：
+        #upstream bakend {
+        #    server 192.168.0.14 weight=10;
+        #    server 192.168.0.15 weight=10;
+        #}
+        #2、ip_hash
+        #每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。
+        #例如：
+        #upstream bakend {
+        #    ip_hash;
+        #    server 192.168.0.14:88;
+        #    server 192.168.0.15:80;
+        #}
+        #3、fair（第三方）
+        #按后端服务器的响应时间来分配请求，响应时间短的优先分配。
+        #upstream backend {
+        #    server server1;
+        #    server server2;
+        #    fair;
+        #}
+        #4、url_hash（第三方）
+        #按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效。
+        #例：在upstream中加入hash语句，server语句中不能写入weight等其他的参数，hash_method是使用的hash算法
+        #upstream backend {
+        #    server squid1:3128;
+        #    server squid2:3128;
+        #    hash $request_uri;
+        #    hash_method crc32;
+        #}
+
+        #tips:
+        #upstream bakend{#定义负载均衡设备的Ip及设备状态}{
+        #    ip_hash;
+        #    server 127.0.0.1:9090 down;
+        #    server 127.0.0.1:8080 weight=2;
+        #    server 127.0.0.1:6060;
+        #    server 127.0.0.1:7070 backup;
+        #}
+        #在需要使用负载均衡的server中增加 proxy_pass http://bakend/;
+
+        #每个设备的状态设置为:
+        #1.down表示单前的server暂时不参与负载
+        #2.weight为weight越大，负载的权重就越大。
+        #3.max_fails：允许请求失败的次数默认为1.当超过最大次数时，返回proxy_next_upstream模块定义的错误
+        #4.fail_timeout:max_fails次失败后，暂停的时间。
+        #5.backup： 其它所有的非backup机器down或者忙的时候，请求backup机器。所以这台机器压力会最轻。
+
+        #nginx支持同时设置多组的负载均衡，用来给不用的server来使用。
+        #client_body_in_file_only设置为On 可以讲client post过来的数据记录到文件中用来做debug
+        #client_body_temp_path设置记录文件的目录 可以设置最多3层目录
+        #location对URL进行匹配.可以进行重定向或者进行新的代理 负载均衡
+    }
+    
+    
+    #虚拟主机的配置
+    server {
+        #监听端口
+        listen 80;
+
+        #域名可以有多个，用空格隔开
+        server_name www.jd.com jd.com;
+        #默认入口文件名称
+        index index.html index.htm index.php;
+        root /data/www/jd;
+
+        #对******进行负载均衡
+        location ~ .*.(php|php5)?$
+        {
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_index index.php;
+            include fastcgi.conf;
         }
-      }
-    },
-    &quot;settings&quot; : {
-      &quot;index&quot; : {
-        &quot;creation_date&quot; : &quot;1599708623941&quot;,
-        &quot;number_of_shards&quot; : &quot;1&quot;,
-        &quot;number_of_replicas&quot; : &quot;1&quot;,
-        &quot;uuid&quot; : &quot;ANWnhwArSMSl8k8iipgH1Q&quot;,
-        &quot;version&quot; : {
-          &quot;created&quot; : &quot;7080099&quot;
-        },
-        &quot;provided_name&quot; : &quot;test2&quot;
-      }
-    }
-  }
-}
-
-# 查看默认的规则
-PUT /test3/_doc/1
-{
-  &quot;name&quot;: &quot;狂神说Java&quot;,
-  &quot;age&quot;: 28,
-  &quot;birthday&quot;: &quot;1997-01-05&quot;
-}
-
-# GET test3
-
-{
-  &quot;test3&quot; : {
-    &quot;aliases&quot; : { },
-    &quot;mappings&quot; : {
-      &quot;properties&quot; : {
-        &quot;age&quot; : {
-          &quot;type&quot; : &quot;long&quot;
-        },
-        &quot;birthday&quot; : {
-          &quot;type&quot; : &quot;date&quot;
-        },
-        &quot;name&quot; : {
-          &quot;type&quot; : &quot;text&quot;,
-          &quot;fields&quot; : {
-            &quot;keyword&quot; : {
-              &quot;type&quot; : &quot;keyword&quot;,
-              &quot;ignore_above&quot; : 256
-            }
-          }
+         
+        #图片缓存时间设置
+        location ~ .*.(gif|jpg|jpeg|png|bmp|swf)$
+        {
+            expires 10d;
         }
-      }
-    },
-    &quot;settings&quot; : {
-      &quot;index&quot; : {
-        &quot;creation_date&quot; : &quot;1599708906181&quot;,
-        &quot;number_of_shards&quot; : &quot;1&quot;,
-        &quot;number_of_replicas&quot; : &quot;1&quot;,
-        &quot;uuid&quot; : &quot;LzPLCDgeQn6tdKo3xBBpbw&quot;,
-        &quot;version&quot; : {
-          &quot;created&quot; : &quot;7080099&quot;
-        },
-        &quot;provided_name&quot; : &quot;test3&quot;
-      }
+         
+        #JS和CSS缓存时间设置
+        location ~ .*.(js|css)?$
+        {
+            expires 1h;
+        }
+         
+        #日志格式设定
+        #$remote_addr与$http_x_forwarded_for用以记录客户端的ip地址；
+        #$remote_user：用来记录客户端用户名称；
+        #$time_local： 用来记录访问时间与时区；
+        #$request： 用来记录请求的url与http协议；
+        #$status： 用来记录请求状态；成功是200，
+        #$body_bytes_sent ：记录发送给客户端文件主体内容大小；
+        #$http_referer：用来记录从那个页面链接访问过来的；
+        #$http_user_agent：记录客户浏览器的相关信息；
+        #通常web服务器放在反向代理的后面，这样就不能获取到客户的IP地址了，通过$remote_add拿到的IP地址是反向代理服务器的iP地址。反向代理服务器在转发请求的http头信息中，可以增加x_forwarded_for信息，用以记录原有客户端的IP地址和原来客户端的请求的服务器地址。
+        log_format access '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '
+        '$status $body_bytes_sent &quot;$http_referer&quot; '
+        '&quot;$http_user_agent&quot; $http_x_forwarded_for';
+         
+        #定义本虚拟主机的访问日志
+        access_log  /usr/local/nginx/logs/host.access.log  main;
+        access_log  /usr/local/nginx/logs/host.access.404.log  log404;
+         
+        #对 &quot;/connect-controller&quot; 启用反向代理
+        location /connect-controller {
+            proxy_pass http://127.0.0.1:88; #请注意此处端口号不能与虚拟主机监听的端口号一样（也就是server监听的端口）
+            proxy_redirect off;
+            proxy_set_header X-Real-IP $remote_addr;
+             
+            #后端的Web服务器可以通过X-Forwarded-For获取用户真实IP
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+             
+            #以下是一些反向代理的配置，可选。
+            proxy_set_header Host $host;
+
+            #允许客户端请求的最大单文件字节数
+            client_max_body_size 10m;
+
+            #缓冲区代理缓冲用户端请求的最大字节数，
+            #如果把它设置为比较大的数值，例如256k，那么，无论使用firefox还是IE浏览器，来提交任意小于256k的图片，都很正常。如果注释该指令，使用默认的client_body_buffer_size设置，也就是操作系统页面大小的两倍，8k或者16k，问题就出现了。
+            #无论使用firefox4.0还是IE8.0，提交一个比较大，200k左右的图片，都返回500 Internal Server Error错误
+            client_body_buffer_size 128k;
+
+            #表示使nginx阻止HTTP应答代码为400或者更高的应答。
+            proxy_intercept_errors on;
+
+            #后端服务器连接的超时时间_发起握手等候响应超时时间
+            #nginx跟后端服务器连接超时时间(代理连接超时)
+            proxy_connect_timeout 90;
+
+            #后端服务器数据回传时间(代理发送超时)
+            #后端服务器数据回传时间_就是在规定时间之内后端服务器必须传完所有的数据
+            proxy_send_timeout 90;
+
+            #连接成功后，后端服务器响应时间(代理接收超时)
+            #连接成功后_等候后端服务器响应时间_其实已经进入后端的排队之中等候处理（也可以说是后端服务器处理请求的时间）
+            proxy_read_timeout 90;
+
+            #设置代理服务器（nginx）保存用户头信息的缓冲区大小
+            #设置从被代理服务器读取的第一部分应答的缓冲区大小，通常情况下这部分应答中包含一个小的应答头，默认情况下这个值的大小为指令proxy_buffers中指定的一个缓冲区的大小，不过可以将其设置为更小
+            proxy_buffer_size 4k;
+
+            #proxy_buffers缓冲区，网页平均在32k以下的设置
+            #设置用于读取应答（来自被代理服务器）的缓冲区数目和大小，默认情况也为分页大小，根据操作系统的不同可能是4k或者8k
+            proxy_buffers 4 32k;
+
+            #高负荷下缓冲大小（proxy_buffers*2）
+            proxy_busy_buffers_size 64k;
+
+            #设置在写入proxy_temp_path时数据的大小，预防一个工作进程在传递文件时阻塞太长
+            #设定缓存文件夹大小，大于这个值，将从upstream服务器传
+            proxy_temp_file_write_size 64k;
+        }
+        
+        #本地动静分离反向代理配置
+        #所有jsp的页面均交由tomcat或resin处理
+        location ~ .(jsp|jspx|do)?$ {
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_pass http://127.0.0.1:8080;
+        }
     }
-  }
-}
-
-</code></pre>
-<figure data-type="image" tabindex="28"><img src="https://img-blog.csdnimg.cn/20200910114250259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<ul>
-<li>修改索引 POST</li>
-</ul>
-<pre><code class="language-bash"># 只会修改指定项，其他内容保证不变
-POST /test3/_doc/1/_update
-{
-  &quot;doc&quot;: {
-    &quot;name&quot;:&quot;暴徒狂神&quot;
-  }
-}
-
-# GET test3/_doc/1
-
-{
-  &quot;_index&quot; : &quot;test3&quot;,
-  &quot;_type&quot; : &quot;_doc&quot;,
-  &quot;_id&quot; : &quot;1&quot;,
-  &quot;_version&quot; : 2,
-  &quot;_seq_no&quot; : 1,
-  &quot;_primary_term&quot; : 1,
-  &quot;found&quot; : true,
-  &quot;_source&quot; : {
-    &quot;name&quot; : &quot;暴徒狂神&quot;,
-    &quot;age&quot; : 28,
-    &quot;birthday&quot; : &quot;1997-01-05&quot;
-  }
-}
-
-</code></pre>
-<figure data-type="image" tabindex="29"><img src="https://img-blog.csdnimg.cn/20200910115620763.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<h1 id="8-关于文档的基本操作">8. 关于文档的基本操作</h1>
-<ul>
-<li>基本操作（简单的查询）</li>
-</ul>
-<pre><code class="language-bash">put /kuangshen/user/1
-{
-  &quot;name&quot;: &quot;狂神说&quot;,
-  &quot;age&quot;: 23,
-  &quot;desc&quot;: &quot;一顿操作猛如虎，一看工资2500&quot;,
-  &quot;tags&quot;: [&quot;码农&quot;, &quot;技术宅&quot;, &quot;直男&quot;]
-}
-
-put /kuangshen/user/2
-{
-  &quot;name&quot;: &quot;张三&quot;,
-  &quot;age&quot;: 28,
-  &quot;desc&quot;: &quot;法外狂徒&quot;,
-  &quot;tags&quot;: [&quot;旅游&quot;, &quot;渣男&quot;, &quot;交友&quot;]
-}
-
-put /kuangshen/user/3
-{
-  &quot;name&quot;: &quot;李四&quot;,
-  &quot;age&quot;: 30,
-  &quot;desc&quot;: &quot;不知道怎么描述&quot;,
-  &quot;tags&quot;: [&quot;旅游&quot;, &quot;靓女&quot;, &quot;唱歌&quot;]
-}
-
-GET kuangshen/user/1
-
-
-GET kuangshen/user/_search?q=name:狂神
-</code></pre>
-<ul>
-<li>复杂操作(排序、分页、高亮、模糊查询、标准查询！)</li>
-</ul>
-<figure data-type="image" tabindex="30"><img src="https://img-blog.csdnimg.cn/20200910140701583.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<pre><code class="language-bash"># 模糊查询
-GET kuangshen/user/_search
-{
-  &quot;query&quot;: {
-    &quot;match&quot;: {
-      &quot;name&quot;: &quot;狂神&quot;
-    }
-  }
-}
-
-# 对查询结果进行字段过滤
-GET kuangshen/user/_search
-{
-  &quot;query&quot;: {
-    &quot;match&quot;: {
-      &quot;name&quot;: &quot;狂神&quot;
-    }
-  },
-  &quot;_source&quot;: [&quot;name&quot;, &quot;desc&quot;]
-}
-
-# 排序
-GET kuangshen/user/_search
-{
-  &quot;query&quot;: {
-    &quot;match&quot;: {
-      &quot;name&quot;: &quot;狂神&quot;
-    }
-  },
-  &quot;sort&quot;:[{
-    &quot;age&quot;: &quot;asc&quot;
-  }]
-}
-
-# 分页
-GET kuangshen/user/_search
-{
-  &quot;query&quot;: {
-    &quot;match&quot;: {
-      &quot;name&quot;: &quot;狂神&quot;
-    }
-  },
-  &quot;sort&quot;:[{
-    &quot;age&quot;: &quot;asc&quot;
-  }], 
-  &quot;from&quot;: 0,
-  &quot;size&quot;: 2
 }
 </code></pre>
-<blockquote>
-<p>布尔值条件查询</p>
-</blockquote>
-<pre><code class="language-bash"># 多条件查询 must 相当于and
-GET kuangshen/user/_search
-{
-  &quot;query&quot;: {
-    &quot;bool&quot;: {
-      &quot;must&quot;: [
-        {&quot;match&quot;: {
-          &quot;name&quot;: &quot;狂神&quot;
-        }},
-        {&quot;match&quot;: {
-          &quot;age&quot;: 23
-        }}
-      ]
-    }
-  }
-}
-
-# 多条件查询 should 相当于or
-GET kuangshen/user/_search
-{
-  &quot;query&quot;: {
-    &quot;bool&quot;: {
-      &quot;should&quot;: [
-        {&quot;match&quot;: {
-          &quot;name&quot;: &quot;狂神说&quot;
-        }},
-        {&quot;match&quot;: {
-          &quot;age&quot;: 25
-        }}
-      ]
-    }
-  }
-}
-
-# 多条件查询 must_not 相当于 not
-GET kuangshen/user/_search
-{
-  &quot;query&quot;: {
-    &quot;bool&quot;: {
-      &quot;must_not&quot;: [
-        {&quot;match&quot;: {
-          &quot;age&quot;: 25
-        }}
-      ]
-    }
-  }
-}
-
-
-# 过滤查询1 age &gt; 24
-GET kuangshen/user/_search
-{
-  &quot;query&quot;: {
-    &quot;bool&quot;: {
-      &quot;must&quot;: [
-        {&quot;match&quot;: {
-          &quot;name&quot;: &quot;狂神&quot;
-        }}
-      ],
-      &quot;filter&quot;: [
-        {&quot;range&quot;: {
-          &quot;age&quot;: {
-            &quot;gt&quot;: 24
-          }
-        }}
-      ]
-    }
-  }
-}
-
-# 过滤器2  22&lt;age&lt;30 
-GET kuangshen/user/_search
-{
-  &quot;query&quot;: {
-    &quot;bool&quot;: {
-      &quot;must&quot;: [
-        {&quot;match&quot;: {
-          &quot;name&quot;: &quot;狂神&quot;
-        }}
-      ],
-      &quot;filter&quot;: [
-        {&quot;range&quot;: {
-          &quot;age&quot;: {
-            &quot;lt&quot;: 30,
-            &quot;gt&quot;: 22
-          }
-        }}
-      ]
-    }
-  }
-}
-</code></pre>
-<blockquote>
-<p>多条件查询</p>
-</blockquote>
-<pre><code class="language-bash">GET kuangshen/user/_search
-{
-  &quot;query&quot;: {
-    &quot;match&quot;: {
-      &quot;tags&quot;: &quot;技术 男&quot;
-    }
-  }
-}
-</code></pre>
-<figure data-type="image" tabindex="31"><img src="https://img-blog.csdnimg.cn/20200910144807544.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<figure data-type="image" tabindex="32"><img src="https://img-blog.csdnimg.cn/2020091014524041.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-<blockquote>
-<p>keyword类型不会被分词器解析</p>
-<p>term: 精确匹配</p>
-</blockquote>
-<pre><code class="language-bash"># 定义类型PUT xiaofan_test_db{  &quot;mappings&quot;: {    &quot;properties&quot;: {      &quot;name&quot;: {        &quot;type&quot;: &quot;text&quot;      },      &quot;desc&quot;: {        &quot;type&quot;: &quot;keyword&quot;      }    }  }}PUT /xiaofan_test_db/_doc/1{  &quot;name&quot;: &quot;小范说Java Name&quot;,  &quot;desc&quot;: &quot;小范说Java Desc&quot;}PUT /xiaofan_test_db/_doc/2{  &quot;name&quot;: &quot;小范说Java Name&quot;,  &quot;desc&quot;: &quot;小范说Java Desc 2&quot;}# 按照keyword类型精准匹配GET xiaofan_test_db/_search{  &quot;query&quot;: {    &quot;term&quot;: {      &quot;desc&quot;: &quot;小范说Java Desc&quot;    }  }}# 结果：{  &quot;took&quot; : 0,  &quot;timed_out&quot; : false,  &quot;_shards&quot; : {    &quot;total&quot; : 1,    &quot;successful&quot; : 1,    &quot;skipped&quot; : 0,    &quot;failed&quot; : 0  },  &quot;hits&quot; : {    &quot;total&quot; : {      &quot;value&quot; : 1,      &quot;relation&quot; : &quot;eq&quot;    },    &quot;max_score&quot; : 0.6931471,    &quot;hits&quot; : [      {        &quot;_index&quot; : &quot;test_db&quot;,        &quot;_type&quot; : &quot;_doc&quot;,        &quot;_id&quot; : &quot;1&quot;,        &quot;_score&quot; : 0.6931471,        &quot;_source&quot; : {          &quot;name&quot; : &quot;小范说Java Name&quot;,          &quot;desc&quot; : &quot;小范说Java Desc&quot;        }      }    ]  }}# 按照text类型匹配GET xiaofan_test_db/_search{  &quot;query&quot;: {    &quot;term&quot;: {      &quot;name&quot;: &quot;小&quot;    }  }}# 结果：{  &quot;took&quot; : 0,  &quot;timed_out&quot; : false,  &quot;_shards&quot; : {    &quot;total&quot; : 1,    &quot;successful&quot; : 1,    &quot;skipped&quot; : 0,    &quot;failed&quot; : 0  },  &quot;hits&quot; : {    &quot;total&quot; : {      &quot;value&quot; : 2,      &quot;relation&quot; : &quot;eq&quot;    },    &quot;max_score&quot; : 0.18232156,    &quot;hits&quot; : [      {        &quot;_index&quot; : &quot;test_db&quot;,        &quot;_type&quot; : &quot;_doc&quot;,        &quot;_id&quot; : &quot;1&quot;,        &quot;_score&quot; : 0.18232156,        &quot;_source&quot; : {          &quot;name&quot; : &quot;小范说Java Name&quot;,          &quot;desc&quot; : &quot;小范说Java Desc&quot;        }      },      {        &quot;_index&quot; : &quot;test_db&quot;,        &quot;_type&quot; : &quot;_doc&quot;,        &quot;_id&quot; : &quot;2&quot;,        &quot;_score&quot; : 0.18232156,        &quot;_source&quot; : {          &quot;name&quot; : &quot;小范说Java Name&quot;,          &quot;desc&quot; : &quot;小范说Java Desc 2&quot;        }      }    ]  }}
-</code></pre>
-<blockquote>
-<p>多个值匹配精确查询</p>
-</blockquote>
-<pre><code class="language-bash">PUT /test_db/_doc/3{  &quot;t1&quot;: &quot;22&quot;,  &quot;t2&quot;: &quot;2020-09-10&quot;}PUT /test_db/_doc/4{  &quot;t1&quot;: &quot;33&quot;,  &quot;t2&quot;: &quot;2020-09-11&quot;}GET test_db/_search{  &quot;query&quot;: {    &quot;bool&quot;: {      &quot;should&quot;: [        {          &quot;term&quot;: {            &quot;t1&quot;: &quot;22&quot;          }        },         {          &quot;term&quot;: {            &quot;t1&quot;: &quot;33&quot;          }        }      ]    }  }}
-</code></pre>
-<blockquote>
-<p>高亮查询</p>
-</blockquote>
-<pre><code class="language-bash">GET kuangshen/user/_search{  &quot;query&quot;: {    &quot;match&quot;: {      &quot;name&quot;: &quot;狂神&quot;    }  },  &quot;highlight&quot;: {    &quot;pre_tags&quot;: &quot;&lt;p class='key' style='color:red'&gt;&quot;,    &quot;post_tags&quot;: &quot;&lt;/p&gt;&quot;,     &quot;fields&quot;: {      &quot;name&quot;: {}    }  }}# 结果显示：#! Deprecation: [types removal] Specifying types in search requests is deprecated.{  &quot;took&quot; : 1,  &quot;timed_out&quot; : false,  &quot;_shards&quot; : {    &quot;total&quot; : 1,    &quot;successful&quot; : 1,    &quot;skipped&quot; : 0,    &quot;failed&quot; : 0  },  &quot;hits&quot; : {    &quot;total&quot; : {      &quot;value&quot; : 2,      &quot;relation&quot; : &quot;eq&quot;    },    &quot;max_score&quot; : 1.3862942,    &quot;hits&quot; : [      {        &quot;_index&quot; : &quot;kuangshen&quot;,        &quot;_type&quot; : &quot;user&quot;,        &quot;_id&quot; : &quot;1&quot;,        &quot;_score&quot; : 1.3862942,        &quot;_source&quot; : {          &quot;name&quot; : &quot;狂神说&quot;,          &quot;age&quot; : 23,          &quot;desc&quot; : &quot;一顿操作猛如虎，一看工资2500&quot;,          &quot;tags&quot; : [            &quot;码农&quot;,            &quot;技术宅&quot;,            &quot;直男&quot;          ]        },        &quot;highlight&quot; : {          &quot;name&quot; : [            &quot;&lt;p class='key' style='color:red'&gt;狂&lt;/p&gt;&lt;p class='key' style='color:red'&gt;神&lt;/p&gt;说&quot;          ]        }      },      {        &quot;_index&quot; : &quot;kuangshen&quot;,        &quot;_type&quot; : &quot;user&quot;,        &quot;_id&quot; : &quot;4&quot;,        &quot;_score&quot; : 1.0892314,        &quot;_source&quot; : {          &quot;name&quot; : &quot;狂神说前端&quot;,          &quot;age&quot; : 25,          &quot;desc&quot; : &quot;大王叫我来巡山&quot;,          &quot;tags&quot; : [            &quot;码农1&quot;,            &quot;技术宅1&quot;,            &quot;直男1&quot;          ]        },        &quot;highlight&quot; : {          &quot;name&quot; : [            &quot;&lt;p class='key' style='color:red'&gt;狂&lt;/p&gt;&lt;p class='key' style='color:red'&gt;神&lt;/p&gt;说前端&quot;          ]        }      }    ]  }}
-</code></pre>
-<h1 id="9-集成springboot">9. 集成SpringBoot</h1>
-<ul>
-<li>
-<p><a href="https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high.html">官网</a></p>
-</li>
-<li>
-<p>添加依赖</p>
-</li>
-</ul>
-<pre><code class="language-xml">&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;    &lt;artifactId&gt;spring-boot-starter-data-elasticsearch&lt;/artifactId&gt;&lt;/dependency&gt;
-</code></pre>
-<ul>
-<li>自定义配置</li>
-</ul>
-<pre><code class="language-java">package com.xiaofan.config;import org.apache.http.HttpHost;import org.elasticsearch.client.RestClient;import org.elasticsearch.client.RestHighLevelClient;import org.springframework.context.annotation.Bean;import org.springframework.context.annotation.Configuration;@Configurationpublic class ElasticSearchClientConfig {    @Bean    public RestHighLevelClient restHighLevelClient() {        RestHighLevelClient client = new RestHighLevelClient(            RestClient.builder(                new HttpHost(&quot;192.168.1.30&quot;, 9201, &quot;http&quot;)            )        );        return client;    }}
-</code></pre>
-<ul>
-<li>编写测试类</li>
-</ul>
-<pre><code class="language-java">package com.xiaofan;import com.alibaba.fastjson.JSON;import com.xiaofan.pojo.User;import org.apache.http.entity.ContentType;import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;import org.elasticsearch.action.bulk.BulkRequest;import org.elasticsearch.action.bulk.BulkResponse;import org.elasticsearch.action.delete.DeleteRequest;import org.elasticsearch.action.delete.DeleteResponse;import org.elasticsearch.action.get.GetRequest;import org.elasticsearch.action.get.GetResponse;import org.elasticsearch.action.index.IndexRequest;import org.elasticsearch.action.index.IndexResponse;import org.elasticsearch.action.search.SearchRequest;import org.elasticsearch.action.search.SearchResponse;import org.elasticsearch.action.support.master.AcknowledgedResponse;import org.elasticsearch.action.update.UpdateRequest;import org.elasticsearch.action.update.UpdateResponse;import org.elasticsearch.client.RequestOptions;import org.elasticsearch.client.RestHighLevelClient;import org.elasticsearch.client.indices.CreateIndexRequest;import org.elasticsearch.client.indices.CreateIndexResponse;import org.elasticsearch.client.indices.GetIndexRequest;import org.elasticsearch.common.unit.TimeValue;import org.elasticsearch.common.xcontent.XContentType;import org.elasticsearch.index.query.MatchAllQueryBuilder;import org.elasticsearch.index.query.QueryBuilders;import org.elasticsearch.index.query.TermQueryBuilder;import org.elasticsearch.search.SearchHit;import org.elasticsearch.search.builder.SearchSourceBuilder;import org.elasticsearch.search.fetch.subphase.FetchSourceContext;import org.junit.jupiter.api.Test;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.beans.factory.annotation.Qualifier;import org.springframework.boot.test.context.SpringBootTest;import java.io.IOException;import java.util.ArrayList;import java.util.concurrent.TimeUnit;@SpringBootTestclass EsApiApplicationTests {	public static final String INDEX = &quot;xiaofan_test_index&quot;;	@Autowired	@Qualifier(value = &quot;restHighLevelClient&quot;)	private RestHighLevelClient client;	// 创建索引	@Test	void testCreateIndex() throws IOException {		// 1. 创建索引请求		CreateIndexRequest request = new CreateIndexRequest(INDEX);		// 2. 客户端执行请求， IndicesClient，请求后获得响应		CreateIndexResponse createIndexResponse = client.indices().create(request, RequestOptions.DEFAULT);		System.out.println(createIndexResponse);	}	// 测试索引存在	@Test	void testExistsIndex() throws IOException {		GetIndexRequest request = new GetIndexRequest(INDEX);		boolean exists = client.indices().exists(request, RequestOptions.DEFAULT);		System.out.println(exists);	}	// 删除索引	@Test	void testDeleteIndex() throws IOException {		DeleteIndexRequest request = new DeleteIndexRequest(INDEX);		AcknowledgedResponse acknowledgedResponse = client.indices().delete(request, RequestOptions.DEFAULT);		System.out.println(acknowledgedResponse.isAcknowledged());	}	// 添加文档	@Test	void testAddDocument() throws IOException {		User user = new User(&quot;狂神说&quot;, 28);		IndexRequest request = new IndexRequest(INDEX);		// 规则 PUT /index/_doc/1		request.id(&quot;1&quot;);		request.timeout(TimeValue.timeValueSeconds(1));		// 将数据放入请求 json		request.source(JSON.toJSONString(user), XContentType.JSON);		IndexResponse response = client.index(request, RequestOptions.DEFAULT);		System.out.println(response.toString());		System.out.println(response.status());	}	// 获取文档 判断是否存在 GET /index/_doc/1	@Test	void testIsExists() throws IOException {		GetRequest request = new GetRequest(INDEX, &quot;1&quot;);		// 不获取返回的 _source 的上下文了		request.fetchSourceContext(new FetchSourceContext(false));		request.storedFields(&quot;_none_&quot;);		boolean exists = client.exists(request, RequestOptions.DEFAULT);		System.out.println(exists);	}	// 获取文档	/**	 * 返回结果：	 * {&quot;age&quot;:28,&quot;name&quot;:&quot;狂神说&quot;}	 * {&quot;_index&quot;:&quot;xiaofan_test_index&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;1&quot;,&quot;_version&quot;:1,&quot;_seq_no&quot;:0,&quot;_primary_term&quot;:1,&quot;found&quot;:true,&quot;_source&quot;:{&quot;age&quot;:28,&quot;name&quot;:&quot;狂神说&quot;}}	 */	@Test	void testGetDocument() throws IOException {		GetRequest request = new GetRequest(INDEX, &quot;1&quot;);		GetResponse response = client.get(request, RequestOptions.DEFAULT);		System.out.println(response.getSourceAsString());		System.out.println(response);	}	// 更新文档	@Test	void testUpdateDocument() throws IOException {		UpdateRequest request = new UpdateRequest(INDEX, &quot;1&quot;);		request.timeout(&quot;1s&quot;);		User user = new User(&quot;小范说Java&quot;, 18);		request.doc(JSON.toJSONString(user), XContentType.JSON);		UpdateResponse updateResponse = client.update(request, RequestOptions.DEFAULT);		System.out.println(updateResponse);	}	// 删除文档	@Test	void testDeleteDocument() throws IOException {		DeleteRequest request = new DeleteRequest(INDEX, &quot;1&quot;);		request.timeout(&quot;1s&quot;);		DeleteResponse deleteResponse = client.delete(request, RequestOptions.DEFAULT);		System.out.println(deleteResponse);	}	// 批量插入数据（修改，删除类似操作）	@Test	void testBulkRequest() throws IOException {		BulkRequest request = new BulkRequest();		request.timeout(&quot;10s&quot;);		ArrayList&lt;User&gt; users = new ArrayList&lt;&gt;();		users.add(new User(&quot;kuangshen1&quot;, 21));		users.add(new User(&quot;kuangshen2&quot;, 22));		users.add(new User(&quot;kuangshen3&quot;, 23));		users.add(new User(&quot;xiaofan1&quot;, 18));		users.add(new User(&quot;xiaofan2&quot;, 19));		// 批处理请求， 修改，删除，只要在这里修改相应的请求就可以		for (int i = 0; i &lt; users.size(); i++) {			request.add(new IndexRequest(INDEX)					.id(String.valueOf(i + 1))					.source(JSON.toJSONString(users.get(i)), XContentType.JSON));		}		BulkResponse bulkResponse = client.bulk(request, RequestOptions.DEFAULT);		//是否失败，返回false表示成功		System.out.println(bulkResponse.hasFailures());	}	// 查询文档	@Test	void testSearch() throws IOException {		SearchRequest searchRequest = new SearchRequest(INDEX);		// 构建搜索条件		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();		// 查询条件， 可以使用QueryBuilders工具类实现		// QueryBuilders.termQuery 精确		// QueryBuilders.matchLLQuery() 匹配所有		TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery(&quot;name&quot;, &quot;kuangshen1&quot;);		// MatchAllQueryBuilder matchAllQueryBuilder = QueryBuilders.matchAllQuery();		sourceBuilder.query(termQueryBuilder);		sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));		searchRequest.source(sourceBuilder);		SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);		System.out.println(JSON.toJSON(searchResponse.getHits()));		System.out.println(&quot;======================================&quot;);		for (SearchHit documentFields : searchResponse.getHits().getHits()) {			System.out.println(documentFields.getSourceAsMap());		}	}}
-</code></pre>
-<h1 id="10-实战模拟全文搜索-京东搜索">10. 实战：模拟全文搜索-京东搜索</h1>
-<ul>
-<li>
-<p>github链接：https://github.com/fanjianhai/CODE/tree/main/SpringBoot/springboot-11-elasticsearch-jd</p>
-</li>
-<li>
-<p>搭建springboot项目，添加依赖，修改es版本</p>
-</li>
-</ul>
-<pre><code class="language-xml">&lt;properties&gt;    &lt;java.version&gt;1.8&lt;/java.version&gt;    &lt;elasticsearch.version&gt;7.9.2&lt;/elasticsearch.version&gt;&lt;/properties&gt;&lt;dependencies&gt;    &lt;dependency&gt;        &lt;groupId&gt;com.alibaba&lt;/groupId&gt;        &lt;artifactId&gt;fastjson&lt;/artifactId&gt;        &lt;version&gt;1.2.73&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;        &lt;groupId&gt;org.jsoup&lt;/groupId&gt;        &lt;artifactId&gt;jsoup&lt;/artifactId&gt;        &lt;version&gt;1.13.1&lt;/version&gt;    &lt;/dependency&gt;&lt;/dependencies&gt;
-</code></pre>
-<ul>
-<li>整体效果</li>
-</ul>
-<figure data-type="image" tabindex="33"><img src="https://img-blog.csdnimg.cn/20200914120729179.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZhbmppYW5oYWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Git]]></title>
-        <id>https://lindamao0753.github.io/post/git/</id>
-        <link href="https://lindamao0753.github.io/post/git/">
-        </link>
-        <updated>2021-06-30T03:16:25.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="git">Git</h1>
-<p><strong>版本控制！</strong></p>
-<h2 id="什么是版本控制">什么是版本控制</h2>
-<p>版本控制（Revision control）是一种在开发的过程中用于管理我们对文件、目录或工程等内容的修改历史，方便查看更改历史记录，备份以便恢复以前的版本的软件工程技术。</p>
-<ul>
-<li>实现跨区域多人协同开发</li>
-<li>追踪和记载一个或者多个文件的历史记录</li>
-<li>组织和保护你的源代码和文档</li>
-<li>统计工作量</li>
-<li>并行开发、提高开发效率</li>
-<li>跟踪记录整个软件的开发过程</li>
-<li>减轻开发人员的负担，节省时间，同时降低人为错误</li>
-</ul>
-<p>简单说就是用于管理多人协同开发项目的技术。</p>
-<p>没有进行版本控制或者版本控制本身缺乏正确的流程管理，在软件开发过程中将会引入很多问题，如软件代码的一致性、软件内容的冗余、软件过程的事物性、软件开发过程中的并发性、软件源代码的安全性，以及软件的整合等问题。</p>
-<p>无论是工作还是学习，或者是自己做笔记，都经历过这样一个阶段！我们就迫切需要一个版本控制工具！</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0C4qeLxMgoTg9B154ibahsUaibiaV7DgH9GTFQZj3Kyhf5fxrj6G2U5HFg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy"></p>
-<p>多人开发就必须要使用版本控制！</p>
-<h2 id="常见的版本控制工具">常见的版本控制工具</h2>
-<p>我们学习的东西，一定是当下最流行的！</p>
-<p>主流的版本控制器有如下这些：</p>
-<ul>
-<li><strong>Git</strong></li>
-<li><strong>SVN</strong>（Subversion）</li>
-<li><strong>CVS</strong>（Concurrent Versions System）</li>
-<li><strong>VSS</strong>（Micorosoft Visual SourceSafe）</li>
-<li><strong>TFS</strong>（Team Foundation Server）</li>
-<li>Visual Studio Online</li>
-</ul>
-<p>版本控制产品非常的多（Perforce、Rational ClearCase、RCS（GNU Revision Control System）、Serena Dimention、SVK、BitKeeper、Monotone、Bazaar、Mercurial、SourceGear Vault），现在影响力最大且使用最广泛的是Git与SVN</p>
-<h2 id="版本控制分类">版本控制分类</h2>
-<p><strong>1、本地版本控制</strong></p>
-<p>记录文件每次的更新，可以对每个版本做一个快照，或是记录补丁文件，适合个人用，如RCS。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0Dg3fHrbPqbNEOMO9GTjFhVaukMZWx54icS7eS2x8A7BEu0VB9ibwEhzQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy"></p>
-<p><strong>2、集中版本控制  SVN</strong></p>
-<p>所有的版本数据都保存在服务器上，协同开发者从服务器上同步更新或上传自己的修改</p>
-<figure data-type="image" tabindex="1"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p00V4uLaibxtZI9RLpq7tkSdlWiaF92AVeZ0ib9DicqBkS2poo5u8sEU2mCQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>所有的版本数据都存在服务器上，用户的本地只有自己以前所同步的版本，如果不连网的话，用户就看不到历史版本，也无法切换版本验证问题，或在不同分支工作。而且，所有数据都保存在单一的服务器上，有很大的风险这个服务器会损坏，这样就会丢失所有的数据，当然可以定期备份。代表产品：SVN、CVS、VSS</p>
-<p><strong>3、分布式版本控制 	Git</strong></p>
-<p>每个人都拥有全部的代码！安全隐患！</p>
-<p>所有版本信息仓库全部同步到本地的每个用户，这样就可以在本地查看所有版本历史，可以离线在本地提交，只需在连网时push到相应的服务器或其他用户那里。由于每个用户那里保存的都是所有的版本数据，只要有一个用户的设备没有问题就可以恢复所有的数据，但这增加了本地存储空间的占用。</p>
-<p>不会因为服务器损坏或者网络问题，造成不能工作的情况！</p>
-<figure data-type="image" tabindex="2"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0ev8Q7qXjsTfeSwFexdA4tGjFAiaVEKQzAHdGcINXILKflI2cfk9BiawQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<h2 id="git与svn的主要区别">Git与SVN的主要区别</h2>
-<p>SVN是集中式版本控制系统，版本库是集中放在中央服务器的，而工作的时候，用的都是自己的电脑，所以首先要从中央服务器得到最新的版本，然后工作，完成工作后，需要把自己做完的活推送到中央服务器。集中式版本控制系统是必须联网才能工作，对网络带宽要求较高。</p>
-<figure data-type="image" tabindex="3"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0qtEIDr2NG6rOGg1UgDu5c3ffRR8P7FD5D8BPLUEXp0hQoL7qfp3I6g/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>Git是分布式版本控制系统，没有中央服务器，每个人的电脑就是一个完整的版本库，工作的时候不需要联网了，因为版本都在自己电脑上。协同的方法是这样的：比如说自己在电脑上改了文件A，其他人也在电脑上改了文件A，这时，你们两之间只需把各自的修改推送给对方，就可以互相看到对方的修改了。Git可以直接看到更新了哪些代码和文件！</p>
-<p><strong>Git是目前世界上最先进的分布式版本控制系统。</strong></p>
-<p>聊聊Git的历史</p>
-<p>同生活中的许多伟大事物一样，Git 诞生于一个极富纷争大举创新的年代。</p>
-<p>Linux 内核开源项目有着为数众广的参与者。绝大多数的 Linux 内核维护工作都花在了提交补丁和保存归档的繁琐事务上(1991－2002年间)。到 2002 年，整个项目组开始启用一个专有的分布式版本控制系统 BitKeeper 来管理和维护代码。</p>
-<p>Linux社区中存在很多的大佬！破解研究 BitKeeper ！</p>
-<p>到了 2005 年，开发 BitKeeper 的商业公司同 Linux 内核开源社区的合作关系结束，他们收回了 Linux 内核社区免费使用 BitKeeper 的权力。这就迫使 Linux 开源社区(特别是 Linux 的缔造者 Linus Torvalds)基于使用 BitKeeper 时的经验教训，开发出自己的版本系统。（2周左右！） 也就是后来的 Git！</p>
-<p><strong>Git是目前世界上最先进的分布式版本控制系统。</strong></p>
-<p>Git是免费、开源的，最初Git是为辅助 Linux 内核开发的，来替代 BitKeeper！<img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy"></p>
-<p>Linux和Git之父李纳斯·托沃兹（Linus Benedic Torvalds）1969、芬兰</p>
-<p>Git环境配置</p>
-<h2 id="软件下载">软件下载</h2>
-<p>打开 [git官网] https://git-scm.com/，下载git对应操作系统的版本。</p>
-<p>所有东西下载慢的话就可以去找镜像！</p>
-<p>官网下载太慢，我们可以使用淘宝镜像下载：http://npm.taobao.org/mirrors/git-for-windows/</p>
-<figure data-type="image" tabindex="4"><img src="E:/java%E7%AC%94%E8%AE%B0/git/Git.assets/image-20210607152223730.png" alt="图片" loading="lazy"></figure>
-<p>下载对应的版本即可安装！</p>
-<p>安装：无脑下一步即可！安装完毕就可以使用了！</p>
-<h2 id="启动git">启动Git</h2>
-<p>安装成功后在开始菜单中会有Git项，菜单下有3个程序：任意文件夹下右键也可以看到对应的程序！</p>
-<figure data-type="image" tabindex="5"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0jaiaAfr2pAfWtFX57kGYqR3SlNxDlAZDkCU6IOB1YAicKxHib5yGbv9zQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>**Git Bash：**Unix与Linux风格的命令行，使用最多，推荐最多</p>
-<p>**Git CMD：**Windows风格的命令行</p>
-<p><strong>Git GUI</strong>：图形界面的Git，不建议初学者使用，尽量先熟悉常用命令</p>
-<h2 id="常用的linux命令">常用的Linux命令</h2>
-<p>平时一定要多使用这些基础的命令！</p>
-<p>1）、cd : 改变目录。</p>
-<p>2）、cd . . 回退到上一个目录，直接cd进入默认目录</p>
-<p>3）、pwd : 显示当前所在的目录路径。</p>
-<p>4）、ls(ll):  都是列出当前目录中的所有文件，只不过ll(两个ll)列出的内容更为详细。</p>
-<p>5）、touch : 新建一个文件 如 touch index.js 就会在当前目录下新建一个index.js文件。</p>
-<p>6）、rm:  删除一个文件, rm index.js 就会把index.js文件删除。</p>
-<p>7）、mkdir:  新建一个目录,就是新建一个文件夹。</p>
-<p>8）、rm -r :  删除一个文件夹, rm -r src 删除src目录</p>
-<pre><code class="language-bash">rm -rf / 切勿在Linux中尝试！删除电脑中全部文件！
-</code></pre>
-<p>9）、mv 移动文件, mv index.html src index.html 是我们要移动的文件, src 是目标文件夹,当然, 这样写,必须保证文件和目标文件夹在同一目录下。</p>
-<p>10）、reset 重新初始化终端/清屏。</p>
-<p>11）、clear 清屏。</p>
-<p>12）、history 查看命令历史。</p>
-<p>13）、help 帮助。</p>
-<p>14）、exit 退出。</p>
-<p>15）、#表示注释</p>
-<h2 id="git配置">Git配置</h2>
-<p>所有的配置文件，其实都保存在本地！</p>
-<p>查看配置 git config -l</p>
-<figure data-type="image" tabindex="6"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0GJANibs86DwYqoADdgZySGibmafR8p1XBq6ZG3t0J2wSg9icrIVVQo6dQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>查看不同级别的配置文件：</p>
-<pre><code class="language-bash">#查看系统configgit config --system --list　
-#查看当前用户（global）配置git config --global  --list
-</code></pre>
-<p><strong>Git相关的配置文件：</strong></p>
-<p>1）、Git\etc\gitconfig  ：Git 安装目录下的 gitconfig   --system 系统级</p>
-<p>2）、C:\Users\Administrator\ .gitconfig   只适用于当前登录用户的配置  --global 全局</p>
-<figure data-type="image" tabindex="7"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0hcJS0rxj3qoCVvfDKh3WxwQJlSV3P15EIZuejraOwXLdic6NCB8X8oQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>这里可以直接编辑配置文件，通过命令设置后会响应到这里。</p>
-<h2 id="设置用户名与邮箱用户标识必要">设置用户名与邮箱（用户标识，必要）</h2>
-<p>当你安装Git后首先要做的事情是设置你的用户名称和e-mail地址。这是非常重要的，因为每次Git提交都会使用该信息。它被永远的嵌入到了你的提交中：</p>
-<pre><code class="language-bash">git config --global user.name &quot;kuangshen&quot;  #名称
-git config --global user.email 24736743@qq.com   #邮箱
-</code></pre>
-<p>只需要做一次这个设置，如果你传递了--global 选项，因为Git将总是会使用该信息来处理你在系统中所做的一切操作。如果你希望在一个特定的项目中使用不同的名称或e-mail地址，你可以在该项目中运行该命令而不要--global选项。总之--global为全局配置，不加为某个项目的特定配置。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0zQZY37q1iaG0n7445X8YgPVvZH5AqyGvT4RgmoyIcZlJWiaLcxyDgSdQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy"></p>
-<p>Git基本理论（重要）</p>
-<h2 id="三个区域">三个区域</h2>
-<p>Git本地有三个工作区域：工作目录（Working Directory）、暂存区(Stage/Index)、资源库(Repository或Git Directory)。如果在加上远程的git仓库(Remote Directory)就可以分为四个工作区域。文件在这四个区域之间的转换关系如下：<img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy"></p>
-<ul>
-<li>Workspace：工作区，就是你平时存放项目代码的地方</li>
-<li>Index / Stage：暂存区，用于临时存放你的改动，事实上它只是一个文件，保存即将提交到文件列表信息</li>
-<li>Repository：仓库区（或本地仓库），就是安全存放数据的位置，这里面有你提交到所有版本的数据。其中HEAD指向最新放入仓库的版本</li>
-<li>Remote：远程仓库，托管代码的服务器，可以简单的认为是你项目组中的一台电脑用于远程数据交换</li>
-</ul>
-<p>本地的三个区域确切的说应该是git仓库中HEAD指向的版本：</p>
-<p>​	<img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0NJ4L9OPI9ia1MmibpvDd6cSddBdvrlbdEtyEOrh4CKnWVibyfCHa3lzXw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片" loading="lazy"></p>
-<ul>
-<li>Directory：使用Git管理的一个目录，也就是一个仓库，包含我们的工作空间和Git的管理空间。</li>
-<li>WorkSpace：需要通过Git进行版本控制的目录和文件，这些目录和文件组成了工作空间。</li>
-<li>.git：存放Git管理信息的目录，初始化仓库的时候自动创建。</li>
-<li>Index/Stage：暂存区，或者叫待提交更新区，在提交进入repo之前，我们可以把所有的更新放在暂存区。</li>
-<li>Local Repo：本地仓库，一个存放在本地的版本库；HEAD会只是当前的开发分支（branch）。</li>
-<li>Stash：隐藏，是一个工作状态保存栈，用于保存/恢复WorkSpace中的临时状态。</li>
-</ul>
-<figure data-type="image" tabindex="8"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0icz6X2aibIgUWzHxtwX8kicPCKpDrsiaPzZk04OlI2bzlydzicBuXTJvLEQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<h2 id="工作流程">工作流程</h2>
-<p>git的工作流程一般是这样的：</p>
-<p>１、在工作目录中添加、修改文件；</p>
-<p>２、将需要进行版本管理的文件放入暂存区域；</p>
-<p>３、将暂存区域的文件提交到git仓库。</p>
-<p>因此，git管理的文件有三种状态：已修改（modified）,已暂存（staged）,已提交(committed)</p>
-<figure data-type="image" tabindex="9"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p09iaOhl0dACfLrMwNbDzucGQ30s3HnsiaczfcR6dC9OehicuwibKuHjRlzg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>Git项目搭建</p>
-<h2 id="创建工作目录与常用指令">创建工作目录与常用指令</h2>
-<p>工作目录（WorkSpace)一般就是你希望Git帮助你管理的文件夹，可以是你项目的目录，也可以是一个空目录，建议不要有中文。</p>
-<p>日常使用只要记住下图6个命令：</p>
-<figure data-type="image" tabindex="10"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0AII6YVooUzibpibzJnoOHHXUsL3f9DqA4horUibfcpEZ88Oyf2gQQNR6w/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<h2 id="本地仓库搭建">本地仓库搭建</h2>
-<p>创建本地仓库的方法有两种：一种是创建全新的仓库，另一种是克隆远程仓库。</p>
-<p>1、<strong>创建全新的仓库</strong>，需要用GIT管理的项目的根目录执行：</p>
-<pre><code class="language-bash"># 在当前目录新建一个Git代码库$ git init
-</code></pre>
-<p>2、执行后可以看到，仅仅在项目目录多出了一个.git目录，关于版本等的所有信息都在这个目录里面。</p>
-<h2 id="克隆远程仓库">克隆远程仓库</h2>
-<p>1、另一种方式是克隆远程目录，由于是将远程服务器上的仓库完全镜像一份至本地！</p>
-<pre><code class="language-bash"># 克隆一个项目和它的整个代码历史(版本信息)$ git clone [url]  # https://gitee.com/kuangstudy/openclass.git
-</code></pre>
-<p>2、去 gitee 或者 github 上克隆一个测试！</p>
-<p>Git文件操作</p>
-<h2 id="文件的四种状态">文件的四种状态</h2>
-<p>版本控制就是对文件的版本控制，要对文件进行修改、提交等操作，首先要知道文件当前在什么状态，不然可能会提交了现在还不想提交的文件，或者要提交的文件没提交上。</p>
-<ul>
-<li>Untracked: 未跟踪, 此文件在文件夹中, 但并没有加入到git库, 不参与版本控制. 通过git add 状态变为Staged.</li>
-<li>Unmodify: 文件已经入库, 未修改, 即版本库中的文件快照内容与文件夹中完全一致. 这种类型的文件有两种去处, 如果它被修改, 而变为Modified. 如果使用git rm移出版本库, 则成为Untracked文件</li>
-<li>Modified: 文件已修改, 仅仅是修改, 并没有进行其他的操作. 这个文件也有两个去处, 通过git add可进入暂存staged状态, 使用git checkout 则丢弃修改过, 返回到unmodify状态, 这个git checkout即从库中取出文件, 覆盖当前修改 !</li>
-<li>Staged: 暂存状态. 执行git commit则将修改同步到库中, 这时库中的文件和本地文件又变为一致, 文件为Unmodify状态. 执行git reset HEAD filename取消暂存, 文件状态为Modified</li>
-</ul>
-<h2 id="查看文件状态">查看文件状态</h2>
-<p>上面说文件有4种状态，通过如下命令可以查看到文件的状态：</p>
-<pre><code class="language-bash">#查看指定文件状态git status [filename]
-#查看所有文件状态git status
-# git add .                  添加所有文件到暂存区
-# git commit -m &quot;消息内容&quot;    提交暂存区中的内容到本地仓库 -m 提交信息
-</code></pre>
-<h2 id="忽略文件">忽略文件</h2>
-<p>有些时候我们不想把某些文件纳入版本控制中，比如数据库文件，临时文件，设计文件等</p>
-<p>在主目录下建立&quot;.gitignore&quot;文件，此文件有如下规则：</p>
+<h2 id="总结-2">总结</h2>
+<p>Nginx 配置文件主要分成四部分：main（全局设置）、server（主机设置）、upstream（上游服务器设置，主要为反向代理、负载均衡相关配置）和 location（URL匹配特定位置后的设置）。</p>
+<p>main 部分设置的指令影响其他所有部分的设置；</p>
+<p>server 部分的指令主要用于制定虚拟主机域名、IP 和端口号；</p>
+<p>upstream 的指令用于设置一系列的后端服务器，设置反向代理及后端服务器的负载均衡；</p>
+<p>location 部分用于匹配网页位置（比如，根目录“/”，“/images”，等等）。</p>
+<p>他们之间的关系：server 继承 main，location 继承 server；upstream 既不会继承指令也不会被继承。</p>
+<h1 id="master和worker">master和worker</h1>
+<figure data-type="image" tabindex="4"><img src="E:/note/Nginx/08-Nginx%E5%8E%9F%E7%90%86%E5%8F%8A%E4%BC%98%E5%8C%96%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.assets/20171225014840369" alt="Master-Worker工作原理" loading="lazy"></figure>
+<h1 id="一个master和多个woker有好处">一个master和多个woker有好处</h1>
+<p>首先，对于每个 worker 进程来说，独立的进程，不需要加锁，所以省掉了锁带来的开销，同时在编程以及问题查找时，也会方便很多。其次，采用独立的进程，可以让互相之间不会影响，一个进程退出后，其它进程还在工作，服务不会中断，master 进程则很快启动新的 worker 进程。当然，worker 进程的异常退出，肯定是程序有 bug 了，异常退出，会导致当前 worker 上的所有请求失败，不过不会影响到所有请求，所以降低了风险。</p>
 <ol>
-<li>忽略文件中的空行或以井号（#）开始的行将会被忽略。</li>
-<li>可以使用Linux通配符。例如：星号（*）代表任意多个字符，问号（？）代表一个字符，方括号（[abc]）代表可选字符范围，大括号（{string1,string2,...}）代表可选的字符串等。</li>
-<li>如果名称的最前面有一个感叹号（!），表示例外规则，将不被忽略。</li>
-<li>如果名称的最前面是一个路径分隔符（/），表示要忽略的文件在此目录下，而子目录中的文件不忽略。</li>
-<li>如果名称的最后面是一个路径分隔符（/），表示要忽略的是此目录下该名称的子目录，而非文件（默认文件或目录都忽略）。</li>
+<li>可以使用nginx –s reload热部署，利用nginx进行热部署操作</li>
+<li>每个woker是独立的进程，如果有其中的一个woker出现问题，其他woker独立的，继续进行争抢，实现请求过程，不会造成服务中断</li>
 </ol>
-<pre><code class="language-bash">#为注释*.txt       
-#忽略所有 .txt结尾的文件,这样的话上传就不会被选中！!lib.txt     
-#但lib.txt除外/temp       
-#仅忽略项目根目录下的TODO文件,不包括其它目录tempbuild/   
-#忽略build/目录下的所有文件doc/*.txt   
-#会忽略 doc/notes.txt 但不包括 doc/server/arch.txt
-</code></pre>
-<p>使用码云</p>
-<h2 id="github-是有墙的比较慢在国内的话我们一般使用-gitee-公司中有时候会搭建自己的gitlab服务器">github 是有墙的，比较慢，在国内的话，我们一般使用 gitee ，公司中有时候会搭建自己的gitlab服务器</h2>
-<p>这个其实可以作为大家未来找工作的一个重要信息！</p>
-<p>1、注册登录码云，完善个人信息</p>
-<figure data-type="image" tabindex="11"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0ebAqhteskG4GHwD01bX4lXYmxlmMGn8PRqn4aCXfaQdp3SnbBHdibtQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>2、设置本机绑定SSH公钥，实现免密码登录！（免密码登录，这一步挺重要的，码云是远程仓库，我们是平时工作在本地仓库！)</p>
-<pre><code class="language-bash"># 进入 C:\Users\Administrator\.ssh 目录# 生成公钥ssh-keygen![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
-</code></pre>
-<figure data-type="image" tabindex="12"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0YlK4ibQ0EMs3LmRmdiahpma8ssTQedkhyShNkibTyFBvaZWicicTfNicWQIA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>3、将公钥信息public key 添加到码云账户中即可！</p>
-<figure data-type="image" tabindex="13"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0I5Zicrm4PEbnox9L5wjCPtPybCyrKI1JOkRWCYIY5zsX4FvI77LXXmQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>4、使用码云创建一个自己的仓库！</p>
-<figure data-type="image" tabindex="14"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0FSIwJb9g6Qbp99jY605xdPfh3N4l2rGpD44d6NCcdibankBUL60uODg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>许可证：开源是否可以随意转载，开源但是不能商业使用，不能转载，...  限制！</p>
-<figure data-type="image" tabindex="15"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0S96XfGogNWVqRAexeybT7DXdyQhfcYJ1oEAgaH1RibRU0WZE0eczdxw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>克隆到本地！</p>
-<figure data-type="image" tabindex="16"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0PyKfGFd8UHSGIRbVLkXH5icQsgxh6K2RPibYeUER54UzuNVAYsgxXcfA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>IDEA中集成Git</p>
-<p>1、新建项目，绑定git。</p>
-<figure data-type="image" tabindex="17"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0D8LPGu2SNKXD01IMqDaSkBeP8ibtvnasBYiaReyuZWAl0EjEib8IYf7cQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>注意观察idea中的变化</p>
-<figure data-type="image" tabindex="18"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0Cs93BiaOia1Sdk8icdH7vQzPfzIjuoTNYquKzYtrEe5mklhg2b7KOYsow/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>2、修改文件，使用IDEA操作git。</p>
+<h1 id="设置多少个worker合适">设置多少个worker合适</h1>
+<p>Nginx 同 redis 类似都采用了 io 多路复用机制，每个 worker 都是一个独立的进程，但每个进程里只有一个主线程，通过异步非阻塞的方式来处理请求， 即使是千上万个请求也不在话下。每个 worker 的线程可以把一个 cpu 的性能发挥到极致。所以 worker 数和服务器的 cpu 数相等是最为适宜的。设少了会浪费 cpu，设多了会造成 cpu 频繁切换上下文带来的损耗。</p>
+<p>设置worker 数量: worker_processes 4 	work 绑定 cpu(4 work 绑定 4cpu)。</p>
+<h1 id="连接数worker_connection">连接数worker_connection</h1>
+<p>这个值是表示每个 worker 进程所能建立连接的最大值，所以，一个 nginx 能建立的最大连接数，应该是 worker_connections * worker_processes。当然，这里说的是最大连接数，对于 HTTP 请 求 本 地 资 源来 说 ， 能 够 支 持 的 最大 并 发 数 量 是 worker_connections * worker_processes，如果是支持 http1.1 的浏览器每次访问要占两个连接，所以普通的静态访问最大并发数是： worker_connections * worker_processes /2，而如果是 HTTP 作 为反向代理来说，最大并发数量应该是 worker_connections *worker_processes/4。因为作为反向代理服务器，每个并发会建立与客户端的连接和与后端服务的连接，会占用两个连接。</p>
+<p>第一个：发送请求，占用了woker 的几个连接数？</p>
+<p>答案：2或者4个</p>
+<p>第二个：nginx有一个master，有四个woker，每个woker支持最大的连接数1024，支持的最大并发数是多少？</p>
+<p>普通的静态访问最大并发数是： worker_connections * worker_processes /2，</p>
+<p>而如果是HTTP作为反向代理来说，最大并发数量应该是worker_connections * worker_processes/4。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Docker]]></title>
+        <id>https://lindamao0753.github.io/post/docker/</id>
+        <link href="https://lindamao0753.github.io/post/docker/">
+        </link>
+        <updated>2021-07-13T01:38:55.000Z</updated>
+        <content type="html"><![CDATA[<p>​</p>
+<h2 id="参考资料">参考资料</h2>
+<p>仓库地址：https://hub.docker.com/</p>
+<h2 id="前期基础">前期基础</h2>
+<p><strong>linux基本命令</strong></p>
+<h2 id="docker概述">Docker概述</h2>
+<h3 id="docker为什么会出现">Docker为什么会出现</h3>
+<p><strong>一款产品，开发和上线两套环境，应用环境配置费时费力，而且容易出问题</strong></p>
+<p>尤其对于机器学习和深度学习的库更是如此，很可能存在版本问题、底层依赖冲突问题</p>
+<p>所以发布项目时，不只是一套代码过去，而是代码+环境整体打包过去</p>
+<p>所谓开发即运维，保证系统稳定性，提高部署效率</p>
+<p>使用Docker后的流程：</p>
+<p>开发：建立模型--环境--打包带上环境，即镜像--放到Docker仓库</p>
+<p>部署：下载Docker中的镜像，直接运行即可</p>
+<p>Docker的思想来自于集装箱，集装箱，对环境进行隔离</p>
+<p>Docker通过隔离机制，可以将服务器利用到极致。</p>
+<h3 id="容器vs虚拟机">容器vs虚拟机</h3>
+<p>在容器技术出来之前，用的是虚拟机技术</p>
+<h4 id="虚拟机原理示意图">虚拟机原理示意图</h4>
+<figure data-type="image" tabindex="1"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf3tfkkhgj30nt0hv0tm.jpg" alt="image-20200606205436434" loading="lazy"></figure>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>资源占用多</li>
+<li>冗余步骤多</li>
+<li>启动很慢</li>
+</ol>
+<h4 id="容器化技术示意图">容器化技术示意图</h4>
+<p>不是模拟的完整的操作系统</p>
+<figure data-type="image" tabindex="2"><img src="E:/note/gridea/Docker.assets/image-20200606205739655.png" alt="image-20200606205739655" loading="lazy"></figure>
+<h4 id="二者对比">二者对比</h4>
+<p>比较虚拟机和Docker的不同</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>传统虚拟机</th>
+<th>Docker</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>虚拟内容</td>
+<td>硬件+完整的操作系统+软件</td>
+<td>APP+LIB</td>
+</tr>
+<tr>
+<td>大小</td>
+<td>笨重，通常几个G</td>
+<td>轻便几个M或KB</td>
+</tr>
+<tr>
+<td>启动速度</td>
+<td>慢，分钟级</td>
+<td>快，秒级</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="docker安装">Docker安装</h2>
+<h3 id="docker的基本组成">Docker的基本组成</h3>
+<figure data-type="image" tabindex="3"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf3u58gnwj30uh0gmwlj.jpg" alt="image-20200606212250845" loading="lazy"></figure>
+<p>明确几个概念：</p>
+<ol>
+<li>
+<p>镜像(image)：docker镜像好比一个模板，可以通过这个模板来创建容器(container)，一个镜像可以创建多个容器，类似Python中的Class</p>
+</li>
+<li>
+<p>容器(container)：类似Python中通过Class创建的实例，Object；容器可以理解为一个简易的系统</p>
+</li>
+<li>
+<p>仓库(repository)：存放镜像的地方，</p>
+<p>分为共有仓库和私有仓库</p>
 <ul>
-<li>添加到暂存区</li>
-<li>commit 提交</li>
-<li>push到远程仓库</li>
+<li>
+<p>Docker Hub：国外的</p>
+</li>
+<li>
+<p>阿里云：配置镜像加速</p>
+</li>
 </ul>
-<p>3、提交测试</p>
-<figure data-type="image" tabindex="19"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0tERIszdgLVlUWamyRapfN74aR8XeGFV2OYWiaeR9CkYlfoBefRh2AIA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>这些都是单个人的操作！</p>
-<p>学习的方式最重要！学会学习！我上课的更多时候都是在教大家去学习一种理念和思想（学习方式）</p>
-<p>有道无术、术尚可求。有术无道、止于术！</p>
-<p>真正的教学，授人以渔！</p>
-<h2 id="说明git分支">说明：GIT分支</h2>
-<p>分支在GIT中相对较难，分支就是科幻电影里面的平行宇宙，如果两个平行宇宙互不干扰，那对现在的你也没啥影响。不过，在某个时间点，两个平行宇宙合并了，我们就需要处理一些问题了！</p>
-<figure data-type="image" tabindex="20"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0BOGzaG4QTc4JXO0hSlwcNtujNzAvxeibSrajLYLCT6otNnHDV9xYWwA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<figure data-type="image" tabindex="21"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0Ayn87woxfepOhSlUj4FQTFUsia4ic0j6aQy4Tz32PRuJ0HSVeGeUzURA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>git分支中常用指令</p>
-<pre><code class="language-bash"># 列出所有本地分支git branch# 列出所有远程分支git branch -r# 新建一个分支，但依然停留在当前分支git branch [branch-name]# 新建一个分支，并切换到该分支git checkout -b [branch]# 合并指定分支到当前分支$ git merge [branch]# 删除分支$ git branch -d [branch-name]# 删除远程分支$ git push origin --delete [branch-name]$ git branch -dr [remote/branch]
+</li>
+</ol>
+<h3 id="环境准备">环境准备</h3>
+<p>我们要有一台服务器，并且可以操作它</p>
+<ol>
+<li>Linux命令基础，购买服务器</li>
+<li>CentOS 7或者以上版本</li>
+<li>使用Xshell链接远程服务器</li>
+</ol>
+<h3 id="安装xshell">安装xshell</h3>
+<p>下载CentOS7 https://www.jianshu.com/p/a63f47e096e8</p>
+<p>VMware配置虚拟机 https://blog.csdn.net/babyxue/article/details/80970526</p>
+<p>xshell链接服务器 https://blog.csdn.net/zzy1078689276/article/details/77280814</p>
+<p><strong>uname -r</strong> 查看当前的系统内核</p>
+<p><strong>cat / etc/os-release</strong> 查看当前版本</p>
+<h3 id="centos安装">Centos安装</h3>
+<p>https://docs.docker.com/engine/install/centos/</p>
+<h3 id="卸载旧的版本">卸载旧的版本</h3>
+<pre><code># 卸载旧的版本
+$ sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine
+
 </code></pre>
-<p>IDEA中操作</p>
-<figure data-type="image" tabindex="22"><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7Ksu8UlITwMlbX3kMGtZ9p0wHNIYeTHC8aHGASoDyZO64QicslqiaMb1OJ1Z1LPoic3LBGyDIYBa7XXw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
-<p>如果同一个文件在合并分支时都被修改了则会引起冲突：解决的办法是我们可以修改冲突文件后重新提交！选择要保留他的代码还是你的代码！</p>
-<p>master主分支应该非常稳定，用来发布新版本，一般情况下不允许在上面工作，工作一般情况下在新建的dev分支上工作，工作完后，比如上要发布，或者说dev分支代码稳定后可以合并到主分支master上来。</p>
+<h3 id="安装基本环境">安装基本环境</h3>
+<pre><code># 安装基本的安装包
+$ sudo yum install -y yum-utils
+</code></pre>
+<h3 id="设置镜像的仓库">设置镜像的仓库</h3>
+<p>注意：</p>
+<p><strong>这个步骤可选可不选</strong></p>
+<p>设置镜像加速</p>
+<p>用国内镜像，百度搜索，docker的阿里云镜像地址</p>
+<pre><code class="language-bash"># 不要用官网默认这个！
+$ sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo # 默认是国外的
+
+# 换成下面的
+
+$ sudo yum-config-manager \
+    --add-repo \
+    https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo # 阿里云镜像
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf3ugr2pgj30vr071jru.jpg" alt="image-20200616145430166" loading="lazy"></figure>
+<p>直接复制粘贴就OK了</p>
+<p>更像软件包索引</p>
+<pre><code class="language-bash">yum makecache fast
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf3uos8l1j30v50d2759.jpg" alt="image-20200616150014082" loading="lazy"></figure>
+<p><strong>没有问题的话就是可以用的</strong></p>
+<h3 id="安装docker引擎">安装docker引擎</h3>
+<pre><code class="language-python">yum install docker-ce docker-ce-cli containerd.io # docker-ce 社区版 ee 企业版
+</code></pre>
+<p>注意这里会有几个个y/n的判断 选择y到complete</p>
+<h3 id="启动docker">启动Docker</h3>
+<pre><code>systemctl start docker # 代表启动成功
+</code></pre>
+<pre><code>docker version #查看docker的版本
+</code></pre>
+<pre><code class="language-bash">Client: Docker Engine - Community
+ Version:           19.03.11
+ API version:       1.40
+ Go version:        go1.13.10
+ Git commit:        42e35e61f3
+ Built:             Mon Jun  1 09:13:48 2020
+ OS/Arch:           linux/amd64
+ Experimental:      false
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          19.03.11
+  API version:      1.40 (minimum version 1.12)
+  Go version:       go1.13.10
+  Git commit:       42e35e61f3
+  Built:            Mon Jun  1 09:12:26 2020
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.2.13
+  GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429
+ runc:
+  Version:          1.0.0-rc10
+  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd
+ docker-init:
+  Version:          0.18.0
+  GitCommit:        fec3683
+
+</code></pre>
+<pre><code class="language-bash">docker run hello-world #run docker
+</code></pre>
+<figure data-type="image" tabindex="6"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf3uwq2yfj31ed0jxwgn.jpg" alt="image-20200616151641013" loading="lazy"></figure>
+<p>中间一堆是签名信息</p>
+<h3 id="run的运行流程图">run的运行流程图</h3>
+<figure data-type="image" tabindex="7"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf3v3hk5sj30n60fm406.jpg" alt="image-20200616161441669" loading="lazy"></figure>
+<p>其流程类似于maven 简单的总结来说是在本地找到对应的镜像并运行 如果在本地没有找到的话会选择去远程仓库当中寻找</p>
+<h3 id="查看下载的镜像">查看下载的镜像</h3>
+<pre><code class="language-bash">docker images
+</code></pre>
+<h3 id="卸载docker">卸载Docker</h3>
+<pre><code class="language-bash"># 卸载依赖yum remove docker-ce docker-ce-cli containerd.io# 删除资源rm -rf /var/lib/docker # docker 的默认工作路径
+</code></pre>
+<h2 id="基本工作原理">基本工作原理</h2>
+<p>工作原理：</p>
+<p>Docker是一个<strong>Client-Server</strong>结构的系统，Docker的守护进程在主机上。通过Socket从客户端访问！</p>
+<p>DockerServer接受到Docker-Client的指令，</p>
+<figure data-type="image" tabindex="8"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf3vb955wj30mq0bggmg.jpg" alt="image-20200616162107363" loading="lazy"></figure>
+<p><strong>Docker为什么比VM快？</strong></p>
+<ol>
+<li>Docker有着比虚拟机更少的<strong>抽象层</strong></li>
+<li>docker主要用的是<strong>宿主机的内核</strong>，vm需要Guest OS<br>
+<img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf3vi81zsj30i708uwgz.jpg" alt="image-20200616162302653" loading="lazy"></li>
+</ol>
+<p>总结：新建一个容器的时候，docker不需要像虚拟机一样再重新加载一个操作系统内核，避免引导</p>
+<h2 id="docker命令">Docker命令</h2>
+<h3 id="帮助命令">帮助命令</h3>
+<pre><code class="language-bash">docker version # 显示docker的版本基本信息docker info # 系统信息 更加详细的信息 看到服务器容器和镜像当中docker 命令 --help # 全部信息
+</code></pre>
+<p><a href="https://docs.docker.com/reference/">官网文档</a></p>
+<h3 id="镜像命令">镜像命令</h3>
+<h4 id="docker-images">docker images</h4>
+<p>查看所有本地主机上的镜像</p>
+<pre><code class="language-bash"># docker images
+</code></pre>
+<figure data-type="image" tabindex="9"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf3vqnh9sj310604fmx8.jpg" alt="image-20200616172056530" loading="lazy"></figure>
+<pre><code class="language-bash"># 解释REPOSITORY  # 镜像仓库源TAG                 # 镜像的标签IMAGE ID           # 镜像的IDCREATED           # 镜像的创建时间SIZE              # 镜像的大小--all , -a		Show all images (default hides intermediate images) # 显示所有的镜像--digests		Show digests--filter , -f		Filter output based on conditions provided--format		Pretty-print images using a Go template--no-trunc		Don’t truncate output--quiet , -q		Only show numeric IDs # 只显示镜像的id
+</code></pre>
+<h4 id="docker-search">docker search</h4>
+<p>利用命令来搜索仓库中的镜像，相当于网页搜索</p>
+<p><a href="http://hub.docker.com">网页搜索</a></p>
+<p>搜索mysql</p>
+<pre><code class="language-bash">docker search mysql
+</code></pre>
+<figure data-type="image" tabindex="10"><img src="//tvax3.sinaimg.cn/large/007bjbYxly1gsf3vxwmduj312t0g9aba.jpg" alt="image-20200616173308194" loading="lazy"></figure>
+<pre><code>docker search --help
+</code></pre>
+<figure data-type="image" tabindex="11"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf3w4pmzhj314e0au752.jpg" alt="image-20200616173740981" loading="lazy"></figure>
+<pre><code class="language-bash"># 解释Options:  -f, --filter filter   Filter output based on conditions provided      --format string   Pretty-print search using a Go template      --limit int       Max number of search results (default 25)      --no-trunc        Don't truncate output
+</code></pre>
+<pre><code class="language-bash">docker search mysql --filter=STARS=3000 # 过滤搜索出Stars大于3000的 starts为搜藏
+</code></pre>
+<figure data-type="image" tabindex="12"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf3wanhzdj311x06ljrq.jpg" alt="image-20200616174440284" loading="lazy"></figure>
+<h4 id="docker-pull">docker pull</h4>
+<p><strong>下载镜像</strong></p>
+<p>不指定版本</p>
+<pre><code class="language-bash">docker pull mysql # 下载mysql镜像，default tag，默认最新版latest
+</code></pre>
+<pre><code class="language-bash">[root@192 ~]# sudo systemctl daemon-reload[root@192 ~]# sudo systemctl restart docker[root@192 ~]# docker pull mysqlUsing default tag: latest # 不写tag默认最新版latest: Pulling from library/mysql8559a31e96f4: Pull complete  # layer 分层下载，docker image的核心 联合文件系统 类似于分片多线程下载d51ce1c2e575: Pull complete c2344adc4858: Pull complete fcf3ceff18fc: Pull complete 16da0c38dc5b: Pull complete b905d1797e97: Pull complete 4b50d1c6b05c: Pull complete c75914a65ca2: Pull complete 1ae8042bdd09: Pull complete 453ac13c00a3: Pull complete 9e680cd72f08: Pull complete a6b5dc864b6c: Pull complete Digest: sha256:8b7b328a7ff6de46ef96bcf83af048cb00a1c86282bfca0cb119c84568b4caf6#签名 防伪标志Status: Downloaded newer image for mysql:latestdocker.io/library/mysql:latest # 真实地址# docker pull mysql #下载最新的版本# 等价于docker pull docker.io/library/mysql:latest
+</code></pre>
+<p>指定版本下载</p>
+<pre><code class="language-bash">docker pull mysql:5.7
+</code></pre>
+<p>注意！版本要对应上官方的版本https://h ub.docker.com/_/mysql</p>
+<figure data-type="image" tabindex="13"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf3whjlg5j30y50omq4y.jpg" alt="image-20200617094339687" loading="lazy"></figure>
+<figure data-type="image" tabindex="14"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf3wnhwg1j310m0fz40f.jpg" alt="image-20200617100948088" loading="lazy"></figure>
+<pre><code>docker images
+</code></pre>
+<p>此时查看镜像，可以看到新下载的两个<br>
+<img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf3wu1egwj30zd086dg6.jpg" alt="image-20200617101105899" loading="lazy"></p>
+<h4 id="docker-rmi">docker rmi</h4>
+<p>remove images 删除镜像</p>
+<p>注意有i  和删除容器不一样</p>
+<pre><code class="language-bash"># 删除一个 可以通过名称 也可以指定id -f表示删除所有docker rmi -f 9cfcce23593a# 删除多个 用空格分隔iddocker rmi -f id id id# 删除所有 docker rmi -f $(docker images -aq) # images -aq就是查所有镜像id，从而递归删除 通过$符号来进行条件筛选![image-20200617102049613](E:/note/gridea/Docker.assets/image-20200617102049613.png)
+</code></pre>
+<h3 id="容器命令">容器命令</h3>
+<p>说明：有了镜像才能创建容器，linux，下载一个centos镜像来测试学习</p>
+<pre><code class="language-bash">docker pull centos #下载centos镜像 	
+</code></pre>
+<figure data-type="image" tabindex="15"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf3x18dwoj310t09yjry.jpg" alt="image-20200617103406974" loading="lazy"></figure>
+<h4 id="新建容器并启动">新建容器并启动</h4>
+<pre><code class="language-shell">docker run [可选参数] image# 参数说明--name=“Name” # 容器名字，用于区分容器-d 后台方式运行-it 使用交互方式运行,进入容器进行操作-p 指定容器的端口 如-p 8080::8080	-p ip:主机端口：容器端口	-p 主机端口:容器端口	-p 容器端口	-p 随机指定端口
+</code></pre>
+<h4 id="进入退出容器">进入退出容器</h4>
+<pre><code class="language-bash"># 进入选择的容器docker run -it centos /bin/bash # 查看目录 这里的目录是根据当前的同期目录来查看的ls# 退出容器并关闭exit#退出容器不关闭ctrl+p+q #注意此时不能再用docker run -it centos /bin/bash 命令 并exit 这个方式会再次创建一个新的容器#用docker attach 选择进入的容器 再exit#docker exec -it 容器ID /bin/bash   根据ID重新进入容器交互
+</code></pre>
+<figure data-type="image" tabindex="16"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gsf3xd7pjlj310i09ut95.jpg" alt="image-20200617104004004" loading="lazy"></figure>
+<p>注意这里面主机名发生了变化 这里面就是一个容器</p>
+<p><strong>只能用socket独立一个docker！</strong></p>
+<h4 id="查看运行的容器">查看运行的容器</h4>
+<pre><code class="language-bash"># 查看正在运行的容器docker ps# 列出当前正在运行的容器+历史运行的容器 status 后面可以看到当前的状态docker ps -a# 显示最近创建的容器，n为显示的个数 docker ps -a - n=? # 只显示容器的编号docker ps -aq
+</code></pre>
+<h4 id="退出容器">退出容器</h4>
+<pre><code class="language-shell"># 容器停止退出exit
+# 容器不停止退出 注意必须在英文输入法下，中文输入法不行Ctrl + P + Q
+</code></pre>
+<h4 id="删除容器">删除容器</h4>
+<pre><code class="language-shell"># 删除指定容器 不能删除正在运行的容器，如果强制删除 rm -f
+docker rm 容器id
+# 删除所有容器 
+docker rm -f $(docker ps -aq)
+# 删除所有容器
+docker ps -a -q|xargs docker rm
+</code></pre>
+<pre><code class="language-shell"># docker ps -a 列出历史正在运行的容器
+</code></pre>
+<pre><code class="language-shell"># docker ps -aq # 所有容器id
+# docker rm -f $(docker ps -aq) # 全部删除
+</code></pre>
+<h4 id="启动和停止容器的操作">启动和停止容器的操作</h4>
+<pre><code class="language-shell">docker start #启动容器
+docker restart #重启容器
+docker stop #停止容器
+docker kill #强制停止容器
+</code></pre>
+<pre><code class="language-shell"># docker run -it centos /bin/bash 通过交互的方式进入容器并执行终端
+</code></pre>
+<h3 id="常用其他命令">常用其他命令</h3>
+<h4 id="后台启动docker">后台启动docker</h4>
+<pre><code class="language-shell">docker run -d #以后台运行的方式进入容器# 注意后台运行的方式，docker发现前台没有，容器启动后，发现自己没有提供服务，会立刻停止
+</code></pre>
+<h4 id="查看日志">查看日志</h4>
+<p>参数-t 日志加时间， -f 保留打印窗口，持续打印，--tail 10 显示最后的10行</p>
+<pre><code class="language-shell">docker logs -f -t #查看全部的日志信息docker logs -f -t --tail #n条数 
+</code></pre>
+<p>这里看到容器当中没有信息因此就日志信息就没有</p>
+<pre><code class="language-shell"># docker logs --helpUsage:	docker logs [OPTIONS] CONTAINERFetch the logs of a containerOptions:      --details        Show extra details provided to logs  -f, --follow         Follow log output      --since string   Show logs since timestamp (e.g.                       2013-01-02T13:23:37) or relative                       (e.g. 42m for 42 minutes)      --tail string    Number of lines to show from the                       end of the logs (default &quot;all&quot;)  -t, --timestamps     Show timestamps # 时间戳      --until string   Show logs before a timestamp (e.g.                       2013-01-02T13:23:37) or relative                       (e.g. 42m for 42 minutes)
+</code></pre>
+<p>现在重新运行一个容器并带上脚本信息</p>
+<p>shell脚本</p>
+<pre><code class="language-shell">whiel true;do echo shenzai;sleep 
+</code></pre>
+<p>测试</p>
+<pre><code class="language-shell"># 运行一个centos的容器# docker run -it centos /bin/bash# docker psCONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMESc2887d35c71d        centos              &quot;/bin/bash&quot;         57 seconds ago      Up 56 seconds                           vigorous_kare# 查看日志，由于没有运行脚本，所以啥也没显示# docker logs -f -t --tail 10 c2887d35c71d^C # ctrl+c退出# 运行centos里面加个脚本[root@VM-0-11-centos /]# docker run -d centos /bin/sh -c &quot;while true;do echo lindamao;sleep 1;done&quot;a71f9fda807798d22179b84ed12848c2b59ae4670dbd91213296407bc029ed7f[root@VM-0-11-centos /]# docker psCONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS         PORTS     NAMESa71f9fda8077   centos    &quot;/bin/sh -c 'while t…&quot;   5 seconds ago    Up 5 seconds             exciting_eulerf2ba05d91d4e   centos    &quot;/bin/bash&quot;              57 minutes ago   Up 8 minutes             friendly_pike[root@VM-0-11-centos /]# docker logs -f -t a71f9fda8077 2021-07-02T03:13:52.497339807Z lindamao2021-07-02T03:13:53.509531916Z lindamao2021-07-02T03:13:54.511461202Z lindamao2021-07-02T03:13:55.513978964Z lindamao2021-07-02T03:13:56.515265169Z lindamao2021-07-02T03:13:57.517215075Z lindamao
+</code></pre>
+<p>查看容器中进程消息</p>
+<pre><code class="language-bash">docker ps 容器id
+</code></pre>
+<p>uuid 用户id</p>
+<p>pid 进程id</p>
+<p>ppid 进程父id</p>
+<h4 id="查看容器的元数据">查看容器的元数据</h4>
+<pre><code class="language-shell"># docker inspect cb6d7fbc3f27
+[
+    {
+        # 容器的完整id
+        &quot;Id&quot;: &quot;cb6d7fbc3f27a064137d58282de97b97365dea2705211ebfbad642079cc1b388&quot;,
+        
+        # 创建时间
+        &quot;Created&quot;: &quot;2020-06-17T12:00:50.706906186Z&quot;,
+        
+        # 脚本位置
+        &quot;Path&quot;: &quot;/bin/sh&quot;,
+        
+        # 运行的脚本
+        &quot;Args&quot;: [
+            &quot;-c&quot;,
+            &quot;while true;do echo shenzai;sleep 1;done&quot;
+        ],
+        &quot;State&quot;: {
+            &quot;Status&quot;: &quot;running&quot;, # 状态，正在运行
+            &quot;Running&quot;: true,
+            &quot;Paused&quot;: false,
+            &quot;Restarting&quot;: false,
+            &quot;OOMKilled&quot;: false,
+            &quot;Dead&quot;: false,
+            &quot;Pid&quot;: 1909, # 父进程id
+            &quot;ExitCode&quot;: 0,
+            &quot;Error&quot;: &quot;&quot;,
+            &quot;StartedAt&quot;: &quot;2020-06-17T12:00:51.093617477Z&quot;,
+            &quot;FinishedAt&quot;: &quot;0001-01-01T00:00:00Z&quot;
+        },
+        
+        # 来源镜像
+        &quot;Image&quot;: &quot;sha256:831691599b88ad6cc2a4abbd0e89661a121aff14cfa289ad840fd3946f274f1f&quot;,
+        &quot;ResolvConfPath&quot;: &quot;/var/lib/docker/containers/cb6d7fbc3f27a064137d58282de97b97365dea2705211ebfbad642079cc1b388/resolv.conf&quot;,
+        &quot;HostnamePath&quot;: &quot;/var/lib/docker/containers/cb6d7fbc3f27a064137d58282de97b97365dea2705211ebfbad642079cc1b388/hostname&quot;,
+        &quot;HostsPath&quot;: &quot;/var/lib/docker/containers/cb6d7fbc3f27a064137d58282de97b97365dea2705211ebfbad642079cc1b388/hosts&quot;,
+        &quot;LogPath&quot;: &quot;/var/lib/docker/containers/cb6d7fbc3f27a064137d58282de97b97365dea2705211ebfbad642079cc1b388/cb6d7fbc3f27a064137d58282de97b97365dea2705211ebfbad642079cc1b388-json.log&quot;,
+        
+        
+        &quot;Name&quot;: &quot;/dreamy_almeida&quot;,
+        &quot;RestartCount&quot;: 0,
+        &quot;Driver&quot;: &quot;overlay2&quot;,
+        &quot;Platform&quot;: &quot;linux&quot;,
+        &quot;MountLabel&quot;: &quot;&quot;,
+        &quot;ProcessLabel&quot;: &quot;&quot;,
+        &quot;AppArmorProfile&quot;: &quot;&quot;,
+        &quot;ExecIDs&quot;: null,
+        
+        # 主机配置
+        &quot;HostConfig&quot;: {
+            &quot;Binds&quot;: null,
+            &quot;ContainerIDFile&quot;: &quot;&quot;,
+            &quot;LogConfig&quot;: {
+                &quot;Type&quot;: &quot;json-file&quot;,
+                &quot;Config&quot;: {}
+            },
+            &quot;NetworkMode&quot;: &quot;default&quot;,
+            &quot;PortBindings&quot;: {},
+            &quot;RestartPolicy&quot;: {
+                &quot;Name&quot;: &quot;no&quot;,
+                &quot;MaximumRetryCount&quot;: 0
+            },
+            &quot;AutoRemove&quot;: false,
+            &quot;VolumeDriver&quot;: &quot;&quot;,
+            &quot;VolumesFrom&quot;: null,
+            &quot;CapAdd&quot;: null,
+            &quot;CapDrop&quot;: null,
+            &quot;Capabilities&quot;: null,
+            &quot;Dns&quot;: [],
+            &quot;DnsOptions&quot;: [],
+            &quot;DnsSearch&quot;: [],
+            &quot;ExtraHosts&quot;: null,
+            &quot;GroupAdd&quot;: null,
+            &quot;IpcMode&quot;: &quot;private&quot;,
+            &quot;Cgroup&quot;: &quot;&quot;,
+            &quot;Links&quot;: null,
+            &quot;OomScoreAdj&quot;: 0,
+            &quot;PidMode&quot;: &quot;&quot;,
+            &quot;Privileged&quot;: false,
+            &quot;PublishAllPorts&quot;: false,
+            &quot;ReadonlyRootfs&quot;: false,
+            &quot;SecurityOpt&quot;: null,
+            &quot;UTSMode&quot;: &quot;&quot;,
+            &quot;UsernsMode&quot;: &quot;&quot;,
+            &quot;ShmSize&quot;: 67108864,
+            &quot;Runtime&quot;: &quot;runc&quot;,
+            &quot;ConsoleSize&quot;: [
+                0,
+                0
+            ],
+            &quot;Isolation&quot;: &quot;&quot;,
+            &quot;CpuShares&quot;: 0,
+            &quot;Memory&quot;: 0,
+            &quot;NanoCpus&quot;: 0,
+            &quot;CgroupParent&quot;: &quot;&quot;,
+            &quot;BlkioWeight&quot;: 0,
+            &quot;BlkioWeightDevice&quot;: [],
+            &quot;BlkioDeviceReadBps&quot;: null,
+            &quot;BlkioDeviceWriteBps&quot;: null,
+            &quot;BlkioDeviceReadIOps&quot;: null,
+            &quot;BlkioDeviceWriteIOps&quot;: null,
+            &quot;CpuPeriod&quot;: 0,
+            &quot;CpuQuota&quot;: 0,
+            &quot;CpuRealtimePeriod&quot;: 0,
+            &quot;CpuRealtimeRuntime&quot;: 0,
+            &quot;CpusetCpus&quot;: &quot;&quot;,
+            &quot;CpusetMems&quot;: &quot;&quot;,
+            &quot;Devices&quot;: [],
+            &quot;DeviceCgroupRules&quot;: null,
+            &quot;DeviceRequests&quot;: null,
+            &quot;KernelMemory&quot;: 0,
+            &quot;KernelMemoryTCP&quot;: 0,
+            &quot;MemoryReservation&quot;: 0,
+            &quot;MemorySwap&quot;: 0,
+            &quot;MemorySwappiness&quot;: null,
+            &quot;OomKillDisable&quot;: false,
+            &quot;PidsLimit&quot;: null,
+            &quot;Ulimits&quot;: null,
+            &quot;CpuCount&quot;: 0,
+            &quot;CpuPercent&quot;: 0,
+            &quot;IOMaximumIOps&quot;: 0,
+            &quot;IOMaximumBandwidth&quot;: 0,
+            &quot;MaskedPaths&quot;: [
+                &quot;/proc/asound&quot;,
+                &quot;/proc/acpi&quot;,
+                &quot;/proc/kcore&quot;,
+                &quot;/proc/keys&quot;,
+                &quot;/proc/latency_stats&quot;,
+                &quot;/proc/timer_list&quot;,
+                &quot;/proc/timer_stats&quot;,
+                &quot;/proc/sched_debug&quot;,
+                &quot;/proc/scsi&quot;,
+                &quot;/sys/firmware&quot;
+            ],
+            &quot;ReadonlyPaths&quot;: [
+                &quot;/proc/bus&quot;,
+                &quot;/proc/fs&quot;,
+                &quot;/proc/irq&quot;,
+                &quot;/proc/sys&quot;,
+                &quot;/proc/sysrq-trigger&quot;
+            ]
+        },
+        
+        # 其他配置
+        &quot;GraphDriver&quot;: {
+            &quot;Data&quot;: {
+                &quot;LowerDir&quot;: &quot;/var/lib/docker/overlay2/3675586ebbd79cd72d2562a90c9380627a331c563724c0dac091f92600af4907-init/diff:/var/lib/docker/overlay2/7f79322e0f58d651a84a555dadd83d92537788172525945d3f538dd95dce336c/diff&quot;,
+                &quot;MergedDir&quot;: &quot;/var/lib/docker/overlay2/3675586ebbd79cd72d2562a90c9380627a331c563724c0dac091f92600af4907/merged&quot;,
+                &quot;UpperDir&quot;: &quot;/var/lib/docker/overlay2/3675586ebbd79cd72d2562a90c9380627a331c563724c0dac091f92600af4907/diff&quot;,
+                &quot;WorkDir&quot;: &quot;/var/lib/docker/overlay2/3675586ebbd79cd72d2562a90c9380627a331c563724c0dac091f92600af4907/work&quot;
+            },
+            &quot;Name&quot;: &quot;overlay2&quot;
+        },
+        
+        &quot;Mounts&quot;: [], # 挂载
+        
+        # 基本配置
+        &quot;Config&quot;: {
+            &quot;Hostname&quot;: &quot;cb6d7fbc3f27&quot;,
+            &quot;Domainname&quot;: &quot;&quot;,
+            &quot;User&quot;: &quot;&quot;,
+            &quot;AttachStdin&quot;: false,
+            &quot;AttachStdout&quot;: false,
+            &quot;AttachStderr&quot;: false,
+            &quot;Tty&quot;: false,
+            &quot;OpenStdin&quot;: false,
+            &quot;StdinOnce&quot;: false,
+            &quot;Env&quot;: [
+                &quot;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot;
+            ], # 基本环境变量，这里没有Java
+            
+            # 基本命令
+            &quot;Cmd&quot;: [
+                &quot;/bin/sh&quot;,
+                &quot;-c&quot;,
+                &quot;while true;do echo shenzai;sleep 1;done&quot;
+            ],
+            &quot;Image&quot;: &quot;centos&quot;,
+            &quot;Volumes&quot;: null,
+            &quot;WorkingDir&quot;: &quot;&quot;,
+            &quot;Entrypoint&quot;: null,
+            &quot;OnBuild&quot;: null,
+            &quot;Labels&quot;: {
+                &quot;org.label-schema.build-date&quot;: &quot;20200611&quot;,
+                &quot;org.label-schema.license&quot;: &quot;GPLv2&quot;,
+                &quot;org.label-schema.name&quot;: &quot;CentOS Base Image&quot;,
+                &quot;org.label-schema.schema-version&quot;: &quot;1.0&quot;,
+                &quot;org.label-schema.vendor&quot;: &quot;CentOS&quot;
+            }
+        },
+        
+        # 网卡，比如现在用的是桥接的网卡
+        &quot;NetworkSettings&quot;: {
+            &quot;Bridge&quot;: &quot;&quot;,
+            &quot;SandboxID&quot;: &quot;4d701985d7e77aa153790b697b2f38a61e20555c224b7675e4bf650b82799882&quot;,
+            &quot;HairpinMode&quot;: false,
+            &quot;LinkLocalIPv6Address&quot;: &quot;&quot;,
+            &quot;LinkLocalIPv6PrefixLen&quot;: 0,
+            &quot;Ports&quot;: {},
+            &quot;SandboxKey&quot;: &quot;/var/run/docker/netns/4d701985d7e7&quot;,
+            &quot;SecondaryIPAddresses&quot;: null,
+            &quot;SecondaryIPv6Addresses&quot;: null,
+            &quot;EndpointID&quot;: &quot;8a6c71e2bafb19ca7dfd85445ccc4bef6d17467360a243d624089e676a24a018&quot;,
+            &quot;Gateway&quot;: &quot;172.17.0.1&quot;,
+            &quot;GlobalIPv6Address&quot;: &quot;&quot;,
+            &quot;GlobalIPv6PrefixLen&quot;: 0,
+            &quot;IPAddress&quot;: &quot;172.17.0.3&quot;,
+            &quot;IPPrefixLen&quot;: 16,
+            &quot;IPv6Gateway&quot;: &quot;&quot;,
+            &quot;MacAddress&quot;: &quot;02:42:ac:11:00:03&quot;,
+            &quot;Networks&quot;: {
+                &quot;bridge&quot;: {
+                    &quot;IPAMConfig&quot;: null,
+                    &quot;Links&quot;: null,
+                    &quot;Aliases&quot;: null,
+                    &quot;NetworkID&quot;: &quot;22b0fd2290ccbc4e066a75d3f01bd8bf32ee4352c5bbcfc9f911287219219571&quot;,
+                    &quot;EndpointID&quot;: &quot;8a6c71e2bafb19ca7dfd85445ccc4bef6d17467360a243d624089e676a24a018&quot;,
+                    &quot;Gateway&quot;: &quot;172.17.0.1&quot;,
+                    &quot;IPAddress&quot;: &quot;172.17.0.3&quot;,
+                    &quot;IPPrefixLen&quot;: 16,
+                    &quot;IPv6Gateway&quot;: &quot;&quot;,
+                    &quot;GlobalIPv6Address&quot;: &quot;&quot;,
+                    &quot;GlobalIPv6PrefixLen&quot;: 0,
+                    &quot;MacAddress&quot;: &quot;02:42:ac:11:00:03&quot;,
+                    &quot;DriverOpts&quot;: null
+                }
+            }
+        }
+    }
+]
+
+</code></pre>
+<h4 id="进入当前正在运行的容器">进入当前正在运行的容器</h4>
+<pre><code class="language-shell"># 我们通常容器都是使用后台方式运行的
+
+docker exec -it 容器id bashSHELL #exec执行
+
+# 测试
+# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+c2887d35c71d        centos              &quot;/bin/bash&quot;         35 minutes ago      Up 35 minutes                           vigorous_kare
+# docker exec -it c2887d35c71d /bin/bash
+[root@c2887d35c71d /]# ls
+bin  etc   lib	  lost+found  mnt  proc  run   srv  tmp  var
+dev  home  lib64  media       opt  root  sbin  sys  usr
+[root@c2887d35c71d /]# ps -ef
+UID         PID   PPID  C STIME TTY          TIME CMD
+root          1      0  0 11:57 pts/0    00:00:00 /bin/bash
+root         14      0  0 12:32 pts/1    00:00:00 /bin/bash
+root         28     14  0 12:32 pts/1    00:00:00 ps -ef
+[root@c2887d35c71d /]# c2887d35c71d
+[root@c2887d35c71d /]# exit
+exit
+
+# 方式二
+[root@192 ~]# docker attach c2887d35c71d
+[root@c2887d35c71d /]# 
+
+# 区别
+# docker exec # 进入容器后开启一个新的终端，可以在里面操作(常用)
+
+# docker attach 进入容器正在执行的终端，不会启动新的进程 也就是没有命令行操作 
+
+</code></pre>
+<p>总结：</p>
+<ul>
+<li>docker run；创建和启动一个新的容器实例，操作对象是镜像，选项较多，如果你要创建和启动一个容器，只能用run；</li>
+<li>docker exec: 在已运行的容器中，执行命令，操作对象是容器，如果你要进入已运行的容器，并且执行命令，用exec；</li>
+<li>docker attach: 同样操作的是已运行的容器，可以将本机标准输入（键盘输入）输到容器中，也可以将容器的输出显示在本机的屏幕上，如果你想查看容器运行过程中产生的标准输入输出，用attach；</li>
+</ul>
+<h4 id="从容器内拷贝文件到主机上">从容器内拷贝文件到主机上</h4>
+<pre><code class="language-bash">docker cp 容器id：容器内路径/选择cp的文件 目的主机路径
+</code></pre>
+<h4 id="查看内容占用">查看内容占用</h4>
+<pre><code class="language-shell">docker stats
+</code></pre>
+<h4 id="小结">小结</h4>
+<figure data-type="image" tabindex="17"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf3xr3z3rj30t50ki7ct.jpg" alt="image-20200617210554147" loading="lazy"></figure>
+<pre><code class="language-shell">[root@192 home]# docker --help
+
+Usage:	docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Options:
+      --config string      Location of client config
+                           files (default &quot;/root/.docker&quot;)
+  -c, --context string     Name of the context to use to
+                           connect to the daemon
+                           (overrides DOCKER_HOST env var
+                           and default context set with
+                           &quot;docker context use&quot;)
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level
+                           (&quot;debug&quot;|&quot;info&quot;|&quot;warn&quot;|&quot;error&quot;|&quot;fatal&quot;) (default &quot;info&quot;)
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by
+                           this CA (default
+                           &quot;/root/.docker/ca.pem&quot;)
+      --tlscert string     Path to TLS certificate file
+                           (default &quot;/root/.docker/cert.pem&quot;)
+      --tlskey string      Path to TLS key file (default
+                           &quot;/root/.docker/key.pem&quot;)
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Management Commands:
+  builder     Manage builds
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  engine      Manage the docker engine
+  image       Manage images
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  images      List images
+  import      Import the contents from a tarball to create a filesystem image
+  info        Display system-wide information
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  login       Log in to a Docker registry
+  logout      Log out from a Docker registry
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  ps          List containers
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  run         Run a command in a new container
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  search      Search the Docker Hub for images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  version     Show the Docker version information
+  wait        Block until one or more containers stop, then print their exit codes
+
+</code></pre>
+<h3 id="常用容器命令的总结">常用容器命令的总结</h3>
+<figure data-type="image" tabindex="18"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf3zxyh0wj30xf0jeqme.jpg" alt="image-20200617210932306" loading="lazy"></figure>
+<figure data-type="image" tabindex="19"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf40e2jjvj30vq0byaky.jpg" alt="image-20200617211021003" loading="lazy"></figure>
+<figure data-type="image" tabindex="20"><img src="//tvax3.sinaimg.cn/large/007bjbYxly1gsf40n9trgj30ux01mtaf.jpg" alt="image-20200617211039508" loading="lazy"></figure>
+<h2 id="可视化">可视化</h2>
+<ul>
+<li>portainer(先用这个)</li>
+<li>Rancher(CI/CD时用)</li>
+</ul>
+<h3 id="portainer">portainer</h3>
+<p>Docker图像化界面管理工具，提供一个后台面板供我们操作！</p>
+<pre><code class="language-shell">    docker run -d -p 8088:9000 --restart=always -v /var/run/docker.sock:/var/run/docker --privileged=true portainer/portainer
+</code></pre>
+<figure data-type="image" tabindex="21"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf40ur3z5j31a007z0tc.jpg" alt="image-20200618114542622" loading="lazy"></figure>
+<p>访问外网8088</p>
+<figure data-type="image" tabindex="22"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf410nkzqj31d10o8wg1.jpg" alt="image-20200618114902169" loading="lazy"></figure>
+<figure data-type="image" tabindex="23"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf41bqtagj31ag08gdgl.jpg" alt="image-20200618135424706" loading="lazy"></figure>
+<figure data-type="image" tabindex="24"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf41l9lq0j31dk0p80vy.jpg" alt="image-20200618135450037" loading="lazy"></figure>
+<h2 id="docker部署nginx">Docker部署nginx</h2>
+<p>docker部署nginx</p>
+<p>搜索镜像</p>
+<pre><code class="language-shell">docker search nginx
+</code></pre>
+<p>下载镜像</p>
+<pre><code class="language-shell">docker pull nginx
+</code></pre>
+<p>通过容器启动nginx</p>
+<pre><code class="language-bash">docker run -d  --name 容器名称 -p 公网端口:容器内端口80 nginx
+</code></pre>
+<p>运行成功之后 在终端测试查看是否能够看到开启服务的页面</p>
+<pre><code class="language-shell">curl localhost:3344
+</code></pre>
+<p>能看到说明开启成功</p>
+<p>通过服务器地址同样可以访问到</p>
+<p>想要修改相关的配置</p>
+<pre><code class="language-shell">whereis nginx查看nginx目录
+</code></pre>
+<pre><code class="language-shell">nginx: /usr/sbin/nginx /usr/lib/nginx /etc/nginx /usr/share/nginx
+</code></pre>
+<p>/usr/sbin/nginx 下有着可执行nginx的服务文件</p>
+<p>etc 下面放的是配置文件</p>
+<p>同样的的当停止docker服务时候就访问不到服务了</p>
+<p>注意:</p>
+<p>放行的端口要在安全组当中打开 否则将会访问不了！</p>
+<h2 id="docker-部署tomcat">Docker 部署tomcat</h2>
+<p>在官网当中搜索</p>
+<pre><code class="language-bash">$ docker run -it --rm tomcat:9.0
+</code></pre>
+<p>有这么一行方法 但是我们不建议这么使用 因为这个测试只是一次性的</p>
+<p>当退出这个服务之后会将这个镜像进行删除</p>
+<p>同样的下载镜像命令完成之后启动容器</p>
+<pre><code class="language-shell">docker run -d -p 外网放行端口:容器内端口  tomcat 
+</code></pre>
+<p>启动之后同样的进行</p>
+<pre><code class="language-shell">curl localhost 地址访问
+</code></pre>
+<p>发现出现了404 错误</p>
+<p>这里的原因是docker在安装tomcat的时候将最小安装 甚至有些基本的命令都使用不了</p>
+<p>下面进行一步步的解决</p>
+<p>先进入容器内部</p>
+<pre><code class="language-shell">docker exec -it 容器id /bin/bash
+</code></pre>
+<pre><code>查看当前的目录结构：ls
+</code></pre>
+<p>我们知道项目一般是放在webapps下面的</p>
+<p>先进入webapps目录下查看文件</p>
+<p>发现里面的文件都没有</p>
+<p>再进入webapps.dist下查看</p>
+<p>发现这里面才是执行我们的真正文件</p>
+<p>将其下面的所有文件都复制到webapps下面就行了</p>
+<pre><code class="language-shell">cp -r webapps.dist/* webapps
+</code></pre>
+<p>此时查看webapps目录下的文件都复制过来之后再次测试</p>
+<p>发现可以了已经进行访问了</p>
+<p>在服务器当中测试同样可以</p>
+<h2 id="部署eskibana">部署es+kibana</h2>
+<figure data-type="image" tabindex="25"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4261lsgj31370aemyb.jpg" alt="image-20200618104950722" loading="lazy"></figure>
+<pre><code class="language-shell"># es 暴露的端口很多# es 十分耗内存# es 的数据一般需要放置到安全目录！挂载# 启动 elasticsearch$ docker run -d --name elasticsearch01 -p 9200:9200 -p 9300:9300 -e &quot;discovery.type=single-node&quot; elasticsearch:7.6.2# 查看内存占用情况docker stats
+</code></pre>
+<figure data-type="image" tabindex="26"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf42ct6dkj318703jaa3.jpg" alt="image-20200618111713885" loading="lazy"></figure>
+<pre><code class="language-shell"># 先感觉stop一下docker stop ba18713ca536
+</code></pre>
+<figure data-type="image" tabindex="27"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf42ky427j319608tgn1.jpg" alt="image-20200618105057785" loading="lazy"></figure>
+<pre><code class="language-shell"># 通过 -e 限制内存$ docker run -d --name elasticsearch02 -p 9200:9200 -p 9300:9300 -e &quot;discovery.type=single-node&quot; -e ES_JAVA_OPTS=“-Xms64m -Xmx512m” elasticsearch:7.6.2
+</code></pre>
+<figure data-type="image" tabindex="28"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf42reruzj31a7034wen.jpg" alt="image-20200618113018622" loading="lazy"></figure>
+<p>没成功啊，SEI能告诉我为啥！！</p>
+<pre><code class="language-shell">docker run -d --name elasticsearch02 -p 9200:9200 -p 9300:9300 -e &quot;discovery.type=single-node&quot; -e ES_JAVA_OPTS=&quot;-Xms64m -Xmx512m&quot; elasticsearch:7.6.2
+</code></pre>
+<blockquote>
+<p>py0003null大佬:<br>
+“ES_JAVA_OPTS=-Xms64m -Xmx512m”</p>
+<p>py0003null大佬:<br>
+引号提前试试</p>
+</blockquote>
+<p>原因是引号！！你没觉得怪怪的嘛</p>
+<figure data-type="image" tabindex="29"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf439nxbwj319y03bt8w.jpg" alt="image-20200618115302656" loading="lazy"></figure>
+<p>此时查看stats，发现内存占用在控制范围内</p>
+<figure data-type="image" tabindex="30"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf43gw4mbj319t059t8x.jpg" alt="image-20200618115149971" loading="lazy"></figure>
+<p>ctrl + C退出，记得stop</p>
+<figure data-type="image" tabindex="31"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf49h16tnj31ac06qmxn.jpg" alt="image-20200618115921069" loading="lazy"></figure>
+<h3 id="思考用kibana链接elasticsearch">思考：用kibana链接elasticsearch</h3>
+<figure data-type="image" tabindex="32"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf49owk09j30mr09yglz.jpg" alt="image-20200618113556445" loading="lazy"></figure>
+<h2 id="docker镜像">Docker镜像</h2>
+<h3 id="原理">原理</h3>
+<p>UnionFS 联合文件系统</p>
+<figure data-type="image" tabindex="33"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf49x88yrj30nv080tdt.jpg" alt="image-20200618140242423" loading="lazy"></figure>
+<p>bootfs：boot file system</p>
+<p>rootfs：root file system<br>
+<img src="//tvax3.sinaimg.cn/large/007bjbYxly1gsf4a487uzj30h20anq4u.jpg" alt="image-20200618140907894" loading="lazy"></p>
+<figure data-type="image" tabindex="34"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4abufwnj30h108qabj.jpg" alt="image-20200618140932621" loading="lazy"></figure>
+<figure data-type="image" tabindex="35"><img src="//tvax3.sinaimg.cn/large/007bjbYxly1gsf4ajp5a2j30vv0gbgpu.jpg" alt="image-20200618141014511" loading="lazy"></figure>
+<figure data-type="image" tabindex="36"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4arupuvj30vx0ga796.jpg" alt="image-20200618153329894" loading="lazy"></figure>
+<p>Docker镜像都是只读的，当容器启动时，一个新的可写层被加到镜像的顶部，这一层就是我们通常说的容器层，容器层之下的都叫镜像层</p>
+<figure data-type="image" tabindex="37"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4ay40a3j30th04wmyz.jpg" alt="image-20200618153855605" loading="lazy"></figure>
+<h3 id="commit提交镜像">commit提交镜像</h3>
+<pre><code class="language-shell">docker commit # 提交容器成为一个新的副本docker commit -m=&quot;提交的描述信息&quot; -a=&quot;作者&quot; 容器id 目标镜像名：[TAG]
+</code></pre>
+<figure data-type="image" tabindex="38"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4b4sndfj31a30mztby.jpg" alt="image-20200618154457286" loading="lazy"></figure>
+<p>这是一个前台程序</p>
+<figure data-type="image" tabindex="39"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4bch0gfj31gn0o341d.jpg" alt="image-20200618154736475" loading="lazy"></figure>
+<p>同样这里直接访问会出现404错误 因为这个我们用到镜像并不是经过修改提交的</p>
+<p>先修改配置</p>
+<figure data-type="image" tabindex="40"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4bjarlzj30q809bmy0.jpg" alt="image-20200618154943194" loading="lazy"></figure>
+<p>完成之后进行提交</p>
+<pre><code class="language-shell">#docker commit -a=&quot;作者&quot; - m=&quot;描述信息&quot; 当前容器的id 新容器名称:版本信息docker commit -a=&quot;paidaxing&quot; -m=&quot;add webapps app&quot; 当前容器的id tomcat02:1.0
+</code></pre>
+<figure data-type="image" tabindex="41"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4bp33imj31ag0hnmzn.jpg" alt="image-20200618160425265" loading="lazy"></figure>
+<p>修改完配置之后要退出然后将需要的镜像进行提交</p>
+<p><strong>注意</strong></p>
+<p>下次再次运行的时候需要启动指定上传的版本进行启动 ！</p>
+<p><strong>发现新的版本，比之前的大了一些，因为里面记录了我们的改动</strong></p>
+<blockquote>
+<p>如果想保存当前容器的状态，可以通过commit提交，获得一个镜像</p>
+<p>好比我们以前学习VM的时候的快照</p>
+<p>到这里算是入门了</p>
+<p>接下来三个部分是docker的精髓</p>
+</blockquote>
+<h2 id="容器数据卷">容器数据卷</h2>
+<h3 id="什么是容器卷">什么是容器卷</h3>
+<p>docker是要将应用和环境打包成一个镜像</p>
+<p>这样，数据就不应该在容器中，否则容器删除，数据就会丢失!</p>
+<p>容器之间要有一个数据共享技术来解决此问题</p>
+<p>在Docker容器中产生的数据，同步到本地，这就是卷技术</p>
+<p>本质上是一个目录挂载，将容器内的目录挂载到虚拟机上</p>
+<p>特点：</p>
+<p>1：数据卷可以在容器之间共享或重用数据</p>
+<p>2：数据卷中的更改可以直接生效</p>
+<p>3：数据卷中的更改不会包含在镜像的更新中</p>
+<p>4：数据卷的生命周期一直持续到没有容器使用它为止</p>
+<figure data-type="image" tabindex="42"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4buxjerj30ha0bfabm.jpg" alt="image-20200618162917672" loading="lazy"></figure>
+<p><strong>目的：容器的持久化和同步操作</strong></p>
+<p>容器间可以数据共享</p>
+<h3 id="使用数据卷">使用数据卷</h3>
+<p>方式一：直接使用命令来挂载</p>
+<pre><code class="language-shell">docker run -it -v 主机目录:容器目录 启动镜像 # -it 交互式进入# -v volume卷技术# -p 主机端口
+</code></pre>
+<figure data-type="image" tabindex="43"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4c13gh7j31a505x3zb.jpg" alt="image-20200618163659503" loading="lazy"></figure>
+<p>通过命令查看容器的信息</p>
+<pre><code class="language-shell">docker inspect 容器id
+</code></pre>
+<figure data-type="image" tabindex="44"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4c13gh7j31a505x3zb.jpg" alt="image-20200618163659503" loading="lazy"></figure>
+<p>找到挂载信息Mounts<br>
+<img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4cdfehgj30la05vq31.jpg" alt="image-20210704151421726" loading="lazy"></p>
+<p>Source源路径</p>
+<p>Destinnation目的路径</p>
+<p>完成挂载之后分别在容器内和主机创建文件测试是否能完成同步操作</p>
+<p>测试<br>
+<img src="//tva3.sinaimg.cn/large/007bjbYxly1gsf4cj74nqj30mk03ijri.jpg" alt="image-20210704151815426" loading="lazy"></p>
+<figure data-type="image" tabindex="45"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4cqrbf2j30j002pwei.jpg" alt="image-20210704151846865" loading="lazy"></figure>
+<p>发现数据同步了</p>
+<p>再次测试在容器停止后，修改主机文件，再启动容器的时候，数据同样改变</p>
+<h3 id="连接mysql">连接mysql</h3>
+<p>数据库安装完成之后记得先找到的配置文件，然后在里面找到 <code>[mysqld]</code> 这一项，然后在该配置项下添加 <code>skip-grant-tables</code> 这个配置，然后保存文件。 重启服务！</p>
+<p>dbeaver配置服务器信息</p>
+<figure data-type="image" tabindex="46"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4cy1gb8j30f40jp3z4.jpg" alt="image-20210704160123178" loading="lazy"></figure>
+<p><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf4dze3wkj307f00pa9u.jpg" alt="image-20210704160152309" loading="lazy"><br>
+此时再进行连接连接成功！</p>
+<h3 id="通过容器连接mysql">通过容器连接mysql</h3>
+<p>先拉取镜像</p>
+<p>docker pull mysql:5.7</p>
+<p>在宿主机创建挂载目录和配置文件</p>
+<pre><code class="language-shell">mkdir /home/data/mysql/data    #创建存放数据目录mkdir /home/data/mysql/conf    #创建存放配置目录cd /home/data/mysql/conftouch my.cnf   #创建mysql配置文件my.cnfvi my.cnf #配置文件
+</code></pre>
+<pre><code class="language-conf">[client]
+
+# password	= 123456
+
+port		= 3306
+socket		= /tmp/mysql.sock
+
+[mysqld]
+skip-grant-tables
+port		= 3306
+socket		= /tmp/mysql.sock
+datadir = /www/server/data
+default_storage_engine = InnoDB
+performance_schema_max_table_instances = 400
+table_definition_cache = 400
+skip-external-locking
+key_buffer_size = 32M
+max_allowed_packet = 100G
+table_open_cache = 128
+sort_buffer_size = 768K
+net_buffer_length = 4K
+read_buffer_size = 768K
+read_rnd_buffer_size = 256K
+myisam_sort_buffer_size = 8M
+thread_cache_size = 16
+query_cache_size = 16M
+tmp_table_size = 32M
+sql-mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+
+explicit_defaults_for_timestamp = true
+#skip-name-resolve
+max_connections = 500
+max_connect_errors = 100
+open_files_limit = 65535
+
+log-bin=mysql-bin
+binlog_format=mixed
+server-id = 1
+expire_logs_days = 10
+slow_query_log=1
+slow-query-log-file=/www/server/data/mysql-slow.log
+long_query_time=3
+#log_queries_not_using_indexes=on
+
+
+innodb_data_home_dir = /www/server/data
+innodb_data_file_path = ibdata1:10M:autoextend
+innodb_log_group_home_dir = /www/server/data
+innodb_buffer_pool_size = 128M
+innodb_log_file_size = 64M
+innodb_log_buffer_size = 16M
+innodb_flush_log_at_trx_commit = 1
+innodb_lock_wait_timeout = 50
+innodb_max_dirty_pages_pct = 90
+innodb_read_io_threads = 1
+innodb_write_io_threads = 1
+
+[mysqldump]
+quick
+max_allowed_packet = 500M
+
+[mysql]
+no-auto-rehash
+
+[myisamchk]
+key_buffer_size = 32M
+sort_buffer_size = 768K
+read_buffer = 2M
+write_buffer = 2M
+
+[mysqlhotcopy]
+interactive-timeout
+</code></pre>
+<p>挂载</p>
+<pre><code class="language-shell">docker run -p 3344:3306 --name linmysql -v /usr/local/workspace/mysql/conf:/etc/mysql -v /usr/local/workspace/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7# 挂载docker run -it -p 3344:3306 -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 --name mysqlin mysql:5.7-d 后台运行-p 端口映射-v 卷挂载-e 环境配置 安装启动mysql需要配置密码--name 容器名字–restart=always 设置随服务启动而启动容器–privileged=true 使用该参数，container内的root拥有真正的root权限
+</code></pre>
+<p><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4ehmplvj30q40kraby.jpg" alt="image-20200618171353336" loading="lazy"><br>
+进行相关配置 同上<br>
+<img src="//tvax3.sinaimg.cn/large/007bjbYxly1gsf4hsmtx2j306r01b3yc.jpg" alt="image-20210704172126920" loading="lazy"></p>
+<p>进入容器内同样可以进行连接数据库</p>
+<figure data-type="image" tabindex="47"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf4i73rm7j30je0ciwf7.jpg" alt="image-20210704172454949-1626143888879" loading="lazy"></figure>
+<figure data-type="image" tabindex="48"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf4idkr6nj30mt0csq3t.jpg" alt="image-20200618173729692" loading="lazy"></figure>
+<h3 id="具名和匿名挂载">具名和匿名挂载</h3>
+<pre><code class="language-shell">#匿名挂载 docker run - d -P --name 容器名称 -v 容器内配置地址 镜像#具名挂载docker run - d -P --name 容器名称 -v 卷名称:容器内配置地址 镜像-P 随机端口-v 挂载#对比差别 匿名挂载就是在宿主机没有指定名称下载  不推荐使用！#查看挂载卷的情况 docker volumn ls
+</code></pre>
+<p>这里简单的测试</p>
+<pre><code class="language-shell">docker run -d -p 3344:80 --name nginxtest1 -v lin:/etc/nginx nginx
+</code></pre>
+<figure data-type="image" tabindex="49"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4ikpn60j30ig04zt92.jpg" alt="image-20210705091843925" loading="lazy"></figure>
+<p>​	查看docker容器卷的具体信息</p>
+<p>docker volume inspect 卷名称<br>
+<img src="//tvax3.sinaimg.cn/large/007bjbYxly1gsf4isr01hj30gm05imx7.jpg" alt="image-20210705092119296" loading="lazy"></p>
+<p>这里看到在没有指定路径挂载的情况下 挂载的路径是在</p>
+<p><strong>/var/lib/docker/volumes/lin/_data</strong>当中</p>
+<p>在这里可以进行我们的相关配置</p>
+<figure data-type="image" tabindex="50"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4izydi5j30jk022747.jpg" alt="image-20210705092407631-1626144003889" loading="lazy"></figure>
+<p><strong>拓展：</strong></p>
+<pre><code class="language-shell">-v 挂载后面配置权限 ro  readonly #只读rw readwrite #可读可写一旦设置了容器权限，就会根据权限产生相应的限定举例：docker run- d -P --name nginx02 - v llin：etc/nginx:ro nginx
+</code></pre>
+<h3 id="创建文件创建镜像">创建文件创建镜像</h3>
+<p>Dockerfile 就是用来构建docker镜像的文件！ 里面放的 是命令脚本</p>
+<p>通过这个脚本可以生成镜像，镜像是一层一层的,每个命令都是一层</p>
+<p>首先创建一个放置dockerfile文件的文件夹</p>
+<p>并在里面创建dockerfile文件名称自定义</p>
+<figure data-type="image" tabindex="51"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4j6zfqlj30lw04yaa6.jpg" alt="image-20210705103501776" loading="lazy"></figure>
+<p>这里文件放的是</p>
+<pre><code class="language-shell">FROM centosVOLUME [&quot;/volume01&quot;,&quot;/volume02&quot;] # 再创建镜像的时候就挂载出来#注意这里的路径前面要加上/ 否则会报错CMD echo &quot;---end---&quot;CMD /bin/bash—FROM 是基于哪个镜像—Volume 挂载—CMD 执行命令
+</code></pre>
+<p>通过文件构建镜像 docker build</p>
+<pre><code class="language-shell">docker build -f dockerfile1 -t lin/centos:1.0 .  # 最后的点很重要 镜像名不能有/-f #构建文件 要注意路径 这里直接是进创建目录当中所以前面没有加上绝对路径-t #构建自定义镜像的名称
+</code></pre>
+<p>构建完成查看镜像是否存在</p>
+<pre><code class="language-shell">docker images
+</code></pre>
+<figure data-type="image" tabindex="52"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf4jgzefpj30i004x74l.jpg" alt="image-20210705104039980" loading="lazy"></figure>
+<p>启动生成的镜像<br>
+<img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4jnm8fkj31300jntau.jpg" alt="image-20200618220658979" loading="lazy"></p>
+<p>在容器内部创建一个文件</p>
+<figure data-type="image" tabindex="53"><img src="//tvax3.sinaimg.cn/large/007bjbYxly1gsf4juwfmaj30b901xglg.jpg" alt="image-20210705103057713" loading="lazy"></figure>
+<p>查看Mounts，Source对应容器外目录，匿名挂载卷</p>
+<figure data-type="image" tabindex="54"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4k0gn2jj30u20as0tg.jpg" alt="image-20210705102844360" loading="lazy"></figure>
+<p>此时在宿主机的路径下查看刚才在容器内生成的文件</p>
+<figure data-type="image" tabindex="55"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4k6ly5sj30s601m746.jpg" alt="image-20210705103153495" loading="lazy"></figure>
+<p>可以看到数据同样过来了</p>
+<h3 id="多个容器数据共享">多个容器数据共享</h3>
+<figure data-type="image" tabindex="56"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4kc6xp8j30sf08hjt7.jpg" alt="image-20200621165403842" loading="lazy"></figure>
+<p>启动docker01，用之前建的lin/centos 1.0  镜像</p>
+<p>注意：</p>
+<p>--volume-form不是同步所有目录，只是同步挂载点，这里就是同步volume01和volume02,在其它目录写的数据是不会同步的</p>
+<pre><code class="language-shell">docker run -it --name docker01 lin/centos:1.0 # 1.0必须写
+</code></pre>
+<figure data-type="image" tabindex="57"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4kiwfktj310g0lfwgo.jpg" alt="image-20200621170429658" loading="lazy"></figure>
+<figure data-type="image" tabindex="58"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4kq0kpfj30m401z0sm.jpg" alt="image-20200621170540593" loading="lazy"></figure>
+<p>依次启动docker02、docker03</p>
+<pre><code class="language-shell">docker run -it --name docker02 --volumes-from docker01 padaxing/centos:1.0
+</code></pre>
+<p>docker02继承docker01的volums 继承容器卷的挂载</p>
+<p>可以验证，在docker01下加一个数据，在docker02下也会出现</p>
+<figure data-type="image" tabindex="59"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4kxngt7j31120g0777.jpg" alt="image-20200621171513650" loading="lazy"></figure>
+<p>创建docker03，同样继承docker01</p>
+<pre><code class="language-shell">docker run -it --name docker03 --volumes-from docker01 padaxing/centos:1.0
+</code></pre>
+<figure data-type="image" tabindex="60"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4l3ekxlj310h072dgh.jpg" alt="image-20200621172333639" loading="lazy"></figure>
+<p>在docker03的volume01下建立文件，在docker01的volume01下同样也有</p>
+<p>即通过--volumes-from 可以实现不同容器间的数据共享</p>
+<pre><code class="language-shell">docker rm -f 
+</code></pre>
+<figure data-type="image" tabindex="61"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4l9gucyj30mi04p74h.jpg" alt="image-20200621172830779" loading="lazy"></figure>
+<p>可以看到，删除docker01，进入docker02，数据依然在</p>
+<p>总结：容器之间配置信息的传递，数据卷的生命周期一直持续到没有容器使用它为止。即使把容器卷删除了 数据还是能持久化到本地</p>
+<p>这个例子不能真实的反应容器数据卷 因为在dockerfile文件当中是创建了两个挂载	只要容器创建了之后 在宿主机当中就存在了</p>
+<p>但通过多个容器创建的容器内确实可以看到挂载数据的同步 其实就是容器的共享</p>
+<p>用docker inspect检查3个容器会发现其实都映射到了宿主机的相同目录</p>
+<hr>
+<h2 id="dockerfile">DockerFile</h2>
+<p>是用来构建docker镜像的文件，可以理解为命令参数脚本</p>
+<p>构建步骤：</p>
+<ol>
+<li>编写一个dockerfile文件</li>
+<li>docker build 构建成为一个镜像</li>
+<li>docker run运行镜像</li>
+<li>docker push 发布镜像（DockerHub、阿里云镜像仓库 私有/共有）</li>
+</ol>
+<p>这个写一个项目时一样的</p>
+<h3 id="官方dockerfile示例">官方DockerFile示例</h3>
+<p>看一下官方的DockerFile</p>
+<figure data-type="image" tabindex="62"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4lfs8vxj31bq0tqq6i.jpg" alt="image-20200621174204807" loading="lazy"></figure>
+<p>可以看到官方镜像都是基础包，很多功能没有，我们通常会自己搭建自己的镜像来添加自己的需求！</p>
+<hr>
+<h3 id="dockerfile基础知识">DockerFile基础知识</h3>
+<ol>
+<li>每个指令都必须是大写字母</li>
+<li>按照从上到下顺序执行</li>
+<li>*#*表示注释</li>
+<li>每一个指令都会创建体检一个新的镜像层，并提交</li>
+</ol>
+<figure data-type="image" tabindex="63"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4llfxpmj30nu0c2ae8.jpg" alt="image-20200621174948310" loading="lazy"></figure>
+<p>docker是面向开发的，我们以后要发布项目，做镜像，就要编写dockerfile文件</p>
+<hr>
+<h3 id="dockerfile命令">DockerFile命令</h3>
+<pre><code class="language-shell">FROM # 基础镜像 比如centosMAINTAINER # 镜像是谁写的 姓名+邮箱 RUN # 镜像构建时需要运行的命令ADD # 添加，比如添加一个tomcat压缩包WORKDIR # 镜像的工作目录VOLUME # 挂载的目录EXPOSE # 指定暴露端口，跟-p一个道理 这里写完之后就可以不用在镜像当中指定端口RUN # 最终要运行的CMD # 指定这个容器启动的时候要运行的命令，只有最后一个会生效，而且可被替代ENTRYPOINT # 指定这个容器启动的时候要运行的命令，可以追加命令ONBUILD # 当构建一个被继承Dockerfile 这个时候运行ONBUILD指定，触发指令COPY # 将文件拷贝到镜像中ENV # 构建的时候设置环境变量
+</code></pre>
+<p>注意这里的MAINCONTAINER已经被官方舍弃掉了</p>
+<p>应该用到是LABEL</p>
+<h3 id="构建自己的centos">构建自己的centos</h3>
+<p>Docker Hub中大部分的镜像都是从FROM scratch开始的</p>
+<p>创建dockerfile文件</p>
+<pre><code class="language-shell"># 创建一个自己centos
+# 进入home目录
+cd /home
+# 创建一个目录，之后的东西都保存到这里
+mkdir dockerfile
+# 进入这个目录
+cd dockerfile/
+# 创建一个dockerfile，名字叫mydockerfile
+vim mydockerfile-centos
+</code></pre>
+<p>这里看一下官方的centos</p>
+<pre><code class="language-shell"># 官方默认centos
+docker run -it centos
+pwd # 官方默认有pwd命令
+vim # 官方默认没有vim命令
+ifconfig # 官方默认没有ifconfig命令
+</code></pre>
+<figure data-type="image" tabindex="64"><img src="//tvax3.sinaimg.cn/large/007bjbYxly1gsf4ls34asj30gw078t8x.jpg" alt="image-20200621184333206" loading="lazy"></figure>
+<p>回到mydockerfile</p>
+<p>这里希望在我们的自定义构建centos镜像里面添加上官方没有的命令</p>
+<pre><code class="language-shell"># 自定义构建centosFROM centosMAINTAINER lindamao&lt;1415877347@qq.com&gt;ENV MYPATH /usr/local #配置环境目录WORKDIR $MYPATH #工作目录RUN yum -y install vim #构建时安装vim命令RUN yum -y install net-toolsEXPOSE 3344 #暴露80端口CMD echo $MYPATH CMD echo &quot;---end---&quot;CMD /bin/bash
+</code></pre>
+<p>构建镜像</p>
+<pre><code class="language-shell">docker build -f mydockerfile-centos -t mycentos:0.1 .
+</code></pre>
+<p>这里可以看到构建镜像的一步步过程<br>
+<img src="//tva3.sinaimg.cn/large/007bjbYxly1gsf4m8ll8tj30ku0873yz.jpg" alt="image-20210705153941591" loading="lazy"></p>
+<p>最终返回Successfully表示成功</p>
+<figure data-type="image" tabindex="65"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gsf4mhp8t3j30a601lt8i.jpg" alt="image-20210705154242078" loading="lazy"></figure>
+<p>运行自己构建的镜像</p>
+<pre><code class="language-shell">docker run -it mycentos:0.1 # 版本号必须写,否则默认找到最新的会报错
+</code></pre>
+<p>检查在dockerfile文件当run的执行</p>
+<figure data-type="image" tabindex="66"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4mpmuuhj30kf0983z2.jpg" alt="image-20210705154650482" loading="lazy"></figure>
+<p>发现的确是按照配置来完成的构建</p>
+<p>查看docker的构建历史</p>
+<p>docker history</p>
+<figure data-type="image" tabindex="67"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf4mv66uhj30k506st9c.jpg" alt="image-20210705154847092" loading="lazy"></figure>
+<p>也就是说我们可以通过此命令参考镜像的构建</p>
+<h3 id="cmd与entrypoint的区别">CMD与ENTRYPOINT的区别</h3>
+<p><strong>CMD指令的定义</strong><br>
+下面我们来看官方给出的定义：</p>
+<pre><code class="language-shell">The main purpose of a CMD is to provide defaults for an executing container. 
+
+These defaults can include an executable, or they can omit the executable, in
+
+which case you must specify an ENTRYPOINT instruction as well.
+</code></pre>
+<p><strong>CMD</strong>主要目的是为执行中的容器提供默认值。这些默认值可以包含可执行文件，也可以省略可执行文件，在这种情下，您还必须指定一条<strong>ENTRYPOINT</strong>指令。</p>
+<p>从上面的定义我可以看出分两种情况，一种是给ENTRYPOINT指令提供默认的参数，一种是指定可执行文件，作为容器启动后执行的命令；</p>
+<p>下面简单看一下该指令的用法</p>
+<pre><code class="language-shell">CMD [&quot;executable&quot;,&quot;param1&quot;,&quot;param2&quot;] (exec模式, 这是推荐的方式)
+
+CMD [&quot;param1&quot;,&quot;param2&quot;] (作为 ENTRYPOINT 的默认参数)
+
+CMD command param1 param2 (shell模式)
+</code></pre>
+<p>如果<strong>Dockerfile</strong>中包含多条<strong>CMD</strong>指令，则只有最后一条指令生效。</p>
+<p><strong>ENTRYPOINT</strong>指令的定义<br>
+An ENTRYPOINT allows you to configure a container that will run as an executable.</p>
+<p>也就是说ENTRYPOINT才是容器执行的入口，<br>
+下面介绍一下该指令的用法：</p>
+<pre><code class="language-shell">ENTRYPOINT [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;] (exec模式，推荐的方式)
+ENTRYPOINT command param1 param2 (shell模式)
+</code></pre>
+<ul>
+<li><strong>exec</strong>形式的<strong>ENTRYPOINT</strong>在执行命令<strong>docker run image</strong>时。命令行参数将附加在<strong>ENTRYPOINT</strong>指定的所有元素之后，并将覆盖使用CMD指定的所有参数，这允许将参数传递到<strong>ENTRYPOINT</strong>，即<strong>docker run image -d</strong>将-<strong>d</strong>参数传递给<strong>ENTRYPOINT</strong> 也就是追加。 您可以使用d<strong>ocker run --entrypoint</strong>覆盖掉ENTRYPOINT指令。</li>
+<li><strong>shell</strong>形式的<strong>ENTRYPOIN</strong>T可防止使用任何<strong>CMD</strong>或运行命令行带入的参数，但其缺点是<strong>ENTRYPOINT</strong>将作为**/bin/sh -c<strong>的子命令启动，该子命令不传递信号。因此您的可执行文件将不会从</strong>docker stop container<strong>接收到</strong>SIGTERM**。</li>
+<li>如果<strong>Dockerfile</strong>中包含多条E<strong>NTRYPOIN</strong>T指令，则只有最后一条指令生效。您可以使用ENTRYPOINT的exec形式来设置相当稳定的默认命令和参数，然后使用CMD来设置更可能被更改的其他默认值。</li>
+</ul>
+<p><strong>CMD和ENTRYPOINT如何相互作用</strong></p>
+<ul>
+<li>
+<p>Dockerfile中应该至少指定CMD或ENTRYPOINT指令中的一种；</p>
+</li>
+<li>
+<p>当使用容器作为可执行文件时应定义ENTRYPOINT；</p>
+</li>
+<li>
+<p>CMD应该被用作在容器中定义ENTRYPOINT命令或执行临时命令默认参数。</p>
+</li>
+<li>
+<p>当使用其他参数运行容器时CMD 将被覆盖</p>
+</li>
+</ul>
+<p><strong>注意</strong>：如果CMD在基础镜像已有定义，则设置ENTRYPOINT会将CMD重置为空值。在这种情况下，CMD必须在当前镜像中重新定义一个值。</p>
+<p><strong>CMD和ENTRYPOINT的区别与联系</strong><br>
+<strong>相同点</strong></p>
+<ul>
+<li>用法相似，都可以指定shell或exec函数调用的方式执行命令；</li>
+<li>当存在多个CMD指令或ENTRYPOINT指令时，只有最后一个生效；</li>
+</ul>
+<p><strong>不同点</strong></p>
+<ul>
+<li>容器启动时，CMD指令指定的启动命令可以被docker run指定的命令覆盖，而ENTRYPOINT指令指定的启动命令不能被覆盖，而是将docker run指定的参数当做ENTRYPOINT指定命令的参数，也就是可以追加</li>
+<li>CMD指令可以作为ENTRYPOINT指令的默认参数 不能追加。</li>
+</ul>
+<hr>
+<h3 id="实战tomcat镜像">实战Tomcat镜像</h3>
+<ol>
+<li>准备镜像文件 tomcat，jdk压缩包</li>
+<li>配置dockerfile文件</li>
+</ol>
+<p>注意版本号要和自己的对应</p>
+<pre><code class="language-shell">FROM centosCOPY readme.txt /usr/local/readme.txt#将宿主机的jdk目录下的文件拷至镜像的/usr/local目录下ADD jdk-8u221-linux-x64.tar.gz /usr/local/#将宿主机的tomcat目录下的文件拷至镜像的/usr/local目录下ADD apache-tomcat-9.0.50.tar.gz /usr/local/#设置环境变量RUN yum -y install vim#切换镜像目录，进ENV MYPATH /usr/local#工作目录WORKDIR $MYPATH#设置环境变量ENV JAVA_HOME /usr/local/jdk1.8.0_221ENV CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jarENV CATALINA_HOME /usr/local/apache-tomcat-9.0.50ENV CATALINA_BASH /usr/local/apache-tomcat-9.0.50ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin#公开端口EXPOSE 8080CMD /usr/local/apache-tomcat-9.0.50/bin/startup.sh &amp;&amp; tail -F /usr/local/apache-tomcat-9.0.50/bin/logs/catalina.out
+</code></pre>
+<p>3.构建镜像</p>
+<pre><code class="language-shell">docker build -t diytomcat .
+</code></pre>
+<p>4.启动镜像</p>
+<pre><code class="language-shell">docker run -d -p 3344:8080 --name lindamaotomcat -v /home/lindamao/build/tomcat/test:/usr/local/apcahe-tomcat-9.0.50/webapps/test -v /home/lindamao/build/tomcat/tomcatlogs/:/usr/local/apcahe-tomcat-9.0.50/logs diytomcat
+</code></pre>
+<p>这里注意要检查镜像是否在后台启动 如果镜像没有在镜像启动说明容器已经停止 很可能是因为<strong>Dockerfile文件</strong>配置出错</p>
+<p>可以通过<strong>docker logs 容器id</strong> 进行排查</p>
+<p>确保容器正在后台启动的时候进行访问测试检查 确保项目能够正常执行</p>
+<p>6.部署自定义项目</p>
+<p>由于我们挂载了test配置 和logs 目录在本地 因此可以直接在本地进行修改并发布项目</p>
+<p>web.xml</p>
+<pre><code class="language-xml"> &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;  &lt;web-app xmlns=&quot;http://www.example.org/web-app_2_5&quot;              xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;          xsi:schemaLocation=&quot;http://www.example.org/web-app_2_5 web-app_2_5.xsd&quot;   version=&quot;2.5&quot;&gt; &lt;/web-app&gt;
+</code></pre>
+<pre><code class="language-jsp">&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;    pageEncoding=&quot;UTF-8&quot;%&gt;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;title&gt;lindamao&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Hello World!&lt;br/&gt;&lt;%System.out.println(&quot;This is my tomcat&quot;);%&gt;&lt;/body&gt;&lt;/html&gt;
+</code></pre>
+<h3 id="小结-2">小结</h3>
+<figure data-type="image" tabindex="68"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gsf4n393koj30me0iuaia.jpg" alt="image-20210706144600864" loading="lazy"></figure>
+<h2 id="docker-网络">Docker 网络</h2>
+<h3 id="理解docker0">理解docker0</h3>
+<p>详细参考https://cloud.tencent.com/developer/article/1747307</p>
+<p>查看宿主机的网络地址</p>
+<p>ip addr</p>
+<figure data-type="image" tabindex="69"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4n9nosmj30pq09et9m.jpg" alt="image-20210706145659133" loading="lazy"></figure>
+<p>后台启动一个tomcat容器</p>
+<pre><code class="language-shell">docker run -d -p 3344:8080 --name lintomcat tomcat
+</code></pre>
+<p>思考能否ping通容器内部的网络</p>
+<p>启动完成之后查看docker的网络地址</p>
+<pre><code class="language-shell">docker exec -it lintomcat ip addr
+</code></pre>
+<figure data-type="image" tabindex="70"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4nfojo3j30ma04awep.jpg" alt="image-20210706150405276" loading="lazy"></figure>
+<p>可以看到这里的网段是相同的 网段相同的情况下之间是可以进行ping 通的</p>
+<p>ping 172.18.0.2</p>
+<figure data-type="image" tabindex="71"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4nlfkq9j30ft07rmxq.jpg" alt="image-20210706150458817" loading="lazy"></figure>
+<p>测试可以ping通</p>
+<p>此时再启动一个tomctat并查看其网络地址</p>
+<figure data-type="image" tabindex="72"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf4nrsz8qj30oo04fwep.jpg" alt="image-20210706152847603" loading="lazy"></figure>
+<p>对比上面的发现容器内有类似的一对eth0 这个就是veth-pair 虚拟网卡对  实际上是不存在的 但是作为连通容器外的桥接</p>
+<p>同时这里看到容器内的地址都在同一个网段内 则容器之间是互相可以ping通的  docker inspect 容器id，看里面的networks信息，就是一个桥接，然后都是在一个网段下的</p>
+<p><strong>原理</strong></p>
+<ul>
+<li>当Docker 启动时,会自动在主机上创建一个 docker0 虚拟网桥,实际上是 Linux 的一个 bridge,可以理解为一个软件交换机。它会在挂载到它的网口之间进行转发。</li>
+<li>容器内和容器外通过veth-pair 虚拟网卡对进行桥接</li>
+<li>容器之间的网段和docker都是在同一个网段下因此可以达到互相连接</li>
+<li>当删除容器时拟网卡对也会相应的删除</li>
+</ul>
+<p><strong>图解</strong><br>
+<img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4o09y17j30pb0hv0tj.jpg" alt="beadv4m8rc-1625556860789" loading="lazy"></p>
+<h3 id="link">link</h3>
+<p>尝试一下通过容器名来连接容器</p>
+<p>测试发现不可行</p>
+<figure data-type="image" tabindex="73"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4o745w0j30jp019744.jpg" alt="image-20210706154132832" loading="lazy"></figure>
+<p>但是可以通过link方式来解决此问题</p>
+<p>此时再次启动容器通过link方式来连接</p>
+<pre><code>docker run -d -P --name lintomcat2 --link lintomcat1 tomcat
+</code></pre>
+<figure data-type="image" tabindex="74"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gsf4od0vl2j30lg043wen.jpg" alt="image-20210706155030654" loading="lazy"></figure>
+<p>此时发现可以ping通</p>
+<p>但是这种方式是但单向的也就是说后者并不能向前者连接成功</p>
+<p>查看dcoker的网路情况</p>
+<p><strong>docker network ls</strong></p>
+<figure data-type="image" tabindex="75"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4oi9z62j30e402k0sn.jpg" alt="image-20210706155333127" loading="lazy"></figure>
+<p><strong>docker network inspect 网卡id</strong> 查看详细信息<br>
+<img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf4onz55aj30op08bt90.jpg" alt="image-20210706155634098" loading="lazy"></p>
+<figure data-type="image" tabindex="76"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4ot6nvqj30ny0a2t9c.jpg" alt="image-20210706155728548" loading="lazy"></figure>
+<p>查看刚才启动的容器的详细信息</p>
+<figure data-type="image" tabindex="77"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf4oyatuaj30po0d0mxz.jpg" alt="image-20210706160032618" loading="lazy"></figure>
+<p>这里看到具体的网络情况</p>
+<p>容器lintomcat2 link l lintomcat1 这里查看是否在host有绑定</p>
+<figure data-type="image" tabindex="78"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4p42f11j30k408t3yn.jpg" alt="image-20210706160531233" loading="lazy"></figure>
+<p>确实发现了有</p>
+<p>也可以通过命令</p>
+<pre><code class="language-shell">docker exec -it lintomcat2 cat /etc/hosts
+</code></pre>
+<p>hosts的相关配置是放在etc下的<br>
+<img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4pa4n8oj30ka04wmxd.jpg" alt="image-20210706160711608" loading="lazy"></p>
+<p><strong>总结:</strong></p>
+<p>docker原生的方式不支持容器名连接访问</p>
+<p>建议使用自定义配置</p>
+<h3 id="自定义网络">自定义网络</h3>
+<p><strong>docker network create</strong></p>
+<p>举例：</p>
+<pre><code class="language-shell">docker network create --driver bridge --subnet 192.168.0.0/16 --gateway 192.168.0.1 mynet
+-driver 网络模式 
+-subnet 子网配置 192.168.0.2-192.168.255.255 可配置
+-gateway 网关配置 
+mynet 网络名称
+</code></pre>
+<figure data-type="image" tabindex="79"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gsf4pfxzvtj30bp02p0sn.jpg" alt="image-20210706162644977" loading="lazy"></figure>
+<p>创建成功</p>
+<p>现在就可以将容器放在自定义的网络当中</p>
+<p>此时启动自定义的网络模式容器测试</p>
+<p>docker run -d -P --name tomcat-net-01 --net mynet tomcat</p>
+<pre><code class="language-shell">docker run -d -P --name tomcat-net-02 --net mynet tomcat
+-net 网络模式
+</code></pre>
+<p>此时通过ip和容器id 进行ping测试</p>
+<figure data-type="image" tabindex="80"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4pm27usj30kj063dgd.jpg" alt="image-20210706163659299" loading="lazy"></figure>
+<p>测试成功</p>
+<h3 id="网络模式">网络模式</h3>
+<figure data-type="image" tabindex="81"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4pr88q2j30bx01yglg.jpg" alt="image-20210706161323229" loading="lazy"></figure>
+<table>
+<thead>
+<tr>
+<th>Docker网络模式</th>
+<th>配置</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>host模式</td>
+<td>–net=host</td>
+<td>容器和宿主机共享Network namespace。</td>
+</tr>
+<tr>
+<td>container模式</td>
+<td>–net=container:NAME_or_ID</td>
+<td>容器和另外一个容器共享Network namespace。 kubernetes中的pod就是多个容器共享一个Network namespace。</td>
+</tr>
+<tr>
+<td>none模式</td>
+<td>–net=none</td>
+<td>容器有独立的Network namespace，但并没有对其进行任何网络设置，如分配veth pair 和网桥连接，配置IP等。</td>
+</tr>
+<tr>
+<td>bridge模式</td>
+<td>–net=bridge</td>
+<td>（默认为该模式）不能通过容器名访问</td>
+</tr>
+</tbody>
+</table>
+<p><strong>测试</strong></p>
+<p>直接启动的 命令用的是bridge模式</p>
+<h4 id="host模式">host模式</h4>
+<p>如果启动容器的时候使用host模式，那么这个容器将不会获得一个独立的Network Namespace，而是和宿主机共用一个Network Namespace。容器将不会虚拟出自己的网卡，配置自己的IP等，而是使用宿主机的IP和端口。但是，容器的其他方面，如文件系统、进程列表等还是和宿主机隔离的。</p>
+<p>使用host模式的容器可以直接使用宿主机的IP地址与外界通信，容器内部的服务端口也可以使用宿主机的端口，不需要进行NAT，host最大的优势就是网络性能比较好，但是docker host上已经使用的端口就不能再用了，网络的隔离性不好。</p>
+<p>Host模式如下图所示：</p>
+<figure data-type="image" tabindex="82"><img src="https:////upload-images.jianshu.io/upload_images/13618762-a892da42b8ff9342.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/698/format/webp" alt="img" loading="lazy"></figure>
+<h4 id="container模式">container模式</h4>
+<p>这个模式指定新创建的容器和已经存在的一个容器共享一个 Network Namespace，而不是和宿主机共享。新创建的容器不会创建自己的网卡，配置自己的 IP，而是和一个指定的容器共享 IP、端口范围等。同样，两个容器除了网络方面，其他的如文件系统、进程列表等还是隔离的。两个容器的进程可以通过 lo 网卡设备通信。</p>
+<p>Container模式示意图：</p>
+<figure data-type="image" tabindex="83"><img src="https:////upload-images.jianshu.io/upload_images/13618762-790a69a562a5b358.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/695/format/webp" alt="img" loading="lazy"></figure>
+<h4 id="none模式">none模式</h4>
+<p>使用none模式，Docker容器拥有自己的Network Namespace，但是，并不为Docker容器进行任何网络配置。也就是说，这个Docker容器没有网卡、IP、路由等信息。需要我们自己为Docker容器添加网卡、配置IP等。</p>
+<p>这种网络模式下容器只有lo回环网络，没有其他网卡。none模式可以在容器创建时通过--network=none来指定。这种类型的网络没有办法联网，封闭的网络能很好的保证容器的安全性。</p>
+<p>None模式示意图:</p>
+<figure data-type="image" tabindex="84"><img src="https:////upload-images.jianshu.io/upload_images/13618762-3fd41778faebcef5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/723/format/webp" alt="img" loading="lazy"></figure>
+<h4 id="bridge模式">bridge模式</h4>
+<p>当Docker进程启动时，会在主机上创建一个名为docker0的虚拟网桥，此主机上启动的Docker容器会连接到这个虚拟网桥上。虚拟网桥的工作方式和物理交换机类似，这样主机上的所有容器就通过交换机连在了一个二层网络中。</p>
+<p>从docker0子网中分配一个IP给容器使用，并设置docker0的IP地址为容器的默认网关。在主机上创建一对虚拟网卡veth pair设备，Docker将veth pair设备的一端放在新创建的容器中，并命名为eth0（容器的网卡），另一端放在主机中，以vethxxx这样类似的名字命名，并将这个网络设备加入到docker0网桥中。可以通过brctl show命令查看。</p>
+<p>bridge模式是docker的默认网络模式，不写--net参数，就是bridge模式。使用docker run -p时，docker实际是在iptables做了DNAT规则，实现端口转发功能。可以使用iptables -t nat -vnL查看。</p>
+<p>bridge模式如下图所示：</p>
+<figure data-type="image" tabindex="85"><img src="https:////upload-images.jianshu.io/upload_images/13618762-f1643a51d313a889.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1083/format/webp" alt="img" loading="lazy"></figure>
+<h3 id="网络连通">网络连通</h3>
+<p>尝试在不同容器之间实现网络的通信</p>
+<p>现在在上面自定义的基础的网络通信模式下再次添加两个</p>
+<figure data-type="image" tabindex="86"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4q7jsppj30s1055q35.jpg" alt="image-20210706190946547" loading="lazy"></figure>
+<p>现在开启了四个不同的容器 两个不同的网卡</p>
+<p>在两个不同的网卡当中实现网络之间的通信是不可能的</p>
+<p>但是可以通过容器连通网络</p>
+<figure data-type="image" tabindex="87"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4rffoiyj30j805jmx7.jpg" alt="image-20210706191320883" loading="lazy"></figure>
+<p>在命令帮助当中也可以看到提示描述的是可以通过容器来连接网络</p>
+<p>这个方式相当于将容器加入到已经配置好的局域网当中</p>
+<p>测试从tomcat 连接到mynet</p>
+<p><strong>命令</strong></p>
+<p>docker network connect 选择要连接的网卡 选择要连接的容器</p>
+<p>连接完没有提示不报错即可</p>
+<p>连接完成之后查看网卡信息</p>
+<figure data-type="image" tabindex="88"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4rkvea8j30rg0b8t9c.jpg" alt="image-20210706191755856" loading="lazy"></figure>
+<p>发现网卡当中将连接的容器加入进来并为其配置了一个子网</p>
+<p>测试</p>
+<figure data-type="image" tabindex="89"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gsf4rqrv4wj30n7030aa4.jpg" alt="image-20210706191944965" loading="lazy"></figure>
+<p>查看连接容器的信息<br>
+<img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4rwrgeej30pm0elwfh.jpg" alt="image-20210706192318383" loading="lazy"></p>
+<p>一个容器两个ip</p>
+<p>类似于公网ip 和私网ip</p>
+<h3 id="部署redis集群">部署Redis集群</h3>
+<figure data-type="image" tabindex="90"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4s5vgxtj30oh0enjrx.jpg" alt="image-20210706192854778" loading="lazy"></figure>
+<p>搭建三个主机三个从机</p>
+<p>先开启一个自定义网卡</p>
+<pre><code class="language-shell">docker network create redis--subnet 172.38.0.0/16
+</code></pre>
+<p>​</p>
+<p><strong>#通过脚本一次创建6个redis配置</strong></p>
+<pre><code class="language-shell">for port in $(seq 1 6); \
+do \
+mkdir -p /mydata/redis/node-${port}/conf
+touch /mydata/redis/node-${port}/conf/redis.conf
+cat  &lt;&lt;EOF&gt; /mydata/redis/node-${port}/conf/redis.conf
+port 6379 
+bind 0.0.0.0
+cluster-enabled yes 
+cluster-config-file nodes.conf
+cluster-node-timeout 5000
+cluster-announce-ip 172.38.0.1${port}
+cluster-announce-port 6379
+cluster-announce-bus-port 16379
+appendonly yes
+EOF
+don
+</code></pre>
+<p>e</p>
+<figure data-type="image" tabindex="91"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4se207lj30g003s3yk.jpg" alt="image-20210706194346477" loading="lazy"></figure>
+<p>**# 通过脚本一次启动6个redis容器**</p>
+<pre><code class="language-shell">docker run -p 637${port}:6379 -p 1637${port}:16379 --name redis-${port} -v /mydata/redis/node-${port}/data:/data -v /mydata/redis/node-${port}/conf/redis.conf:/etc/redis/redis.conf -d --net redis --ip 172.38.0.11${port} redis:5.0.9-alpine3.11 redis-server /etc/redis/redis.conf
+</code></pre>
+<p>参考链接</p>
+<p>https://blog.csdn.net/Happy_Sunshine_Boy/article/details/107333904</p>
+<h2 id="docker-部署springboot">Docker 部署springboot</h2>
+<p>先将最终要发布的springboot项目打包</p>
+<figure data-type="image" tabindex="92"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4sjs4egj30be062dfs.jpg" alt="image-20210707093320963" loading="lazy"></figure>
+<p>等到打包完成之后然后再用 java -jar测试是否能够成功运行</p>
+<p>打包完成的项目在dist目录下</p>
+<p>在服务器当中上传项目并编写dockerfile文件</p>
+<pre><code class="language-dockerfile">FROM java:8
+
+COPY *.jar /app.jar
+
+CMD [&quot;--server.port-8080&quot;]
+
+EXPOSE 8080
+
+ENTRYPOINT  [&quot;java&quot;,&quot;-jar&quot;,&quot;/app.jar&quot;]
+</code></pre>
+<p>这里测试用的是这个</p>
+<p>打包项目</p>
+<p>docker build -t springbootdemo .</p>
+<p>启动镜像</p>
+<p>docker run -d -p 3344:8080 --name linspring springbootdemo</p>
+<p>记得要暴露对外的端口</p>
+<p>完成之后进行测试</p>
+<p>测试成功即可</p>
 ]]></content>
     </entry>
     <entry>
@@ -12636,6 +13723,1631 @@ public class Merge2 {
 </ul>
 <figure data-type="image" tabindex="9"><img src="//tva2.sinaimg.cn/large/007bjbYxly1got13efm1cj30cd05v0sx.jpg" alt="20170514113524334" loading="lazy"></figure>
 <p>除了归并算法代码实现内部可优化的细节处，使用Fork/Join框架后，我们基本上在保证操作系统线程规模的情况下，将每一个CPU内核的运算资源同时发挥了出来。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[多线程]]></title>
+        <id>https://lindamao0753.github.io/post/Multithreading/</id>
+        <link href="https://lindamao0753.github.io/post/Multithreading/">
+        </link>
+        <updated>2021-03-16T04:38:31.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="1-创建线程的两种方法">1、创建线程的两种方法</h1>
+<h2 id="1-继承thread类">1、继承Thread类</h2>
+<pre><code class="language-java">package com.lin;
+//创建线程方式一： 继承Thread类 ，重写run()方法 ，调用start开启线程
+public class TestThread1 extends Thread {
+    //重写run方法线程体
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 200; i++) {
+            System.out.println(&quot;我在看代码&quot;+i);
+        }
+    }
+
+    public static void main(String[] args) {
+        //main线程 ，主线程、
+        //创建一个线程对象
+        TestThread1 testThread1 = new TestThread1();
+        //调用start（）方法开启副线程
+        testThread1.start();
+        for (int i = 0; i &lt; 1000; i++) {
+            System.out.println(&quot;我在学习多线程&quot;+i);
+        }
+    }
+}
+
+</code></pre>
+<p>测试：</p>
+<figure data-type="image" tabindex="1"><img src="//tvax3.sinaimg.cn/mw690/007bjbYxly1goo6u2wjv9j30mh0bl74i.jpg" alt="image-20210311185407365" loading="lazy"></figure>
+<p>经过测试可以发现这些 这些线程的执行是<strong>交互</strong>进行的 并且每次运行的结果都会不一样</p>
+<h2 id="2-实现runnable接口">2、实现Runnable接口</h2>
+<pre><code class="language-java">package com.draco.demo01;
+
+/**
+ * 创建线程方式2，实现Runnable接口
+ */
+public class TestThread2 implements Runnable{
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 200; i++) {
+            System.out.println(&quot;我在看代码&quot;+i);
+        }
+    }
+
+    public static void main(String[] args) {
+        //main线程 ，主线程、
+        //创建一个线程对象
+        TestThread1 testThread1 = new TestThread1();
+		// Thread thread = new Thread(testThread1);
+		// thread.start();
+        //利用反射的方式实现 
+        new Thread(testThread1).start();//推荐用这种方式
+
+        //调用start（）方法开启线程
+
+        for (int i = 0; i &lt; 1000; i++) {
+            System.out.println(&quot;我在学习多线程&quot;+i);
+        }
+    }
+}
+
+</code></pre>
+<p>推荐使用第二种，<strong>实现Runnable接口</strong>。</p>
+<p>点击源码可以发现Thread类就是集成Runnable接口的</p>
+<figure data-type="image" tabindex="2"><img src="//tva2.sinaimg.cn/mw690/007bjbYxly1goo6w7cyqij30ia0fkq4c.jpg" alt="image-20210313130004060" loading="lazy"></figure>
+<p>**所以说Thread是继承了Runnable接口的 **</p>
+<p><strong>因为在第二种方式里还是得创建一个Thread线程的对象</strong></p>
+<p>还有第三种<strong>Callable接口</strong></p>
+<h2 id="3-下载网络图片">3、下载网络图片</h2>
+<p>这个操作需要导入包 然后才能执行</p>
+<p>1实现Runnable接口</p>
+<pre><code class="language-java">package com.draco.demo01;
+
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
+public class Downloader implements Runnable {
+
+    private String url;
+    private String name;
+	//写构造函数
+    public Downloader(String url, String name) {
+        this.url = url;
+        this.name = name;
+    }
+
+    @Override
+    //重写run方法
+    public void run() {
+        //new 一个下载器对象
+        WebDownloader webDownloader = new WebDownloader();
+        try {
+            webDownloader.downloader(url,name);
+            System.out.println(&quot;下载了文件名：&quot;+name);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        Downloader d1 = new Downloader(&quot;https://i0.hdslb.com/bfs/sycp/creative_img/202012/625fd761428be531b5405815ea33768b.jpg&quot;,&quot;第一个.jpg&quot;);
+        Downloader d2 = new Downloader(&quot;https://i0.hdslb.com/bfs/sycp/creative_img/202102/d521778b3f50444d90e6fefc6719065c.jpg&quot;,&quot;第二个.jpg&quot;);
+        Downloader d3 = new Downloader(&quot;https://i0.hdslb.com/bfs/activity-plat/static/20200714/953d0bfef678072bd11ec5fb6ff04190/nMOp2aGOf.png@400w_413h_1c_100q.webp&quot;,&quot;第三个.jpg&quot;);
+
+        new Thread(d1).start();
+        new Thread(d2).start();
+        new Thread(d3).start();
+    }
+}
+//下载器
+class WebDownloader{
+    //下载方法 参数传递的是路径和 名字
+    public void downloader(String url,String name) throws IOException {
+        //通过此方法将url变为文件。
+        FileUtils.copyURLToFile(new URL(url),new File(name));
+    }
+}
+</code></pre>
+<p>2实现Callable接口</p>
+<pre><code class="language-java">package com.lin;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.concurrent.*;
+
+public class Testcallable implements Callable&lt;Boolean&gt; {
+
+    private String url;
+    private String name;
+    //写构造函数
+    public Testcallable(String url, String name) {
+        this.url = url;
+        this.name = name;
+    }
+
+    @Override
+    //重写run方法
+    //对比之前的写的下载图片的方法有所不通的是 这里药品重写的是call方法 然后需要添加一个Boolean类型的值
+    public Boolean call() throws IOException {
+        WebDownloader webDownloader = new WebDownloader();
+        webDownloader.downloader(url,name);
+        System.out.println(&quot;下载了文件名为:&quot;+name);
+        return true;
+    }
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        Testcallable t1 = new Testcallable(&quot;https://i0.hdslb.com/bfs/sycp/creative_img/202012/625fd761428be531b5405815ea33768b.jpg&quot;, &quot;第一个.jpg&quot;);
+        Testcallable t2=  new Testcallable(&quot;https://i0.hdslb.com/bfs/sycp/creative_img/202102/d521778b3f50444d90e6fefc6719065c.jpg&quot;,&quot;第二个.jpg&quot;);
+        Testcallable t3=  new Testcallable(&quot;https://i0.hdslb.com/bfs/activity-plat/static/20200714/953d0bfef678072bd11ec5fb6ff04190/nMOp2aGOf.png@400w_413h_1c_100q.webp&quot;,&quot;第三个.jpg&quot;);
+
+
+
+        //下面的创建方式也不一样 这里用的是固定的方法 线程池里面的东西
+
+        //创建服务 参数是服务的个数
+        ExecutorService ser= Executors.newFixedThreadPool(3);
+
+        //提交执行 将对象提交上去并创建一个对象
+        Future&lt;Boolean&gt; r1=ser.submit(t1);
+        Future&lt;Boolean&gt; r2=ser.submit(t2);
+        Future&lt;Boolean&gt; r3=ser.submit(t3);
+
+        //获取结果 获取的结果也可以返回 出来
+        Boolean rs1 = r1.get();
+        Boolean rs2 = r2.get();
+        Boolean rs3 = r3.get();
+
+        //最后一步是将服务关闭
+        ser.shutdown();
+
+        //也可以将获取的结构打印出来
+        System.out.println(rs1);
+        System.out.println(rs2);
+        System.out.println(rs3);
+    }
+
+}
+//下载器
+class WebDownloader{
+    //下载方法 参数传递的是路径和 名字
+    public void downloader(String url,String name) throws IOException {
+        //通过此方法将url变为文件。
+        FileUtils.copyURLToFile(new URL(url),new File(name));
+    }
+}
+</code></pre>
+<p>Callable接口的实现的创建方式和前面两种方式都不相同 因为</p>
+<p>总结：<strong>下载的顺序可能不一样 说明这个是同时进行</strong></p>
+<h2 id="4-小结">4、小结</h2>
+<ul>
+<li>继承Thread类
+<ul>
+<li><strong>子类继承Thread类具有多线程能力</strong></li>
+<li><strong>启动线程：子类对象.start()</strong></li>
+<li><mark><strong>不建议使用，避免OOP单继承局限性</strong></mark></li>
+</ul>
+</li>
+<li>实现Runnable接口
+<ul>
+<li><strong>实现接口Runnable具有多线程能力</strong></li>
+<li>启动线程：传入目标对象+Thread对象.start()</li>
+<li>==<strong>推荐使用，避免单继承局限性，灵活方便，方便同一个对象被多个线程使用=</strong>=</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-静态代理">2、静态代理</h1>
+<pre><code class="language-java">package com.draco.proxystatic;
+
+/**
+ * 静态代理
+ */
+public class Test {
+
+    public static void main(String[] args) {
+        You you = new You();
+        WeddingCompany weddingCompany = new WeddingCompany(you);
+        weddingCompany.marry();
+    }
+
+}
+
+interface Marry{
+    void marry();
+}
+
+//真实对象：结婚的人
+class You implements Marry{
+
+    @Override
+    public void marry() {
+        System.out.println(&quot;小明准备结婚了！&quot;);
+    }
+}
+
+//代理对象：婚庆公司
+class WeddingCompany implements Marry{
+
+    private You you;
+
+    public WeddingCompany(You you) {
+        this.you = you;
+    }
+
+    @Override
+    public void marry() {
+        before();
+        you.marry();
+        after();
+    }
+
+    private void after() {
+        System.out.println(&quot;婚庆公司在结婚之后，收钱~&quot;);
+    }
+
+    private void before() {
+        System.out.println(&quot;婚庆公司在结婚之前，准备布置~&quot;);
+    }
+}
+</code></pre>
+<p>总结：</p>
+<ul>
+<li>真实对象和代理对象都要事先继承一个接口</li>
+<li><strong>代理对象要代理真实的对象</strong>去帮他干事情</li>
+</ul>
+<p><strong>静态代理的好处：</strong></p>
+<ul>
+<li>​    代理对象可以做很多真实对象都做不了的事情</li>
+<li>​    真实对象专注去做自己的事情</li>
+</ul>
+<h1 id="3-lambda">3、lambda</h1>
+<p>首先要理解Functional Interface (函数式接口) 是学习java8 lambda 表达式的关键所在</p>
+<p>函数式接口的定义是：</p>
+<ul>
+<li>
+<p><strong>任何接口 ，如果只包含唯一一个抽象的方法</strong> ，那么他就是一个函数式接口</p>
+<p>例如下面的例子</p>
+<pre><code class="language-java">public interface Runnable(){
+    public abstract void run();
+}
+</code></pre>
+</li>
+<li>
+<p>对于函数式接口，我们可以通过lambda表达式来创建该接口的对象</p>
+</li>
+</ul>
+<p>lambda表达式的本质是<strong>单方法接口的实现类的实例</strong>。</p>
+<p>最后lambda表达式含义：接口 对象 = (参数（接口中函数的参数）) -&gt; {具体实现};</p>
+<h2 id="1-逐渐演进的版本">1、逐渐演进的版本</h2>
+<pre><code class="language-java">package com.lambda;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
+public class TestLambda1 {
+    //静态内部类的实现
+    static class Like2 implements Ilike{
+        @Override
+        public void like() {
+            System.out.println(&quot;I Like Lambda 2 我实现了静态内部类&quot;);
+        }
+        //静态内部类方法的调用不能再主方法外面实现
+    }
+
+
+
+    public static void main(String[] args) {
+        //普通的的实现方式
+        Ilike like = new Like();
+        like.like();
+        //创建静态内部类的对象
+        Like2 like2 = new Like2();
+        like2.like();
+
+
+        //4.局部内部类 定义在住方法里面
+        class Like3 implements Ilike{
+            @Override
+            public void like() {
+                System.out.println(&quot;I Like Lambda 3 我实现了局部内部类 &quot;);
+            }
+
+        }
+        Like3 like3 = new Like3();
+        like3.like();
+
+        //5.匿名内部类 就是没有类的名字
+            Ilike like4 = new Ilike(){
+             @Override
+             public void like() {
+                 System.out.println(&quot;I Like Lambda 4 我实现了匿名内部类&quot;);
+             }
+         };
+            like4.like();
+
+            //6.lambad 表达式
+        Ilike like5=()-&gt;{
+            System.out.println(&quot;I Like Lambda 5 我实现了lambda表达式&quot;);
+        };
+        like5.like();
+
+
+
+
+    }
+}
+//1.先定义一个函数式接口
+interface Ilike{
+    void like();
+
+}
+//定义一个类去实现这个接口
+class Like implements Ilike{
+
+    @Override
+    public void like() {
+        System.out.println(&quot;I Like Lambda&quot;);
+    }
+}
+
+</code></pre>
+<h2 id="2-最终简化版">2、最终简化版</h2>
+<p>**单参数 **</p>
+<p>多个简化的方式 根据喜好和具体的情况来进行选择</p>
+<pre><code class="language-java">package com.lambda;
+
+public class TestLambda2 {
+
+    public static void main(String[] args) {
+    //一般的表达式
+    Ilove love =(int a)-&gt;{
+        System.out.println(&quot;I Love You ---&gt;&quot;+a);
+    };
+    love.love(1);
+
+    //简化1 参数类型
+    Ilove love2 =(a)-&gt;{
+        System.out.println(&quot;I Love You ---&gt;&quot;+a);
+    };
+    love2.love(2);
+    //简化2 简化括号
+    Ilove love3 =a-&gt;{
+        System.out.println(&quot;I Love You ---&gt;&quot;+a);
+        System.out.println(&quot;我有多行代码 所有我用上了代码块&quot;+a);
+    };
+    love3.love(3);
+
+    //简化3，去掉花括号
+    Ilove love4 =(a)-&gt; System.out.println(&quot;I Love You ---&gt;&quot;+a);
+    love4.love(4);
+
+
+    /*
+    总结：
+    lambda 表达式只写一行的情况下是当代码只有一行的时候如果的代码有多行 就必须用代码块包裹起来 也就是花括号
+    使用lambda必须满足接口是函数式接口 也就是 接口里面只有一个方法
+    接口里面的多个参数也可以去掉 但是去掉就得都去掉
+
+     */
+
+    }
+
+}
+interface Ilove{
+    void love(int a);
+}
+</code></pre>
+<p><strong>多参数</strong></p>
+<pre><code class="language-java">package com.lambda;
+
+public class TestLambda3 {
+    public static void main(String[] args) {
+        ILove love = null;
+
+        love = (a,name)-&gt;{
+            System.out.println(&quot;年龄=&quot;+a);
+            System.out.println(&quot;名字=&quot;+name);
+        };
+
+        love.love(12,&quot;王菲&quot;);
+
+
+        love = (int a,String name)-&gt;{
+            System.out.println(&quot;年龄=&quot;+a);
+            System.out.println(&quot;名字=&quot;+name);
+        };
+
+        love.love(12,&quot;小明&quot;);
+    }
+
+}
+
+interface ILove{
+    void love(int a,String name);
+}
+
+</code></pre>
+<h2 id="3-总结">3、总结</h2>
+<ul>
+<li>lambda表达式只能有一行代码的情况下，才能简化为一行，如果有多行，那么就用代码块包裹</li>
+<li>前提接口是函数式接口，只有一个方法的接口</li>
+<li>多个参数也可以去掉参数，要去掉就都去掉，而且必须加上括号。</li>
+</ul>
+<h1 id="4-线程状态">4、线程状态</h1>
+<figure data-type="image" tabindex="3"><img src="//tvax3.sinaimg.cn/mw690/007bjbYxly1goo6xfbroyj30vj0ao795.jpg" alt="image-20210204111058577" loading="lazy"></figure>
+<p>详细</p>
+<figure data-type="image" tabindex="4"><img src="//tvax3.sinaimg.cn/mw690/007bjbYxly1goo6xobqppj312x0jtk0c.jpg" alt="image-20210204112126116" loading="lazy"></figure>
+<p><strong>创建，就绪，运行，等待，死亡</strong></p>
+<p><strong>线程方法</strong></p>
+<figure data-type="image" tabindex="5"><img src="//tvax2.sinaimg.cn/mw690/007bjbYxly1goo6xx4xilj313f0ibtkv.jpg" alt="image-20210313214445748" loading="lazy"></figure>
+<h3 id="线程案例">线程案例</h3>
+<p><strong>买票</strong></p>
+<pre><code class="language-java">package com.lin;
+/*
+实现思路 让兔子设置延时模拟睡觉 然后让乌龟正常的进行跑步的过程
+run方法用来实现龟兔赛跑 进行的条件是游戏还没有产生胜利者
+GameOver 用来判断游戏的是否结束 并产生胜利者
+ */
+public class Race implements Runnable {
+//    定义一个胜利者
+    private static String Winner;
+    @Override
+    public void run() {
+        for (int i = 1; i &lt;=100 ; i++) {
+            //模拟让兔子跑一会停一会 所以就设宴延时
+            if (Thread.currentThread().getName().equals(&quot;兔子&quot;)&amp;&amp; i%20==0)
+            {
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            boolean flag= Gameover(i);
+            //当返回值为真的时候比赛结束
+            if (flag){
+
+                break;
+            }
+            System.out.println(Thread.currentThread().getName()+&quot;跑了&quot;+i+&quot;步&quot;);
+
+
+        }
+
+    }
+    //通过步数的完成来判断是否完成饿了比赛
+    public Boolean Gameover(int Steps){
+        //判断是否有胜利者
+        if (Winner!=null)
+        {
+            //当不存在胜利者的时候就是比赛还没结束
+            return true;
+        }
+         //当步数达到100以上比赛结束
+            if (Steps&gt;=100){
+                Winner=Thread.currentThread().getName();
+                System.out.println(&quot;======游戏结束!! 胜利者是&quot;+Winner+&quot;======&quot;);
+                return true;
+
+            }
+
+        return false;
+    }
+
+    public static void main(String[] args) {
+        Race race=new Race();
+        new Thread(race,&quot;兔子&quot;).start();
+        new Thread(race,&quot;乌龟&quot;).start();
+    }
+
+}
+
+</code></pre>
+<p><strong>龟兔赛跑</strong></p>
+<pre><code class="language-java">package com.lin;
+/*
+实现思路 让兔子设置延时模拟睡觉 然后让乌龟正常的进行跑步的过程
+ */
+public class Race implements Runnable {
+//    定义一个胜利者
+    private static String Winner;
+    @Override
+    public void run() {
+        for (int i = 1; i &lt;=100 ; i++) {
+            //模拟让兔子跑一会停一会 所以就设宴延时
+            if (Thread.currentThread().getName().equals(&quot;兔子&quot;)&amp;&amp; i%20==0)
+            {
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            boolean flag= Gameover(i);
+            //当返回值为真的时候比赛结束
+            if (flag){
+
+                break;
+            }
+            System.out.println(Thread.currentThread().getName()+&quot;跑了&quot;+i+&quot;步&quot;);
+
+
+        }
+
+    }
+    //通过步数的完成来判断是否完成饿了比赛
+    public Boolean Gameover(int Steps){
+        //判断是否有胜利者
+        if (Winner!=null)
+        {
+            //当不存在胜利者的时候就是比赛还没结束
+            return true;
+        }
+         //当步数达到100以上比赛结束
+            if (Steps&gt;=100){
+                Winner=Thread.currentThread().getName();
+                System.out.println(&quot;胜利者是&quot;+Winner);
+                return true;
+
+            }
+
+        return false;
+    }
+
+    public static void main(String[] args) {
+        Race race=new Race();
+        new Thread(race,&quot;兔子&quot;).start();
+        new Thread(race,&quot;乌龟&quot;).start();
+    }
+
+}
+</code></pre>
+<h2 id="1-停止stop">1、停止stop</h2>
+<ul>
+<li>1、建议线程正常停止，利用次数，不建议死循环</li>
+<li>2、<strong>建议使用标志位</strong>，设置一个标志位</li>
+<li>3、<strong>不要使用stop或者destroy等过时或者JDK不建议使用的方法</strong></li>
+</ul>
+<pre><code class="language-java">package com.draco.staticThread;
+
+/**
+ * 1、建议线程正常停止，利用次数，不建议死循环
+ * 2、建议使用标志位，设置一个标志位
+ * 3、不要使用stop或者destroy等过时或者JDK不建议使用的方法
+ */
+public class TestStop implements Runnable{
+
+    private boolean flag = true;
+
+    @Override
+    public void run() {
+        int i = 0;
+        while (flag){
+            System.out.println(&quot;run....Runnable Thread &quot;+i++);
+        }
+    }
+
+    public void over(){
+        flag = false;
+    }
+
+    public static void main(String[] args) {
+
+        TestStop testStop = new TestStop();
+        new Thread(testStop).start();
+
+        for (int i = 0; i &lt; 1000; i++) {
+            System.out.println(&quot;test main &quot;+i);
+            if(i==500){
+                testStop.over();
+                System.out.println(&quot;线程停止了&quot;);
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="2-睡眠sleep">2、睡眠sleep</h2>
+<p><img src="//tvax4.sinaimg.cn/mw690/007bjbYxly1goo6y8x9e3j31ac0mn7in.jpg" alt="image-20210313220958238" loading="lazy"><br>
+模拟网络延时</p>
+<p><strong>注意！</strong></p>
+<p>如果没有加上延时的话 会出现票数为负的情况 结果就可能为负数！！！</p>
+<p>模拟网络延时：放大问题的发生性</p>
+<pre><code class="language-java">package com.draco.staticThread;
+
+/**
+ * 模拟网络延时，放大问题的发生性
+ */
+public class TestSleep implements Runnable {
+
+    private int tickteNum = 10;
+
+    @Override
+    public void run() {
+        while (true){
+            if(tickteNum&lt;=0){
+                break;
+            }else {
+
+                //模拟延时
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                System.out.println(Thread.currentThread().getName()+&quot;得到了第 &quot;+tickteNum--+&quot; 票&quot;);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        TestSleep testSleep = new TestSleep();
+
+        new Thread(testSleep,&quot;小红&quot;).start();
+        new Thread(testSleep,&quot;小明&quot;).start();
+        new Thread(testSleep,&quot;小黄&quot;).start();
+    }
+}
+</code></pre>
+<p>倒计时，输出当前时间</p>
+<pre><code class="language-java">package com.state;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+/*
+这里要注意 可能与我们调用的时间会有差别 因为cpu调度还需要一定的时间
+ */
+
+public class TestSleep {
+
+    public static void main(String[] args) throws InterruptedException {
+        TestSleep testSleep = new TestSleep();
+        //可以通过类来直接调用静态方法
+        //也可以直接调用
+//        tendown();
+        TestSleep.tendown();
+        tendown();
+
+        //需要通过对象来调用非静态方法
+        testSleep.getcurrentTime();
+
+
+
+
+
+    }
+    public  void getcurrentTime(){
+        //打印当前的时间
+        Date currentTime = new Date(System.currentTimeMillis());
+
+        while (true){
+            //1000毫秒等于1s
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //还得格式化时间 将其变为我们认识的格式
+            System.out.println(new SimpleDateFormat(&quot;HH:mm:ss&quot;).format(currentTime));
+            //还得再更新一次当前的时间 不然时间就停留在当前的时间了
+            currentTime = new Date(System.currentTimeMillis());
+        }
+
+
+    }
+    //倒计时器
+    public  static void tendown() throws InterruptedException {
+        int number=10;
+        while (true){
+            Thread.sleep(1000);
+            System.out.println(number--);
+            if (number&lt;0)
+            {
+                break;
+            }
+
+        }
+
+
+    }
+
+}
+
+</code></pre>
+<p><strong>每个对象都有一把锁，sleep不会释放锁~</strong></p>
+<p><strong>sleep方法 让进程进入阻塞状态的时候不会把自己的位置让出去</strong></p>
+<h2 id="3-礼让yield">3、礼让yield</h2>
+<ul>
+<li>礼让线程，让当前正在执行的线程暂停，但不阻塞</li>
+<li><strong>将线程从运行状态变为就绪状态</strong></li>
+<li>让cpu重新调度，礼让不一定成功！看cpu心情</li>
+</ul>
+<p>从运行到就绪状态，就是礼让，<strong>还是有抢夺CPU资源的机会的</strong></p>
+<p><strong>代码测试</strong></p>
+<pre><code class="language-java">package com.draco.staticThread;
+
+public class TestYield {
+    public static void main(String[] args) {
+        MyYield myYield = new MyYield();
+
+        new Thread(myYield,&quot;小红&quot;).start();
+        new Thread(myYield,&quot;小名&quot;).start();
+    }
+}
+
+class MyYield implements Runnable{
+
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName()+&quot;线程在执行&quot;);
+        Thread.yield();
+        System.out.println(Thread.currentThread().getName()+&quot;线程被暂停&quot;);
+    }
+}
+</code></pre>
+<p>礼让不一定成功，要看CPU的心情~</p>
+<p>礼让线程，让当前正在执行的线程暂停，但不阻塞，将线程从运行状态转为就绪状态</p>
+<p>所以也就会出现</p>
+<p>礼让<strong>不成功</strong>的状态</p>
+<p><img src="//tva4.sinaimg.cn/mw690/007bjbYxly1goo6yxojkoj30es0553yj.jpg" alt="image-20210314142023127" loading="lazy">7.png)</p>
+<p>礼让<strong>成功</strong>的状态</p>
+<figure data-type="image" tabindex="6"><img src="//tvax4.sinaimg.cn/mw690/007bjbYxly1goo6z3ipjkj30gv06t3yl.jpg" alt="image-20210314142049174" loading="lazy"></figure>
+<h2 id="4-合并join">4、合并Join</h2>
+<p>Join合并线程，待次线程执行完成之后，再执行其他的线程，其他线程阻塞</p>
+<p>可以想象成插队 是个很霸道的东西。</p>
+<pre><code class="language-java">package com.state;
+
+public class TestJoin implements Runnable{
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 200; i++) {
+            System.out.println(&quot;VIP线程来啦！！！！&quot;);
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        TestJoin testJoin = new TestJoin();
+        Thread thread = new Thread(testJoin);
+
+        for (int i = 0; i &lt; 300; i++) {
+            if (i==200){
+                //注意这里要将副线程放到if语句当中实现 不然副线程在主线程的运行刚开始的时候就会执行官就可能不会等到if条件满足的时候就开始执行了
+                thread.start();
+                //让副线程插队
+                thread.join();
+            }
+            System.out.println(&quot;主线程正在运行当中&quot;+i);
+        }
+    }
+}
+
+</code></pre>
+<p>也就是插队，待此线程执行完成后，再执行其他的线程，其他线程阻塞</p>
+<p><img src="//tvax1.sinaimg.cn/mw690/007bjbYxly1goo6zixn87j31a90hvq3w.jpg" alt="image-20210317111406644" loading="lazy"><br>
+<strong>注意：</strong></p>
+<p>这里要将副线程放到if语句当中实现 不然副线程在主线程的运行刚开始的时候就会执行官 就可能不会等到if条件满足的时候就开始执行了</p>
+<p>这里可以看到 当线程实现了Join方法后 前面正在执行的线程必须等待插队进来的线程执行完之后才能继续进行下去。</p>
+<h2 id="5-线程的状态">5、线程的状态</h2>
+<figure data-type="image" tabindex="7"><img src="//tvax1.sinaimg.cn/mw690/007bjbYxly1goo7316i2uj31aa0n547u.jpg" alt="image-20210314143557265" loading="lazy"></figure>
+<pre><code class="language-java">package com.state;
+/*
+思路
+启动线程
+观察线程刚开始
+观察线程进行
+观察线程结束
+ */
+public class TestState {
+    public static void main(String[] args) throws InterruptedException {
+        Thread thread = new Thread(()-&gt;{
+            for (int i = 0; i &lt; 5; i++) {
+                //这里要让线程延时一会进行观察线程的状态
+                //等待5秒之后输出 如果没有这段程序 就不会输出TIMED_WAITING的状态
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println(&quot;轮到我啦&quot;);
+        });
+        //观察线程
+        Thread.State state = thread.getState();
+        System.out.println(state);//NEW 线程在还没启动状态就有了
+
+        thread.start();
+        //更新线程 因为每一个状态的线程状态都不一样
+        state=thread.getState();
+
+        System.out.println(state);//RUNNABLE 
+
+        while (state!=Thread.State.TERMINATED){
+            //再次更新状态
+            state=thread.getState();
+
+            Thread.sleep(100);
+            System.out.println(state);//会输出TIMED_WAITING 和 TERMINATED 后者在前者完成之后才进行运行
+
+        }
+
+    }
+}
+
+</code></pre>
+<p>当线程TERMINATED后（死亡后），就不能启动了，<strong>所以线程只能启动一次</strong></p>
+<p>在线程结束之后再启动程序会报错</p>
+<figure data-type="image" tabindex="8"><img src="//tvax3.sinaimg.cn/mw690/007bjbYxly1goo737ze0cj30nl022aab.jpg" alt="image-20210314151322323" loading="lazy"></figure>
+<p><strong>想要再执行线程就必须再new一个新的线程</strong></p>
+<h2 id="6-线程的优先级">6、线程的优先级</h2>
+<p><img src="//tva4.sinaimg.cn/mw690/007bjbYxly1goo756jzn1j31930oygsf.jpg" alt="image-20210314151423661" loading="lazy"><br>
+<strong>两种方式</strong></p>
+<p>getPrriority() <strong>获得</strong>现线程的优先级</p>
+<p>setPriority（int XXX）<strong>设置</strong>线程的优先级</p>
+<p><strong>注意</strong></p>
+<p>优先级的设定建议要在start()调度前 否则线程在运行的时候再改变其优先级是无法实现的</p>
+<p>要注意的是 <strong>优先级低只是意味着获得调度的概率低</strong> ，并不是优先级低就不会被调用了 这还得注意看cpu的调度</p>
+<p>如果cpu调度了优先级比较低的线程 就会出现性能倒置的情况 所以我们要尽量避免这种情况的发生。</p>
+<pre><code class="language-java">package com.state;
+
+public class TestPriority {
+    public static void main(String[] args) {
+        //打印主函数的优先级
+//        Thread.currentThread().setPriority(10); 修改主函的优先级
+        System.out.println(Thread.currentThread().getName() + &quot;-----&gt;&quot; + Thread.currentThread().getPriority());
+
+        MyPriority myPriority = new MyPriority();
+
+        Thread t1 = new Thread(myPriority);
+        Thread t2 = new Thread(myPriority);
+        Thread t3 = new Thread(myPriority);
+        Thread t4 = new Thread(myPriority);
+        Thread t5 = new Thread(myPriority);
+        Thread t6 = new Thread(myPriority);
+
+
+        // 要注意 要设定优先级才能启动
+        t1.setPriority(Thread.MAX_PRIORITY);//Thread.MAX_PRIORITY 设置最大优先级
+        t1.start();
+
+        t2.setPriority(Thread.NORM_PRIORITY);//Thread.NORM_PRIORITY) 设置中等优先级
+        t2.start();
+
+        t3.setPriority(Thread.MIN_PRIORITY);//Thread.MIN_PRIORITY 设置最小优先级
+        t3.start();
+
+        t4.setPriority(8);
+        t4.start();
+
+        t5.setPriority(3);
+        t5.start();
+
+        t6.start();
+
+    }
+
+    static class MyPriority implements Runnable {
+        @Override
+        public void run() {
+            System.out.println(Thread.currentThread().getName() + &quot;-----&gt;&quot; + Thread.currentThread().getPriority());
+        }
+    }
+}
+</code></pre>
+<p><strong>先设置优先级，再启动</strong></p>
+<p><strong>优先级低的只是意味着获得CPU调度的概率低，并不是优先级低就不会被调用</strong>了</p>
+<figure data-type="image" tabindex="9"><img src="//tvax2.sinaimg.cn/mw690/007bjbYxly1goo75eamxcj30ep05bmx8.jpg" alt="image-20210314153526471" loading="lazy"></figure>
+<p><strong>注意</strong></p>
+<p><strong>主函数的优先级默认为5 且能改变主函数优先级</strong></p>
+<p><strong>最大优先级为10</strong></p>
+<p><strong>未被设置优先级的线程优先级也默认为5</strong></p>
+<h2 id="7-守护daemon线程">7、守护（daemon）线程</h2>
+<p>线程分为<strong>用户线程</strong>和<strong>守护线程</strong></p>
+<p>虚拟机<strong>必须确保用户线程执行完毕</strong></p>
+<p>虚拟机<strong>不用等待守护线程执行完毕</strong>如，后台记录操作日志，监控内存，垃圾回收等等 这些都是属于守护线程</p>
+<p>守护线程只管着用户的线程 伴随着用户线程的开始到结束</p>
+<pre><code class="language-java">package com.state;
+
+public class TestDaemon {
+    public static void main(String[] args) {
+        Buddha buddha = new Buddha();
+        You you = new You();
+        //线程代理佛祖 然后
+        Thread thread = new Thread(buddha);
+        //将线程设置为守护线程 里面放的是Boolean值 默认的是为false 将其设置为true 就是为守护线程
+
+        thread.setDaemon(true);
+        //守护线程启动
+        thread.start();
+        // 用户线程启动
+        new Thread(new You()).start();
+
+
+    }
+
+}
+class Buddha implements Runnable{
+
+    @Override
+    public void run() {
+        while (true){
+            //
+            System.out.println(&quot;佛祖保佑着你&quot;);
+        }
+    }
+
+}
+class You implements Runnable{
+
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 100; i++) {
+            System.out.println(&quot;你每年都过得很开心&quot;);
+        }
+        System.out.println(&quot;再见啦 &quot;);
+    }
+}
+
+</code></pre>
+<p><strong>注意</strong></p>
+<p>在用户线程结束了之后 守护线程还会再运行一段时间因为 虚拟机并没有去管 守护线程。</p>
+<p>线程分为<mark>用户线程</mark>和<mark>守护线程</mark></p>
+<p>虚拟机必须等到<mark>用户线程</mark>执行完毕【例如：main等】</p>
+<p>虚拟机不用等到<mark>守护线程</mark>执行完毕【例如：GC等】</p>
+<h1 id="5-线程同步">5、线程同步</h1>
+<p><strong>多个线程想访问同一个对象的时候就是并发</strong> 我们需要改变你这个机制</p>
+<p>所以就需要线程同步这个机制 线程同步就是一种等待机制</p>
+<p>多个需要同时访问次此对象的线程进入这个<strong>对象的的等待池子</strong></p>
+<p><strong>排队来解决问题</strong></p>
+<p>队列和锁</p>
+<p>举个简单的例子 去景区上厕所排队 排队形成队列 厕所上的门把锁就是队列的锁</p>
+<p>把锁锁上才能保证自己方便的自由  也就是保证了线程的安全。</p>
+<p>加入锁机制<strong>synchronized</strong></p>
+<p>当然加入锁也会出现一些问题</p>
+<p>鱼和熊掌不可兼得嘛</p>
+<figure data-type="image" tabindex="10"><img src="//tvax2.sinaimg.cn/mw690/007bjbYxly1goo75wlgdtj318h0knk1z.jpg" alt="image-20210314163518662" loading="lazy"></figure>
+<h2 id="1-三大线程不安全案例">1、三大线程不安全案例</h2>
+<p><strong>不安全的情况出现的本质是</strong></p>
+<p><strong>每个线程在自己的工作内存交互，内存控制不当会造成数据不一致。</strong></p>
+<p><strong>不安全的买票</strong></p>
+<pre><code class="language-java">package com.draco.syn;
+
+/**
+ * 不安全的买票
+ */
+public class UnSafeBuyTicket {
+    public static void main(String[] args) {
+        BuyTicket buyTicket = new BuyTicket();
+
+        new Thread(buyTicket,&quot;小明&quot;).start();
+        new Thread(buyTicket,&quot;小红&quot;).start();
+        new Thread(buyTicket,&quot;黄牛党&quot;).start();
+    }
+}
+
+class BuyTicket implements Runnable{
+    private int ticketNums = 10;
+    boolean flag = true;
+    @Override
+    public void run() {
+        //买票
+        
+        while (flag){
+            
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+            buy();
+        }
+    }
+
+    public void buy(){
+        if (ticketNums&lt;=0){
+            flag = false;
+            return;
+        }
+
+
+        System.out.println(Thread.currentThread().getName()+&quot;--&gt;&quot;+ticketNums--);
+    }
+}
+</code></pre>
+<p><strong>出现的问题：</strong></p>
+<p>因为当用户同一时间都取到最后一张票的时候票的数量就会同一时间的减少 就会取到负数的票</p>
+<figure data-type="image" tabindex="11"><img src="//tva1.sinaimg.cn/mw690/007bjbYxly1goo76fhwruj309n04v745.jpg" alt="image-20210315133410036" loading="lazy"></figure>
+<p><strong>不安全的取钱</strong></p>
+<pre><code class="language-java">package com.UnSafe;
+
+public class UnSafeBank {
+    public static void main(String[] args) {
+        //创建一个银行卡
+        Account account = new Account(100,&quot;理财基金&quot;);
+
+
+        TakeMoney you = new TakeMoney(account,50,&quot;你&quot;);
+        TakeMoney gilrfriend = new TakeMoney(account,100,&quot;女朋友&quot;);
+        you.start();
+        gilrfriend.start();
+
+
+    }
+}
+//卡
+class Account{
+    int money;//余额
+    String name;//基金的名字
+
+    public Account(int money, String name) {
+        this.money = money;
+        this.name = name;
+    }
+}
+class TakeMoney extends Thread {
+    Account account;
+    int takemoney;//取走的钱
+    int nowmoney;//用户现在持有的钱
+
+    public TakeMoney(Account account, int takemoney, String name) {
+        super(name);
+        this.account = account;
+
+        this.takemoney = takemoney;
+    }
+    @Override
+    public void run(){
+        //判断有没有这么多钱
+        if (account.money-takemoney&lt;0){
+            System.out.println(&quot;您账户的余额不足！,还剩&quot;+account.money);
+        }
+        account.money=account.money-takemoney;
+        //手里的钱取到的钱加上本来有的钱
+        nowmoney=nowmoney+takemoney;
+        System.out.println(account.name+&quot;--&gt;&quot;+&quot;账户余额：&quot;+account.money);
+
+        //这个this等等同于类
+        System.out.println(this.getName()+&quot;--&gt;&quot;+&quot;手里钱：&quot;+nowmoney);
+    }
+
+
+    }
+</code></pre>
+<p><strong>出现的问题：</strong></p>
+<p>钱不足的时候还能再进行取钱这个操作</p>
+<p>假设这种情况发生在实际生活当中 那就会出现很危险的情况！！！</p>
+<figure data-type="image" tabindex="12"><img src="//tvax4.sinaimg.cn/mw690/007bjbYxly1goo76phnrbj30cc03uwee.jpg" alt="image-20210315132557572" loading="lazy"></figure>
+<p><strong>不安全的集合</strong></p>
+<pre><code class="language-java">package com.UnSafe;
+
+import java.util.ArrayList;
+
+public class UnSafeList {
+    public static void main(String[] args) {
+        ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; 1000; i++) {
+            new Thread(()-&gt;{
+                //想集合里面加入当前线程的名字
+                list.add(Thread.currentThread().getName());
+            }).start();
+
+
+        }
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(&quot;集合的大小为&quot;+list.size());
+    }
+}
+
+</code></pre>
+<p>出现的问题：</p>
+<p>程在执行的过程 有的进程一起进行的时候同时将内存覆盖掉了  所以就会出现集合的大小填不满的情况 !<img src="//tva4.sinaimg.cn/mw690/007bjbYxly1goo773g8rnj30ee02m0sl.jpg" alt="image-20210315133807600" loading="lazy"><br>
+为了解决这种机制 和避免在计算机中发生这种情况 我们使用了下面的同步机制</p>
+<p>第一个是synchronize</p>
+<p>第二个是Lock锁</p>
+<h2 id="2-synchronize同步">2、synchronize同步</h2>
+<figure data-type="image" tabindex="13"><img src="//tvax4.sinaimg.cn/mw690/007bjbYxly1goo77dfolkj319m0omnat.jpg" alt="image-20210315134716665" loading="lazy"></figure>
+<figure data-type="image" tabindex="14"><img src="//tvax2.sinaimg.cn/mw690/007bjbYxly1goo77lfoqzj310v0jcgys.jpg" alt="image-20210315140002986" loading="lazy"></figure>
+<p><strong>对于上述三种线程不安全的案例解决方案</strong></p>
+<pre><code class="language-java">package com.draco.syn;
+
+/**
+ * 不安全的买票
+ */
+public class UnSafeBuyTicket {
+    public static void main(String[] args) {
+        BuyTicket buyTicket = new BuyTicket();
+
+        new Thread(buyTicket,&quot;小明&quot;).start();
+        new Thread(buyTicket,&quot;小红&quot;).start();
+        new Thread(buyTicket,&quot;黄牛党&quot;).start();
+    }
+}
+
+class BuyTicket implements Runnable{
+    private int ticketNums = 10;
+    boolean flag = true;
+    @Override
+    public void run() {
+        //买票
+        while (flag){
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            buy();
+        }
+    }
+
+    //synchronized，同步方法，锁的是this
+    public synchronized void buy(){
+        if (ticketNums&lt;=0){
+            flag = false;
+            return;
+        }
+
+        System.out.println(Thread.currentThread().getName()+&quot;--&gt;&quot;+ticketNums--);
+    }
+}
+</code></pre>
+<p>解决同一时间取钱的问题</p>
+<pre><code class="language-java">package com.synchronize;
+
+public class SafeBank {
+    public static void main(String[] args) {
+        //创建一个银行卡
+        Account account = new Account(100,&quot;理财基金&quot;);
+
+
+        TakeMoney you = new TakeMoney(account,50,&quot;你&quot;);
+       TakeMoney gilrfriend = new TakeMoney(account,100,&quot;女朋友&quot;);
+        you.start();
+        gilrfriend.start();
+
+
+    }
+}
+//卡
+class Account{
+    int money;//余额
+    String name;//基金的名字
+
+    public Account(int money, String name) {
+        this.money = money;
+        this.name = name;
+    }
+}
+class TakeMoney extends Thread {
+    Account account;
+    int takemoney;//取走的钱
+    int nowmoney;//用户现在持有的钱
+
+    public TakeMoney(Account account, int takemoney, String name) {
+        super(name);
+        this.account = account;
+
+        this.takemoney = takemoney;
+    }
+//    synchronized 默认锁的是this 在run上面锁住并不能和真正的把对象锁住
+    @Override
+    public void run(){
+        //所以我们锁的应当是account 因为是这个对象发生了增删改查
+        // synchronized (TakeMoney.class) 这里将取钱这个类锁住了 也是可以实现的
+        synchronized (account){
+            //判断有没有这么多钱
+            if (account.money-takemoney&lt;0){
+                System.out.println(&quot;您账户的余额不足！,还剩&quot;+account.money);
+                return;
+            }
+            try {
+                //经测试发现 如果这个延时的时间不够长 也会出现锁不住的情况
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            account.money=account.money-takemoney;
+            //手里的钱取到的钱加上本来有的钱
+            nowmoney=nowmoney+takemoney;
+            System.out.println(account.name+&quot;--&gt;&quot;+&quot;账户余额：&quot;+account.money);
+            //Thread.currentThread().getName()=this.getName()=TakeMoney.this.getName()
+            //这个this等等同于TakeMoney类
+            System.out.println(this.getName()+&quot;--&gt;&quot;+&quot;手里钱：&quot;+nowmoney);
+        }
+
+        }
+}
+</code></pre>
+<p><strong>分析问题：</strong></p>
+<p>对比上面的取票案例 单单的只是锁住了run方法并不能实现同步</p>
+<p>这里为什么出现了不同步的情况，是因为创建这个银行账户多线程的方式是继承Thread，也就是通过extend Thread来进行实现的，在main主方法中创建了两个银行账户，这两个账户对象都是独立的，只是共享一个Account对象数据，我们给Run方法加了锁，锁的是当前对象，但这两个银行账户的当前对象是自己 所以锁住了run'放法并不能真正的锁住对象</p>
+<p>线程“you”执行run方法时发现加锁了，便找到加锁对象(you)，发现没有其他线程执行run方法，就持锁执行run方法</p>
+<p>线程“girlfriend”执行run方法时发现加锁了，便找到枷锁对象(girlfriend,不是you)，也发现没有其他线程执行run方法，就持锁执行run方法</p>
+<p><strong>注意</strong></p>
+<p>这里的锁银行而不是锁this  <strong>指的是当前类 也就是银行的class TakeMoney.class</strong></p>
+<p>而synchronized方法 想让锁对象是当前类的class ，要么只能有一个银行的实例对象， 要么ynchronized方法前用static修饰 这样也能保证锁对象是类的class</p>
+<p>而他有两个银行的实例对象  you 和girlfriend 两个实例对象 那么这两个实例对象开启了两条线程，每条线程用的锁对象都是当前实例对象 锁对象不同是无法实现同步的。</p>
+<p>最简单的方法就是 用synchronized代码块 在synchronized(){}， 小括号中放当前类的class，因为一个类是只能有一个class的 所以 能保证锁对象是一样的 而实现同步<br>
+ps:<strong>小括号中只要是一个唯一的就行 对象 class都可以</strong></p>
+<p>其实只要记住下面这三点 任何时候都不会搞错同步方法或同步代码块中的锁对象是什么了<br>
+对于普通同步方法，<strong>锁是当前实例对象。 如果有多个实例 那么锁对象必然不同无法实现同步。</strong><br>
+对于<strong>静态同步方法</strong>，锁是当前类的Class对象。有多个实例 但是锁对象是相同的  可以完成同步。<br>
+对于同步方法块，锁是Synchonized括号里配置的对象。</p>
+<p><strong>对象最好是只有一个的 如当前类的 class 是只有一个的  锁对象相同 也能实现同步</strong>。</p>
+<p>我们应该找出到底是哪个对象在进行真正的增删改查 再进行操作</p>
+<pre><code class="language-java">package com.draco.syn;
+
+import java.util.ArrayList;
+
+/**
+ * 不安全的集合
+ */
+public class UnSafeList {
+    public static void main(String[] args) throws InterruptedException {
+        ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; 10000; i++) {
+            new Thread(()-&gt;{
+                synchronized (list){
+                    list.add(Thread.currentThread().getName());
+                }
+            }).start();
+        }
+
+        Thread.sleep(10);
+
+        System.out.println(&quot;list's size = &quot;+list.size());
+    }
+}
+</code></pre>
+<p><strong>记住：对于synchronized的对象就是我们需要<mark>修改的对象</mark>即可</strong></p>
+<p><strong>对比之前的加锁案例我们可以发现 Lock 锁我们可以很清楚的看到加锁和解锁的位置</strong></p>
+<h1 id="6-锁">6、锁</h1>
+<figure data-type="image" tabindex="15"><img src="//tvax2.sinaimg.cn/mw690/007bjbYxly1goo780lhp4j318b0nj11z.jpg" alt="image-20210315195114285" loading="lazy"></figure>
+<h2 id="synchronized与lock对比"><strong>synchronized与Lock对比</strong></h2>
+<figure data-type="image" tabindex="16"><img src="//tva2.sinaimg.cn/mw690/007bjbYxly1goo787z7gkj31co0n1gty.jpg" alt="image-20210315194059435" loading="lazy"></figure>
+<h2 id="1-死锁">1、死锁</h2>
+<pre><code class="language-java">package com.draco.lock;
+
+public class DeadLock {
+    public static void main(String[] args) {
+        Makeup g1 = new Makeup(0,&quot;小红&quot;);
+        Makeup g2 = new Makeup(1,&quot;小明明&quot;);
+
+        g1.start();
+        g2.start();
+    }
+}
+
+class LipStick{}
+class Mirror{}
+
+class Makeup extends Thread{
+
+    //需要一份资源，用static来保证只有一份资源
+    static LipStick lipStick = new LipStick();
+    static Mirror mirror = new Mirror();
+
+    private int choice;
+    private String girlName;
+
+    public Makeup(int choice,String girlName){
+        this.choice = choice;
+        this.girlName = girlName;
+    }
+
+    @Override
+    public void run() {
+        makeup();
+    }
+
+    private void makeup() {
+        if(choice==0){
+            //不要同时抱一把锁就好了
+            synchronized (lipStick){
+                System.out.println(this.girlName+&quot;获得口红&quot;);
+//                synchronized (mirror){
+//                    System.out.println(this.girlName+&quot;获得镜子&quot;);
+//                }
+            }
+            synchronized (mirror){
+                System.out.println(this.girlName+&quot;获得镜子&quot;);
+            }
+        }else{
+            synchronized (mirror){
+                System.out.println(this.girlName+&quot;获得镜子&quot;);
+//                synchronized (lipStick){
+//                    System.out.println(this.girlName+&quot;获得口红&quot;);
+//                }
+            }
+            synchronized (lipStick){
+                System.out.println(this.girlName+&quot;获得口红&quot;);
+            }
+        }
+    }
+}
+</code></pre>
+<figure data-type="image" tabindex="17"><img src="//tvax4.sinaimg.cn/mw690/007bjbYxly1goo78gb92xj305c02d0rf.jpg" alt="image-20210315201107334" loading="lazy"></figure>
+<p><strong>解决方法：</strong></p>
+<p><strong>不一次性将锁全部获取到 用完就放开</strong></p>
+<figure data-type="image" tabindex="18"><img src="//tva1.sinaimg.cn/mw690/007bjbYxly1goo78mbx1ij30d503e0si.jpg" alt="image-20210315201213576" loading="lazy"></figure>
+<h2 id="2-死锁产生的必要条件">2、死锁产生的必要条件</h2>
+<figure data-type="image" tabindex="19"><img src="//tvax4.sinaimg.cn/mw690/007bjbYxly1goo7a45b4gj30z30fjjyw.jpg" alt="image-20210204214449140" loading="lazy"></figure>
+<h2 id="3-reentrantlock可重入锁">3、ReentrantLock可重入锁</h2>
+<p>对比之前的取票案例</p>
+<pre><code class="language-java">package com.draco.lock;
+
+import java.util.concurrent.locks.ReentrantLock;
+
+public class TestReentrantLock {
+    public static void main(String[] args) {
+        Lock2 lock2 = new Lock2();
+
+        new Thread(lock2).start();
+        new Thread(lock2).start();
+    }
+}
+
+class Lock2 implements Runnable{
+    private int ticketNums = 10;
+	//根据ReentrantLock创建一个对象 再通过调用相关方法 再进行实现
+    private final ReentrantLock reentrantLock = new ReentrantLock();
+
+    @Override
+    public void run() {
+        while (true){
+            try{
+                //加锁
+                reentrantLock.lock();
+                if(ticketNums&lt;=0){
+                    break;
+                }else{
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(ticketNums--);
+                }
+            }
+            finally {
+                //解锁
+                reentrantLock.unlock();
+            }
+
+
+        }
+    }
+}
+</code></pre>
+<p><strong>对比之前的加锁案例我们可以发现 Lock 锁我们可以很清楚的看到加锁和解锁的位置</strong></p>
+<figure data-type="image" tabindex="20"><img src="//tva3.sinaimg.cn/mw690/007bjbYxly1goo7abjwfoj30pe09ydjd.jpg" alt="image-20210204220748282" loading="lazy"></figure>
+<h1 id="7-线程通信">7、线程通信</h1>
+<h2 id="1-管程法">1、管程法</h2>
+<pre><code class="language-java">package com.draco.gaoji;
+
+/**
+ *
+ */
+public class TestPC {
+    public static void main(String[] args) {
+        KeepSpace keepSpace = new KeepSpace();
+
+        new Thread(new Producer(keepSpace)).start();
+        new Thread(new Customer(keepSpace)).start();
+
+    }
+
+}
+
+class Food{
+    int id;
+    public Food(int id) {
+        this.id = id;
+    }
+}
+
+class Producer implements Runnable{
+
+    KeepSpace keepSpace;
+
+    public Producer(KeepSpace keepSpace) {
+        this.keepSpace = keepSpace;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 100; i++) {
+            keepSpace.push(new Food(i));
+            System.out.println(&quot;生产了第&quot;+i+&quot;个食物&quot;);
+        }
+    }
+}
+
+class Customer implements Runnable{
+
+    KeepSpace keepSpace;
+
+    public Customer(KeepSpace keepSpace) {
+        this.keepSpace = keepSpace;
+    }
+
+    @Override
+    public void run() {
+        //消费者消费
+        for (int i = 0; i &lt; 100; i++) {
+            System.out.println(&quot;消费了第&quot;+keepSpace.pop().id+&quot;个食物&quot;);
+        }
+    }
+}
+
+class KeepSpace{
+    //空间大小
+    Food[] foods = new Food[10];
+    //空间计数器
+    int count = 0;
+
+    public synchronized void push(Food food){
+        //空间满了，等待消费者消费
+        if (count==foods.length){
+            //通知消费者消费
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //空间没有满，继续制作
+        foods[count] = food;
+        count++;
+        //有吃的，可以通知消费者消费了
+        this.notifyAll();
+    }
+
+    //消费者消费
+    public synchronized Food pop(){
+        //判断能否消费
+        if (count==0){
+            //等待生产者生产
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        count--;
+        Food food = foods[count];
+        //吃完了，通知生产者生产
+        this.notifyAll();
+        return food;
+    }
+}
+</code></pre>
+<p>具体的思路 ：</p>
+<p>生产者生产的仓库放满了之后就该停止生产并让用户消费 用户消费时即应当提醒生产者进行生产</p>
+<h2 id="2-信号灯法">2、信号灯法</h2>
+<h2 id="3-消费者生产者模式"><strong>3、消费者生产者模式</strong></h2>
+<figure data-type="image" tabindex="21"><img src="//tvax4.sinaimg.cn/mw690/007bjbYxly1goo7avf9m9j31ar0n8wo3.jpg" alt="image-20210315201440570" loading="lazy"></figure>
+<p><strong>分析问题</strong></p>
+<figure data-type="image" tabindex="22"><img src="//tvax3.sinaimg.cn/mw690/007bjbYxly1goo7b13sqqj317r0pwk0m.jpg" alt="image-20210315201451306" loading="lazy"></figure>
+<p><strong>常用方法</strong></p>
+<figure data-type="image" tabindex="23"><img src="//tva3.sinaimg.cn/mw690/007bjbYxly1goo7b64smhj317l0pv7j3.jpg" alt="image-20210315201509636" loading="lazy"></figure>
+<pre><code class="language-java">package com.commun;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
+//测试：生产者消费者模型-&gt;利用缓冲区解决：管程法
+public class TestPC {
+    public static void main(String[] args) {
+        synContioner synContioner = new synContioner();
+        new Thread(new Producer(synContioner)).start();
+        new Thread(new Consumer(synContioner)).start();
+    }
+}
+//生产者
+class Producer implements Runnable{
+    synContioner synContioner;
+
+    public Producer(com.commun.synContioner synContioner) {
+        this.synContioner = synContioner;
+    }
+
+    @Override
+    public void run() {
+        //生产者生产
+        for (int i = 1; i &lt;= 30; i++) {
+            synContioner.push(new Food(i));
+            System.out.println(&quot;生产者生产了第&quot;+i+&quot;个食物&quot;);
+        }
+
+    }
+}
+//消费者
+class Consumer implements Runnable{
+    synContioner synContioner;
+
+    public Consumer(synContioner synContioner) {
+        this.synContioner = synContioner;
+    }
+
+    @Override
+    public void run() {
+        //消费者消费
+        for (int i = 1; i &lt; 30; i++) {
+            System.out.println(&quot;消费者吃了第&quot;+synContioner.pop().id+&quot;个食物&quot;);
+        }
+
+    }
+
+}
+//食品
+class Food{
+    int id;//食品编号
+
+    public Food(int id) {
+        this.id = id;
+    }
+}
+//缓冲区
+class synContioner{
+    //需要一个容器并有一定的大小
+    Food[] foods=new Food[5];
+    //计数器
+    int count=0;
+    // 生产者放入食品
+    public synchronized void push(Food food){
+        //如果容器满了就需要等待消费者消费
+        while (count==foods.length){
+            //生产者就需要等待
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        //如果容器还没与偶满 就要放入食品 将food 放入数组当中
+        foods[count]=food;
+        count++;
+        //然后就得通知消费者了
+        this.notifyAll();
+
+    }
+
+    //消费者消费食品
+    public synchronized Food pop(){
+        //判断能否消费
+        while (count==0){
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        count--;
+        //吃完了再通知生产者
+        Food food=foods[count];
+        this.notifyAll();
+        return food;
+
+        //吃完了，通知生产者生产
+    }
+
+}
+
+
+</code></pre>
+<p><strong>注意</strong></p>
+<p>应该用while，否则当有多个消费者的时候，会出现脏判断的</p>
+<p>if语句中醒来的线程 不会再一次进行判断了 而while会重新再判断</p>
+<h2 id="线程池">线程池</h2>
+<figure data-type="image" tabindex="24"><img src="//tva2.sinaimg.cn/mw690/007bjbYxly1goo7bexypjj318a0qiwpj.jpg" alt="image-20210315210736862" loading="lazy"></figure>
 ]]></content>
     </entry>
 </feed>

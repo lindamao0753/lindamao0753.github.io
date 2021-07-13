@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="keywords" content="Gridea静态个人博客">
+<meta name="description" content="好好学习">
+<meta name="theme-color" content="#212529">
+<title>Docker | Lindamao</title>
+<link rel="shortcut icon" href="/favicon.ico?v=1626144793159">
+<link rel="stylesheet" href="/styles/main.css">
+<link rel="stylesheet" href="/media/css/pisces.css">
+
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+<link href="/media/hljs/styles/idea.css" rel="stylesheet">  
+
+<script src="/media/hljs/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+    <meta name="description" content="Docker" />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div class="head-top-line"></div>
+    <div class="header-box">
+      
+<div class=" pisces">
+  <header class="header bg-color ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>Lindamao</span>
+            </a>  
+          
+        </div>
+        
+          <p class="subtitle">好好学习</p>
+        
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/" target="_self">
+                  <i class="fa fa-home"></i> 首页
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/archives" target="_self">
+                  <i class="fa fa-archive"></i> 归档
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/tags" target="_self">
+                  <i class="fa fa-tags"></i> 标签
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/post/about" target="_self">
+                  <i class="fa fa-user"></i> 关于
+                </a>
+              
+            </li>
+          
+          <li class="nav-item">
+            <a>
+              <i class="fa fa-search"></i> 搜索
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+    </div>
+    <div class="main-continer">
+      
+      <div class="section-layout pisces ">
+        <div class="section-layout-wrapper">
+          
+
+<div class="sidebar">
+  
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+      <div class="sidebar-body pisces" id="sidebar_body">
+        
+          
+            <div style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto" id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+<li><a href="#%E5%89%8D%E6%9C%9F%E5%9F%BA%E7%A1%80">前期基础</a></li>
+<li><a href="#docker%E6%A6%82%E8%BF%B0">Docker概述</a>
+<ul>
+<li><a href="#docker%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%87%BA%E7%8E%B0">Docker为什么会出现</a></li>
+<li><a href="#%E5%AE%B9%E5%99%A8vs%E8%99%9A%E6%8B%9F%E6%9C%BA">容器vs虚拟机</a>
+<ul>
+<li><a href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%8E%9F%E7%90%86%E7%A4%BA%E6%84%8F%E5%9B%BE">虚拟机原理示意图</a></li>
+<li><a href="#%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF%E7%A4%BA%E6%84%8F%E5%9B%BE">容器化技术示意图</a></li>
+<li><a href="#%E4%BA%8C%E8%80%85%E5%AF%B9%E6%AF%94">二者对比</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#docker%E5%AE%89%E8%A3%85">Docker安装</a>
+<ul>
+<li><a href="#docker%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90">Docker的基本组成</a></li>
+<li><a href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87">环境准备</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85xshell">安装xshell</a></li>
+<li><a href="#centos%E5%AE%89%E8%A3%85">Centos安装</a></li>
+<li><a href="#%E5%8D%B8%E8%BD%BD%E6%97%A7%E7%9A%84%E7%89%88%E6%9C%AC">卸载旧的版本</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83">安装基本环境</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E9%95%9C%E5%83%8F%E7%9A%84%E4%BB%93%E5%BA%93">设置镜像的仓库</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85docker%E5%BC%95%E6%93%8E">安装docker引擎</a></li>
+<li><a href="#%E5%90%AF%E5%8A%A8docker">启动Docker</a></li>
+<li><a href="#run%E7%9A%84%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B%E5%9B%BE">run的运行流程图</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E4%B8%8B%E8%BD%BD%E7%9A%84%E9%95%9C%E5%83%8F">查看下载的镜像</a></li>
+<li><a href="#%E5%8D%B8%E8%BD%BDdocker">卸载Docker</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86">基本工作原理</a></li>
+<li><a href="#docker%E5%91%BD%E4%BB%A4">Docker命令</a>
+<ul>
+<li><a href="#%E5%B8%AE%E5%8A%A9%E5%91%BD%E4%BB%A4">帮助命令</a></li>
+<li><a href="#%E9%95%9C%E5%83%8F%E5%91%BD%E4%BB%A4">镜像命令</a>
+<ul>
+<li><a href="#docker-images">docker images</a></li>
+<li><a href="#docker-search">docker search</a></li>
+<li><a href="#docker-pull">docker pull</a></li>
+<li><a href="#docker-rmi">docker rmi</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%B9%E5%99%A8%E5%91%BD%E4%BB%A4">容器命令</a>
+<ul>
+<li><a href="#%E6%96%B0%E5%BB%BA%E5%AE%B9%E5%99%A8%E5%B9%B6%E5%90%AF%E5%8A%A8">新建容器并启动</a></li>
+<li><a href="#%E8%BF%9B%E5%85%A5%E9%80%80%E5%87%BA%E5%AE%B9%E5%99%A8">进入退出容器</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E8%BF%90%E8%A1%8C%E7%9A%84%E5%AE%B9%E5%99%A8">查看运行的容器</a></li>
+<li><a href="#%E9%80%80%E5%87%BA%E5%AE%B9%E5%99%A8">退出容器</a></li>
+<li><a href="#%E5%88%A0%E9%99%A4%E5%AE%B9%E5%99%A8">删除容器</a></li>
+<li><a href="#%E5%90%AF%E5%8A%A8%E5%92%8C%E5%81%9C%E6%AD%A2%E5%AE%B9%E5%99%A8%E7%9A%84%E6%93%8D%E4%BD%9C">启动和停止容器的操作</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B8%B8%E7%94%A8%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4">常用其他命令</a>
+<ul>
+<li><a href="#%E5%90%8E%E5%8F%B0%E5%90%AF%E5%8A%A8docker">后台启动docker</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97">查看日志</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE">查看容器的元数据</a></li>
+<li><a href="#%E8%BF%9B%E5%85%A5%E5%BD%93%E5%89%8D%E6%AD%A3%E5%9C%A8%E8%BF%90%E8%A1%8C%E7%9A%84%E5%AE%B9%E5%99%A8">进入当前正在运行的容器</a></li>
+<li><a href="#%E4%BB%8E%E5%AE%B9%E5%99%A8%E5%86%85%E6%8B%B7%E8%B4%9D%E6%96%87%E4%BB%B6%E5%88%B0%E4%B8%BB%E6%9C%BA%E4%B8%8A">从容器内拷贝文件到主机上</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%86%85%E5%AE%B9%E5%8D%A0%E7%94%A8">查看内容占用</a></li>
+<li><a href="#%E5%B0%8F%E7%BB%93">小结</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B8%B8%E7%94%A8%E5%AE%B9%E5%99%A8%E5%91%BD%E4%BB%A4%E7%9A%84%E6%80%BB%E7%BB%93">常用容器命令的总结</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%AF%E8%A7%86%E5%8C%96">可视化</a>
+<ul>
+<li><a href="#portainer">portainer</a></li>
+</ul>
+</li>
+<li><a href="#docker%E9%83%A8%E7%BD%B2nginx">Docker部署nginx</a></li>
+<li><a href="#docker-%E9%83%A8%E7%BD%B2tomcat">Docker 部署tomcat</a></li>
+<li><a href="#%E9%83%A8%E7%BD%B2eskibana">部署es+kibana</a>
+<ul>
+<li><a href="#%E6%80%9D%E8%80%83%E7%94%A8kibana%E9%93%BE%E6%8E%A5elasticsearch">思考：用kibana链接elasticsearch</a></li>
+</ul>
+</li>
+<li><a href="#docker%E9%95%9C%E5%83%8F">Docker镜像</a>
+<ul>
+<li><a href="#%E5%8E%9F%E7%90%86">原理</a></li>
+<li><a href="#commit%E6%8F%90%E4%BA%A4%E9%95%9C%E5%83%8F">commit提交镜像</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%B9%E5%99%A8%E6%95%B0%E6%8D%AE%E5%8D%B7">容器数据卷</a>
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AE%B9%E5%99%A8%E5%8D%B7">什么是容器卷</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E5%8D%B7">使用数据卷</a></li>
+<li><a href="#%E8%BF%9E%E6%8E%A5mysql">连接mysql</a></li>
+<li><a href="#%E9%80%9A%E8%BF%87%E5%AE%B9%E5%99%A8%E8%BF%9E%E6%8E%A5mysql">通过容器连接mysql</a></li>
+<li><a href="#%E5%85%B7%E5%90%8D%E5%92%8C%E5%8C%BF%E5%90%8D%E6%8C%82%E8%BD%BD">具名和匿名挂载</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F">创建文件创建镜像</a></li>
+<li><a href="#%E5%A4%9A%E4%B8%AA%E5%AE%B9%E5%99%A8%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB">多个容器数据共享</a></li>
+</ul>
+</li>
+<li><a href="#dockerfile">DockerFile</a>
+<ul>
+<li><a href="#%E5%AE%98%E6%96%B9dockerfile%E7%A4%BA%E4%BE%8B">官方DockerFile示例</a></li>
+<li><a href="#dockerfile%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">DockerFile基础知识</a></li>
+<li><a href="#dockerfile%E5%91%BD%E4%BB%A4">DockerFile命令</a></li>
+<li><a href="#%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84centos">构建自己的centos</a></li>
+<li><a href="#cmd%E4%B8%8Eentrypoint%E7%9A%84%E5%8C%BA%E5%88%AB">CMD与ENTRYPOINT的区别</a></li>
+<li><a href="#%E5%AE%9E%E6%88%98tomcat%E9%95%9C%E5%83%8F">实战Tomcat镜像</a></li>
+<li><a href="#%E5%B0%8F%E7%BB%93-2">小结</a></li>
+</ul>
+</li>
+<li><a href="#docker-%E7%BD%91%E7%BB%9C">Docker 网络</a>
+<ul>
+<li><a href="#%E7%90%86%E8%A7%A3docker0">理解docker0</a></li>
+<li><a href="#link">link</a></li>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BD%91%E7%BB%9C">自定义网络</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F">网络模式</a>
+<ul>
+<li><a href="#host%E6%A8%A1%E5%BC%8F">host模式</a></li>
+<li><a href="#container%E6%A8%A1%E5%BC%8F">container模式</a></li>
+<li><a href="#none%E6%A8%A1%E5%BC%8F">none模式</a></li>
+<li><a href="#bridge%E6%A8%A1%E5%BC%8F">bridge模式</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E8%BF%9E%E9%80%9A">网络连通</a></li>
+<li><a href="#%E9%83%A8%E7%BD%B2redis%E9%9B%86%E7%BE%A4">部署Redis集群</a></li>
+</ul>
+</li>
+<li><a href="#docker-%E9%83%A8%E7%BD%B2springboot">Docker 部署springboot</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1; 
+let active = 'active-show', activeClass = 'active-current';
+let tocWrapper = document.querySelector('#toc_wrapper');
+let tocContent = tocWrapper.children[0];
+let autoNumber = tocWrapper&&tocWrapper.classList.contains('auto-number');
+
+function addTocNumber(elem, deep) {
+  if (!elem) {
+    return;
+  }
+  let prop = elem.__proto__;
+
+  if (prop === HTMLUListElement.prototype) {
+    for (let i = 0; i < elem.children.length; i++) {
+      addTocNumber(elem.children[i], deep + (i + 1) + '.');
+    }
+  } else if (prop === HTMLLIElement.prototype) {
+    // 保存li元素
+    if (elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+      lList.push(elem);
+    }
+    for (let i = 0; i < elem.children.length; i++) {
+      let cur = elem.children[i];
+      if (cur.__proto__ === HTMLAnchorElement.prototype) {
+        if (autoNumber) {
+          cur.text =  deep + ' ' + cur.text;
+        }
+      } else if (cur.__proto__ === HTMLUListElement.prototype) {
+        addTocNumber(cur, deep);
+      }
+    }
+  }
+}
+
+function removeParentActiveClass() {
+  let parents = tocContent.querySelectorAll('.'+active)
+  parents.forEach(function(elem) {
+    elem.classList.remove(active);
+  });
+}
+
+function addActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.add(activeClass);
+  }
+}
+
+function removeActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.remove(activeClass);
+  }
+}
+
+function addActiveLiElemment(elem, parent) {
+  if (!elem || elem === parent) {
+    return;
+  } else {
+    if (elem.__proto__ === HTMLLIElement.prototype) {
+      elem.classList.add(active);
+    }
+    addActiveLiElemment(elem.parentElement, parent);
+  }
+}
+
+function showToc() {
+  if (tocWrapper) {
+    postBody = document.querySelector('#post_body');
+    for (let i = 0; i < postBody.children.length; i++) {
+      if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+        hList.push(postBody.children[i]);
+      }
+    }
+    if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+    } else if (tocWrapper.classList.contains('no_compress')){
+      tocContent.classList.add('expanded');
+    } else {
+      if (hList.length > 10) {
+        active = 'active-hidden'
+        tocContent.classList.add('closed');
+      } else {
+        tocContent.classList.add('expanded');
+      }
+    }
+  }
+}
+
+(function() {
+  // 处理不是从#一级标题开始目录
+  if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+    let con = tocContent.children[0].children[0];
+    tocContent.innerHTML = con.innerHTML;
+  }
+  addTocNumber(tocContent, '');
+})();
+
+document.addEventListener('scroll', function(e) {
+  if (lList.length <= 0) {
+    return;
+  }
+  let scrollTop = document.scrollingElement.scrollTop + 10;
+  let dir;
+
+  if (lastTop - scrollTop > 0) {
+    dir = 'up';
+  } else {
+    dir = 'down';
+  }
+
+  lastTop = scrollTop;
+  if (scrollTop <= 0) {
+    if (lastIndex >= 0 && lastIndex < hList.length) {
+      lList[lastIndex].classList.remove(activeClass);
+    }
+    return;
+  }
+
+  let current = 0, hasFind = false;
+  for (let i = 0; i < hList.length; i++) {
+    if (hList[i].offsetTop > scrollTop) {
+      current = i;
+      hasFind = true;
+      break;
+    }
+  }
+  if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+    current = hList.length - 1;
+  } else {
+    current--;
+  }
+  if (dir === 'down') {
+    if (current > lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex) 
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  } else {
+    if (current < lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex);
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  }
+});
+
+window.addEventListener('load', function() {
+  showToc();
+  document.querySelector('#sidebar').style='display: block;';
+  tocWrapper.classList.add('toc-active');
+  setTimeout(function() {
+    if ("createEvent" in document) {
+      let evt = document.createEvent("HTMLEvents");
+      evt.initEvent("scroll", false, true);
+      document.dispatchEvent(evt);
+    }
+    else {
+      document.fireEvent("scroll");
+    }
+  }, 500)
+})
+
+</script>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc && postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  if (sidebarBody) {
+    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+      let hasFix = false;
+      let scrollEl = document.querySelector('.main-continer');
+      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+      window.addEventListener('scroll', function(e) {
+        if (document.scrollingElement.scrollTop >= limitTop) {
+          if (!hasFix) {
+            sidebar.classList.add('sidebar-fixed');
+            hasFix = true;
+          }
+        } else {
+          if (hasFix) {
+            sidebar.classList.remove('sidebar-fixed');
+            hasFix = false;
+          }
+        }
+      });
+    }
+  }
+  
+</script>
+          <div class="section-box box-shadow-wrapper">
+            <div class="section bg-color post post-page">
+              <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://lindamao0753.github.io/post/docker/">
+      Docker
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span>发布于</span>
+      <span>2021-07-13</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>53分钟</span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>12033<span class="pc-show">字数</span></span>
+    </span>
+    
+      
+      
+        
+      
+      <span id="/post/docker/" data-flag-title="Docker" class="meta-item pc-show leancloud_visitors">
+        <span class="post-meta-divider">|</span>
+        <i class="fa fa-eye"></i>
+        <span>浏览量：<span class="leancloud-visitors-count" ></span></span>
+      </span>
+    
+  </div>
+</header>
+              <div class="post-body next-md-body" id="post_body">
+                <p>​</p>
+<h2 id="参考资料">参考资料</h2>
+<p>仓库地址：https://hub.docker.com/</p>
+<h2 id="前期基础">前期基础</h2>
+<p><strong>linux基本命令</strong></p>
+<h2 id="docker概述">Docker概述</h2>
+<h3 id="docker为什么会出现">Docker为什么会出现</h3>
+<p><strong>一款产品，开发和上线两套环境，应用环境配置费时费力，而且容易出问题</strong></p>
+<p>尤其对于机器学习和深度学习的库更是如此，很可能存在版本问题、底层依赖冲突问题</p>
+<p>所以发布项目时，不只是一套代码过去，而是代码+环境整体打包过去</p>
+<p>所谓开发即运维，保证系统稳定性，提高部署效率</p>
+<p>使用Docker后的流程：</p>
+<p>开发：建立模型--环境--打包带上环境，即镜像--放到Docker仓库</p>
+<p>部署：下载Docker中的镜像，直接运行即可</p>
+<p>Docker的思想来自于集装箱，集装箱，对环境进行隔离</p>
+<p>Docker通过隔离机制，可以将服务器利用到极致。</p>
+<h3 id="容器vs虚拟机">容器vs虚拟机</h3>
+<p>在容器技术出来之前，用的是虚拟机技术</p>
+<h4 id="虚拟机原理示意图">虚拟机原理示意图</h4>
+<figure data-type="image" tabindex="1"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf3tfkkhgj30nt0hv0tm.jpg" alt="image-20200606205436434" loading="lazy"></figure>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>资源占用多</li>
+<li>冗余步骤多</li>
+<li>启动很慢</li>
+</ol>
+<h4 id="容器化技术示意图">容器化技术示意图</h4>
+<p>不是模拟的完整的操作系统</p>
+<figure data-type="image" tabindex="2"><img src="E:/note/gridea/Docker.assets/image-20200606205739655.png" alt="image-20200606205739655" loading="lazy"></figure>
+<h4 id="二者对比">二者对比</h4>
+<p>比较虚拟机和Docker的不同</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>传统虚拟机</th>
+<th>Docker</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>虚拟内容</td>
+<td>硬件+完整的操作系统+软件</td>
+<td>APP+LIB</td>
+</tr>
+<tr>
+<td>大小</td>
+<td>笨重，通常几个G</td>
+<td>轻便几个M或KB</td>
+</tr>
+<tr>
+<td>启动速度</td>
+<td>慢，分钟级</td>
+<td>快，秒级</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="docker安装">Docker安装</h2>
+<h3 id="docker的基本组成">Docker的基本组成</h3>
+<figure data-type="image" tabindex="3"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf3u58gnwj30uh0gmwlj.jpg" alt="image-20200606212250845" loading="lazy"></figure>
+<p>明确几个概念：</p>
+<ol>
+<li>
+<p>镜像(image)：docker镜像好比一个模板，可以通过这个模板来创建容器(container)，一个镜像可以创建多个容器，类似Python中的Class</p>
+</li>
+<li>
+<p>容器(container)：类似Python中通过Class创建的实例，Object；容器可以理解为一个简易的系统</p>
+</li>
+<li>
+<p>仓库(repository)：存放镜像的地方，</p>
+<p>分为共有仓库和私有仓库</p>
+<ul>
+<li>
+<p>Docker Hub：国外的</p>
+</li>
+<li>
+<p>阿里云：配置镜像加速</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="环境准备">环境准备</h3>
+<p>我们要有一台服务器，并且可以操作它</p>
+<ol>
+<li>Linux命令基础，购买服务器</li>
+<li>CentOS 7或者以上版本</li>
+<li>使用Xshell链接远程服务器</li>
+</ol>
+<h3 id="安装xshell">安装xshell</h3>
+<p>下载CentOS7 https://www.jianshu.com/p/a63f47e096e8</p>
+<p>VMware配置虚拟机 https://blog.csdn.net/babyxue/article/details/80970526</p>
+<p>xshell链接服务器 https://blog.csdn.net/zzy1078689276/article/details/77280814</p>
+<p><strong>uname -r</strong> 查看当前的系统内核</p>
+<p><strong>cat / etc/os-release</strong> 查看当前版本</p>
+<h3 id="centos安装">Centos安装</h3>
+<p>https://docs.docker.com/engine/install/centos/</p>
+<h3 id="卸载旧的版本">卸载旧的版本</h3>
+<pre><code># 卸载旧的版本
+$ sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine
+
+</code></pre>
+<h3 id="安装基本环境">安装基本环境</h3>
+<pre><code># 安装基本的安装包
+$ sudo yum install -y yum-utils
+</code></pre>
+<h3 id="设置镜像的仓库">设置镜像的仓库</h3>
+<p>注意：</p>
+<p><strong>这个步骤可选可不选</strong></p>
+<p>设置镜像加速</p>
+<p>用国内镜像，百度搜索，docker的阿里云镜像地址</p>
+<pre><code class="language-bash"># 不要用官网默认这个！
+$ sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo # 默认是国外的
+
+# 换成下面的
+
+$ sudo yum-config-manager \
+    --add-repo \
+    https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo # 阿里云镜像
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf3ugr2pgj30vr071jru.jpg" alt="image-20200616145430166" loading="lazy"></figure>
+<p>直接复制粘贴就OK了</p>
+<p>更像软件包索引</p>
+<pre><code class="language-bash">yum makecache fast
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf3uos8l1j30v50d2759.jpg" alt="image-20200616150014082" loading="lazy"></figure>
+<p><strong>没有问题的话就是可以用的</strong></p>
+<h3 id="安装docker引擎">安装docker引擎</h3>
+<pre><code class="language-python">yum install docker-ce docker-ce-cli containerd.io # docker-ce 社区版 ee 企业版
+</code></pre>
+<p>注意这里会有几个个y/n的判断 选择y到complete</p>
+<h3 id="启动docker">启动Docker</h3>
+<pre><code>systemctl start docker # 代表启动成功
+</code></pre>
+<pre><code>docker version #查看docker的版本
+</code></pre>
+<pre><code class="language-bash">Client: Docker Engine - Community
+ Version:           19.03.11
+ API version:       1.40
+ Go version:        go1.13.10
+ Git commit:        42e35e61f3
+ Built:             Mon Jun  1 09:13:48 2020
+ OS/Arch:           linux/amd64
+ Experimental:      false
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          19.03.11
+  API version:      1.40 (minimum version 1.12)
+  Go version:       go1.13.10
+  Git commit:       42e35e61f3
+  Built:            Mon Jun  1 09:12:26 2020
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.2.13
+  GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429
+ runc:
+  Version:          1.0.0-rc10
+  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd
+ docker-init:
+  Version:          0.18.0
+  GitCommit:        fec3683
+
+</code></pre>
+<pre><code class="language-bash">docker run hello-world #run docker
+</code></pre>
+<figure data-type="image" tabindex="6"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf3uwq2yfj31ed0jxwgn.jpg" alt="image-20200616151641013" loading="lazy"></figure>
+<p>中间一堆是签名信息</p>
+<h3 id="run的运行流程图">run的运行流程图</h3>
+<figure data-type="image" tabindex="7"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf3v3hk5sj30n60fm406.jpg" alt="image-20200616161441669" loading="lazy"></figure>
+<p>其流程类似于maven 简单的总结来说是在本地找到对应的镜像并运行 如果在本地没有找到的话会选择去远程仓库当中寻找</p>
+<h3 id="查看下载的镜像">查看下载的镜像</h3>
+<pre><code class="language-bash">docker images
+</code></pre>
+<h3 id="卸载docker">卸载Docker</h3>
+<pre><code class="language-bash"># 卸载依赖yum remove docker-ce docker-ce-cli containerd.io# 删除资源rm -rf /var/lib/docker # docker 的默认工作路径
+</code></pre>
+<h2 id="基本工作原理">基本工作原理</h2>
+<p>工作原理：</p>
+<p>Docker是一个<strong>Client-Server</strong>结构的系统，Docker的守护进程在主机上。通过Socket从客户端访问！</p>
+<p>DockerServer接受到Docker-Client的指令，</p>
+<figure data-type="image" tabindex="8"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf3vb955wj30mq0bggmg.jpg" alt="image-20200616162107363" loading="lazy"></figure>
+<p><strong>Docker为什么比VM快？</strong></p>
+<ol>
+<li>Docker有着比虚拟机更少的<strong>抽象层</strong></li>
+<li>docker主要用的是<strong>宿主机的内核</strong>，vm需要Guest OS<br>
+<img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf3vi81zsj30i708uwgz.jpg" alt="image-20200616162302653" loading="lazy"></li>
+</ol>
+<p>总结：新建一个容器的时候，docker不需要像虚拟机一样再重新加载一个操作系统内核，避免引导</p>
+<h2 id="docker命令">Docker命令</h2>
+<h3 id="帮助命令">帮助命令</h3>
+<pre><code class="language-bash">docker version # 显示docker的版本基本信息docker info # 系统信息 更加详细的信息 看到服务器容器和镜像当中docker 命令 --help # 全部信息
+</code></pre>
+<p><a href="https://docs.docker.com/reference/">官网文档</a></p>
+<h3 id="镜像命令">镜像命令</h3>
+<h4 id="docker-images">docker images</h4>
+<p>查看所有本地主机上的镜像</p>
+<pre><code class="language-bash"># docker images
+</code></pre>
+<figure data-type="image" tabindex="9"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf3vqnh9sj310604fmx8.jpg" alt="image-20200616172056530" loading="lazy"></figure>
+<pre><code class="language-bash"># 解释REPOSITORY  # 镜像仓库源TAG                 # 镜像的标签IMAGE ID           # 镜像的IDCREATED           # 镜像的创建时间SIZE              # 镜像的大小--all , -a		Show all images (default hides intermediate images) # 显示所有的镜像--digests		Show digests--filter , -f		Filter output based on conditions provided--format		Pretty-print images using a Go template--no-trunc		Don’t truncate output--quiet , -q		Only show numeric IDs # 只显示镜像的id
+</code></pre>
+<h4 id="docker-search">docker search</h4>
+<p>利用命令来搜索仓库中的镜像，相当于网页搜索</p>
+<p><a href="http://hub.docker.com">网页搜索</a></p>
+<p>搜索mysql</p>
+<pre><code class="language-bash">docker search mysql
+</code></pre>
+<figure data-type="image" tabindex="10"><img src="//tvax3.sinaimg.cn/large/007bjbYxly1gsf3vxwmduj312t0g9aba.jpg" alt="image-20200616173308194" loading="lazy"></figure>
+<pre><code>docker search --help
+</code></pre>
+<figure data-type="image" tabindex="11"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf3w4pmzhj314e0au752.jpg" alt="image-20200616173740981" loading="lazy"></figure>
+<pre><code class="language-bash"># 解释Options:  -f, --filter filter   Filter output based on conditions provided      --format string   Pretty-print search using a Go template      --limit int       Max number of search results (default 25)      --no-trunc        Don't truncate output
+</code></pre>
+<pre><code class="language-bash">docker search mysql --filter=STARS=3000 # 过滤搜索出Stars大于3000的 starts为搜藏
+</code></pre>
+<figure data-type="image" tabindex="12"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf3wanhzdj311x06ljrq.jpg" alt="image-20200616174440284" loading="lazy"></figure>
+<h4 id="docker-pull">docker pull</h4>
+<p><strong>下载镜像</strong></p>
+<p>不指定版本</p>
+<pre><code class="language-bash">docker pull mysql # 下载mysql镜像，default tag，默认最新版latest
+</code></pre>
+<pre><code class="language-bash">[root@192 ~]# sudo systemctl daemon-reload[root@192 ~]# sudo systemctl restart docker[root@192 ~]# docker pull mysqlUsing default tag: latest # 不写tag默认最新版latest: Pulling from library/mysql8559a31e96f4: Pull complete  # layer 分层下载，docker image的核心 联合文件系统 类似于分片多线程下载d51ce1c2e575: Pull complete c2344adc4858: Pull complete fcf3ceff18fc: Pull complete 16da0c38dc5b: Pull complete b905d1797e97: Pull complete 4b50d1c6b05c: Pull complete c75914a65ca2: Pull complete 1ae8042bdd09: Pull complete 453ac13c00a3: Pull complete 9e680cd72f08: Pull complete a6b5dc864b6c: Pull complete Digest: sha256:8b7b328a7ff6de46ef96bcf83af048cb00a1c86282bfca0cb119c84568b4caf6#签名 防伪标志Status: Downloaded newer image for mysql:latestdocker.io/library/mysql:latest # 真实地址# docker pull mysql #下载最新的版本# 等价于docker pull docker.io/library/mysql:latest
+</code></pre>
+<p>指定版本下载</p>
+<pre><code class="language-bash">docker pull mysql:5.7
+</code></pre>
+<p>注意！版本要对应上官方的版本https://h ub.docker.com/_/mysql</p>
+<figure data-type="image" tabindex="13"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf3whjlg5j30y50omq4y.jpg" alt="image-20200617094339687" loading="lazy"></figure>
+<figure data-type="image" tabindex="14"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf3wnhwg1j310m0fz40f.jpg" alt="image-20200617100948088" loading="lazy"></figure>
+<pre><code>docker images
+</code></pre>
+<p>此时查看镜像，可以看到新下载的两个<br>
+<img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf3wu1egwj30zd086dg6.jpg" alt="image-20200617101105899" loading="lazy"></p>
+<h4 id="docker-rmi">docker rmi</h4>
+<p>remove images 删除镜像</p>
+<p>注意有i  和删除容器不一样</p>
+<pre><code class="language-bash"># 删除一个 可以通过名称 也可以指定id -f表示删除所有docker rmi -f 9cfcce23593a# 删除多个 用空格分隔iddocker rmi -f id id id# 删除所有 docker rmi -f $(docker images -aq) # images -aq就是查所有镜像id，从而递归删除 通过$符号来进行条件筛选![image-20200617102049613](E:/note/gridea/Docker.assets/image-20200617102049613.png)
+</code></pre>
+<h3 id="容器命令">容器命令</h3>
+<p>说明：有了镜像才能创建容器，linux，下载一个centos镜像来测试学习</p>
+<pre><code class="language-bash">docker pull centos #下载centos镜像 	
+</code></pre>
+<figure data-type="image" tabindex="15"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf3x18dwoj310t09yjry.jpg" alt="image-20200617103406974" loading="lazy"></figure>
+<h4 id="新建容器并启动">新建容器并启动</h4>
+<pre><code class="language-shell">docker run [可选参数] image# 参数说明--name=“Name” # 容器名字，用于区分容器-d 后台方式运行-it 使用交互方式运行,进入容器进行操作-p 指定容器的端口 如-p 8080::8080	-p ip:主机端口：容器端口	-p 主机端口:容器端口	-p 容器端口	-p 随机指定端口
+</code></pre>
+<h4 id="进入退出容器">进入退出容器</h4>
+<pre><code class="language-bash"># 进入选择的容器docker run -it centos /bin/bash # 查看目录 这里的目录是根据当前的同期目录来查看的ls# 退出容器并关闭exit#退出容器不关闭ctrl+p+q #注意此时不能再用docker run -it centos /bin/bash 命令 并exit 这个方式会再次创建一个新的容器#用docker attach 选择进入的容器 再exit#docker exec -it 容器ID /bin/bash   根据ID重新进入容器交互
+</code></pre>
+<figure data-type="image" tabindex="16"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gsf3xd7pjlj310i09ut95.jpg" alt="image-20200617104004004" loading="lazy"></figure>
+<p>注意这里面主机名发生了变化 这里面就是一个容器</p>
+<p><strong>只能用socket独立一个docker！</strong></p>
+<h4 id="查看运行的容器">查看运行的容器</h4>
+<pre><code class="language-bash"># 查看正在运行的容器docker ps# 列出当前正在运行的容器+历史运行的容器 status 后面可以看到当前的状态docker ps -a# 显示最近创建的容器，n为显示的个数 docker ps -a - n=? # 只显示容器的编号docker ps -aq
+</code></pre>
+<h4 id="退出容器">退出容器</h4>
+<pre><code class="language-shell"># 容器停止退出exit
+# 容器不停止退出 注意必须在英文输入法下，中文输入法不行Ctrl + P + Q
+</code></pre>
+<h4 id="删除容器">删除容器</h4>
+<pre><code class="language-shell"># 删除指定容器 不能删除正在运行的容器，如果强制删除 rm -f
+docker rm 容器id
+# 删除所有容器 
+docker rm -f $(docker ps -aq)
+# 删除所有容器
+docker ps -a -q|xargs docker rm
+</code></pre>
+<pre><code class="language-shell"># docker ps -a 列出历史正在运行的容器
+</code></pre>
+<pre><code class="language-shell"># docker ps -aq # 所有容器id
+# docker rm -f $(docker ps -aq) # 全部删除
+</code></pre>
+<h4 id="启动和停止容器的操作">启动和停止容器的操作</h4>
+<pre><code class="language-shell">docker start #启动容器
+docker restart #重启容器
+docker stop #停止容器
+docker kill #强制停止容器
+</code></pre>
+<pre><code class="language-shell"># docker run -it centos /bin/bash 通过交互的方式进入容器并执行终端
+</code></pre>
+<h3 id="常用其他命令">常用其他命令</h3>
+<h4 id="后台启动docker">后台启动docker</h4>
+<pre><code class="language-shell">docker run -d #以后台运行的方式进入容器# 注意后台运行的方式，docker发现前台没有，容器启动后，发现自己没有提供服务，会立刻停止
+</code></pre>
+<h4 id="查看日志">查看日志</h4>
+<p>参数-t 日志加时间， -f 保留打印窗口，持续打印，--tail 10 显示最后的10行</p>
+<pre><code class="language-shell">docker logs -f -t #查看全部的日志信息docker logs -f -t --tail #n条数 
+</code></pre>
+<p>这里看到容器当中没有信息因此就日志信息就没有</p>
+<pre><code class="language-shell"># docker logs --helpUsage:	docker logs [OPTIONS] CONTAINERFetch the logs of a containerOptions:      --details        Show extra details provided to logs  -f, --follow         Follow log output      --since string   Show logs since timestamp (e.g.                       2013-01-02T13:23:37) or relative                       (e.g. 42m for 42 minutes)      --tail string    Number of lines to show from the                       end of the logs (default &quot;all&quot;)  -t, --timestamps     Show timestamps # 时间戳      --until string   Show logs before a timestamp (e.g.                       2013-01-02T13:23:37) or relative                       (e.g. 42m for 42 minutes)
+</code></pre>
+<p>现在重新运行一个容器并带上脚本信息</p>
+<p>shell脚本</p>
+<pre><code class="language-shell">whiel true;do echo shenzai;sleep 
+</code></pre>
+<p>测试</p>
+<pre><code class="language-shell"># 运行一个centos的容器# docker run -it centos /bin/bash# docker psCONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMESc2887d35c71d        centos              &quot;/bin/bash&quot;         57 seconds ago      Up 56 seconds                           vigorous_kare# 查看日志，由于没有运行脚本，所以啥也没显示# docker logs -f -t --tail 10 c2887d35c71d^C # ctrl+c退出# 运行centos里面加个脚本[root@VM-0-11-centos /]# docker run -d centos /bin/sh -c &quot;while true;do echo lindamao;sleep 1;done&quot;a71f9fda807798d22179b84ed12848c2b59ae4670dbd91213296407bc029ed7f[root@VM-0-11-centos /]# docker psCONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS         PORTS     NAMESa71f9fda8077   centos    &quot;/bin/sh -c 'while t…&quot;   5 seconds ago    Up 5 seconds             exciting_eulerf2ba05d91d4e   centos    &quot;/bin/bash&quot;              57 minutes ago   Up 8 minutes             friendly_pike[root@VM-0-11-centos /]# docker logs -f -t a71f9fda8077 2021-07-02T03:13:52.497339807Z lindamao2021-07-02T03:13:53.509531916Z lindamao2021-07-02T03:13:54.511461202Z lindamao2021-07-02T03:13:55.513978964Z lindamao2021-07-02T03:13:56.515265169Z lindamao2021-07-02T03:13:57.517215075Z lindamao
+</code></pre>
+<p>查看容器中进程消息</p>
+<pre><code class="language-bash">docker ps 容器id
+</code></pre>
+<p>uuid 用户id</p>
+<p>pid 进程id</p>
+<p>ppid 进程父id</p>
+<h4 id="查看容器的元数据">查看容器的元数据</h4>
+<pre><code class="language-shell"># docker inspect cb6d7fbc3f27
+[
+    {
+        # 容器的完整id
+        &quot;Id&quot;: &quot;cb6d7fbc3f27a064137d58282de97b97365dea2705211ebfbad642079cc1b388&quot;,
+        
+        # 创建时间
+        &quot;Created&quot;: &quot;2020-06-17T12:00:50.706906186Z&quot;,
+        
+        # 脚本位置
+        &quot;Path&quot;: &quot;/bin/sh&quot;,
+        
+        # 运行的脚本
+        &quot;Args&quot;: [
+            &quot;-c&quot;,
+            &quot;while true;do echo shenzai;sleep 1;done&quot;
+        ],
+        &quot;State&quot;: {
+            &quot;Status&quot;: &quot;running&quot;, # 状态，正在运行
+            &quot;Running&quot;: true,
+            &quot;Paused&quot;: false,
+            &quot;Restarting&quot;: false,
+            &quot;OOMKilled&quot;: false,
+            &quot;Dead&quot;: false,
+            &quot;Pid&quot;: 1909, # 父进程id
+            &quot;ExitCode&quot;: 0,
+            &quot;Error&quot;: &quot;&quot;,
+            &quot;StartedAt&quot;: &quot;2020-06-17T12:00:51.093617477Z&quot;,
+            &quot;FinishedAt&quot;: &quot;0001-01-01T00:00:00Z&quot;
+        },
+        
+        # 来源镜像
+        &quot;Image&quot;: &quot;sha256:831691599b88ad6cc2a4abbd0e89661a121aff14cfa289ad840fd3946f274f1f&quot;,
+        &quot;ResolvConfPath&quot;: &quot;/var/lib/docker/containers/cb6d7fbc3f27a064137d58282de97b97365dea2705211ebfbad642079cc1b388/resolv.conf&quot;,
+        &quot;HostnamePath&quot;: &quot;/var/lib/docker/containers/cb6d7fbc3f27a064137d58282de97b97365dea2705211ebfbad642079cc1b388/hostname&quot;,
+        &quot;HostsPath&quot;: &quot;/var/lib/docker/containers/cb6d7fbc3f27a064137d58282de97b97365dea2705211ebfbad642079cc1b388/hosts&quot;,
+        &quot;LogPath&quot;: &quot;/var/lib/docker/containers/cb6d7fbc3f27a064137d58282de97b97365dea2705211ebfbad642079cc1b388/cb6d7fbc3f27a064137d58282de97b97365dea2705211ebfbad642079cc1b388-json.log&quot;,
+        
+        
+        &quot;Name&quot;: &quot;/dreamy_almeida&quot;,
+        &quot;RestartCount&quot;: 0,
+        &quot;Driver&quot;: &quot;overlay2&quot;,
+        &quot;Platform&quot;: &quot;linux&quot;,
+        &quot;MountLabel&quot;: &quot;&quot;,
+        &quot;ProcessLabel&quot;: &quot;&quot;,
+        &quot;AppArmorProfile&quot;: &quot;&quot;,
+        &quot;ExecIDs&quot;: null,
+        
+        # 主机配置
+        &quot;HostConfig&quot;: {
+            &quot;Binds&quot;: null,
+            &quot;ContainerIDFile&quot;: &quot;&quot;,
+            &quot;LogConfig&quot;: {
+                &quot;Type&quot;: &quot;json-file&quot;,
+                &quot;Config&quot;: {}
+            },
+            &quot;NetworkMode&quot;: &quot;default&quot;,
+            &quot;PortBindings&quot;: {},
+            &quot;RestartPolicy&quot;: {
+                &quot;Name&quot;: &quot;no&quot;,
+                &quot;MaximumRetryCount&quot;: 0
+            },
+            &quot;AutoRemove&quot;: false,
+            &quot;VolumeDriver&quot;: &quot;&quot;,
+            &quot;VolumesFrom&quot;: null,
+            &quot;CapAdd&quot;: null,
+            &quot;CapDrop&quot;: null,
+            &quot;Capabilities&quot;: null,
+            &quot;Dns&quot;: [],
+            &quot;DnsOptions&quot;: [],
+            &quot;DnsSearch&quot;: [],
+            &quot;ExtraHosts&quot;: null,
+            &quot;GroupAdd&quot;: null,
+            &quot;IpcMode&quot;: &quot;private&quot;,
+            &quot;Cgroup&quot;: &quot;&quot;,
+            &quot;Links&quot;: null,
+            &quot;OomScoreAdj&quot;: 0,
+            &quot;PidMode&quot;: &quot;&quot;,
+            &quot;Privileged&quot;: false,
+            &quot;PublishAllPorts&quot;: false,
+            &quot;ReadonlyRootfs&quot;: false,
+            &quot;SecurityOpt&quot;: null,
+            &quot;UTSMode&quot;: &quot;&quot;,
+            &quot;UsernsMode&quot;: &quot;&quot;,
+            &quot;ShmSize&quot;: 67108864,
+            &quot;Runtime&quot;: &quot;runc&quot;,
+            &quot;ConsoleSize&quot;: [
+                0,
+                0
+            ],
+            &quot;Isolation&quot;: &quot;&quot;,
+            &quot;CpuShares&quot;: 0,
+            &quot;Memory&quot;: 0,
+            &quot;NanoCpus&quot;: 0,
+            &quot;CgroupParent&quot;: &quot;&quot;,
+            &quot;BlkioWeight&quot;: 0,
+            &quot;BlkioWeightDevice&quot;: [],
+            &quot;BlkioDeviceReadBps&quot;: null,
+            &quot;BlkioDeviceWriteBps&quot;: null,
+            &quot;BlkioDeviceReadIOps&quot;: null,
+            &quot;BlkioDeviceWriteIOps&quot;: null,
+            &quot;CpuPeriod&quot;: 0,
+            &quot;CpuQuota&quot;: 0,
+            &quot;CpuRealtimePeriod&quot;: 0,
+            &quot;CpuRealtimeRuntime&quot;: 0,
+            &quot;CpusetCpus&quot;: &quot;&quot;,
+            &quot;CpusetMems&quot;: &quot;&quot;,
+            &quot;Devices&quot;: [],
+            &quot;DeviceCgroupRules&quot;: null,
+            &quot;DeviceRequests&quot;: null,
+            &quot;KernelMemory&quot;: 0,
+            &quot;KernelMemoryTCP&quot;: 0,
+            &quot;MemoryReservation&quot;: 0,
+            &quot;MemorySwap&quot;: 0,
+            &quot;MemorySwappiness&quot;: null,
+            &quot;OomKillDisable&quot;: false,
+            &quot;PidsLimit&quot;: null,
+            &quot;Ulimits&quot;: null,
+            &quot;CpuCount&quot;: 0,
+            &quot;CpuPercent&quot;: 0,
+            &quot;IOMaximumIOps&quot;: 0,
+            &quot;IOMaximumBandwidth&quot;: 0,
+            &quot;MaskedPaths&quot;: [
+                &quot;/proc/asound&quot;,
+                &quot;/proc/acpi&quot;,
+                &quot;/proc/kcore&quot;,
+                &quot;/proc/keys&quot;,
+                &quot;/proc/latency_stats&quot;,
+                &quot;/proc/timer_list&quot;,
+                &quot;/proc/timer_stats&quot;,
+                &quot;/proc/sched_debug&quot;,
+                &quot;/proc/scsi&quot;,
+                &quot;/sys/firmware&quot;
+            ],
+            &quot;ReadonlyPaths&quot;: [
+                &quot;/proc/bus&quot;,
+                &quot;/proc/fs&quot;,
+                &quot;/proc/irq&quot;,
+                &quot;/proc/sys&quot;,
+                &quot;/proc/sysrq-trigger&quot;
+            ]
+        },
+        
+        # 其他配置
+        &quot;GraphDriver&quot;: {
+            &quot;Data&quot;: {
+                &quot;LowerDir&quot;: &quot;/var/lib/docker/overlay2/3675586ebbd79cd72d2562a90c9380627a331c563724c0dac091f92600af4907-init/diff:/var/lib/docker/overlay2/7f79322e0f58d651a84a555dadd83d92537788172525945d3f538dd95dce336c/diff&quot;,
+                &quot;MergedDir&quot;: &quot;/var/lib/docker/overlay2/3675586ebbd79cd72d2562a90c9380627a331c563724c0dac091f92600af4907/merged&quot;,
+                &quot;UpperDir&quot;: &quot;/var/lib/docker/overlay2/3675586ebbd79cd72d2562a90c9380627a331c563724c0dac091f92600af4907/diff&quot;,
+                &quot;WorkDir&quot;: &quot;/var/lib/docker/overlay2/3675586ebbd79cd72d2562a90c9380627a331c563724c0dac091f92600af4907/work&quot;
+            },
+            &quot;Name&quot;: &quot;overlay2&quot;
+        },
+        
+        &quot;Mounts&quot;: [], # 挂载
+        
+        # 基本配置
+        &quot;Config&quot;: {
+            &quot;Hostname&quot;: &quot;cb6d7fbc3f27&quot;,
+            &quot;Domainname&quot;: &quot;&quot;,
+            &quot;User&quot;: &quot;&quot;,
+            &quot;AttachStdin&quot;: false,
+            &quot;AttachStdout&quot;: false,
+            &quot;AttachStderr&quot;: false,
+            &quot;Tty&quot;: false,
+            &quot;OpenStdin&quot;: false,
+            &quot;StdinOnce&quot;: false,
+            &quot;Env&quot;: [
+                &quot;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot;
+            ], # 基本环境变量，这里没有Java
+            
+            # 基本命令
+            &quot;Cmd&quot;: [
+                &quot;/bin/sh&quot;,
+                &quot;-c&quot;,
+                &quot;while true;do echo shenzai;sleep 1;done&quot;
+            ],
+            &quot;Image&quot;: &quot;centos&quot;,
+            &quot;Volumes&quot;: null,
+            &quot;WorkingDir&quot;: &quot;&quot;,
+            &quot;Entrypoint&quot;: null,
+            &quot;OnBuild&quot;: null,
+            &quot;Labels&quot;: {
+                &quot;org.label-schema.build-date&quot;: &quot;20200611&quot;,
+                &quot;org.label-schema.license&quot;: &quot;GPLv2&quot;,
+                &quot;org.label-schema.name&quot;: &quot;CentOS Base Image&quot;,
+                &quot;org.label-schema.schema-version&quot;: &quot;1.0&quot;,
+                &quot;org.label-schema.vendor&quot;: &quot;CentOS&quot;
+            }
+        },
+        
+        # 网卡，比如现在用的是桥接的网卡
+        &quot;NetworkSettings&quot;: {
+            &quot;Bridge&quot;: &quot;&quot;,
+            &quot;SandboxID&quot;: &quot;4d701985d7e77aa153790b697b2f38a61e20555c224b7675e4bf650b82799882&quot;,
+            &quot;HairpinMode&quot;: false,
+            &quot;LinkLocalIPv6Address&quot;: &quot;&quot;,
+            &quot;LinkLocalIPv6PrefixLen&quot;: 0,
+            &quot;Ports&quot;: {},
+            &quot;SandboxKey&quot;: &quot;/var/run/docker/netns/4d701985d7e7&quot;,
+            &quot;SecondaryIPAddresses&quot;: null,
+            &quot;SecondaryIPv6Addresses&quot;: null,
+            &quot;EndpointID&quot;: &quot;8a6c71e2bafb19ca7dfd85445ccc4bef6d17467360a243d624089e676a24a018&quot;,
+            &quot;Gateway&quot;: &quot;172.17.0.1&quot;,
+            &quot;GlobalIPv6Address&quot;: &quot;&quot;,
+            &quot;GlobalIPv6PrefixLen&quot;: 0,
+            &quot;IPAddress&quot;: &quot;172.17.0.3&quot;,
+            &quot;IPPrefixLen&quot;: 16,
+            &quot;IPv6Gateway&quot;: &quot;&quot;,
+            &quot;MacAddress&quot;: &quot;02:42:ac:11:00:03&quot;,
+            &quot;Networks&quot;: {
+                &quot;bridge&quot;: {
+                    &quot;IPAMConfig&quot;: null,
+                    &quot;Links&quot;: null,
+                    &quot;Aliases&quot;: null,
+                    &quot;NetworkID&quot;: &quot;22b0fd2290ccbc4e066a75d3f01bd8bf32ee4352c5bbcfc9f911287219219571&quot;,
+                    &quot;EndpointID&quot;: &quot;8a6c71e2bafb19ca7dfd85445ccc4bef6d17467360a243d624089e676a24a018&quot;,
+                    &quot;Gateway&quot;: &quot;172.17.0.1&quot;,
+                    &quot;IPAddress&quot;: &quot;172.17.0.3&quot;,
+                    &quot;IPPrefixLen&quot;: 16,
+                    &quot;IPv6Gateway&quot;: &quot;&quot;,
+                    &quot;GlobalIPv6Address&quot;: &quot;&quot;,
+                    &quot;GlobalIPv6PrefixLen&quot;: 0,
+                    &quot;MacAddress&quot;: &quot;02:42:ac:11:00:03&quot;,
+                    &quot;DriverOpts&quot;: null
+                }
+            }
+        }
+    }
+]
+
+</code></pre>
+<h4 id="进入当前正在运行的容器">进入当前正在运行的容器</h4>
+<pre><code class="language-shell"># 我们通常容器都是使用后台方式运行的
+
+docker exec -it 容器id bashSHELL #exec执行
+
+# 测试
+# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+c2887d35c71d        centos              &quot;/bin/bash&quot;         35 minutes ago      Up 35 minutes                           vigorous_kare
+# docker exec -it c2887d35c71d /bin/bash
+[root@c2887d35c71d /]# ls
+bin  etc   lib	  lost+found  mnt  proc  run   srv  tmp  var
+dev  home  lib64  media       opt  root  sbin  sys  usr
+[root@c2887d35c71d /]# ps -ef
+UID         PID   PPID  C STIME TTY          TIME CMD
+root          1      0  0 11:57 pts/0    00:00:00 /bin/bash
+root         14      0  0 12:32 pts/1    00:00:00 /bin/bash
+root         28     14  0 12:32 pts/1    00:00:00 ps -ef
+[root@c2887d35c71d /]# c2887d35c71d
+[root@c2887d35c71d /]# exit
+exit
+
+# 方式二
+[root@192 ~]# docker attach c2887d35c71d
+[root@c2887d35c71d /]# 
+
+# 区别
+# docker exec # 进入容器后开启一个新的终端，可以在里面操作(常用)
+
+# docker attach 进入容器正在执行的终端，不会启动新的进程 也就是没有命令行操作 
+
+</code></pre>
+<p>总结：</p>
+<ul>
+<li>docker run；创建和启动一个新的容器实例，操作对象是镜像，选项较多，如果你要创建和启动一个容器，只能用run；</li>
+<li>docker exec: 在已运行的容器中，执行命令，操作对象是容器，如果你要进入已运行的容器，并且执行命令，用exec；</li>
+<li>docker attach: 同样操作的是已运行的容器，可以将本机标准输入（键盘输入）输到容器中，也可以将容器的输出显示在本机的屏幕上，如果你想查看容器运行过程中产生的标准输入输出，用attach；</li>
+</ul>
+<h4 id="从容器内拷贝文件到主机上">从容器内拷贝文件到主机上</h4>
+<pre><code class="language-bash">docker cp 容器id：容器内路径/选择cp的文件 目的主机路径
+</code></pre>
+<h4 id="查看内容占用">查看内容占用</h4>
+<pre><code class="language-shell">docker stats
+</code></pre>
+<h4 id="小结">小结</h4>
+<figure data-type="image" tabindex="17"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf3xr3z3rj30t50ki7ct.jpg" alt="image-20200617210554147" loading="lazy"></figure>
+<pre><code class="language-shell">[root@192 home]# docker --help
+
+Usage:	docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Options:
+      --config string      Location of client config
+                           files (default &quot;/root/.docker&quot;)
+  -c, --context string     Name of the context to use to
+                           connect to the daemon
+                           (overrides DOCKER_HOST env var
+                           and default context set with
+                           &quot;docker context use&quot;)
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level
+                           (&quot;debug&quot;|&quot;info&quot;|&quot;warn&quot;|&quot;error&quot;|&quot;fatal&quot;) (default &quot;info&quot;)
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by
+                           this CA (default
+                           &quot;/root/.docker/ca.pem&quot;)
+      --tlscert string     Path to TLS certificate file
+                           (default &quot;/root/.docker/cert.pem&quot;)
+      --tlskey string      Path to TLS key file (default
+                           &quot;/root/.docker/key.pem&quot;)
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Management Commands:
+  builder     Manage builds
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  engine      Manage the docker engine
+  image       Manage images
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  images      List images
+  import      Import the contents from a tarball to create a filesystem image
+  info        Display system-wide information
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  login       Log in to a Docker registry
+  logout      Log out from a Docker registry
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  ps          List containers
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  run         Run a command in a new container
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  search      Search the Docker Hub for images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  version     Show the Docker version information
+  wait        Block until one or more containers stop, then print their exit codes
+
+</code></pre>
+<h3 id="常用容器命令的总结">常用容器命令的总结</h3>
+<figure data-type="image" tabindex="18"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf3zxyh0wj30xf0jeqme.jpg" alt="image-20200617210932306" loading="lazy"></figure>
+<figure data-type="image" tabindex="19"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf40e2jjvj30vq0byaky.jpg" alt="image-20200617211021003" loading="lazy"></figure>
+<figure data-type="image" tabindex="20"><img src="//tvax3.sinaimg.cn/large/007bjbYxly1gsf40n9trgj30ux01mtaf.jpg" alt="image-20200617211039508" loading="lazy"></figure>
+<h2 id="可视化">可视化</h2>
+<ul>
+<li>portainer(先用这个)</li>
+<li>Rancher(CI/CD时用)</li>
+</ul>
+<h3 id="portainer">portainer</h3>
+<p>Docker图像化界面管理工具，提供一个后台面板供我们操作！</p>
+<pre><code class="language-shell">    docker run -d -p 8088:9000 --restart=always -v /var/run/docker.sock:/var/run/docker --privileged=true portainer/portainer
+</code></pre>
+<figure data-type="image" tabindex="21"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf40ur3z5j31a007z0tc.jpg" alt="image-20200618114542622" loading="lazy"></figure>
+<p>访问外网8088</p>
+<figure data-type="image" tabindex="22"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf410nkzqj31d10o8wg1.jpg" alt="image-20200618114902169" loading="lazy"></figure>
+<figure data-type="image" tabindex="23"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf41bqtagj31ag08gdgl.jpg" alt="image-20200618135424706" loading="lazy"></figure>
+<figure data-type="image" tabindex="24"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf41l9lq0j31dk0p80vy.jpg" alt="image-20200618135450037" loading="lazy"></figure>
+<h2 id="docker部署nginx">Docker部署nginx</h2>
+<p>docker部署nginx</p>
+<p>搜索镜像</p>
+<pre><code class="language-shell">docker search nginx
+</code></pre>
+<p>下载镜像</p>
+<pre><code class="language-shell">docker pull nginx
+</code></pre>
+<p>通过容器启动nginx</p>
+<pre><code class="language-bash">docker run -d  --name 容器名称 -p 公网端口:容器内端口80 nginx
+</code></pre>
+<p>运行成功之后 在终端测试查看是否能够看到开启服务的页面</p>
+<pre><code class="language-shell">curl localhost:3344
+</code></pre>
+<p>能看到说明开启成功</p>
+<p>通过服务器地址同样可以访问到</p>
+<p>想要修改相关的配置</p>
+<pre><code class="language-shell">whereis nginx查看nginx目录
+</code></pre>
+<pre><code class="language-shell">nginx: /usr/sbin/nginx /usr/lib/nginx /etc/nginx /usr/share/nginx
+</code></pre>
+<p>/usr/sbin/nginx 下有着可执行nginx的服务文件</p>
+<p>etc 下面放的是配置文件</p>
+<p>同样的的当停止docker服务时候就访问不到服务了</p>
+<p>注意:</p>
+<p>放行的端口要在安全组当中打开 否则将会访问不了！</p>
+<h2 id="docker-部署tomcat">Docker 部署tomcat</h2>
+<p>在官网当中搜索</p>
+<pre><code class="language-bash">$ docker run -it --rm tomcat:9.0
+</code></pre>
+<p>有这么一行方法 但是我们不建议这么使用 因为这个测试只是一次性的</p>
+<p>当退出这个服务之后会将这个镜像进行删除</p>
+<p>同样的下载镜像命令完成之后启动容器</p>
+<pre><code class="language-shell">docker run -d -p 外网放行端口:容器内端口  tomcat 
+</code></pre>
+<p>启动之后同样的进行</p>
+<pre><code class="language-shell">curl localhost 地址访问
+</code></pre>
+<p>发现出现了404 错误</p>
+<p>这里的原因是docker在安装tomcat的时候将最小安装 甚至有些基本的命令都使用不了</p>
+<p>下面进行一步步的解决</p>
+<p>先进入容器内部</p>
+<pre><code class="language-shell">docker exec -it 容器id /bin/bash
+</code></pre>
+<pre><code>查看当前的目录结构：ls
+</code></pre>
+<p>我们知道项目一般是放在webapps下面的</p>
+<p>先进入webapps目录下查看文件</p>
+<p>发现里面的文件都没有</p>
+<p>再进入webapps.dist下查看</p>
+<p>发现这里面才是执行我们的真正文件</p>
+<p>将其下面的所有文件都复制到webapps下面就行了</p>
+<pre><code class="language-shell">cp -r webapps.dist/* webapps
+</code></pre>
+<p>此时查看webapps目录下的文件都复制过来之后再次测试</p>
+<p>发现可以了已经进行访问了</p>
+<p>在服务器当中测试同样可以</p>
+<h2 id="部署eskibana">部署es+kibana</h2>
+<figure data-type="image" tabindex="25"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4261lsgj31370aemyb.jpg" alt="image-20200618104950722" loading="lazy"></figure>
+<pre><code class="language-shell"># es 暴露的端口很多# es 十分耗内存# es 的数据一般需要放置到安全目录！挂载# 启动 elasticsearch$ docker run -d --name elasticsearch01 -p 9200:9200 -p 9300:9300 -e &quot;discovery.type=single-node&quot; elasticsearch:7.6.2# 查看内存占用情况docker stats
+</code></pre>
+<figure data-type="image" tabindex="26"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf42ct6dkj318703jaa3.jpg" alt="image-20200618111713885" loading="lazy"></figure>
+<pre><code class="language-shell"># 先感觉stop一下docker stop ba18713ca536
+</code></pre>
+<figure data-type="image" tabindex="27"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf42ky427j319608tgn1.jpg" alt="image-20200618105057785" loading="lazy"></figure>
+<pre><code class="language-shell"># 通过 -e 限制内存$ docker run -d --name elasticsearch02 -p 9200:9200 -p 9300:9300 -e &quot;discovery.type=single-node&quot; -e ES_JAVA_OPTS=“-Xms64m -Xmx512m” elasticsearch:7.6.2
+</code></pre>
+<figure data-type="image" tabindex="28"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf42reruzj31a7034wen.jpg" alt="image-20200618113018622" loading="lazy"></figure>
+<p>没成功啊，SEI能告诉我为啥！！</p>
+<pre><code class="language-shell">docker run -d --name elasticsearch02 -p 9200:9200 -p 9300:9300 -e &quot;discovery.type=single-node&quot; -e ES_JAVA_OPTS=&quot;-Xms64m -Xmx512m&quot; elasticsearch:7.6.2
+</code></pre>
+<blockquote>
+<p>py0003null大佬:<br>
+“ES_JAVA_OPTS=-Xms64m -Xmx512m”</p>
+<p>py0003null大佬:<br>
+引号提前试试</p>
+</blockquote>
+<p>原因是引号！！你没觉得怪怪的嘛</p>
+<figure data-type="image" tabindex="29"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf439nxbwj319y03bt8w.jpg" alt="image-20200618115302656" loading="lazy"></figure>
+<p>此时查看stats，发现内存占用在控制范围内</p>
+<figure data-type="image" tabindex="30"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf43gw4mbj319t059t8x.jpg" alt="image-20200618115149971" loading="lazy"></figure>
+<p>ctrl + C退出，记得stop</p>
+<figure data-type="image" tabindex="31"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf49h16tnj31ac06qmxn.jpg" alt="image-20200618115921069" loading="lazy"></figure>
+<h3 id="思考用kibana链接elasticsearch">思考：用kibana链接elasticsearch</h3>
+<figure data-type="image" tabindex="32"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf49owk09j30mr09yglz.jpg" alt="image-20200618113556445" loading="lazy"></figure>
+<h2 id="docker镜像">Docker镜像</h2>
+<h3 id="原理">原理</h3>
+<p>UnionFS 联合文件系统</p>
+<figure data-type="image" tabindex="33"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf49x88yrj30nv080tdt.jpg" alt="image-20200618140242423" loading="lazy"></figure>
+<p>bootfs：boot file system</p>
+<p>rootfs：root file system<br>
+<img src="//tvax3.sinaimg.cn/large/007bjbYxly1gsf4a487uzj30h20anq4u.jpg" alt="image-20200618140907894" loading="lazy"></p>
+<figure data-type="image" tabindex="34"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4abufwnj30h108qabj.jpg" alt="image-20200618140932621" loading="lazy"></figure>
+<figure data-type="image" tabindex="35"><img src="//tvax3.sinaimg.cn/large/007bjbYxly1gsf4ajp5a2j30vv0gbgpu.jpg" alt="image-20200618141014511" loading="lazy"></figure>
+<figure data-type="image" tabindex="36"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4arupuvj30vx0ga796.jpg" alt="image-20200618153329894" loading="lazy"></figure>
+<p>Docker镜像都是只读的，当容器启动时，一个新的可写层被加到镜像的顶部，这一层就是我们通常说的容器层，容器层之下的都叫镜像层</p>
+<figure data-type="image" tabindex="37"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4ay40a3j30th04wmyz.jpg" alt="image-20200618153855605" loading="lazy"></figure>
+<h3 id="commit提交镜像">commit提交镜像</h3>
+<pre><code class="language-shell">docker commit # 提交容器成为一个新的副本docker commit -m=&quot;提交的描述信息&quot; -a=&quot;作者&quot; 容器id 目标镜像名：[TAG]
+</code></pre>
+<figure data-type="image" tabindex="38"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4b4sndfj31a30mztby.jpg" alt="image-20200618154457286" loading="lazy"></figure>
+<p>这是一个前台程序</p>
+<figure data-type="image" tabindex="39"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4bch0gfj31gn0o341d.jpg" alt="image-20200618154736475" loading="lazy"></figure>
+<p>同样这里直接访问会出现404错误 因为这个我们用到镜像并不是经过修改提交的</p>
+<p>先修改配置</p>
+<figure data-type="image" tabindex="40"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4bjarlzj30q809bmy0.jpg" alt="image-20200618154943194" loading="lazy"></figure>
+<p>完成之后进行提交</p>
+<pre><code class="language-shell">#docker commit -a=&quot;作者&quot; - m=&quot;描述信息&quot; 当前容器的id 新容器名称:版本信息docker commit -a=&quot;paidaxing&quot; -m=&quot;add webapps app&quot; 当前容器的id tomcat02:1.0
+</code></pre>
+<figure data-type="image" tabindex="41"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4bp33imj31ag0hnmzn.jpg" alt="image-20200618160425265" loading="lazy"></figure>
+<p>修改完配置之后要退出然后将需要的镜像进行提交</p>
+<p><strong>注意</strong></p>
+<p>下次再次运行的时候需要启动指定上传的版本进行启动 ！</p>
+<p><strong>发现新的版本，比之前的大了一些，因为里面记录了我们的改动</strong></p>
+<blockquote>
+<p>如果想保存当前容器的状态，可以通过commit提交，获得一个镜像</p>
+<p>好比我们以前学习VM的时候的快照</p>
+<p>到这里算是入门了</p>
+<p>接下来三个部分是docker的精髓</p>
+</blockquote>
+<h2 id="容器数据卷">容器数据卷</h2>
+<h3 id="什么是容器卷">什么是容器卷</h3>
+<p>docker是要将应用和环境打包成一个镜像</p>
+<p>这样，数据就不应该在容器中，否则容器删除，数据就会丢失!</p>
+<p>容器之间要有一个数据共享技术来解决此问题</p>
+<p>在Docker容器中产生的数据，同步到本地，这就是卷技术</p>
+<p>本质上是一个目录挂载，将容器内的目录挂载到虚拟机上</p>
+<p>特点：</p>
+<p>1：数据卷可以在容器之间共享或重用数据</p>
+<p>2：数据卷中的更改可以直接生效</p>
+<p>3：数据卷中的更改不会包含在镜像的更新中</p>
+<p>4：数据卷的生命周期一直持续到没有容器使用它为止</p>
+<figure data-type="image" tabindex="42"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4buxjerj30ha0bfabm.jpg" alt="image-20200618162917672" loading="lazy"></figure>
+<p><strong>目的：容器的持久化和同步操作</strong></p>
+<p>容器间可以数据共享</p>
+<h3 id="使用数据卷">使用数据卷</h3>
+<p>方式一：直接使用命令来挂载</p>
+<pre><code class="language-shell">docker run -it -v 主机目录:容器目录 启动镜像 # -it 交互式进入# -v volume卷技术# -p 主机端口
+</code></pre>
+<figure data-type="image" tabindex="43"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4c13gh7j31a505x3zb.jpg" alt="image-20200618163659503" loading="lazy"></figure>
+<p>通过命令查看容器的信息</p>
+<pre><code class="language-shell">docker inspect 容器id
+</code></pre>
+<figure data-type="image" tabindex="44"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4c13gh7j31a505x3zb.jpg" alt="image-20200618163659503" loading="lazy"></figure>
+<p>找到挂载信息Mounts<br>
+<img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4cdfehgj30la05vq31.jpg" alt="image-20210704151421726" loading="lazy"></p>
+<p>Source源路径</p>
+<p>Destinnation目的路径</p>
+<p>完成挂载之后分别在容器内和主机创建文件测试是否能完成同步操作</p>
+<p>测试<br>
+<img src="//tva3.sinaimg.cn/large/007bjbYxly1gsf4cj74nqj30mk03ijri.jpg" alt="image-20210704151815426" loading="lazy"></p>
+<figure data-type="image" tabindex="45"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4cqrbf2j30j002pwei.jpg" alt="image-20210704151846865" loading="lazy"></figure>
+<p>发现数据同步了</p>
+<p>再次测试在容器停止后，修改主机文件，再启动容器的时候，数据同样改变</p>
+<h3 id="连接mysql">连接mysql</h3>
+<p>数据库安装完成之后记得先找到的配置文件，然后在里面找到 <code>[mysqld]</code> 这一项，然后在该配置项下添加 <code>skip-grant-tables</code> 这个配置，然后保存文件。 重启服务！</p>
+<p>dbeaver配置服务器信息</p>
+<figure data-type="image" tabindex="46"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4cy1gb8j30f40jp3z4.jpg" alt="image-20210704160123178" loading="lazy"></figure>
+<p><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf4dze3wkj307f00pa9u.jpg" alt="image-20210704160152309" loading="lazy"><br>
+此时再进行连接连接成功！</p>
+<h3 id="通过容器连接mysql">通过容器连接mysql</h3>
+<p>先拉取镜像</p>
+<p>docker pull mysql:5.7</p>
+<p>在宿主机创建挂载目录和配置文件</p>
+<pre><code class="language-shell">mkdir /home/data/mysql/data    #创建存放数据目录mkdir /home/data/mysql/conf    #创建存放配置目录cd /home/data/mysql/conftouch my.cnf   #创建mysql配置文件my.cnfvi my.cnf #配置文件
+</code></pre>
+<pre><code class="language-conf">[client]
+
+# password	= 123456
+
+port		= 3306
+socket		= /tmp/mysql.sock
+
+[mysqld]
+skip-grant-tables
+port		= 3306
+socket		= /tmp/mysql.sock
+datadir = /www/server/data
+default_storage_engine = InnoDB
+performance_schema_max_table_instances = 400
+table_definition_cache = 400
+skip-external-locking
+key_buffer_size = 32M
+max_allowed_packet = 100G
+table_open_cache = 128
+sort_buffer_size = 768K
+net_buffer_length = 4K
+read_buffer_size = 768K
+read_rnd_buffer_size = 256K
+myisam_sort_buffer_size = 8M
+thread_cache_size = 16
+query_cache_size = 16M
+tmp_table_size = 32M
+sql-mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+
+explicit_defaults_for_timestamp = true
+#skip-name-resolve
+max_connections = 500
+max_connect_errors = 100
+open_files_limit = 65535
+
+log-bin=mysql-bin
+binlog_format=mixed
+server-id = 1
+expire_logs_days = 10
+slow_query_log=1
+slow-query-log-file=/www/server/data/mysql-slow.log
+long_query_time=3
+#log_queries_not_using_indexes=on
+
+
+innodb_data_home_dir = /www/server/data
+innodb_data_file_path = ibdata1:10M:autoextend
+innodb_log_group_home_dir = /www/server/data
+innodb_buffer_pool_size = 128M
+innodb_log_file_size = 64M
+innodb_log_buffer_size = 16M
+innodb_flush_log_at_trx_commit = 1
+innodb_lock_wait_timeout = 50
+innodb_max_dirty_pages_pct = 90
+innodb_read_io_threads = 1
+innodb_write_io_threads = 1
+
+[mysqldump]
+quick
+max_allowed_packet = 500M
+
+[mysql]
+no-auto-rehash
+
+[myisamchk]
+key_buffer_size = 32M
+sort_buffer_size = 768K
+read_buffer = 2M
+write_buffer = 2M
+
+[mysqlhotcopy]
+interactive-timeout
+</code></pre>
+<p>挂载</p>
+<pre><code class="language-shell">docker run -p 3344:3306 --name linmysql -v /usr/local/workspace/mysql/conf:/etc/mysql -v /usr/local/workspace/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7# 挂载docker run -it -p 3344:3306 -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 --name mysqlin mysql:5.7-d 后台运行-p 端口映射-v 卷挂载-e 环境配置 安装启动mysql需要配置密码--name 容器名字–restart=always 设置随服务启动而启动容器–privileged=true 使用该参数，container内的root拥有真正的root权限
+</code></pre>
+<p><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4ehmplvj30q40kraby.jpg" alt="image-20200618171353336" loading="lazy"><br>
+进行相关配置 同上<br>
+<img src="//tvax3.sinaimg.cn/large/007bjbYxly1gsf4hsmtx2j306r01b3yc.jpg" alt="image-20210704172126920" loading="lazy"></p>
+<p>进入容器内同样可以进行连接数据库</p>
+<figure data-type="image" tabindex="47"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf4i73rm7j30je0ciwf7.jpg" alt="image-20210704172454949-1626143888879" loading="lazy"></figure>
+<figure data-type="image" tabindex="48"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf4idkr6nj30mt0csq3t.jpg" alt="image-20200618173729692" loading="lazy"></figure>
+<h3 id="具名和匿名挂载">具名和匿名挂载</h3>
+<pre><code class="language-shell">#匿名挂载 docker run - d -P --name 容器名称 -v 容器内配置地址 镜像#具名挂载docker run - d -P --name 容器名称 -v 卷名称:容器内配置地址 镜像-P 随机端口-v 挂载#对比差别 匿名挂载就是在宿主机没有指定名称下载  不推荐使用！#查看挂载卷的情况 docker volumn ls
+</code></pre>
+<p>这里简单的测试</p>
+<pre><code class="language-shell">docker run -d -p 3344:80 --name nginxtest1 -v lin:/etc/nginx nginx
+</code></pre>
+<figure data-type="image" tabindex="49"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4ikpn60j30ig04zt92.jpg" alt="image-20210705091843925" loading="lazy"></figure>
+<p>​	查看docker容器卷的具体信息</p>
+<p>docker volume inspect 卷名称<br>
+<img src="//tvax3.sinaimg.cn/large/007bjbYxly1gsf4isr01hj30gm05imx7.jpg" alt="image-20210705092119296" loading="lazy"></p>
+<p>这里看到在没有指定路径挂载的情况下 挂载的路径是在</p>
+<p><strong>/var/lib/docker/volumes/lin/_data</strong>当中</p>
+<p>在这里可以进行我们的相关配置</p>
+<figure data-type="image" tabindex="50"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4izydi5j30jk022747.jpg" alt="image-20210705092407631-1626144003889" loading="lazy"></figure>
+<p><strong>拓展：</strong></p>
+<pre><code class="language-shell">-v 挂载后面配置权限 ro  readonly #只读rw readwrite #可读可写一旦设置了容器权限，就会根据权限产生相应的限定举例：docker run- d -P --name nginx02 - v llin：etc/nginx:ro nginx
+</code></pre>
+<h3 id="创建文件创建镜像">创建文件创建镜像</h3>
+<p>Dockerfile 就是用来构建docker镜像的文件！ 里面放的 是命令脚本</p>
+<p>通过这个脚本可以生成镜像，镜像是一层一层的,每个命令都是一层</p>
+<p>首先创建一个放置dockerfile文件的文件夹</p>
+<p>并在里面创建dockerfile文件名称自定义</p>
+<figure data-type="image" tabindex="51"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4j6zfqlj30lw04yaa6.jpg" alt="image-20210705103501776" loading="lazy"></figure>
+<p>这里文件放的是</p>
+<pre><code class="language-shell">FROM centosVOLUME [&quot;/volume01&quot;,&quot;/volume02&quot;] # 再创建镜像的时候就挂载出来#注意这里的路径前面要加上/ 否则会报错CMD echo &quot;---end---&quot;CMD /bin/bash—FROM 是基于哪个镜像—Volume 挂载—CMD 执行命令
+</code></pre>
+<p>通过文件构建镜像 docker build</p>
+<pre><code class="language-shell">docker build -f dockerfile1 -t lin/centos:1.0 .  # 最后的点很重要 镜像名不能有/-f #构建文件 要注意路径 这里直接是进创建目录当中所以前面没有加上绝对路径-t #构建自定义镜像的名称
+</code></pre>
+<p>构建完成查看镜像是否存在</p>
+<pre><code class="language-shell">docker images
+</code></pre>
+<figure data-type="image" tabindex="52"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf4jgzefpj30i004x74l.jpg" alt="image-20210705104039980" loading="lazy"></figure>
+<p>启动生成的镜像<br>
+<img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4jnm8fkj31300jntau.jpg" alt="image-20200618220658979" loading="lazy"></p>
+<p>在容器内部创建一个文件</p>
+<figure data-type="image" tabindex="53"><img src="//tvax3.sinaimg.cn/large/007bjbYxly1gsf4juwfmaj30b901xglg.jpg" alt="image-20210705103057713" loading="lazy"></figure>
+<p>查看Mounts，Source对应容器外目录，匿名挂载卷</p>
+<figure data-type="image" tabindex="54"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4k0gn2jj30u20as0tg.jpg" alt="image-20210705102844360" loading="lazy"></figure>
+<p>此时在宿主机的路径下查看刚才在容器内生成的文件</p>
+<figure data-type="image" tabindex="55"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4k6ly5sj30s601m746.jpg" alt="image-20210705103153495" loading="lazy"></figure>
+<p>可以看到数据同样过来了</p>
+<h3 id="多个容器数据共享">多个容器数据共享</h3>
+<figure data-type="image" tabindex="56"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4kc6xp8j30sf08hjt7.jpg" alt="image-20200621165403842" loading="lazy"></figure>
+<p>启动docker01，用之前建的lin/centos 1.0  镜像</p>
+<p>注意：</p>
+<p>--volume-form不是同步所有目录，只是同步挂载点，这里就是同步volume01和volume02,在其它目录写的数据是不会同步的</p>
+<pre><code class="language-shell">docker run -it --name docker01 lin/centos:1.0 # 1.0必须写
+</code></pre>
+<figure data-type="image" tabindex="57"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4kiwfktj310g0lfwgo.jpg" alt="image-20200621170429658" loading="lazy"></figure>
+<figure data-type="image" tabindex="58"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4kq0kpfj30m401z0sm.jpg" alt="image-20200621170540593" loading="lazy"></figure>
+<p>依次启动docker02、docker03</p>
+<pre><code class="language-shell">docker run -it --name docker02 --volumes-from docker01 padaxing/centos:1.0
+</code></pre>
+<p>docker02继承docker01的volums 继承容器卷的挂载</p>
+<p>可以验证，在docker01下加一个数据，在docker02下也会出现</p>
+<figure data-type="image" tabindex="59"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4kxngt7j31120g0777.jpg" alt="image-20200621171513650" loading="lazy"></figure>
+<p>创建docker03，同样继承docker01</p>
+<pre><code class="language-shell">docker run -it --name docker03 --volumes-from docker01 padaxing/centos:1.0
+</code></pre>
+<figure data-type="image" tabindex="60"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4l3ekxlj310h072dgh.jpg" alt="image-20200621172333639" loading="lazy"></figure>
+<p>在docker03的volume01下建立文件，在docker01的volume01下同样也有</p>
+<p>即通过--volumes-from 可以实现不同容器间的数据共享</p>
+<pre><code class="language-shell">docker rm -f 
+</code></pre>
+<figure data-type="image" tabindex="61"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4l9gucyj30mi04p74h.jpg" alt="image-20200621172830779" loading="lazy"></figure>
+<p>可以看到，删除docker01，进入docker02，数据依然在</p>
+<p>总结：容器之间配置信息的传递，数据卷的生命周期一直持续到没有容器使用它为止。即使把容器卷删除了 数据还是能持久化到本地</p>
+<p>这个例子不能真实的反应容器数据卷 因为在dockerfile文件当中是创建了两个挂载	只要容器创建了之后 在宿主机当中就存在了</p>
+<p>但通过多个容器创建的容器内确实可以看到挂载数据的同步 其实就是容器的共享</p>
+<p>用docker inspect检查3个容器会发现其实都映射到了宿主机的相同目录</p>
+<hr>
+<h2 id="dockerfile">DockerFile</h2>
+<p>是用来构建docker镜像的文件，可以理解为命令参数脚本</p>
+<p>构建步骤：</p>
+<ol>
+<li>编写一个dockerfile文件</li>
+<li>docker build 构建成为一个镜像</li>
+<li>docker run运行镜像</li>
+<li>docker push 发布镜像（DockerHub、阿里云镜像仓库 私有/共有）</li>
+</ol>
+<p>这个写一个项目时一样的</p>
+<h3 id="官方dockerfile示例">官方DockerFile示例</h3>
+<p>看一下官方的DockerFile</p>
+<figure data-type="image" tabindex="62"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4lfs8vxj31bq0tqq6i.jpg" alt="image-20200621174204807" loading="lazy"></figure>
+<p>可以看到官方镜像都是基础包，很多功能没有，我们通常会自己搭建自己的镜像来添加自己的需求！</p>
+<hr>
+<h3 id="dockerfile基础知识">DockerFile基础知识</h3>
+<ol>
+<li>每个指令都必须是大写字母</li>
+<li>按照从上到下顺序执行</li>
+<li>*#*表示注释</li>
+<li>每一个指令都会创建体检一个新的镜像层，并提交</li>
+</ol>
+<figure data-type="image" tabindex="63"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4llfxpmj30nu0c2ae8.jpg" alt="image-20200621174948310" loading="lazy"></figure>
+<p>docker是面向开发的，我们以后要发布项目，做镜像，就要编写dockerfile文件</p>
+<hr>
+<h3 id="dockerfile命令">DockerFile命令</h3>
+<pre><code class="language-shell">FROM # 基础镜像 比如centosMAINTAINER # 镜像是谁写的 姓名+邮箱 RUN # 镜像构建时需要运行的命令ADD # 添加，比如添加一个tomcat压缩包WORKDIR # 镜像的工作目录VOLUME # 挂载的目录EXPOSE # 指定暴露端口，跟-p一个道理 这里写完之后就可以不用在镜像当中指定端口RUN # 最终要运行的CMD # 指定这个容器启动的时候要运行的命令，只有最后一个会生效，而且可被替代ENTRYPOINT # 指定这个容器启动的时候要运行的命令，可以追加命令ONBUILD # 当构建一个被继承Dockerfile 这个时候运行ONBUILD指定，触发指令COPY # 将文件拷贝到镜像中ENV # 构建的时候设置环境变量
+</code></pre>
+<p>注意这里的MAINCONTAINER已经被官方舍弃掉了</p>
+<p>应该用到是LABEL</p>
+<h3 id="构建自己的centos">构建自己的centos</h3>
+<p>Docker Hub中大部分的镜像都是从FROM scratch开始的</p>
+<p>创建dockerfile文件</p>
+<pre><code class="language-shell"># 创建一个自己centos
+# 进入home目录
+cd /home
+# 创建一个目录，之后的东西都保存到这里
+mkdir dockerfile
+# 进入这个目录
+cd dockerfile/
+# 创建一个dockerfile，名字叫mydockerfile
+vim mydockerfile-centos
+</code></pre>
+<p>这里看一下官方的centos</p>
+<pre><code class="language-shell"># 官方默认centos
+docker run -it centos
+pwd # 官方默认有pwd命令
+vim # 官方默认没有vim命令
+ifconfig # 官方默认没有ifconfig命令
+</code></pre>
+<figure data-type="image" tabindex="64"><img src="//tvax3.sinaimg.cn/large/007bjbYxly1gsf4ls34asj30gw078t8x.jpg" alt="image-20200621184333206" loading="lazy"></figure>
+<p>回到mydockerfile</p>
+<p>这里希望在我们的自定义构建centos镜像里面添加上官方没有的命令</p>
+<pre><code class="language-shell"># 自定义构建centosFROM centosMAINTAINER lindamao&lt;1415877347@qq.com&gt;ENV MYPATH /usr/local #配置环境目录WORKDIR $MYPATH #工作目录RUN yum -y install vim #构建时安装vim命令RUN yum -y install net-toolsEXPOSE 3344 #暴露80端口CMD echo $MYPATH CMD echo &quot;---end---&quot;CMD /bin/bash
+</code></pre>
+<p>构建镜像</p>
+<pre><code class="language-shell">docker build -f mydockerfile-centos -t mycentos:0.1 .
+</code></pre>
+<p>这里可以看到构建镜像的一步步过程<br>
+<img src="//tva3.sinaimg.cn/large/007bjbYxly1gsf4m8ll8tj30ku0873yz.jpg" alt="image-20210705153941591" loading="lazy"></p>
+<p>最终返回Successfully表示成功</p>
+<figure data-type="image" tabindex="65"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gsf4mhp8t3j30a601lt8i.jpg" alt="image-20210705154242078" loading="lazy"></figure>
+<p>运行自己构建的镜像</p>
+<pre><code class="language-shell">docker run -it mycentos:0.1 # 版本号必须写,否则默认找到最新的会报错
+</code></pre>
+<p>检查在dockerfile文件当run的执行</p>
+<figure data-type="image" tabindex="66"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4mpmuuhj30kf0983z2.jpg" alt="image-20210705154650482" loading="lazy"></figure>
+<p>发现的确是按照配置来完成的构建</p>
+<p>查看docker的构建历史</p>
+<p>docker history</p>
+<figure data-type="image" tabindex="67"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf4mv66uhj30k506st9c.jpg" alt="image-20210705154847092" loading="lazy"></figure>
+<p>也就是说我们可以通过此命令参考镜像的构建</p>
+<h3 id="cmd与entrypoint的区别">CMD与ENTRYPOINT的区别</h3>
+<p><strong>CMD指令的定义</strong><br>
+下面我们来看官方给出的定义：</p>
+<pre><code class="language-shell">The main purpose of a CMD is to provide defaults for an executing container. 
+
+These defaults can include an executable, or they can omit the executable, in
+
+which case you must specify an ENTRYPOINT instruction as well.
+</code></pre>
+<p><strong>CMD</strong>主要目的是为执行中的容器提供默认值。这些默认值可以包含可执行文件，也可以省略可执行文件，在这种情下，您还必须指定一条<strong>ENTRYPOINT</strong>指令。</p>
+<p>从上面的定义我可以看出分两种情况，一种是给ENTRYPOINT指令提供默认的参数，一种是指定可执行文件，作为容器启动后执行的命令；</p>
+<p>下面简单看一下该指令的用法</p>
+<pre><code class="language-shell">CMD [&quot;executable&quot;,&quot;param1&quot;,&quot;param2&quot;] (exec模式, 这是推荐的方式)
+
+CMD [&quot;param1&quot;,&quot;param2&quot;] (作为 ENTRYPOINT 的默认参数)
+
+CMD command param1 param2 (shell模式)
+</code></pre>
+<p>如果<strong>Dockerfile</strong>中包含多条<strong>CMD</strong>指令，则只有最后一条指令生效。</p>
+<p><strong>ENTRYPOINT</strong>指令的定义<br>
+An ENTRYPOINT allows you to configure a container that will run as an executable.</p>
+<p>也就是说ENTRYPOINT才是容器执行的入口，<br>
+下面介绍一下该指令的用法：</p>
+<pre><code class="language-shell">ENTRYPOINT [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;] (exec模式，推荐的方式)
+ENTRYPOINT command param1 param2 (shell模式)
+</code></pre>
+<ul>
+<li><strong>exec</strong>形式的<strong>ENTRYPOINT</strong>在执行命令<strong>docker run image</strong>时。命令行参数将附加在<strong>ENTRYPOINT</strong>指定的所有元素之后，并将覆盖使用CMD指定的所有参数，这允许将参数传递到<strong>ENTRYPOINT</strong>，即<strong>docker run image -d</strong>将-<strong>d</strong>参数传递给<strong>ENTRYPOINT</strong> 也就是追加。 您可以使用d<strong>ocker run --entrypoint</strong>覆盖掉ENTRYPOINT指令。</li>
+<li><strong>shell</strong>形式的<strong>ENTRYPOIN</strong>T可防止使用任何<strong>CMD</strong>或运行命令行带入的参数，但其缺点是<strong>ENTRYPOINT</strong>将作为**/bin/sh -c<strong>的子命令启动，该子命令不传递信号。因此您的可执行文件将不会从</strong>docker stop container<strong>接收到</strong>SIGTERM**。</li>
+<li>如果<strong>Dockerfile</strong>中包含多条E<strong>NTRYPOIN</strong>T指令，则只有最后一条指令生效。您可以使用ENTRYPOINT的exec形式来设置相当稳定的默认命令和参数，然后使用CMD来设置更可能被更改的其他默认值。</li>
+</ul>
+<p><strong>CMD和ENTRYPOINT如何相互作用</strong></p>
+<ul>
+<li>
+<p>Dockerfile中应该至少指定CMD或ENTRYPOINT指令中的一种；</p>
+</li>
+<li>
+<p>当使用容器作为可执行文件时应定义ENTRYPOINT；</p>
+</li>
+<li>
+<p>CMD应该被用作在容器中定义ENTRYPOINT命令或执行临时命令默认参数。</p>
+</li>
+<li>
+<p>当使用其他参数运行容器时CMD 将被覆盖</p>
+</li>
+</ul>
+<p><strong>注意</strong>：如果CMD在基础镜像已有定义，则设置ENTRYPOINT会将CMD重置为空值。在这种情况下，CMD必须在当前镜像中重新定义一个值。</p>
+<p><strong>CMD和ENTRYPOINT的区别与联系</strong><br>
+<strong>相同点</strong></p>
+<ul>
+<li>用法相似，都可以指定shell或exec函数调用的方式执行命令；</li>
+<li>当存在多个CMD指令或ENTRYPOINT指令时，只有最后一个生效；</li>
+</ul>
+<p><strong>不同点</strong></p>
+<ul>
+<li>容器启动时，CMD指令指定的启动命令可以被docker run指定的命令覆盖，而ENTRYPOINT指令指定的启动命令不能被覆盖，而是将docker run指定的参数当做ENTRYPOINT指定命令的参数，也就是可以追加</li>
+<li>CMD指令可以作为ENTRYPOINT指令的默认参数 不能追加。</li>
+</ul>
+<hr>
+<h3 id="实战tomcat镜像">实战Tomcat镜像</h3>
+<ol>
+<li>准备镜像文件 tomcat，jdk压缩包</li>
+<li>配置dockerfile文件</li>
+</ol>
+<p>注意版本号要和自己的对应</p>
+<pre><code class="language-shell">FROM centosCOPY readme.txt /usr/local/readme.txt#将宿主机的jdk目录下的文件拷至镜像的/usr/local目录下ADD jdk-8u221-linux-x64.tar.gz /usr/local/#将宿主机的tomcat目录下的文件拷至镜像的/usr/local目录下ADD apache-tomcat-9.0.50.tar.gz /usr/local/#设置环境变量RUN yum -y install vim#切换镜像目录，进ENV MYPATH /usr/local#工作目录WORKDIR $MYPATH#设置环境变量ENV JAVA_HOME /usr/local/jdk1.8.0_221ENV CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jarENV CATALINA_HOME /usr/local/apache-tomcat-9.0.50ENV CATALINA_BASH /usr/local/apache-tomcat-9.0.50ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin#公开端口EXPOSE 8080CMD /usr/local/apache-tomcat-9.0.50/bin/startup.sh &amp;&amp; tail -F /usr/local/apache-tomcat-9.0.50/bin/logs/catalina.out
+</code></pre>
+<p>3.构建镜像</p>
+<pre><code class="language-shell">docker build -t diytomcat .
+</code></pre>
+<p>4.启动镜像</p>
+<pre><code class="language-shell">docker run -d -p 3344:8080 --name lindamaotomcat -v /home/lindamao/build/tomcat/test:/usr/local/apcahe-tomcat-9.0.50/webapps/test -v /home/lindamao/build/tomcat/tomcatlogs/:/usr/local/apcahe-tomcat-9.0.50/logs diytomcat
+</code></pre>
+<p>这里注意要检查镜像是否在后台启动 如果镜像没有在镜像启动说明容器已经停止 很可能是因为<strong>Dockerfile文件</strong>配置出错</p>
+<p>可以通过<strong>docker logs 容器id</strong> 进行排查</p>
+<p>确保容器正在后台启动的时候进行访问测试检查 确保项目能够正常执行</p>
+<p>6.部署自定义项目</p>
+<p>由于我们挂载了test配置 和logs 目录在本地 因此可以直接在本地进行修改并发布项目</p>
+<p>web.xml</p>
+<pre><code class="language-xml"> &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;  &lt;web-app xmlns=&quot;http://www.example.org/web-app_2_5&quot;              xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;          xsi:schemaLocation=&quot;http://www.example.org/web-app_2_5 web-app_2_5.xsd&quot;   version=&quot;2.5&quot;&gt; &lt;/web-app&gt;
+</code></pre>
+<pre><code class="language-jsp">&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;    pageEncoding=&quot;UTF-8&quot;%&gt;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;title&gt;lindamao&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Hello World!&lt;br/&gt;&lt;%System.out.println(&quot;This is my tomcat&quot;);%&gt;&lt;/body&gt;&lt;/html&gt;
+</code></pre>
+<h3 id="小结-2">小结</h3>
+<figure data-type="image" tabindex="68"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gsf4n393koj30me0iuaia.jpg" alt="image-20210706144600864" loading="lazy"></figure>
+<h2 id="docker-网络">Docker 网络</h2>
+<h3 id="理解docker0">理解docker0</h3>
+<p>详细参考https://cloud.tencent.com/developer/article/1747307</p>
+<p>查看宿主机的网络地址</p>
+<p>ip addr</p>
+<figure data-type="image" tabindex="69"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4n9nosmj30pq09et9m.jpg" alt="image-20210706145659133" loading="lazy"></figure>
+<p>后台启动一个tomcat容器</p>
+<pre><code class="language-shell">docker run -d -p 3344:8080 --name lintomcat tomcat
+</code></pre>
+<p>思考能否ping通容器内部的网络</p>
+<p>启动完成之后查看docker的网络地址</p>
+<pre><code class="language-shell">docker exec -it lintomcat ip addr
+</code></pre>
+<figure data-type="image" tabindex="70"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4nfojo3j30ma04awep.jpg" alt="image-20210706150405276" loading="lazy"></figure>
+<p>可以看到这里的网段是相同的 网段相同的情况下之间是可以进行ping 通的</p>
+<p>ping 172.18.0.2</p>
+<figure data-type="image" tabindex="71"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4nlfkq9j30ft07rmxq.jpg" alt="image-20210706150458817" loading="lazy"></figure>
+<p>测试可以ping通</p>
+<p>此时再启动一个tomctat并查看其网络地址</p>
+<figure data-type="image" tabindex="72"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf4nrsz8qj30oo04fwep.jpg" alt="image-20210706152847603" loading="lazy"></figure>
+<p>对比上面的发现容器内有类似的一对eth0 这个就是veth-pair 虚拟网卡对  实际上是不存在的 但是作为连通容器外的桥接</p>
+<p>同时这里看到容器内的地址都在同一个网段内 则容器之间是互相可以ping通的  docker inspect 容器id，看里面的networks信息，就是一个桥接，然后都是在一个网段下的</p>
+<p><strong>原理</strong></p>
+<ul>
+<li>当Docker 启动时,会自动在主机上创建一个 docker0 虚拟网桥,实际上是 Linux 的一个 bridge,可以理解为一个软件交换机。它会在挂载到它的网口之间进行转发。</li>
+<li>容器内和容器外通过veth-pair 虚拟网卡对进行桥接</li>
+<li>容器之间的网段和docker都是在同一个网段下因此可以达到互相连接</li>
+<li>当删除容器时拟网卡对也会相应的删除</li>
+</ul>
+<p><strong>图解</strong><br>
+<img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4o09y17j30pb0hv0tj.jpg" alt="beadv4m8rc-1625556860789" loading="lazy"></p>
+<h3 id="link">link</h3>
+<p>尝试一下通过容器名来连接容器</p>
+<p>测试发现不可行</p>
+<figure data-type="image" tabindex="73"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4o745w0j30jp019744.jpg" alt="image-20210706154132832" loading="lazy"></figure>
+<p>但是可以通过link方式来解决此问题</p>
+<p>此时再次启动容器通过link方式来连接</p>
+<pre><code>docker run -d -P --name lintomcat2 --link lintomcat1 tomcat
+</code></pre>
+<figure data-type="image" tabindex="74"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gsf4od0vl2j30lg043wen.jpg" alt="image-20210706155030654" loading="lazy"></figure>
+<p>此时发现可以ping通</p>
+<p>但是这种方式是但单向的也就是说后者并不能向前者连接成功</p>
+<p>查看dcoker的网路情况</p>
+<p><strong>docker network ls</strong></p>
+<figure data-type="image" tabindex="75"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4oi9z62j30e402k0sn.jpg" alt="image-20210706155333127" loading="lazy"></figure>
+<p><strong>docker network inspect 网卡id</strong> 查看详细信息<br>
+<img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf4onz55aj30op08bt90.jpg" alt="image-20210706155634098" loading="lazy"></p>
+<figure data-type="image" tabindex="76"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4ot6nvqj30ny0a2t9c.jpg" alt="image-20210706155728548" loading="lazy"></figure>
+<p>查看刚才启动的容器的详细信息</p>
+<figure data-type="image" tabindex="77"><img src="//tvax1.sinaimg.cn/large/007bjbYxly1gsf4oyatuaj30po0d0mxz.jpg" alt="image-20210706160032618" loading="lazy"></figure>
+<p>这里看到具体的网络情况</p>
+<p>容器lintomcat2 link l lintomcat1 这里查看是否在host有绑定</p>
+<figure data-type="image" tabindex="78"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4p42f11j30k408t3yn.jpg" alt="image-20210706160531233" loading="lazy"></figure>
+<p>确实发现了有</p>
+<p>也可以通过命令</p>
+<pre><code class="language-shell">docker exec -it lintomcat2 cat /etc/hosts
+</code></pre>
+<p>hosts的相关配置是放在etc下的<br>
+<img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4pa4n8oj30ka04wmxd.jpg" alt="image-20210706160711608" loading="lazy"></p>
+<p><strong>总结:</strong></p>
+<p>docker原生的方式不支持容器名连接访问</p>
+<p>建议使用自定义配置</p>
+<h3 id="自定义网络">自定义网络</h3>
+<p><strong>docker network create</strong></p>
+<p>举例：</p>
+<pre><code class="language-shell">docker network create --driver bridge --subnet 192.168.0.0/16 --gateway 192.168.0.1 mynet
+-driver 网络模式 
+-subnet 子网配置 192.168.0.2-192.168.255.255 可配置
+-gateway 网关配置 
+mynet 网络名称
+</code></pre>
+<figure data-type="image" tabindex="79"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gsf4pfxzvtj30bp02p0sn.jpg" alt="image-20210706162644977" loading="lazy"></figure>
+<p>创建成功</p>
+<p>现在就可以将容器放在自定义的网络当中</p>
+<p>此时启动自定义的网络模式容器测试</p>
+<p>docker run -d -P --name tomcat-net-01 --net mynet tomcat</p>
+<pre><code class="language-shell">docker run -d -P --name tomcat-net-02 --net mynet tomcat
+-net 网络模式
+</code></pre>
+<p>此时通过ip和容器id 进行ping测试</p>
+<figure data-type="image" tabindex="80"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4pm27usj30kj063dgd.jpg" alt="image-20210706163659299" loading="lazy"></figure>
+<p>测试成功</p>
+<h3 id="网络模式">网络模式</h3>
+<figure data-type="image" tabindex="81"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4pr88q2j30bx01yglg.jpg" alt="image-20210706161323229" loading="lazy"></figure>
+<table>
+<thead>
+<tr>
+<th>Docker网络模式</th>
+<th>配置</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>host模式</td>
+<td>–net=host</td>
+<td>容器和宿主机共享Network namespace。</td>
+</tr>
+<tr>
+<td>container模式</td>
+<td>–net=container:NAME_or_ID</td>
+<td>容器和另外一个容器共享Network namespace。 kubernetes中的pod就是多个容器共享一个Network namespace。</td>
+</tr>
+<tr>
+<td>none模式</td>
+<td>–net=none</td>
+<td>容器有独立的Network namespace，但并没有对其进行任何网络设置，如分配veth pair 和网桥连接，配置IP等。</td>
+</tr>
+<tr>
+<td>bridge模式</td>
+<td>–net=bridge</td>
+<td>（默认为该模式）不能通过容器名访问</td>
+</tr>
+</tbody>
+</table>
+<p><strong>测试</strong></p>
+<p>直接启动的 命令用的是bridge模式</p>
+<h4 id="host模式">host模式</h4>
+<p>如果启动容器的时候使用host模式，那么这个容器将不会获得一个独立的Network Namespace，而是和宿主机共用一个Network Namespace。容器将不会虚拟出自己的网卡，配置自己的IP等，而是使用宿主机的IP和端口。但是，容器的其他方面，如文件系统、进程列表等还是和宿主机隔离的。</p>
+<p>使用host模式的容器可以直接使用宿主机的IP地址与外界通信，容器内部的服务端口也可以使用宿主机的端口，不需要进行NAT，host最大的优势就是网络性能比较好，但是docker host上已经使用的端口就不能再用了，网络的隔离性不好。</p>
+<p>Host模式如下图所示：</p>
+<figure data-type="image" tabindex="82"><img src="https:////upload-images.jianshu.io/upload_images/13618762-a892da42b8ff9342.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/698/format/webp" alt="img" loading="lazy"></figure>
+<h4 id="container模式">container模式</h4>
+<p>这个模式指定新创建的容器和已经存在的一个容器共享一个 Network Namespace，而不是和宿主机共享。新创建的容器不会创建自己的网卡，配置自己的 IP，而是和一个指定的容器共享 IP、端口范围等。同样，两个容器除了网络方面，其他的如文件系统、进程列表等还是隔离的。两个容器的进程可以通过 lo 网卡设备通信。</p>
+<p>Container模式示意图：</p>
+<figure data-type="image" tabindex="83"><img src="https:////upload-images.jianshu.io/upload_images/13618762-790a69a562a5b358.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/695/format/webp" alt="img" loading="lazy"></figure>
+<h4 id="none模式">none模式</h4>
+<p>使用none模式，Docker容器拥有自己的Network Namespace，但是，并不为Docker容器进行任何网络配置。也就是说，这个Docker容器没有网卡、IP、路由等信息。需要我们自己为Docker容器添加网卡、配置IP等。</p>
+<p>这种网络模式下容器只有lo回环网络，没有其他网卡。none模式可以在容器创建时通过--network=none来指定。这种类型的网络没有办法联网，封闭的网络能很好的保证容器的安全性。</p>
+<p>None模式示意图:</p>
+<figure data-type="image" tabindex="84"><img src="https:////upload-images.jianshu.io/upload_images/13618762-3fd41778faebcef5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/723/format/webp" alt="img" loading="lazy"></figure>
+<h4 id="bridge模式">bridge模式</h4>
+<p>当Docker进程启动时，会在主机上创建一个名为docker0的虚拟网桥，此主机上启动的Docker容器会连接到这个虚拟网桥上。虚拟网桥的工作方式和物理交换机类似，这样主机上的所有容器就通过交换机连在了一个二层网络中。</p>
+<p>从docker0子网中分配一个IP给容器使用，并设置docker0的IP地址为容器的默认网关。在主机上创建一对虚拟网卡veth pair设备，Docker将veth pair设备的一端放在新创建的容器中，并命名为eth0（容器的网卡），另一端放在主机中，以vethxxx这样类似的名字命名，并将这个网络设备加入到docker0网桥中。可以通过brctl show命令查看。</p>
+<p>bridge模式是docker的默认网络模式，不写--net参数，就是bridge模式。使用docker run -p时，docker实际是在iptables做了DNAT规则，实现端口转发功能。可以使用iptables -t nat -vnL查看。</p>
+<p>bridge模式如下图所示：</p>
+<figure data-type="image" tabindex="85"><img src="https:////upload-images.jianshu.io/upload_images/13618762-f1643a51d313a889.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1083/format/webp" alt="img" loading="lazy"></figure>
+<h3 id="网络连通">网络连通</h3>
+<p>尝试在不同容器之间实现网络的通信</p>
+<p>现在在上面自定义的基础的网络通信模式下再次添加两个</p>
+<figure data-type="image" tabindex="86"><img src="//tva4.sinaimg.cn/large/007bjbYxly1gsf4q7jsppj30s1055q35.jpg" alt="image-20210706190946547" loading="lazy"></figure>
+<p>现在开启了四个不同的容器 两个不同的网卡</p>
+<p>在两个不同的网卡当中实现网络之间的通信是不可能的</p>
+<p>但是可以通过容器连通网络</p>
+<figure data-type="image" tabindex="87"><img src="//tva2.sinaimg.cn/large/007bjbYxly1gsf4rffoiyj30j805jmx7.jpg" alt="image-20210706191320883" loading="lazy"></figure>
+<p>在命令帮助当中也可以看到提示描述的是可以通过容器来连接网络</p>
+<p>这个方式相当于将容器加入到已经配置好的局域网当中</p>
+<p>测试从tomcat 连接到mynet</p>
+<p><strong>命令</strong></p>
+<p>docker network connect 选择要连接的网卡 选择要连接的容器</p>
+<p>连接完没有提示不报错即可</p>
+<p>连接完成之后查看网卡信息</p>
+<figure data-type="image" tabindex="88"><img src="//tva1.sinaimg.cn/large/007bjbYxly1gsf4rkvea8j30rg0b8t9c.jpg" alt="image-20210706191755856" loading="lazy"></figure>
+<p>发现网卡当中将连接的容器加入进来并为其配置了一个子网</p>
+<p>测试</p>
+<figure data-type="image" tabindex="89"><img src="//tva3.sinaimg.cn/large/007bjbYxly1gsf4rqrv4wj30n7030aa4.jpg" alt="image-20210706191944965" loading="lazy"></figure>
+<p>查看连接容器的信息<br>
+<img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4rwrgeej30pm0elwfh.jpg" alt="image-20210706192318383" loading="lazy"></p>
+<p>一个容器两个ip</p>
+<p>类似于公网ip 和私网ip</p>
+<h3 id="部署redis集群">部署Redis集群</h3>
+<figure data-type="image" tabindex="90"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4s5vgxtj30oh0enjrx.jpg" alt="image-20210706192854778" loading="lazy"></figure>
+<p>搭建三个主机三个从机</p>
+<p>先开启一个自定义网卡</p>
+<pre><code class="language-shell">docker network create redis--subnet 172.38.0.0/16
+</code></pre>
+<p>​</p>
+<p><strong>#通过脚本一次创建6个redis配置</strong></p>
+<pre><code class="language-shell">for port in $(seq 1 6); \
+do \
+mkdir -p /mydata/redis/node-${port}/conf
+touch /mydata/redis/node-${port}/conf/redis.conf
+cat  &lt;&lt;EOF&gt; /mydata/redis/node-${port}/conf/redis.conf
+port 6379 
+bind 0.0.0.0
+cluster-enabled yes 
+cluster-config-file nodes.conf
+cluster-node-timeout 5000
+cluster-announce-ip 172.38.0.1${port}
+cluster-announce-port 6379
+cluster-announce-bus-port 16379
+appendonly yes
+EOF
+don
+</code></pre>
+<p>e</p>
+<figure data-type="image" tabindex="91"><img src="//tvax2.sinaimg.cn/large/007bjbYxly1gsf4se207lj30g003s3yk.jpg" alt="image-20210706194346477" loading="lazy"></figure>
+<p>**# 通过脚本一次启动6个redis容器**</p>
+<pre><code class="language-shell">docker run -p 637${port}:6379 -p 1637${port}:16379 --name redis-${port} -v /mydata/redis/node-${port}/data:/data -v /mydata/redis/node-${port}/conf/redis.conf:/etc/redis/redis.conf -d --net redis --ip 172.38.0.11${port} redis:5.0.9-alpine3.11 redis-server /etc/redis/redis.conf
+</code></pre>
+<p>参考链接</p>
+<p>https://blog.csdn.net/Happy_Sunshine_Boy/article/details/107333904</p>
+<h2 id="docker-部署springboot">Docker 部署springboot</h2>
+<p>先将最终要发布的springboot项目打包</p>
+<figure data-type="image" tabindex="92"><img src="//tvax4.sinaimg.cn/large/007bjbYxly1gsf4sjs4egj30be062dfs.jpg" alt="image-20210707093320963" loading="lazy"></figure>
+<p>等到打包完成之后然后再用 java -jar测试是否能够成功运行</p>
+<p>打包完成的项目在dist目录下</p>
+<p>在服务器当中上传项目并编写dockerfile文件</p>
+<pre><code class="language-dockerfile">FROM java:8
+
+COPY *.jar /app.jar
+
+CMD [&quot;--server.port-8080&quot;]
+
+EXPOSE 8080
+
+ENTRYPOINT  [&quot;java&quot;,&quot;-jar&quot;,&quot;/app.jar&quot;]
+</code></pre>
+<p>这里测试用的是这个</p>
+<p>打包项目</p>
+<p>docker build -t springbootdemo .</p>
+<p>启动镜像</p>
+<p>docker run -d -p 3344:8080 --name linspring springbootdemo</p>
+<p>记得要暴露对外的端口</p>
+<p>完成之后进行测试</p>
+<p>测试成功即可</p>
+
+              </div>
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Lindamao
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://lindamao0753.github.io/post/docker/" title="Docker">Docker</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+        <i class="fa fa-chevron-left"></i>
+        <a class="nav-pc-next" title="Nginx" href="https://lindamao0753.github.io/post/nginx/">Nginx</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="Nginx" href="https://lindamao0753.github.io/post/nginx/">上一篇</a>
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="Redis" href="https://lindamao0753.github.io/post/redis/">Redis</a>
+        <a class="nav-mobile-next" title="Redis" href="https://lindamao0753.github.io/post/redis/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
+      
+    </div>
+  </div>
+</div>
+              
+                
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-box">
+  <footer class="footer">
+    <div class="copyright">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | © 2019-2020 Theme By HsxyHao
+    </div>
+    <div class="poweredby">
+      <p class="copyright text-muted">Copyright ©<span>lindamao</span><br><a href="https://github.com/getgridea/gridea" class="Themeinfo" one-link-mark="yes"></a></p>
+    </div>
+  </footer>
+  
+  
+  <div class="pisces back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    
+    <span class="scrollpercent">
+      <span id="back_to_top_text">0</span>%
+    </span>
+    
+  </div>
+  
+  
+  
+</div>
+<script>
+
+  let sideBarOpen = 'sidebar-open';
+  let body = document.body;
+  let back2Top = document.querySelector('#back_to_top'),
+  back2TopText = document.querySelector('#back_to_top_text'),
+  drawerBox = document.querySelector('#drawer_box'),
+  rightSideBar = document.querySelector('.sidebar'),
+  viewport = document.querySelector('body');
+
+  function scrollAnimation(currentY, targetY) {
+   
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
+
+  back2Top.addEventListener("click", function(e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+  
+  window.addEventListener('scroll', function(e) {
+    let percent = document.scrollingElement.scrollTop / (document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+  
+  let hasCacu = false;
+  window.onresize = function() {
+    if (window.width > 991) {
+      calcuHeight();
+    } else {
+      hasCacu = false;
+    }
+  }
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (!hasCacu && back2Top.classList.contains('pisces') || back2Top.classList.contains('gemini')) {
+      let sideBar = document.querySelector('.sidebar');
+      let navUl = document.querySelector('#site_nav');
+      sideBar.style = 'margin-top:' + (navUl.offsetHeight + navUl.offsetTop + 15) + 'px;';
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+  
+  let open = false, MOTION_TIME = 300, RIGHT_MOVE_DIS = '320px';
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll('.right-motion');
+    let right = drawerBox.classList.contains('right');
+
+    let transitionDir = right ? "transition.slideRightIn" : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingRight: '0px'
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingLeft: '0px'
+      };
+    }
+
+    drawerBox.onclick = function() {
+      open = !open;
+      window.Velocity(rightSideBar, 'stop');
+      window.Velocity(viewport, 'stop');
+      window.Velocity(rightMotions, 'stop');
+      if (open) {
+        window.Velocity(rightSideBar, {
+          width: RIGHT_MOVE_DIS
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, transitionDir,{ });
+          }
+        })
+        window.Velocity(viewport, openProp,{
+          duration: MOTION_TIME
+        });
+      } else {
+        window.Velocity(rightSideBar, {
+          width: '0px'
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, {
+              opacity: 0
+            });
+          }
+        })
+        window.Velocity(viewport, closeProp ,{
+          duration: MOTION_TIME
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle('muse-line');
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    }
+  }
+
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+
+</script>
+    </div>
+  </body>
+  <script src="/media/js/motion.js"></script>
+</html>
